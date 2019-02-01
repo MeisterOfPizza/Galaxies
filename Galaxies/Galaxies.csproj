@@ -48,6 +48,10 @@
     <Compile Include="Items\ShipUpgrade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIControllers\GameUIController.cs" />
+    <Compile Include="UI\Elements\ListBox.cs" />
+    <Compile Include="UI\Screens\GalaxyScreen.cs" />
+    <Compile Include="UI\Screens\Screen.cs" />
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +65,7 @@
     <Content Include="Content\Sprites\Player Ships\Player Ship 1.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 2.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 3.png" />
+    <Content Include="Content\Sprites\UI\List Box.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

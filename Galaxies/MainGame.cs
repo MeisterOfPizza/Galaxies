@@ -1,5 +1,6 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Entities;
+using Galaxies.UI.Screens;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -48,6 +49,8 @@ namespace Galaxies
             // TODO: Add your initialization logic here
 
             GameUIController.Window = Window;
+
+            GameUIController.CreateGalaxyScreen(Content);
 
             base.Initialize();
         }

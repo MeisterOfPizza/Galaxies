@@ -1,5 +1,6 @@
 ﻿using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.UIControllers
@@ -28,7 +29,17 @@ namespace Galaxies.UIControllers
             }
         }
 
-        #region Helpers
+        #region Screens
+
+        public static void CreateGalaxyScreen(ContentManager content)
+        {
+            CurrentScreen = new GalaxyScreen();
+            CurrentScreen.CreateUI(content);
+        }
+
+        #endregion
+
+        #region Position helpers
 
         public static Vector2 TopLeftCorner(int width, int height)
         {

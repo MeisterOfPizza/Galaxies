@@ -22,7 +22,7 @@ namespace Galaxies.UI.Elements
 
             foreach (UIElement elem in Container)
             {
-                nextY += elem.Sprite.Height + SpaceY;
+                nextY += elem.Height + SpaceY;
             }
 
             return nextY;

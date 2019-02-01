@@ -10,7 +10,8 @@ namespace Galaxies.UI
 
         #region Private Properties
 
-        private OnClickEvent OnClick { get; set; }
+        private OnClickEvent OnClick      { get; set; }
+        private Color        DefaultColor { get; set; }
 
         #endregion
 
@@ -27,6 +28,8 @@ namespace Galaxies.UI
         {
             this.OnClick      = onClick;
             this.CanBeClicked = canBeClicked;
+
+            DefaultColor = Color;
         }
 
         public void Click()
@@ -40,6 +43,8 @@ namespace Galaxies.UI
         public void Select()
         {
             IsFocused = !IsFocused;
+
+            Color = IsFocused ? Color.AliceBlue : DefaultColor;
         }
 
     }

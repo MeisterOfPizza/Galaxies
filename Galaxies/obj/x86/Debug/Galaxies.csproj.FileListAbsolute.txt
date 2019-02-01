@@ -24,3 +24,4 @@ I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engel
 I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engelin - Galaxies\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 1.xnb
 I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engelin - Galaxies\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 2.xnb
 I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engelin - Galaxies\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 3.xnb
+I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engelin - Galaxies\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\UI\List Box.xnb

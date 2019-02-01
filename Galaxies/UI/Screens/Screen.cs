@@ -11,7 +11,7 @@ namespace Galaxies.UI.Screens
 
         private List<UIElement> UIElements { get; set; } = new List<UIElement>();
 
-        protected List<UIElement> ClickableElements { get; set; }
+        protected List<UIElement> ClickableElements { get; set; } = new List<UIElement>();
 
         protected int SelectedIndex { get; set; }
 
@@ -74,7 +74,8 @@ namespace Galaxies.UI.Screens
         /// Adds a UI Element and makes it selectable if is has <see cref="UIElement.CanBeClicked"/> set to true.
         /// </summary>
         /// <param name="uiElement">The UI Element to add.</param>
-        protected void AddUIElement(UIElement uiElement)
+        /// <returns>Returns the craeted UI Element.</returns>
+        protected UIElement AddUIElement(UIElement uiElement)
         {
             UIElements.Add(uiElement);
 
@@ -82,6 +83,8 @@ namespace Galaxies.UI.Screens
             {
                 ClickableElements.Add(uiElement);
             }
+
+            return uiElement;
         }
 
     }
