@@ -1,12 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -14,7 +9,7 @@ namespace Galaxies.UI.Screens
     abstract class Screen
     {
 
-        public List<UIElement> UIElements { get; protected set; } = new List<UIElement>();
+        private List<UIElement> UIElements { get; set; } = new List<UIElement>();
 
         protected List<UIElement> ClickableElements { get; set; }
 
@@ -72,6 +67,20 @@ namespace Galaxies.UI.Screens
             if (SelectedIndex >= 0 && SelectedIndex < ClickableElements.Count && ClickableElements.Count > 0)
             {
                 ClickableElements[SelectedIndex].Click();
+            }
+        }
+
+        /// <summary>
+        /// Adds a UI Element and makes it selectable if is has <see cref="UIElement.CanBeClicked"/> set to true.
+        /// </summary>
+        /// <param name="uiElement">The UI Element to add.</param>
+        protected void AddUIElement(UIElement uiElement)
+        {
+            UIElements.Add(uiElement);
+
+            if (uiElement.CanBeClicked)
+            {
+                ClickableElements.Add(uiElement);
             }
         }
 
