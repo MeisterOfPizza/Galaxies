@@ -38,10 +38,18 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
+    <Compile Include="Datas\Data.cs" />
+    <Compile Include="Datas\Space\ArtifactPlanetEventData.cs" />
+    <Compile Include="Datas\Space\CombatPlanetEventData.cs" />
+    <Compile Include="Datas\Space\ItemDropPlanetEventData.cs" />
+    <Compile Include="Datas\Space\PlanetarySystemData.cs" />
+    <Compile Include="Datas\Space\PlanetData.cs" />
+    <Compile Include="Datas\Space\PlanetEventData.cs" />
     <Compile Include="Entities\PlayerShip.cs" />
     <Compile Include="Entities\ShipEntity.cs" />
     <Compile Include="MainGame.cs" />
