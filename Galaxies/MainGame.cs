@@ -1,6 +1,4 @@
 ﻿using Galaxies.Controllers;
-using Galaxies.Entities;
-using Galaxies.UI.Screens;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,26 +14,14 @@ namespace Galaxies
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        /* FOR FULLSCREEN!
-        const int TargetWidth = 480;
-        const int TargetHeight = 270;
-        Matrix Scale;
-        */
-
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
-            /* FOR FULLSCREEN!
-            graphics.PreferredBackBufferWidth = TargetWidth;
-            graphics.PreferredBackBufferHeight = TargetHeight;
-            graphics.ToggleFullScreen();
 
-            float scaleX = graphics.PreferredBackBufferWidth / (float)TargetWidth;
-            float scaleY = graphics.PreferredBackBufferHeight / (float)TargetHeight;
-            Scale = Matrix.CreateScale(new Vector3(scaleX, scaleY, 1));
-            */
+            graphics.PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            //graphics.ToggleFullScreen();
         }
 
         /// <summary>
@@ -105,9 +91,6 @@ namespace Galaxies
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            /* FOR FULLSCREEN!
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Scale);
-            */
 
             spriteBatch.Begin();
             GameUIController.Draw(spriteBatch);

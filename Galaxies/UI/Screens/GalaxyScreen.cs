@@ -21,8 +21,8 @@ namespace Galaxies.UI.Screens
 
             UIElement uiElement = null;
 
-            uiElement = AddUIElement(new ListBox(listBoxSprite, GameUIController.TopLeftCorner(100, 100), 0, Color.White, null));
-            uiElement.SetDrawHeight(500);
+            uiElement = AddUIElement(new ListBox(listBoxSprite, GameUIController.TopLeftCorner(), 0, Color.White, null));
+            uiElement.SetDrawSize(200, 300);
             /*
             AddUIElement(new UIElement(backToMenuSprite, GameUIController.BottomLeftCorner(backToMenuSprite.Width, backToMenuSprite.Height), 0, Color.White, null)); //TODO: Back to menu
             AddUIElement(new UIElement(galaxyBackgroundSprite, Vector2.Zero, 0, Color.White, null));

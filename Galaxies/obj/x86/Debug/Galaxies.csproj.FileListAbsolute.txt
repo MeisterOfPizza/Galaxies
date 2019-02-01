@@ -25,3 +25,30 @@ I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engel
 I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engelin - Galaxies\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 2.xnb
 I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engelin - Galaxies\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 3.xnb
 I:\rbk\Elevmtrl 03-04\Data\Tatiana\Elevmappar\PROG2221860\emy394\Spel\Emil Engelin - Galaxies\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\UI\List Box.xnb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\UI\List Box.xnb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 1.xnb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 2.xnb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Player Ships\Player Ship 3.xnb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Galaxies.exe
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Galaxies.pdb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\MonoGame.Framework.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.XInput.dll
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\MonoGame.Framework.xml
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.xml
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\SharpDX.XInput.xml
+F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.csprojAssemblyReference.cache
+F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.csproj.CoreCompileInputs.cache
+F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.csproj.CopyComplete
+F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.exe
+F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.pdb

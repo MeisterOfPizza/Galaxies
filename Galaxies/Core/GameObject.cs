@@ -31,14 +31,6 @@ namespace Galaxies.Core
 
         #region Properties
 
-        public Texture2D Sprite
-        {
-            get
-            {
-                return sprite;
-            }
-        }
-
         public Vector2 Position
         {
             get
@@ -125,7 +117,7 @@ namespace Galaxies.Core
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, position, SpriteEffects.None, 0f);
+            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, Vector2.Zero, SpriteEffects.None, 0f);
         }
 
     }
