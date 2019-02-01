@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Galaxies.Controllers;
+using Galaxies.Entities;
+using Galaxies.UIControllers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -7,15 +10,31 @@ namespace Galaxies
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class MainGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        /* FOR FULLSCREEN!
+        const int TargetWidth = 480;
+        const int TargetHeight = 270;
+        Matrix Scale;
+        */
+
+        public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
+            /* FOR FULLSCREEN!
+            graphics.PreferredBackBufferWidth = TargetWidth;
+            graphics.PreferredBackBufferHeight = TargetHeight;
+            graphics.ToggleFullScreen();
+
+            float scaleX = graphics.PreferredBackBufferWidth / (float)TargetWidth;
+            float scaleY = graphics.PreferredBackBufferHeight / (float)TargetHeight;
+            Scale = Matrix.CreateScale(new Vector3(scaleX, scaleY, 1));
+            */
         }
 
         /// <summary>
@@ -27,6 +46,8 @@ namespace Galaxies
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            GameUIController.Window = Window;
 
             base.Initialize();
         }
@@ -41,6 +62,8 @@ namespace Galaxies
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            GameController.LoadGame(Content);
         }
 
         /// <summary>
@@ -64,6 +87,9 @@ namespace Galaxies
 
             // TODO: Add your update logic here
 
+            GameController.UpdateGame(gameTime);
+            GameUIController.Update();
+
             base.Update(gameTime);
         }
 
@@ -76,6 +102,13 @@ namespace Galaxies
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            /* FOR FULLSCREEN!
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Scale);
+            */
+
+            spriteBatch.Begin();
+            GameUIController.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

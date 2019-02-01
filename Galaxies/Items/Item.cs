@@ -49,9 +49,9 @@ namespace Galaxies.Items
             this.color  = color;
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            //spriteBatch.Draw(sprite, color);
+            spriteBatch.Draw(sprite, position, color);
         }
 
     }

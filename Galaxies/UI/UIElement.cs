@@ -16,20 +16,25 @@ namespace Galaxies.UI
 
         #region Public Properties
 
-        public bool IsFocused { get; private set; }
+        public bool IsFocused    { get; private set; }
+        public bool CanBeClicked { get; private set; }
 
         #endregion
 
         public delegate void OnClickEvent();
 
-        public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick) : base(sprite, position, rotation, color)
+        public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, bool canBeClicked = true) : base(sprite, position, rotation, color)
         {
-            this.OnClick = onClick;
+            this.OnClick      = onClick;
+            this.CanBeClicked = canBeClicked;
         }
 
         public void Click()
         {
-            OnClick.Invoke();
+            if (CanBeClicked)
+            {
+                OnClick.Invoke();
+            }
         }
 
         public void Select()
