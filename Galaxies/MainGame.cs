@@ -14,6 +14,8 @@ namespace Galaxies
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static MainGame Singleton { get; private set; }
+
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -22,6 +24,8 @@ namespace Galaxies
             graphics.PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
             //graphics.ToggleFullScreen();
+
+            Singleton = this;
         }
 
         /// <summary>
@@ -36,7 +40,7 @@ namespace Galaxies
 
             GameUIController.Window = Window;
 
-            GameUIController.CreateGalaxyScreen(Content);
+            GameUIController.CreateGalaxyScreen(); //TODO: Change to CreateMenuScreen().
 
             base.Initialize();
         }
@@ -52,7 +56,7 @@ namespace Galaxies
 
             // TODO: use this.Content to load your game content here
 
-            GameController.LoadGame(Content);
+            GameController.LoadGame();
         }
 
         /// <summary>
@@ -77,7 +81,7 @@ namespace Galaxies
             // TODO: Add your update logic here
 
             GameController.UpdateGame(gameTime);
-            GameUIController.Update();
+            GameUIController.Update(gameTime);
 
             base.Update(gameTime);
         }

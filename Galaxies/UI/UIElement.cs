@@ -1,4 +1,5 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,16 +18,19 @@ namespace Galaxies.UI
 
         #region Public Properties
 
-        public bool IsFocused    { get; private set; }
+        public bool IsFocused    { get; protected set; }
         public bool CanBeClicked { get; private set; }
+
+        protected Screen Screen { get; set; }
 
         #endregion
 
         public delegate void OnClickEvent();
 
-        public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, bool canBeClicked = true) : base(sprite, position, rotation, color)
+        public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color)
         {
             this.OnClick      = onClick;
+            this.Screen       = screen;
             this.CanBeClicked = canBeClicked;
 
             DefaultColor = Color;
@@ -34,17 +38,24 @@ namespace Galaxies.UI
 
         public void Click()
         {
-            if (CanBeClicked)
+            if (CanBeClicked && OnClick != null)
             {
                 OnClick.Invoke();
             }
         }
 
-        public void Select()
+        public virtual void Select()
         {
-            IsFocused = !IsFocused;
+            IsFocused = true;
 
-            Color = IsFocused ? Color.AliceBlue : DefaultColor;
+            Color = Color.Red;
+        }
+
+        public virtual void Deselect()
+        {
+            IsFocused = false;
+
+            Color = DefaultColor;
         }
 
     }

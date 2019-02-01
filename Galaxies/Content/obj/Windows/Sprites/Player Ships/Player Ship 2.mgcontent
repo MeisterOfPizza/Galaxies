@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>I:/rbk/Elevmtrl 03-04/Data/Tatiana/Elevmappar/PROG2221860/emy394/Spel/Emil Engelin - Galaxies/Galaxies/Galaxies/Content/Sprites/Player Ships/Player Ship 2.png</SourceFile>
-  <SourceTime>2019-02-01T08:39:28.4126149+01:00</SourceTime>
-  <DestFile>I:/rbk/Elevmtrl 03-04/Data/Tatiana/Elevmappar/PROG2221860/emy394/Spel/Emil Engelin - Galaxies/Galaxies/Galaxies/Content/bin/Windows/Sprites/Player Ships/Player Ship 2.xnb</DestFile>
-  <DestTime>2019-02-01T08:52:03.7448149+01:00</DestTime>
+  <SourceFile>F:/Projects/Galaxies/Galaxies/Content/Sprites/Player Ships/Player Ship 2.png</SourceFile>
+  <SourceTime>2019-02-01T19:21:26.673551+01:00</SourceTime>
+  <DestFile>F:/Projects/Galaxies/Galaxies/Content/bin/Windows/Sprites/Player Ships/Player Ship 2.xnb</DestFile>
+  <DestTime>2019-02-01T21:56:32.2810148+01:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
+  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
+  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

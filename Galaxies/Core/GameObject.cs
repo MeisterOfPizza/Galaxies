@@ -12,10 +12,10 @@ namespace Galaxies.Core
 
         #region Fields
 
-        Texture2D sprite;
-        Vector2   position;
-        float     rotation = 0;
-        Color     color    = Color.White;
+        protected Texture2D sprite;
+        Vector2 position;
+        float   rotation = 0;
+        Color   color    = Color.White;
 
         /// <summary>
         /// Rectangle draw width.
@@ -41,6 +41,8 @@ namespace Galaxies.Core
             set
             {
                 position = value;
+
+                PositionChanged();
             }
         }
 
@@ -113,6 +115,11 @@ namespace Galaxies.Core
         {
             this.drawWidth  = width;
             this.drawHeight = height;
+        }
+
+        protected virtual void PositionChanged()
+        {
+            //Do nothing here
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

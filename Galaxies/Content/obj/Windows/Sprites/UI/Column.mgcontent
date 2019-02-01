@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>F:/Projects/Galaxies/Galaxies/Content/Sprites/Player Ships/Player Ship 3.png</SourceFile>
-  <SourceTime>2019-02-01T19:21:26.6755443+01:00</SourceTime>
-  <DestFile>F:/Projects/Galaxies/Galaxies/Content/bin/Windows/Sprites/Player Ships/Player Ship 3.xnb</DestFile>
-  <DestTime>2019-02-01T21:56:32.2969692+01:00</DestTime>
+  <SourceFile>F:/Projects/Galaxies/Galaxies/Content/Sprites/UI/Column.png</SourceFile>
+  <SourceTime>2019-02-01T19:21:26.6775386+01:00</SourceTime>
+  <DestFile>F:/Projects/Galaxies/Galaxies/Content/bin/Windows/Sprites/UI/Column.xnb</DestFile>
+  <DestTime>2019-02-01T22:00:09.116092+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

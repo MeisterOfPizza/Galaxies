@@ -52,3 +52,6 @@ F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.csproj.CoreCompileInputs.ca
 F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.csproj.CopyComplete
 F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.exe
 F:\Projects\Galaxies\Galaxies\obj\x86\Debug\Galaxies.pdb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\UI\Column.xnb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Fonts\Arial.xnb
+F:\Projects\Galaxies\Galaxies\bin\Windows\x86\Debug\Content\Sprites\Transparent.xnb

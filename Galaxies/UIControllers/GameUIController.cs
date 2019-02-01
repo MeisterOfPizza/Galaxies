@@ -14,11 +14,11 @@ namespace Galaxies.UIControllers
 
         public static GameWindow Window { get; set; }
 
-        public static void Update()
+        public static void Update(GameTime gameTime)
         {
             if (CurrentScreen != null)
             {
-                CurrentScreen.Update();
+                CurrentScreen.Update(gameTime);
             }
         }
 
@@ -32,10 +32,16 @@ namespace Galaxies.UIControllers
 
         #region Screens
 
-        public static void CreateGalaxyScreen(ContentManager content)
+        public static void CreateMenuScreen()
+        {
+            CurrentScreen = new MenuScreen();
+            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+        }
+
+        public static void CreateGalaxyScreen()
         {
             CurrentScreen = new GalaxyScreen();
-            CurrentScreen.CreateUI(content);
+            CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
         #endregion

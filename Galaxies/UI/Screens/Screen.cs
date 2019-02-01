@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -9,22 +10,41 @@ namespace Galaxies.UI.Screens
     abstract class Screen
     {
 
+        private const double SELECT_COOLDOWN = 0.15f;
+
         private List<UIElement> UIElements { get; set; } = new List<UIElement>();
 
         protected List<UIElement> ClickableElements { get; set; } = new List<UIElement>();
 
-        protected int SelectedIndex { get; set; }
+        protected int SelectedIndex;
+
+        private double selectionCooldown;
 
         public abstract void CreateUI(ContentManager content);
 
         /// <summary>
         /// Look for keystrokes or mouse movement.
         /// </summary>
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
+            selectionCooldown += gameTime.ElapsedGameTime.TotalSeconds;
 
-            CycleSelected(keyboardState);
+            if (selectionCooldown > SELECT_COOLDOWN)
+            {
+                KeyboardState keyboardState = Keyboard.GetState();
+
+                if (keyboardState.GetPressedKeys().Length > 0)
+                {
+                    CycleSelected(keyboardState);
+
+                    if (keyboardState.IsKeyDown(Keys.Enter))
+                    {
+                        ClickSelected();
+                    }
+
+                    selectionCooldown = 0;
+                }
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -39,26 +59,32 @@ namespace Galaxies.UI.Screens
         {
             if (ClickableElements.Count > 0)
             {
-                if (keyboardState.IsKeyDown(Keys.Up))
+                if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Tab))
                 {
-                    SelectedIndex++;
+                    ClickableElements[SelectedIndex].Deselect();
 
-                    if (SelectedIndex > ClickableElements.Count)
-                    {
-                        SelectedIndex = 0;
-                    }
-                }
-                else if (keyboardState.IsKeyDown(Keys.Down))
-                {
                     SelectedIndex--;
 
                     if (SelectedIndex < 0)
                     {
-                        SelectedIndex = ClickableElements.Count;
+                        SelectedIndex = ClickableElements.Count - 1;
                     }
-                }
 
-                ClickableElements[SelectedIndex].Select();
+                    ClickableElements[SelectedIndex].Select();
+                }
+                else if (keyboardState.IsKeyDown(Keys.Down) || (keyboardState.IsKeyDown(Keys.Tab) && keyboardState.IsKeyDown(Keys.LeftShift)))
+                {
+                    ClickableElements[SelectedIndex].Deselect();
+
+                    SelectedIndex++;
+
+                    if (SelectedIndex > ClickableElements.Count - 1)
+                    {
+                        SelectedIndex = 0;
+                    }
+
+                    ClickableElements[SelectedIndex].Select();
+                }
             }
         }
 
@@ -73,9 +99,10 @@ namespace Galaxies.UI.Screens
         /// <summary>
         /// Adds a UI Element and makes it selectable if is has <see cref="UIElement.CanBeClicked"/> set to true.
         /// </summary>
+        /// <typeparam name="T">UIElement descendant of type T.</typeparam>
         /// <param name="uiElement">The UI Element to add.</param>
         /// <returns>Returns the craeted UI Element.</returns>
-        protected UIElement AddUIElement(UIElement uiElement)
+        protected T AddUIElement<T>(T uiElement) where T : UIElement
         {
             UIElements.Add(uiElement);
 
@@ -84,7 +111,27 @@ namespace Galaxies.UI.Screens
                 ClickableElements.Add(uiElement);
             }
 
+            //Select the first UI Element if uiElement is the only UI Element.
+            if (ClickableElements.Count == 1 && ClickableElements[0] == uiElement)
+            {
+                ClickableElements[0].Select();
+            }
+
             return uiElement;
+        }
+
+        /// <summary>
+        /// Adds the UI Element to the <see cref="ClickableElements"/> list.
+        /// </summary>
+        public void AddClickableUIElement(UIElement uiElement)
+        {
+            ClickableElements.Add(uiElement);
+
+            //Select the first UI Element if uiElement is the only UI Element.
+            if (ClickableElements.Count == 1 && ClickableElements[0] == uiElement)
+            {
+                ClickableElements[0].Select();
+            }
         }
 
     }

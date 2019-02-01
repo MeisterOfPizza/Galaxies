@@ -21,15 +21,15 @@ namespace Galaxies.Controllers
 
         }
 
-        public static void LoadGame(ContentManager content)
+        public static void LoadGame()
         {
             if (false) //Check if a save file exists, if so: check if it's valid.
             {
-                LoadSaveGame(content);
+                LoadSaveGame(MainGame.Singleton.Content);
             }
             else
             {
-                LoadNewGame(content);
+                LoadNewGame(MainGame.Singleton.Content);
             }
         }
 
