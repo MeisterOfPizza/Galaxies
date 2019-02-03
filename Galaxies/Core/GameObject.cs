@@ -12,22 +12,24 @@ namespace Galaxies.Core
 
         #region Fields
 
-        Texture2D sprite;
-        Vector2   position;
-        float     rotation = 0;
-        Color     color    = Color.White;
+        protected Texture2D sprite;
+        Vector2 position;
+        float   rotation = 0;
+        Color   color    = Color.White;
+
+        /// <summary>
+        /// Rectangle draw width.
+        /// </summary>
+        int drawWidth;
+
+        /// <summary>
+        /// Rectangle draw height.
+        /// </summary>
+        int drawHeight;
 
         #endregion
 
         #region Properties
-
-        public Texture2D Sprite
-        {
-            get
-            {
-                return sprite;
-            }
-        }
 
         public Vector2 Position
         {
@@ -39,6 +41,8 @@ namespace Galaxies.Core
             set
             {
                 position = value;
+
+                PositionChanged();
             }
         }
 
@@ -68,6 +72,24 @@ namespace Galaxies.Core
             }
         }
 
+        public int Width
+        {
+            get
+            {
+                return drawWidth;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return drawHeight;
+            }
+        }
+
+        public virtual bool Visable { get; set; } = true;
+
         #endregion
 
         public GameObject(Texture2D sprite, Vector2 position, float rotation, Color color)
@@ -76,11 +98,41 @@ namespace Galaxies.Core
             this.position = position;
             this.rotation = rotation;
             this.color    = color;
+
+            if (sprite != null)
+            {
+                this.drawWidth  = sprite.Width;
+                this.drawHeight = sprite.Height;
+            }
+        }
+
+        public void SetDrawWidth(int width)
+        {
+            this.drawWidth = width;
+        }
+
+        public void SetDrawHeight(int height)
+        {
+            this.drawHeight = height;
+        }
+
+        public void SetDrawSize(int width, int height)
+        {
+            this.drawWidth  = width;
+            this.drawHeight = height;
+        }
+
+        protected virtual void PositionChanged()
+        {
+            //Do nothing here
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height), null, color, rotation, position, SpriteEffects.None, 0f);
+            if (Visable && sprite != null)
+            {
+                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, Vector2.Zero, SpriteEffects.None, 0f);
+            }
         }
 
     }

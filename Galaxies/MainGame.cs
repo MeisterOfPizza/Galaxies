@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Galaxies.Controllers;
+using Galaxies.Progression;
+using Galaxies.UIControllers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -7,15 +10,23 @@ namespace Galaxies
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class MainGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        public static MainGame Singleton { get; private set; }
+
+        public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            //graphics.ToggleFullScreen();
+
+            Singleton = this;
         }
 
         /// <summary>
@@ -27,6 +38,10 @@ namespace Galaxies
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            GameUIController.Window = Window;
+
+            GameUIController.CreateGalaxyScreen(); //TODO: Change to CreateMenuScreen().
 
             base.Initialize();
         }
@@ -41,6 +56,8 @@ namespace Galaxies
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            GameController.LoadGame(new SaveFile());
         }
 
         /// <summary>
@@ -64,6 +81,9 @@ namespace Galaxies
 
             // TODO: Add your update logic here
 
+            GameController.UpdateGame(gameTime);
+            GameUIController.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -76,6 +96,10 @@ namespace Galaxies
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            spriteBatch.Begin();
+            GameUIController.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

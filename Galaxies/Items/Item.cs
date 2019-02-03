@@ -1,57 +1,30 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Galaxies.Core;
+using Galaxies.Datas.Items;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Galaxies.Items
 {
 
-    abstract class Item
+    abstract class Item : GameObject
     {
 
-        #region Fields
+        public ItemData  Data      { get; protected set; }
+        public Inventory Inventory { get; private set; }
 
-        int       id;
-        string    name;
-        Texture2D sprite;
-        Color     color = Color.White;
-
-        #endregion
-
-        #region Properties
-
-        public int Id
+        public Item(ItemData data, Inventory inventory) : base(MainGame.Singleton.Content.Load<Texture2D>(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor())
         {
-            get
-            {
-                return id;
-            }
+            this.Data      = data;
+            this.Inventory = inventory;
+
+            Visable = false;
         }
 
-        public string Name
+        public virtual void ChangeInventory(Inventory newInventory)
         {
-            get
-            {
-                return name;
-            }
-        }
-
-        #endregion
-
-        public Item(int id, string name, Texture2D sprite, Color color)
-        {
-            this.id     = id;
-            this.name   = name;
-            this.sprite = sprite;
-            this.color  = color;
-        }
-
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            //spriteBatch.Draw(sprite, color);
+            this.Inventory.RemoveItem(this); //Remove item from old inventory
+            this.Inventory = newInventory; //Switch pointer
+            this.Inventory.AddItem(this); //Add item to new inventory
         }
 
     }
