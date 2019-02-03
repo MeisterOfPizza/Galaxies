@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.UI
 {
 
+    /// <summary>
+    /// Allows this GameObject to be clicked, as well as focused on.
+    /// </summary>
     class UIElement : GameObject
     {
 
@@ -24,6 +27,33 @@ namespace Galaxies.UI
         protected Screen Screen { get; set; }
 
         #endregion
+
+        public override bool Visable
+        {
+            get
+            {
+                return visable;
+            }
+
+            set
+            {
+                visable = value;
+
+                if (CanBeClicked)
+                {
+                    if (value)
+                    {
+                        Screen.AddUIClickable(this);
+                    }
+                    else
+                    {
+                        Screen.RemoveUIClickable(this);
+                    }
+                }
+            }
+        }
+
+        private bool visable = true;
 
         public delegate void OnClickEvent();
 

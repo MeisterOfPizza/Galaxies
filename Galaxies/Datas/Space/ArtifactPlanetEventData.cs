@@ -1,9 +1,11 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 using Galaxies.Space.Events;
 
 namespace Galaxies.Datas.Space
 {
 
+    [Obsolete("Use ItemDropPlanetEventData instead.", true)] //TODO: Remove obsolete
     [XmlRoot(Namespace = "", ElementName = "Artifact")]
     class ArtifactPlanetEventData : PlanetEventData
     {

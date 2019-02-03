@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Progression;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -56,7 +57,7 @@ namespace Galaxies
 
             // TODO: use this.Content to load your game content here
 
-            GameController.LoadGame();
+            GameController.LoadGame(new SaveFile());
         }
 
         /// <summary>

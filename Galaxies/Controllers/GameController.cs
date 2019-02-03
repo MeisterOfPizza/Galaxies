@@ -1,12 +1,7 @@
 ﻿using Galaxies.Entities;
+using Galaxies.Progression;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Galaxies.Controllers
 {
@@ -14,31 +9,35 @@ namespace Galaxies.Controllers
     static class GameController
     {
 
-        public static PlayerShip Player { get; set; }
+        public static PlayerShip Player { get; private set; }
+
+        public static SaveFile CurrentSaveFile { get; private set; }
 
         public static void StartNewGame()
         {
-
+            
         }
 
-        public static void LoadGame()
+        public static void LoadGame(SaveFile saveFile)
         {
-            if (false) //Check if a save file exists, if so: check if it's valid.
+            CurrentSaveFile = saveFile;
+
+            if (!CurrentSaveFile.IsNewGame) //TODO: Check if a save file exists, if so: check if it's valid.
             {
-                LoadSaveGame(MainGame.Singleton.Content);
+                LoadSaveGame(saveFile);
             }
             else
             {
-                LoadNewGame(MainGame.Singleton.Content);
+                LoadNewGame();
             }
         }
 
-        private static void LoadNewGame(ContentManager content)
+        private static void LoadNewGame()
         {
-            
+            CurrentSaveFile.IsNewGame = false;
         }
         
-        private static void LoadSaveGame(ContentManager content)
+        private static void LoadSaveGame(SaveFile saveFile)
         {
 
         }

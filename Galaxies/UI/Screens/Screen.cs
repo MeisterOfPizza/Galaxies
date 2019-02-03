@@ -14,6 +14,9 @@ namespace Galaxies.UI.Screens
 
         private List<UIElement> UIElements { get; set; } = new List<UIElement>();
 
+        /// <summary>
+        /// Clickable UI Elements. An element is also selectable if it's clickable, and vice versa.
+        /// </summary>
         protected List<UIElement> ClickableElements { get; set; } = new List<UIElement>();
 
         protected int SelectedIndex;
@@ -96,6 +99,42 @@ namespace Galaxies.UI.Screens
             }
         }
 
+        #region Handling clickables
+
+        /// <summary>
+        /// Adds an already existing UI Clickable Element to the <see cref="ClickableElements"/> list.
+        /// This is NOT the same as <see cref="AddClickableUIElement(UIElement)"/>!
+        /// Use that if you want to add a new UI Element that's clickable.
+        /// Mainly called after altering <see cref="UIElement.Visable"/> property.
+        /// </summary>
+        public void AddUIClickable(UIElement uiElement)
+        {
+            if (!ClickableElements.Contains(uiElement))
+            {
+                ClickableElements.Add(uiElement);
+            }
+        }
+
+        /// <summary>
+        /// Removes an already existing UI Clickable Element from the <see cref="ClickableElements"/> list.
+        /// Mainly called after altering <see cref="UIElement.Visable"/> property.
+        /// </summary>
+        public void RemoveUIClickable(UIElement uiElement)
+        {
+            var index = ClickableElements.IndexOf(uiElement);
+
+            if (index != -1)
+            {
+                ClickableElements.Remove(uiElement);
+
+                SelectedIndex = 0;
+            }
+        }
+
+        #endregion
+
+        #region Adding UI Elements
+
         /// <summary>
         /// Adds a UI Element and makes it selectable if is has <see cref="UIElement.CanBeClicked"/> set to true.
         /// </summary>
@@ -122,6 +161,7 @@ namespace Galaxies.UI.Screens
 
         /// <summary>
         /// Adds the UI Element to the <see cref="ClickableElements"/> list.
+        /// Mainly used by <see cref="UIContainer"/>.
         /// </summary>
         public void AddClickableUIElement(UIElement uiElement)
         {
@@ -133,6 +173,8 @@ namespace Galaxies.UI.Screens
                 ClickableElements[0].Select();
             }
         }
+
+        #endregion
 
     }
 

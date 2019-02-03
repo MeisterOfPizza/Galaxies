@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.UI.Elements
 {
 
-    class UIButton : UIElement, ITextElement<UIButton>
+    class UIText : UIElement, ITextElement<UIText>
     {
 
         #region Fields
@@ -15,7 +15,6 @@ namespace Galaxies.UI.Elements
         TextAlign  textAlign;
         string     text;
         Vector2    textPosition;
-        int        textPadding;
 
         #endregion
 
@@ -57,19 +56,21 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIButton(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(backgroundSprite, position, rotation, color, onClick, screen, canBeClicked)
+        public UIText(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Vector2 position, float rotation, Color color, Screen screen) : base(null, position, rotation, color, null, screen, false)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;
             this.Text        = text;
-            this.textPadding = textPadding;
+            this.TextPadding = textPadding;
         }
 
         private void CalculateTextPosition()
         {
             textPosition = Position + TextHelper.Align(this);
-
+            
             FormattedText = TextHelper.WrapText(this, Width);
+
+            SetDrawHeight((int)spriteFont.MeasureString(FormattedText).Y);
         }
 
         protected override void PositionChanged()
@@ -83,12 +84,10 @@ namespace Galaxies.UI.Elements
         {
             if (Visable)
             {
-                if (sprite != null)
+                if (spriteFont != null)
                 {
-                    base.Draw(spriteBatch);
+                    spriteBatch.DrawString(spriteFont, FormattedText, textPosition, Color);
                 }
-
-                spriteBatch.DrawString(spriteFont, FormattedText, textPosition, Color);
             }
         }
 

@@ -9,14 +9,14 @@ namespace Galaxies.Controllers
     static class DataController
     {
 
-        private static Dictionary<string, DataFile> DataFiles { get; set; } = new Dictionary<string, DataFile>();
+        private static Dictionary<DataFileType, DataFile> DataFiles { get; set; } = new Dictionary<DataFileType, DataFile>();
 
         /// <summary>
         /// Loads the specified data from specified file (if it exists).
         /// </summary>
-        public static T LoadData<T>(string id, string file) where T : Data
+        public static T LoadData<T>(string id, DataFileType type) where T : Data
         {
-            var dataFile = DataFiles[file];
+            var dataFile = DataFiles[type];
 
             if (dataFile != null)
             {
@@ -28,7 +28,7 @@ namespace Galaxies.Controllers
             }
         }
 
-        public static T Deserialize<T>(XmlNode xmlNode) where T : Data
+        private static T Deserialize<T>(XmlNode xmlNode) where T : Data
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
 
@@ -39,6 +39,14 @@ namespace Galaxies.Controllers
             return data;
         }
 
+    }
+
+    enum DataFileType
+    {
+        PlanetarySystems,
+        Planets,
+        Items,
+        Enemies
     }
 
     class DataFile

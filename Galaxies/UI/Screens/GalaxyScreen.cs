@@ -1,4 +1,7 @@
-﻿using Galaxies.UI.Elements;
+﻿using Galaxies.Controllers;
+using Galaxies.Space;
+using Galaxies.UI.Elements;
+using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -10,9 +13,6 @@ namespace Galaxies.UI.Screens
     class GalaxyScreen : Screen
     {
 
-        private UIColumn POIListBox       { get; set; }
-        private UIButton BackToMenuButton { get; set; }
-
         public override void CreateUI(ContentManager content)
         {
             var columnSprite           = content.Load<Texture2D>("Sprites/UI/Column");
@@ -23,13 +23,16 @@ namespace Galaxies.UI.Screens
             */
             var arialFont              = content.Load<SpriteFont>("Fonts/Arial");
 
-            POIListBox = AddUIElement(new UIColumn(columnSprite, GameUIController.TopLeftCorner(), 0, Color.White, null, this, 5, 5));
-            POIListBox.SetDrawSize(200, 300);
-            POIListBox.AddUIElement(new UIElement(columnSprite, Vector2.Zero, 0, Color.White, null, this));
-            POIListBox.AddUIElement(new UIElement(columnSprite, Vector2.Zero, 0, Color.White, null, this));
-            POIListBox.AddUIElement(new UIElement(columnSprite, Vector2.Zero, 0, Color.White, null, this));
+            var visitablesColumn = AddUIElement(new UIColumn(columnSprite, GameUIController.TopLeftCorner(), 0, Color.White, null, this, 5, 5));
+            visitablesColumn.SetDrawSize(300, 300);
 
-            BackToMenuButton = AddUIElement(new UIButton(arialFont, "Menu", columnSprite, GameUIController.BottomLeftCorner(100, 100),  0, Color.White, new UIElement.OnClickEvent(GameUIController.CreateMenuScreen), this));
+            AddUIElement(new UIButton(arialFont, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100),  0, Color.White, GameUIController.CreateMenuScreen, this));
+
+            //Creating visitables
+            foreach (IVisitable visitable in GalaxyController.Visitables)
+            {
+                visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable)).CalculatePositions();
+            }
 
             /*
             AddUIElement(new UIElement(backToMenuSprite, GameUIController.BottomLeftCorner(backToMenuSprite.Width, backToMenuSprite.Height), 0, Color.White, null)); //TODO: Back to menu

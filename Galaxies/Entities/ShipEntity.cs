@@ -1,8 +1,9 @@
 ﻿using Galaxies.Core;
+using Galaxies.Datas.Items;
 using Galaxies.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
+using System.Linq;
 
 //Disable "[...] is never assigned to [...]" warnings.
 #pragma warning disable 0649
@@ -10,20 +11,15 @@ using System.Collections.Generic;
 namespace Galaxies.Entities
 {
 
-    abstract class ShipEntity : MovingObject
+    abstract class ShipEntity : MovingObject, IInventoryOwner
     {
 
         #region Fields
 
-        int  baseHealth;
-        int  modifiedHealth;
-        int  currentHealth;
-        int  baseArmor;
-        int  modifiedArmor;
-        int  baseDamage;
-        int  modifiedDamage;
-        bool isAlive = true;
-        List<ShipUpgrade> upgrades;
+        ShipStats baseStats;
+        ShipStats modifiedStats;
+        int       currentHealth;
+        bool      isAlive = true;
 
         #endregion
 
@@ -46,7 +42,7 @@ namespace Galaxies.Entities
         {
             get
             {
-                return baseHealth + modifiedHealth;
+                return baseStats.Health + modifiedStats.Health;
             }
         }
 
@@ -54,7 +50,7 @@ namespace Galaxies.Entities
         {
             get
             {
-                return baseArmor + modifiedArmor;
+                return baseStats.Armor + modifiedStats.Armor;
             }
         }
 
@@ -62,7 +58,7 @@ namespace Galaxies.Entities
         {
             get
             {
-                return baseDamage + modifiedDamage;
+                return baseStats.Damage + modifiedStats.Damage;
             }
         }
 
@@ -74,33 +70,38 @@ namespace Galaxies.Entities
             }
         }
 
-        public List<ShipUpgrade> Upgrades
-        {
-            get
-            {
-                return upgrades;
-            }
-        }
+        #endregion
+
+        #region IInventoryOwner
+
+        public Inventory Inventory { get; set; }
 
         #endregion
 
-        public ShipEntity(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 speed, int baseHealth, int baseArmor, int baseDamage) : base(sprite, position, rotation, color, speed)
+        public ShipEntity(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, speed)
         {
-            this.baseHealth = baseHealth;
-            this.baseArmor  = baseArmor;
-            this.baseDamage = baseDamage;
+            this.baseStats     = baseStats;
+            this.modifiedStats = new ShipStats();
         }
 
-        public void Equip(ShipUpgrade shipUpgrade)
+        protected void CalculateStats()
         {
-            upgrades.Add(shipUpgrade);
+            var shipUpgradeShipStats = Inventory.Items
+                .Where(i => i.Data.ItemType == ItemType.ShipUpgrade)
+                .Select(i => ((ShipUpgradeItemData)i.Data).ShipStats);
 
-            CalculateStats();
-        }
+            int newHealth = 0;
+            int newArmor  = 0;
+            int newDamage = 0;
 
-        private void CalculateStats()
-        {
+            foreach (ShipStats stats in shipUpgradeShipStats)
+            {
+                newHealth += stats.Health;
+                newArmor  += stats.Armor;
+                newDamage += stats.Damage;
+            }
 
+            modifiedStats = new ShipStats(newHealth, newArmor, newDamage);
         }
 
         public virtual void TakeDamage(int dmg)
@@ -123,6 +124,19 @@ namespace Galaxies.Entities
             Health  = 0;
             isAlive = false;
         }
+
+        #region IInventory
+
+        public void InventoryChanged(Item changedItem)
+        {
+            //We only care to update stats if the changed item was of type ShipUpgrade.
+            if (changedItem.Data.ItemType == ItemType.ShipUpgrade)
+            {
+                CalculateStats();
+            }
+        }
+
+        #endregion
 
     }
 

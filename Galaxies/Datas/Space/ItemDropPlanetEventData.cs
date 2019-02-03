@@ -8,9 +8,9 @@ namespace Galaxies.Datas.Space
     class ItemDropPlanetEventData : PlanetEventData
     {
 
-        [XmlArray("Items", IsNullable = false)]
-        [XmlArrayItem("Item", IsNullable = false)]
-        public string[] Items { get; set; }
+        [XmlArray("ItemIds", IsNullable = false)]
+        [XmlArrayItem("ItemId", IsNullable = false)]
+        public string[] ItemIds { get; set; }
 
         public override PlanetEvent CreateEvent()
         {

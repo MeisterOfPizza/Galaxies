@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Galaxies.Datas.Items;
 
 namespace Galaxies.Items
 {
@@ -12,7 +6,7 @@ namespace Galaxies.Items
     class ShipUpgrade : Item
     {
 
-        public ShipUpgrade(int id, string name, Texture2D sprite, Color color) : base(id, name, sprite, color)
+        public ShipUpgrade(ShipUpgradeItemData data, Inventory inventory) : base(data, inventory)
         {
 
         }

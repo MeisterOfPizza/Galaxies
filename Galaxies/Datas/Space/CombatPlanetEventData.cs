@@ -8,9 +8,9 @@ namespace Galaxies.Datas.Space
     class CombatPlanetEventData : PlanetEventData
     {
 
-        [XmlArray("Enemies", IsNullable = false)]
-        [XmlArrayItem("Enemy", IsNullable = false)]
-        public string[] Enemies { get; set; }
+        [XmlArray("EnemyIds", IsNullable = false)]
+        [XmlArrayItem("EnemyId", IsNullable = false)]
+        public string[] EnemyIds { get; set; }
 
         public override PlanetEvent CreateEvent()
         {

@@ -16,9 +16,9 @@ namespace Galaxies.Datas.Space
         [XmlElement("MaxRandomPlanets", typeof(int), IsNullable = true)]
         public int MaxRandomPlanets { get; set; }
 
-        [XmlArray("Planets", IsNullable = true)]
-        [XmlArrayItem("Planet", typeof(PlanetData), IsNullable = false)]
-        public PlanetData Planets { get; set; }
+        [XmlArray("PlanetIds", IsNullable = true)]
+        [XmlArrayItem("PlanetId", IsNullable = false)]
+        public string[] PlanetIds { get; set; }
 
     }
 

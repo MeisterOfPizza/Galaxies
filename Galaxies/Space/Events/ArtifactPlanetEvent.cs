@@ -4,6 +4,7 @@ using System;
 namespace Galaxies.Space.Events
 {
 
+    [Obsolete("Use ItemDropPlanetEventData instead.", true)] //TODO: Remove obsolete
     class ArtifactPlanetEvent : PlanetEvent
     {
 

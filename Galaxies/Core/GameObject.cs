@@ -88,6 +88,8 @@ namespace Galaxies.Core
             }
         }
 
+        public virtual bool Visable { get; set; } = true;
+
         #endregion
 
         public GameObject(Texture2D sprite, Vector2 position, float rotation, Color color)
@@ -97,8 +99,11 @@ namespace Galaxies.Core
             this.rotation = rotation;
             this.color    = color;
 
-            this.drawWidth  = sprite.Width;
-            this.drawHeight = sprite.Height;
+            if (sprite != null)
+            {
+                this.drawWidth  = sprite.Width;
+                this.drawHeight = sprite.Height;
+            }
         }
 
         public void SetDrawWidth(int width)
@@ -124,7 +129,10 @@ namespace Galaxies.Core
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, Vector2.Zero, SpriteEffects.None, 0f);
+            if (Visable && sprite != null)
+            {
+                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, Vector2.Zero, SpriteEffects.None, 0f);
+            }
         }
 
     }
