@@ -44,6 +44,12 @@ namespace Galaxies.UIControllers
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
+        public static void CreateCombatScreen()
+        {
+            CurrentScreen = new CombatScreen();
+            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+        }
+
         #endregion
 
         #region Position helpers

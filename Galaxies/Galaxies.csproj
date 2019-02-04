@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CombatController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -45,6 +46,7 @@
     <Compile Include="Core\MovingObject.cs" />
     <Compile Include="Datas\ColorData.cs" />
     <Compile Include="Datas\Data.cs" />
+    <Compile Include="Datas\Enemies\EnemyShipData.cs" />
     <Compile Include="Datas\Items\ArtifactItemData.cs" />
     <Compile Include="Datas\Items\ItemData.cs" />
     <Compile Include="Datas\Items\ShipUpgradeItemData.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Datas\Space\PlanetarySystemData.cs" />
     <Compile Include="Datas\Space\PlanetData.cs" />
     <Compile Include="Datas\Space\PlanetEventData.cs" />
+    <Compile Include="Entities\EnemyShip.cs" />
     <Compile Include="Entities\PlayerShip.cs" />
     <Compile Include="Entities\ShipEntity.cs" />
     <Compile Include="Entities\ShipStats.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
     <Compile Include="UI\Interfaces\ITextElement.cs" />
+    <Compile Include="UI\Screens\CombatScreen.cs" />
     <Compile Include="UI\Screens\GalaxyScreen.cs" />
     <Compile Include="UI\Screens\MenuScreen.cs" />
     <Compile Include="UI\Screens\Screen.cs" />

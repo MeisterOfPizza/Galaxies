@@ -40,8 +40,7 @@ namespace Galaxies
             // TODO: Add your initialization logic here
 
             GameUIController.Window = Window;
-
-            GameUIController.CreateGalaxyScreen(); //TODO: Change to CreateMenuScreen().
+            GameUIController.CreateMenuScreen();
 
             base.Initialize();
         }
@@ -81,7 +80,7 @@ namespace Galaxies
 
             // TODO: Add your update logic here
 
-            GameController.UpdateGame(gameTime);
+            GameController.Update(gameTime);
             GameUIController.Update(gameTime);
 
             base.Update(gameTime);

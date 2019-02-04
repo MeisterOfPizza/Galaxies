@@ -28,7 +28,7 @@ namespace Galaxies.UI.Screens
         /// <summary>
         /// Look for keystrokes or mouse movement.
         /// </summary>
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             selectionCooldown += gameTime.ElapsedGameTime.TotalSeconds;
 
