@@ -1,7 +1,6 @@
 ﻿using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
 
 namespace Galaxies.UI.Elements
 {
@@ -15,9 +14,9 @@ namespace Galaxies.UI.Elements
         /// <summary>
         /// This is the responsive height.
         /// </summary>
-        private int ResponsiveMaxY;
+        protected int ResponsiveMaxY;
 
-        public UIColumn(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, int spaceY, int borderY, bool responsiveSize = true) : base(sprite, position, rotation, color, onClick, screen, 0, spaceY, 0, borderY, responsiveSize)
+        public UIColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Screen screen, int spaceY, int borderY, bool responsiveSize = true) : base(sprite, position, rotation, color, screen, 0, spaceY, 0, borderY, responsiveSize)
         {
         }
 

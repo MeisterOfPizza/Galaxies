@@ -32,6 +32,13 @@ namespace Galaxies.UI.Elements
             return uiElement;
         }
 
+        protected override void PositionChanged()
+        {
+            base.PositionChanged();
+
+            CalculatePositions();
+        }
+
         public void CalculatePositions()
         {
             foreach (UIGroupElement groupElement in GroupElements)

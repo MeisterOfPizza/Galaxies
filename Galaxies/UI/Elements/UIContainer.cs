@@ -22,7 +22,7 @@ namespace Galaxies.UI
 
         private bool ResponsiveSize { get; set; }
 
-        public UIContainer(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, int spaceX, int spaceY, int borderX, int borderY, bool responsiveSize) : base(sprite, position, rotation, color, onClick, screen, false)
+        public UIContainer(Texture2D sprite, Vector2 position, float rotation, Color color, Screen screen, int spaceX, int spaceY, int borderX, int borderY, bool responsiveSize) : base(sprite, position, rotation, color, null, screen, false)
         {
             this.SpaceX  = spaceX;
             this.SpaceY  = spaceY;
