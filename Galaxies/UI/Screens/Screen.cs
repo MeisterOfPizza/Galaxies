@@ -79,7 +79,10 @@ namespace Galaxies.UI.Screens
 
                     ClickableElements[SelectedIndex].Select();
 
-                    SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    if (SelectCallbacks != null)
+                    {
+                        SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    }
                 }
                 else if (keyboardState.IsKeyDown(Keys.Down) || (keyboardState.IsKeyDown(Keys.Tab) && keyboardState.IsKeyDown(Keys.LeftShift)))
                 {
@@ -94,7 +97,10 @@ namespace Galaxies.UI.Screens
 
                     ClickableElements[SelectedIndex].Select();
 
-                    SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    if (SelectCallbacks != null)
+                    {
+                        SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    }
                 }
             }
         }

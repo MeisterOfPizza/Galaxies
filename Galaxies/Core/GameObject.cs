@@ -125,6 +125,9 @@ namespace Galaxies.Core
         protected virtual void PositionChanged()
         {
             //Do nothing here
+            //We'll leave this method blank (and not modified as abstract).
+            //This is because we don't want to override this method in ALL classes further down the line.
+            //It looks ugly but it's the best we can do.
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

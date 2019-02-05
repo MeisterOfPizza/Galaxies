@@ -34,9 +34,7 @@ namespace Galaxies.UI.Screens
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    var v = visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable));
-                    v.CalculatePositions();
-                    v.Name.Text = i.ToString();
+                    visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable));
                 }
                 //visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable)).CalculatePositions();
             }
