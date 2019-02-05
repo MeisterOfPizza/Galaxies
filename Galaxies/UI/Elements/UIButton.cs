@@ -67,7 +67,7 @@ namespace Galaxies.UI.Elements
 
         private void CalculateTextPosition()
         {
-            textPosition = Position + TextHelper.Align(this);
+            textPosition = TextHelper.Align(this);
 
             FormattedText = TextHelper.WrapText(this, Width);
         }
@@ -88,7 +88,7 @@ namespace Galaxies.UI.Elements
                     base.Draw(spriteBatch);
                 }
 
-                spriteBatch.DrawString(spriteFont, FormattedText, textPosition, Color);
+                spriteBatch.DrawString(spriteFont, FormattedText, Position + textPosition, Color);
             }
         }
 

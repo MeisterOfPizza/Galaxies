@@ -23,6 +23,10 @@ namespace Galaxies.UI.Screens
 
         private double selectionCooldown;
 
+        public SelectCallback SelectCallbacks { get; set; }
+
+        public delegate void SelectCallback(UIElement uiElement);
+
         public abstract void CreateUI(ContentManager content);
 
         /// <summary>
@@ -74,6 +78,8 @@ namespace Galaxies.UI.Screens
                     }
 
                     ClickableElements[SelectedIndex].Select();
+
+                    SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
                 }
                 else if (keyboardState.IsKeyDown(Keys.Down) || (keyboardState.IsKeyDown(Keys.Tab) && keyboardState.IsKeyDown(Keys.LeftShift)))
                 {
@@ -87,6 +93,8 @@ namespace Galaxies.UI.Screens
                     }
 
                     ClickableElements[SelectedIndex].Select();
+
+                    SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
                 }
             }
         }
