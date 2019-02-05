@@ -7,9 +7,15 @@ namespace Galaxies.UI.Elements
 
     class UIScrollableColumn : UIColumn
     {
+        
+        /// <summary>
+        /// How many items can fit per view?
+        /// </summary>
+        private int maxFitPerView;
 
-        private int scrollYOffset;
-        private int maxFitPerScroll;
+        /// <summary>
+        /// How high is each item?
+        /// </summary>
         private int itemHeight;
 
         /// <summary>
@@ -33,27 +39,32 @@ namespace Galaxies.UI.Elements
         {
             int currentY = BorderY;
             
-            for (int i = minIndex; i < maxIndex; i++)
+            for (int i = minIndex; i <= maxIndex; i++)
             {
                 Container[i].Position = Position + new Vector2((Width - Container[i].Width) / 2f, currentY);
 
                 currentY += itemHeight + SpaceY;
             }
+
+            ResponsiveMaxY = currentY + BorderY; //Not used by this class, but may be used later down the road?
         }
 
         protected override void CalculateSize()
         {
-            CalculateResponsiveHeight();
-            CalculateFitPerScroll();
+            CalculateFitPerView();
         }
 
+        /// <summary>
+        /// Callback method whenever the player selects a new UI Element from the current screen.
+        /// </summary>
+        /// <param name="newSelected">Newly selected element.</param>
         protected void SelectedChanged(UIElement newSelected)
         {
             int index = Container.IndexOf(newSelected);
 
             if (index != -1)
             {
-                CalculateScrollYOffset(index);
+                CalculateIndexRange(index);
 
                 CalculatePositions();
             }
@@ -65,60 +76,52 @@ namespace Galaxies.UI.Elements
             {
                 spriteBatch.Draw(sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Vector2.Zero, SpriteEffects.None, 0f);
             }
-
-            for (int i = minIndex; i < maxIndex; i++)
+            
+            if (Container.Count > 0)
             {
-                Container[i].Draw(spriteBatch);
+                for (int i = minIndex; i <= maxIndex; i++)
+                {
+                    Container[i].Draw(spriteBatch);
+                }
             }
         }
 
         #region Helpers
 
-        private void CalculateResponsiveHeight()
+        /// <summary>
+        /// How many elements can fit per view?
+        /// </summary>
+        private void CalculateFitPerView()
         {
-            int currentY = BorderY;
-
-            for (int i = 0; i < Container.Count; i++)
-            {
-                currentY += Container[i].Height + SpaceY;
-            }
-
-            ResponsiveMaxY = currentY;
-        }
-
-        private void CalculateFitPerScroll()
-        {
-            maxFitPerScroll = 0;
+            maxFitPerView = 0;
 
             int totHeight = 0;
 
             while (totHeight <= Height - itemHeight)
             {
                 totHeight += itemHeight;
-                maxFitPerScroll++;
+                maxFitPerView++;
             }
+
+            maxFitPerView--; //Account for index value.
         }
 
-        private void CalculateScrollYOffset(int selectedIndex)
+        /// <summary>
+        /// Calculates the min and max index allowed.
+        /// </summary>
+        private void CalculateIndexRange(int selectedIndex)
         {
-            if (selectedIndex < minIndex)
+            if (selectedIndex <= minIndex)
             {
-                minIndex = selectedIndex;
+                minIndex = MathHelper.Clamp(selectedIndex, 0, Container.Count - 1);
 
-                maxIndex = MathHelper.Clamp(minIndex + maxFitPerScroll, 0, Container.Count - 1);
+                maxIndex = MathHelper.Clamp(minIndex + maxFitPerView, 0, Container.Count - 1);
             }
-            else if (selectedIndex > maxIndex)
+            else if (selectedIndex >= maxIndex)
             {
-                maxIndex = selectedIndex;
+                maxIndex = MathHelper.Clamp(selectedIndex, 0, Container.Count - 1);
 
-                minIndex = MathHelper.Clamp(maxIndex - maxFitPerScroll, 0, Container.Count - 1);
-            }
-
-            scrollYOffset = 0;
-
-            for (int i = 0; i < maxIndex; i++)
-            {
-                scrollYOffset += Container[i].Height;
+                minIndex = MathHelper.Clamp(maxIndex - maxFitPerView, 0, Container.Count - 1);
             }
         }
 

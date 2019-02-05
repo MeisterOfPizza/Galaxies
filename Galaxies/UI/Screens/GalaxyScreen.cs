@@ -25,7 +25,7 @@ namespace Galaxies.UI.Screens
 
             //var visitablesColumn = AddUIElement(new UIColumn(columnSprite, GameUIController.TopLeftCorner(), 0, Color.White, this, 5, 5));
             var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.TopLeftCorner(), 0, Color.White, this, 5, 5, 200));
-            visitablesColumn.SetDrawSize(300, 500);
+            visitablesColumn.SetDrawSize(300, 600);
 
             AddUIElement(new UIButton(arialFont, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100),  0, Color.White, GameUIController.CreateMenuScreen, this));
 
@@ -36,7 +36,7 @@ namespace Galaxies.UI.Screens
                 {
                     var v = visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable));
                     v.CalculatePositions();
-                    v.Name.Text = (i + 1).ToString();
+                    v.Name.Text = i.ToString();
                 }
                 //visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable)).CalculatePositions();
             }
