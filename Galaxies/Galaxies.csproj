@@ -79,6 +79,7 @@
     <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
+    <Compile Include="UI\Elements\UIScrollableColumn.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
     <Compile Include="UI\Interfaces\ITextElement.cs" />

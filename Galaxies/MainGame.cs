@@ -26,6 +26,8 @@ namespace Galaxies
             graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
             //graphics.ToggleFullScreen();
 
+            //graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
+
             Singleton = this;
         }
 

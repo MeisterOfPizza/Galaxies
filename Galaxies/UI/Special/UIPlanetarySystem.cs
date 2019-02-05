@@ -12,6 +12,15 @@ namespace Galaxies.UI.Special
 
         IVisitable visitable;
 
+        //TODO: Remove test
+        public UIText Name
+        {
+            get
+            {
+                return (UIText)GroupElements[1].UIElement;
+            }
+        }
+
         public UIPlanetarySystem(Texture2D sprite, Vector2 position, OnClickEvent onClick, Screen screen, IVisitable visitable) : base(sprite, position, 0, Color.White, onClick, screen)
         {
             var content = MainGame.Singleton.Content;
