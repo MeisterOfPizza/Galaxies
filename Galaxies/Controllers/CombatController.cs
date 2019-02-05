@@ -14,6 +14,8 @@ namespace Galaxies.Controllers
         public static PlayerShip Player    { get; private set; }
         public static EnemyShip  EnemyShip { get; private set; }
 
+        public static bool PlayerTurn { get; set; }
+
         public static void StartBattle()
         {
 
