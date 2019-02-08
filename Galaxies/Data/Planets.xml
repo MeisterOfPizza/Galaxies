@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Collection>
+  <Planet id="test">
+    <Name>Earth</Name>
+    <Description>Home planet of Humans</Description>
+    <SpriteName>Sprites/UI/Column</SpriteName>
+    <OnVisitEvents>
+      <Combat>
+        <EnemyIds>
+          <EnemyId>test</EnemyId>
+        </EnemyIds>
+      </Combat>
+    </OnVisitEvents>
+  </Planet>
+</Collection>

@@ -111,6 +111,18 @@
     <Content Include="Content\Sprites\Player Ships\Player Ship 3.png" />
     <Content Include="Content\Sprites\Transparent.png" />
     <Content Include="Content\Sprites\UI\Column.png" />
+    <Content Include="Data\Enemies.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Items.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\PlanetarySystems.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Planets.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Collection>
+  <Enemy id="test">
+    <Name>Fighter</Name>
+    <Description>Basic fighter.</Description>
+    <SpriteName>Sprites/Player Ships/Player Ship 1</SpriteName>
+    <BaseShipStats>
+      <Health>100</Health>
+      <Shield>25</Shield>
+      <Damage>10</Damage>
+      <Energy>50</Energy>
+      <EnergyRegen>5</EnergyRegen>
+    </BaseShipStats>
+    <ShipUpgradeIds>
+      <ShipUpgradeId>0</ShipUpgradeId>
+    </ShipUpgradeIds>
+    <Color r="255" g="0" b="0"></Color>
+  </Enemy>
+</Collection>

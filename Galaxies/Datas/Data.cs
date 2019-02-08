@@ -4,7 +4,7 @@ namespace Galaxies.Datas
 {
 
     [XmlRoot(Namespace = "", ElementName = "Data")]
-    abstract class Data
+    public abstract class Data
     {
 
         [XmlAttribute("id")]
