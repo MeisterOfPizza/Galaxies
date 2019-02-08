@@ -6,6 +6,9 @@ using System.Collections.Generic;
 namespace Galaxies.UI.Elements
 {
 
+    /// <summary>
+    /// Groups UI Elements into one single head element. This can be useful when dealing with text and texture based components that needs to be positioned together.
+    /// </summary>
     class UIGroup : UIElement
     {
 

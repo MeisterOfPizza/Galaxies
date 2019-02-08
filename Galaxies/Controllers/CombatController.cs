@@ -1,9 +1,8 @@
-﻿using Galaxies.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Galaxies.Combat;
+using Galaxies.Datas.Enemies;
+using Galaxies.Entities;
+using Galaxies.Extensions;
+using Galaxies.Space.Events;
 
 namespace Galaxies.Controllers
 {
@@ -11,14 +10,13 @@ namespace Galaxies.Controllers
     static class CombatController
     {
 
-        public static PlayerShip Player    { get; private set; }
-        public static EnemyShip  EnemyShip { get; private set; }
+        public static Battlefield Battlefield { get; private set; }
 
-        public static bool PlayerTurn { get; set; }
-
-        public static void StartBattle()
+        public static void StartBattle(CombatPlanetEvent @event)
         {
+            string enemyId = @event.data.EnemyIds[Random.Next(@event.data.EnemyIds.Length)];
 
+            Battlefield = new Battlefield(PlayerShip.Singleton, new EnemyShip(DataController.LoadData<EnemyShipData>(enemyId, DataFileType.Enemies)));
         }
 
         public static void Update()

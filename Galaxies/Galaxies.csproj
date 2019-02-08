@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Combat\Battlefield.cs" />
     <Compile Include="Controllers\CombatController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Entities\ShipEntity.cs" />
     <Compile Include="Entities\ShipStats.cs" />
     <Compile Include="Extensions\Random.cs" />
+    <Compile Include="Extensions\SpriteHelper.cs" />
     <Compile Include="Items\Interfaces\IInventoryOwner.cs" />
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="MainGame.cs" />

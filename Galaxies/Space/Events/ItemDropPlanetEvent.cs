@@ -7,7 +7,7 @@ namespace Galaxies.Space.Events
     class ItemDropPlanetEvent : PlanetEvent
     {
 
-        private ItemDropPlanetEventData data;
+        public ItemDropPlanetEventData data;
 
         public override PlanetEventData Data
         {

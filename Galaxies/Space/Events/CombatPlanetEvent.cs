@@ -1,5 +1,5 @@
-﻿using Galaxies.Datas.Space;
-using System;
+﻿using Galaxies.Controllers;
+using Galaxies.Datas.Space;
 
 namespace Galaxies.Space.Events
 {
@@ -7,7 +7,7 @@ namespace Galaxies.Space.Events
     class CombatPlanetEvent : PlanetEvent
     {
 
-        private CombatPlanetEventData data;
+        public CombatPlanetEventData data;
 
         public override PlanetEventData Data
         {
@@ -24,7 +24,7 @@ namespace Galaxies.Space.Events
 
         public override void Trigger()
         {
-            throw new NotImplementedException();
+            CombatController.StartBattle(this);
         }
 
     }

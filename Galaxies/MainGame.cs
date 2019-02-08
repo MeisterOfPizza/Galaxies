@@ -41,10 +41,10 @@ namespace Galaxies
         {
             // TODO: Add your initialization logic here
 
-            GameUIController.Window = Window;
-            GameUIController.CreateMenuScreen();
-
             base.Initialize();
+
+            GameUIController.Window = Window;
+            GameUIController.CreateGalaxyScreen();
         }
 
         /// <summary>

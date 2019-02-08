@@ -150,7 +150,7 @@ namespace Galaxies.UI.Screens
         #region Adding UI Elements
 
         /// <summary>
-        /// Adds a UI Element and makes it selectable if is has <see cref="UIElement.CanBeClicked"/> set to true.
+        /// Adds a UI Element and makes it selectable (and clickable!) if is has <see cref="UIElement.CanBeClicked"/> set to true.
         /// </summary>
         /// <typeparam name="T">UIElement descendant of type T.</typeparam>
         /// <param name="uiElement">The UI Element to add.</param>

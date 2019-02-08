@@ -1,5 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Galaxies.Controllers;
+using Galaxies.Datas.Enemies;
+using Galaxies.Datas.Items;
+using Galaxies.Extensions;
+using Galaxies.Items;
+using Microsoft.Xna.Framework;
 
 namespace Galaxies.Entities
 {
@@ -7,9 +11,16 @@ namespace Galaxies.Entities
     class EnemyShip : ShipEntity
     {
 
-        public EnemyShip(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, speed, baseStats)
-        {
+        private EnemyShipData Data { get; set; }
 
+        public EnemyShip(EnemyShipData data) : base(SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor(), Vector2.Zero, data.BaseShipStats)
+        {
+            this.Data = data;
+
+            foreach (string id in Data.ShipUpgradeIds)
+            {
+                Inventory.AddItem(new ShipUpgrade(DataController.LoadData<ShipUpgradeItemData>(id, DataFileType.Items), Inventory));
+            }
         }
 
     }

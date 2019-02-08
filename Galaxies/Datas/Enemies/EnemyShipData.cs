@@ -18,6 +18,9 @@ namespace Galaxies.Datas.Enemies
         [XmlArrayItem("ShipUpgradeId", IsNullable = true)]
         public string[] ShipUpgradeIds { get; set; }
 
+        [XmlElement("Color", typeof(ColorData), IsNullable = true)]
+        public ColorData Color { get; set; }
+
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -12,16 +13,45 @@ namespace Galaxies.UI.Screens
 
         public override void CreateUI(ContentManager content)
         {
-            CombatController.Player.Position    = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
-            CombatController.EnemyShip.Position = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
+            CombatController.Battlefield.Player.Position = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
+            CombatController.Battlefield.Enemy.Position  = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
+
+            var arial = content.Load<SpriteFont>("Fonts/Arial");
+            var actionBackground = content.Load<Texture2D>("Sprites/UI/Column");
+
+            AddUIElement(new UIButton(
+                arial,
+                "FIRE",
+                TextAlign.MiddleCenter,
+                10,
+                actionBackground,
+                new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)),
+                0,
+                Color.White,
+                CombatController.Battlefield.Player_Attack,
+                this))
+                .SetDrawSize(100, 100);
+
+            AddUIElement(new UIButton(
+                arial,
+                "SHIELD UP",
+                TextAlign.MiddleCenter,
+                10,
+                actionBackground,
+                new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)),
+                0,
+                Color.White,
+                CombatController.Battlefield.Player_ShieldUp,
+                this))
+                .SetDrawSize(100, 100);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
 
-            CombatController.Player.Draw(spriteBatch);
-            CombatController.EnemyShip.Draw(spriteBatch);
+            CombatController.Battlefield.Player.Draw(spriteBatch);
+            CombatController.Battlefield.Enemy.Draw(spriteBatch);
         }
 
     }

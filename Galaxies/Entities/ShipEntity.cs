@@ -19,6 +19,7 @@ namespace Galaxies.Entities
         ShipStats baseStats;
         ShipStats modifiedStats;
         int       currentHealth;
+        int       currentEnergy;
         bool      isAlive = true;
 
         #endregion
@@ -32,7 +33,7 @@ namespace Galaxies.Entities
                 return currentHealth;
             }
 
-            set
+            private set
             {
                 currentHealth = value;
             }
@@ -46,11 +47,11 @@ namespace Galaxies.Entities
             }
         }
 
-        public int Armor
+        public int Shield
         {
             get
             {
-                return baseStats.Armor + modifiedStats.Armor;
+                return baseStats.Shield + modifiedStats.Shield;
             }
         }
 
@@ -59,6 +60,35 @@ namespace Galaxies.Entities
             get
             {
                 return baseStats.Damage + modifiedStats.Damage;
+            }
+        }
+
+        public int Energy
+        {
+            get
+            {
+                return currentEnergy;
+            }
+
+            private set
+            {
+                currentEnergy = value;
+            }
+        }
+
+        public int MaxEnergy
+        {
+            get
+            {
+                return baseStats.Energy + modifiedStats.Energy;
+            }
+        }
+
+        public int EnergyRegen
+        {
+            get
+            {
+                return baseStats.EnergyRegen + modifiedStats.EnergyRegen;
             }
         }
 
@@ -90,23 +120,32 @@ namespace Galaxies.Entities
                 .Where(i => i.Data.ItemType == ItemType.ShipUpgrade)
                 .Select(i => ((ShipUpgradeItemData)i.Data).ShipStats);
 
-            int newHealth = 0;
-            int newArmor  = 0;
-            int newDamage = 0;
+            int newHealth      = 0;
+            int newShield      = 0;
+            int newDamage      = 0;
+            int newEnergy      = 0;
+            int newEnergyRegen = 0;
 
             foreach (ShipStats stats in shipUpgradeShipStats)
             {
-                newHealth += stats.Health;
-                newArmor  += stats.Armor;
-                newDamage += stats.Damage;
+                newHealth      += stats.Health;
+                newShield      += stats.Shield;
+                newDamage      += stats.Damage;
+                newEnergy      += stats.Energy;
+                newEnergyRegen += stats.EnergyRegen;
             }
 
-            modifiedStats = new ShipStats(newHealth, newArmor, newDamage);
+            modifiedStats = new ShipStats(newHealth, newShield, newDamage, newEnergy, newEnergyRegen);
         }
 
-        public virtual void TakeDamage(int dmg)
+        public virtual void Attack(ShipEntity defender)
         {
-            Health -= dmg;
+            defender.Defend(Damage);
+        }
+
+        public virtual void Defend(int damage)
+        {
+            Health -= damage;
 
             if (Health <= 0)
             {
@@ -114,9 +153,9 @@ namespace Galaxies.Entities
             }
         }
 
-        public virtual void DoDamage(ShipEntity entity)
+        public virtual void RegenEnergy()
         {
-            entity.TakeDamage(Damage);
+            Energy = MathHelper.Clamp(Energy + EnergyRegen, 0, MaxEnergy);
         }
 
         public void Die()
