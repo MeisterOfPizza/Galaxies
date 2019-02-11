@@ -1,7 +1,7 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Datas.Space;
 using Galaxies.Extensions;
-using Microsoft.Xna.Framework;
+using Galaxies.UIControllers;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Space
@@ -68,9 +68,11 @@ namespace Galaxies.Space
 
         public void Visit()
         {
-            GalaxyController.Visitables.Remove(this);
-
             CreatePlanets();
+
+            GalaxyController.Visitables.Remove(this); //Remove this from visitable things.
+            PlanetarySystemController.SetPlanetarySystem(this); //Set the current planetary system.
+            GameUIController.CreatePlanetarySystemScreen(); //Create the UI.
         }
 
         #endregion

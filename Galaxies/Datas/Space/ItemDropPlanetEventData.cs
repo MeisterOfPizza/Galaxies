@@ -5,7 +5,7 @@ namespace Galaxies.Datas.Space
 {
 
     [XmlRoot(Namespace = "", ElementName = "ItemDrop")]
-    class ItemDropPlanetEventData : PlanetEventData
+    public class ItemDropPlanetEventData : PlanetEventData
     {
 
         [XmlArray("ItemIds", IsNullable = false)]

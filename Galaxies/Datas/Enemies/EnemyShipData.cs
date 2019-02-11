@@ -5,7 +5,7 @@ namespace Galaxies.Datas.Enemies
 {
 
     [XmlRoot(Namespace = "", ElementName = "EnemyShip")]
-    class EnemyShipData : Data
+    public class EnemyShipData : Data
     {
 
         [XmlElement("SpriteName", IsNullable = false)]

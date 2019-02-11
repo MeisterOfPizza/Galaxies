@@ -5,7 +5,7 @@ namespace Galaxies.Datas.Space
 {
 
     [XmlRoot(Namespace = "", ElementName = "Combat")]
-    class CombatPlanetEventData : PlanetEventData
+    public class CombatPlanetEventData : PlanetEventData
     {
 
         [XmlArray("EnemyIds", IsNullable = false)]

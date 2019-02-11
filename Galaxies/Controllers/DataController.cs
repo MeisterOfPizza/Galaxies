@@ -47,10 +47,21 @@ namespace Galaxies.Controllers
 
             if (dataFile != null)
             {
-                return Deserialize<T>(dataFile.GetNode(id));
+                XmlNode node = dataFile.GetNode(id);
+
+                if (node != null)
+                {
+                    return Deserialize<T>(node);
+                }
+                else
+                {
+                    //TODO: Add debug msg
+                    return null;
+                }
             }
             else
             {
+                //TODO: Add debug msg
                 return null;
             }
         }
@@ -59,7 +70,7 @@ namespace Galaxies.Controllers
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
 
-            XmlReader reader = XmlReader.Create(xmlNode.OuterXml);
+            StringReader reader = new StringReader(xmlNode.OuterXml);
 
             T data = (T)serializer.Deserialize(reader);
 

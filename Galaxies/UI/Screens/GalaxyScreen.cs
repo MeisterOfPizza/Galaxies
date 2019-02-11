@@ -24,7 +24,7 @@ namespace Galaxies.UI.Screens
             var arialFont              = content.Load<SpriteFont>("Fonts/Arial");
 
             //var visitablesColumn = AddUIElement(new UIColumn(columnSprite, GameUIController.TopLeftCorner(), 0, Color.White, this, 5, 5));
-            var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.TopLeftCorner(), 0, Color.White, this, 5, 5, 200));
+            var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.TopLeftCorner(300, 600), 0, Color.White, this, 5, 5, 200));
             visitablesColumn.SetDrawSize(300, 600);
 
             AddUIElement(new UIButton(arialFont, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100),  0, Color.White, GameUIController.CreateMenuScreen, this));
@@ -32,11 +32,8 @@ namespace Galaxies.UI.Screens
             //Creating visitables
             foreach (IVisitable visitable in GalaxyController.Visitables)
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable));
-                }
-                //visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable)).CalculatePositions();
+                ///<see cref="PlanetarySystem.Visit"/> and <see cref="Citadel.Visit"/>
+                visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable));
             }
 
             /*

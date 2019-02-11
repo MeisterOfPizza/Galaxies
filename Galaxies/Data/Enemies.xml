@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Collection>
-  <Enemy id="test">
+  <EnemyShip id="test">
     <Name>Fighter</Name>
     <Description>Basic fighter.</Description>
     <SpriteName>Sprites/Player Ships/Player Ship 1</SpriteName>
@@ -15,5 +15,5 @@
       <ShipUpgradeId>0</ShipUpgradeId>
     </ShipUpgradeIds>
     <Color r="255" g="0" b="0"></Color>
-  </Enemy>
+  </EnemyShip>
 </Collection>

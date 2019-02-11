@@ -45,11 +45,13 @@ namespace Galaxies
 
             DataController.Initialize();
 
+            //TEST:
+            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
+
             GameUIController.Window = Window;
             GameUIController.CreateGalaxyScreen();
 
             //TEST: Adding a planetary system
-            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
         }
 
         /// <summary>

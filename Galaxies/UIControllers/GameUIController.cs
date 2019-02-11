@@ -43,6 +43,12 @@ namespace Galaxies.UIControllers
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
+        public static void CreatePlanetarySystemScreen()
+        {
+            CurrentScreen = new PlanetarySystemScreen();
+            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+        }
+
         public static void CreateCombatScreen()
         {
             CurrentScreen = new CombatScreen();
@@ -53,24 +59,24 @@ namespace Galaxies.UIControllers
 
         #region Position helpers
 
-        public static Vector2 TopLeftCorner()
+        public static Vector2 TopLeftCorner(int width, int height)
         {
-            return Vector2.Zero;
+            return new Vector2(width / 2f, height / 2f);
         }
 
         public static Vector2 TopRightCorner(int width, int height)
         {
-            return new Vector2(Window.ClientBounds.Width - width, 0);
+            return new Vector2(Window.ClientBounds.Width - width / 2f, height / 2f);
         }
 
         public static Vector2 BottomLeftCorner(int width, int height)
         {
-            return new Vector2(0, Window.ClientBounds.Height - height);
+            return new Vector2(width / 2f, Window.ClientBounds.Height - height / 2f);
         }
 
         public static Vector2 BottomRightCorner(int width, int height)
         {
-            return new Vector2(Window.ClientBounds.Width - width, Window.ClientBounds.Height - height);
+            return new Vector2(Window.ClientBounds.Width - width / 2f, Window.ClientBounds.Height - height / 2f);
         }
 
         public static Vector2 Center(int width, int height)

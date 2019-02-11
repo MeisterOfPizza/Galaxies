@@ -14,6 +14,7 @@ namespace Galaxies.Core
 
         protected Texture2D sprite;
         Vector2 position;
+        Vector2 origin;
         float   rotation = 0;
         Color   color    = Color.White;
 
@@ -104,22 +105,30 @@ namespace Galaxies.Core
                 this.drawWidth  = sprite.Width;
                 this.drawHeight = sprite.Height;
             }
+
+            origin = new Vector2(Width / 2f, Height / 2f);
         }
 
         public void SetDrawWidth(int width)
         {
             this.drawWidth = width;
+
+            origin = new Vector2(Width / 2f, Height / 2f);
         }
 
         public void SetDrawHeight(int height)
         {
             this.drawHeight = height;
+
+            origin = new Vector2(Width / 2f, Height / 2f);
         }
 
         public void SetDrawSize(int width, int height)
         {
             this.drawWidth  = width;
             this.drawHeight = height;
+
+            origin = new Vector2(Width / 2f, Height / 2f);
         }
 
         protected virtual void PositionChanged()
@@ -134,7 +143,7 @@ namespace Galaxies.Core
         {
             if (Visable && sprite != null)
             {
-                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, Vector2.Zero, SpriteEffects.None, 0f);
+                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, origin, SpriteEffects.None, 0f);
             }
         }
 

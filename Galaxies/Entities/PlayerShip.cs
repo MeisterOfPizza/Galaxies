@@ -14,6 +14,13 @@ namespace Galaxies.Entities
             Singleton = this;
         }
 
+        public static void CreateNewPlayer()
+        {
+            var content = MainGame.Singleton.Content;
+
+            Singleton = new PlayerShip(content.Load<Texture2D>("Sprites/Player Ships/Player Ship 1"), Vector2.Zero, 0, Color.White, Vector2.Zero, new ShipStats(100, 100, 10, 1000, 50));
+        }
+
     }
 
 }

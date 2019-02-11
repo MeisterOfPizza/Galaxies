@@ -4,7 +4,7 @@ namespace Galaxies.Entities
 {
 
     [XmlRoot(Namespace = "", ElementName = "ShipStats")]
-    struct ShipStats
+    public struct ShipStats
     {
 
         [XmlElement("Health", typeof(int), IsNullable = false)]

@@ -4,7 +4,7 @@ namespace Galaxies.Datas.Space
 {
 
     [XmlRoot(Namespace = "", ElementName = "Planet")]
-    class PlanetData : Data
+    public class PlanetData : Data
     {
 
         [XmlElement("SpriteName", IsNullable = false)]

@@ -1,5 +1,6 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Datas.Space;
+using Galaxies.UIControllers;
 
 namespace Galaxies.Space.Events
 {
@@ -25,6 +26,7 @@ namespace Galaxies.Space.Events
         public override void Trigger()
         {
             CombatController.StartBattle(this);
+            GameUIController.CreateCombatScreen();
         }
 
     }

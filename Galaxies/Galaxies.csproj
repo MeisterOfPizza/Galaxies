@@ -43,6 +43,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
     <Compile Include="Datas\ColorData.cs" />
@@ -91,8 +92,10 @@
     <Compile Include="UI\Screens\CombatScreen.cs" />
     <Compile Include="UI\Screens\GalaxyScreen.cs" />
     <Compile Include="UI\Screens\MenuScreen.cs" />
+    <Compile Include="UI\Screens\PlanetarySystemScreen.cs" />
     <Compile Include="UI\Screens\Screen.cs" />
     <Compile Include="UI\Elements\UIContainer.cs" />
+    <Compile Include="UI\Special\UIPlanet.cs" />
     <Compile Include="UI\Special\UIPlanetarySystem.cs" />
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
