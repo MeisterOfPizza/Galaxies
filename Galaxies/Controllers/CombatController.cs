@@ -3,6 +3,7 @@ using Galaxies.Datas.Enemies;
 using Galaxies.Entities;
 using Galaxies.Extensions;
 using Galaxies.Space.Events;
+using Microsoft.Xna.Framework;
 
 namespace Galaxies.Controllers
 {
@@ -16,7 +17,7 @@ namespace Galaxies.Controllers
         {
             string enemyId = @event.data.EnemyIds[Random.Next(@event.data.EnemyIds.Length)];
 
-            Battlefield = new Battlefield(PlayerShip.Singleton, new EnemyShip(DataController.LoadData<EnemyShipData>(enemyId, DataFileType.Enemies)));
+            Battlefield = new Battlefield(PlayerShip.Singleton, new EnemyShip(DataController.LoadData<EnemyShipData>(enemyId, DataFileType.Enemies), new Vector2(100)));
         }
 
         public static void Update()

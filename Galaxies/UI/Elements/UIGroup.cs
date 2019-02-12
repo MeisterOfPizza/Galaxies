@@ -14,7 +14,7 @@ namespace Galaxies.UI.Elements
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
 
-        public UIGroup(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, onClick, screen, canBeClicked)
+        public UIGroup(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size, onClick, screen, canBeClicked)
         {
 
         }

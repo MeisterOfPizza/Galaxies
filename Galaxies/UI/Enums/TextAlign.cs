@@ -28,24 +28,26 @@ namespace Galaxies.UI
         {
             Vector2 size = textElement.SpriteFont.MeasureString(textElement.Text);
 
+            textElement.FormattedTextOrigin = size / 2f;
+
             switch (textElement.TextAlign)
             {
                 case TextAlign.TopLeft:
-                    return new Vector2(textElement.TextPadding, textElement.TextPadding);
+                    return new Vector2(textElement.TextPadding, textElement.TextPadding - size.Y / 2f);
                 case TextAlign.TopCenter:
-                    return new Vector2(textElement.Width / 2f - size.X / 2f, textElement.TextPadding);
+                    return new Vector2(0, textElement.TextPadding - size.Y / 2f);
                 case TextAlign.TopRight:
-                    return new Vector2(textElement.Width - size.X - textElement.TextPadding, textElement.TextPadding);
+                    return new Vector2(-textElement.TextPadding, textElement.TextPadding - size.Y / 2f);
                 case TextAlign.MiddleLeft:
-                    return new Vector2(textElement.TextPadding, textElement.Height / 2f - size.Y / 2f);
+                    return new Vector2(textElement.TextPadding, 0);
                 case TextAlign.MiddleCenter:
-                    return new Vector2(textElement.Width / 2f - size.X / 2f, textElement.Height / 2f - size.Y / 2f);
+                    return Vector2.Zero;
                 case TextAlign.MiddleRight:
-                    return new Vector2(textElement.Width - size.X - textElement.TextPadding, textElement.Height / 2f - size.Y / 2f);
+                    return new Vector2(textElement.Width - size.X - textElement.TextPadding, 0);
                 case TextAlign.BottomLeft:
                     return new Vector2(textElement.TextPadding, textElement.Height - size.Y / 2f);
                 case TextAlign.BottomCenter:
-                    return new Vector2(textElement.Width / 2f - size.X / 2f, textElement.Height - size.Y / 2f);
+                    return new Vector2(0, textElement.Height - size.Y / 2f);
                 case TextAlign.BottomRight:
                     return new Vector2(textElement.Width - size.X - textElement.TextPadding, textElement.Height - size.Y / 2f);
             }

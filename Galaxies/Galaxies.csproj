@@ -82,6 +82,7 @@
     <Compile Include="Space\Planet.cs" />
     <Compile Include="Space\PlanetarySystem.cs" />
     <Compile Include="UIControllers\GameUIController.cs" />
+    <Compile Include="UI\Debug\UITextAlignments.cs" />
     <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />

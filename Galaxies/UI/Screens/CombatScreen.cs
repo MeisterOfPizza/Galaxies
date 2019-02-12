@@ -28,9 +28,9 @@ namespace Galaxies.UI.Screens
                 new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)),
                 0,
                 Color.White,
+                new Vector2(100),
                 CombatController.Battlefield.Player_Attack,
-                this))
-                .SetDrawSize(100, 100);
+                this));
 
             AddUIElement(new UIButton(
                 arial,
@@ -41,9 +41,9 @@ namespace Galaxies.UI.Screens
                 new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)),
                 0,
                 Color.White,
+                new Vector2(100),
                 CombatController.Battlefield.Player_ShieldUp,
-                this))
-                .SetDrawSize(100, 100);
+                this));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

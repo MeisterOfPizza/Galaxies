@@ -13,7 +13,7 @@ namespace Galaxies.Entities
 
         private EnemyShipData Data { get; set; }
 
-        public EnemyShip(EnemyShipData data) : base(SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor(), Vector2.Zero, data.BaseShipStats)
+        public EnemyShip(EnemyShipData data, Vector2 size) : base(SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor(), size, Vector2.Zero, data.BaseShipStats)
         {
             this.Data = data;
 

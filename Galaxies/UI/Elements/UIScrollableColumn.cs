@@ -28,7 +28,7 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private int maxIndex;
 
-        public UIScrollableColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Screen screen, int spaceY, int borderY, int itemHeight) : base(sprite, position, rotation, color, screen, spaceY, borderY, true)
+        public UIScrollableColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, int spaceY, int borderY, int itemHeight) : base(sprite, position, rotation, color, size, screen, spaceY, borderY, true)
         {
             this.itemHeight = itemHeight;
 
@@ -37,11 +37,11 @@ namespace Galaxies.UI.Elements
 
         protected override void CalculatePositions()
         {
-            int currentY = BorderY;
+            int currentY = BorderY - Height / 2;
             
             for (int i = minIndex; i <= maxIndex; i++)
             {
-                Container[i].Position = Position + new Vector2((Width - Container[i].Width) / 2f, currentY);
+                Container[i].Position = Position + new Vector2(0, 0);
 
                 currentY += itemHeight + SpaceY;
             }

@@ -17,8 +17,7 @@ namespace Galaxies.UI.Screens
         {
             var column = content.Load<Texture2D>("Sprites/UI/Column");
 
-            var planetsColumn = AddUIElement(new UIScrollableColumn(column, GameUIController.TopLeftCorner(300, 600), 0, Color.White, this, 5, 0, 200));
-            planetsColumn.SetDrawSize(300, 600);
+            var planetsColumn = AddUIElement(new UIScrollableColumn(column, GameUIController.TopLeftCorner(300, 600), 0, Color.White, new Vector2(300, 600), this, 5, 0, 200));
 
             foreach (Planet planet in PlanetarySystemController.CurrentPlanetarySystem.Planets)
             {

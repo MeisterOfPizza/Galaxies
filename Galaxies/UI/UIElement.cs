@@ -57,7 +57,7 @@ namespace Galaxies.UI
 
         public delegate void OnClickEvent();
 
-        public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color)
+        public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size)
         {
             this.OnClick      = onClick;
             this.Screen       = screen;

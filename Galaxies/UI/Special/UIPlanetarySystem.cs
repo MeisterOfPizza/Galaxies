@@ -10,15 +10,13 @@ namespace Galaxies.UI.Special
     class UIPlanetarySystem : UIGroup
     {
 
-        public UIPlanetarySystem(Texture2D sprite, Vector2 position, OnClickEvent onClick, Screen screen, IVisitable visitable) : base(sprite, position, 0, Color.White, onClick, screen)
+        public UIPlanetarySystem(Texture2D sprite, Vector2 position, OnClickEvent onClick, Screen screen, IVisitable visitable) : base(sprite, position, 0, Color.White, new Vector2(300, 200), onClick, screen)
         {
             var content = MainGame.Singleton.Content;
 
-            AddUIElement(new UIElement(visitable.VisitableTypeIcon, new Vector2(0, 0), 0, Color.Red, null, screen, false)).SetDrawSize(50, 50);
-            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), visitable.Name, TextAlign.MiddleLeft, 5, new Vector2(50, 0), 0, Color.White, screen)).SetDrawSize(250, 50);
-            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), visitable.Description, TextAlign.TopLeft, 5, new Vector2(0, 50), 0, Color.White, screen)).SetDrawSize(300, 150);
-
-            SetDrawSize(300, 200);
+            AddUIElement(new UIElement(visitable.VisitableTypeIcon, new Vector2(25, 25), 0, Color.Red, new Vector2(50), null, screen, false)).SetDrawSize(50, 50);
+            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), visitable.Name, TextAlign.MiddleLeft, 5, new Vector2(175, 25), 0, Color.White, new Vector2(250, 50), screen));
+            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), visitable.Description, TextAlign.TopLeft, 5, new Vector2(150, 125), 0, Color.White, new Vector2(300, 150), screen));
         }
 
     }

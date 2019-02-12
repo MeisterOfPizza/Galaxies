@@ -33,7 +33,7 @@ namespace Galaxies.Core
 
         #endregion
 
-        public MovingObject(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 speed) : base(sprite, position, rotation, color)
+        public MovingObject(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Vector2 speed) : base(sprite, position, rotation, color, size)
         {
             this.speed = speed;
         }

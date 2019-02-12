@@ -1,5 +1,6 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Space;
+using Galaxies.UI.Debug;
 using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
@@ -24,18 +25,23 @@ namespace Galaxies.UI.Screens
             var arialFont              = content.Load<SpriteFont>("Fonts/Arial");
 
             //var visitablesColumn = AddUIElement(new UIColumn(columnSprite, GameUIController.TopLeftCorner(), 0, Color.White, this, 5, 5));
-            var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.TopLeftCorner(300, 600), 0, Color.White, this, 5, 5, 200));
-            visitablesColumn.SetDrawSize(300, 600);
+            //var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.Center(300, 600), 0, Color.White, this, 5, 5, 200));
+            //visitablesColumn.SetDrawSize(300, 600);
+            //visitablesColumn.Position = GameUIController.TopLeftCorner(150, 300);
 
-            AddUIElement(new UIButton(arialFont, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100),  0, Color.White, GameUIController.CreateMenuScreen, this));
+            //AddUIElement(new UIButton(arialFont, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100),  0, Color.White, GameUIController.CreateMenuScreen, this));
+            //TEST:
+            //AddUIElement(new UIButton(arialFont, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.Center(100, 100),  0, Color.White, GameUIController.CreateMenuScreen, this));
+            AddUIElement(new UITextAlignments(GameUIController.Center(100, 100), 0, Color.White, new Vector2(500, 500), this));
 
+            /*
             //Creating visitables
             foreach (IVisitable visitable in GalaxyController.Visitables)
             {
                 ///<see cref="PlanetarySystem.Visit"/> and <see cref="Citadel.Visit"/>
                 visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, visitable.Visit, this, visitable));
             }
-
+            */
             /*
             AddUIElement(new UIElement(backToMenuSprite, GameUIController.BottomLeftCorner(backToMenuSprite.Width, backToMenuSprite.Height), 0, Color.White, null)); //TODO: Back to menu
             AddUIElement(new UIElement(galaxyBackgroundSprite, Vector2.Zero, 0, Color.White, null));

@@ -19,14 +19,9 @@ namespace Galaxies.Core
         Color   color    = Color.White;
 
         /// <summary>
-        /// Rectangle draw width.
+        /// Rectangle draw width and height.
         /// </summary>
-        int drawWidth;
-
-        /// <summary>
-        /// Rectangle draw height.
-        /// </summary>
-        int drawHeight;
+        Vector2 drawSize;
 
         #endregion
 
@@ -77,7 +72,7 @@ namespace Galaxies.Core
         {
             get
             {
-                return drawWidth;
+                return (int)drawSize.X;
             }
         }
 
@@ -85,7 +80,15 @@ namespace Galaxies.Core
         {
             get
             {
-                return drawHeight;
+                return (int)drawSize.Y;
+            }
+        }
+
+        public Vector2 Size
+        {
+            get
+            {
+                return drawSize;
             }
         }
 
@@ -93,40 +96,35 @@ namespace Galaxies.Core
 
         #endregion
 
-        public GameObject(Texture2D sprite, Vector2 position, float rotation, Color color)
+        public GameObject(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size)
         {
             this.sprite   = sprite;
             this.position = position;
             this.rotation = rotation;
             this.color    = color;
 
-            if (sprite != null)
-            {
-                this.drawWidth  = sprite.Width;
-                this.drawHeight = sprite.Height;
-            }
+            this.drawSize = size;
 
             origin = new Vector2(Width / 2f, Height / 2f);
         }
 
         public void SetDrawWidth(int width)
         {
-            this.drawWidth = width;
+            this.drawSize = new Vector2(width, drawSize.Y);
 
             origin = new Vector2(Width / 2f, Height / 2f);
         }
 
         public void SetDrawHeight(int height)
         {
-            this.drawHeight = height;
+            this.drawSize = new Vector2(drawSize.X, height);
 
             origin = new Vector2(Width / 2f, Height / 2f);
         }
 
         public void SetDrawSize(int width, int height)
         {
-            this.drawWidth  = width;
-            this.drawHeight = height;
+            this.drawSize = new Vector2(width, height);
 
             origin = new Vector2(Width / 2f, Height / 2f);
         }
@@ -143,7 +141,7 @@ namespace Galaxies.Core
         {
             if (Visable && sprite != null)
             {
-                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, drawWidth, drawHeight), null, color, rotation, origin, SpriteEffects.None, 0f);
+                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, (int)drawSize.X, (int)drawSize.Y), null, color, rotation, origin, SpriteEffects.None, 0f);
             }
         }
 

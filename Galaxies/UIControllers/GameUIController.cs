@@ -81,7 +81,7 @@ namespace Galaxies.UIControllers
 
         public static Vector2 Center(int width, int height)
         {
-            return new Vector2(Window.ClientBounds.Width / 2f - width / 2f, Window.ClientBounds.Height / 2f - height / 2f);
+            return new Vector2(Window.ClientBounds.Width / 2f, Window.ClientBounds.Height / 2f);
         }
 
         public static int WidthPercent(float percent)

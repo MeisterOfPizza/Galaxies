@@ -9,7 +9,7 @@ namespace Galaxies.Entities
 
         public static PlayerShip Singleton { get; private set; }
 
-        public PlayerShip(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, speed, baseStats)
+        public PlayerShip(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, size, speed, baseStats)
         {
             Singleton = this;
         }
@@ -18,7 +18,14 @@ namespace Galaxies.Entities
         {
             var content = MainGame.Singleton.Content;
 
-            Singleton = new PlayerShip(content.Load<Texture2D>("Sprites/Player Ships/Player Ship 1"), Vector2.Zero, 0, Color.White, Vector2.Zero, new ShipStats(100, 100, 10, 1000, 50));
+            Singleton = new PlayerShip(
+                content.Load<Texture2D>("Sprites/Player Ships/Player Ship 1"), 
+                Vector2.Zero, 
+                0, 
+                Color.White, 
+                new Vector2(100), 
+                Vector2.Zero, 
+                new ShipStats(100, 100, 10, 1000, 50));
         }
 
     }
