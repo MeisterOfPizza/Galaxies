@@ -84,12 +84,12 @@ namespace Galaxies.UI
 
         public override void Select()
         {
-            //Do nothing
+            //Do nothing, TODO: Remove as we already have Clickable set to false?
         }
 
         public override void Deselect()
         {
-            //Do nothing
+            //Do nothing, TODO: Remove as we already have Clickable set to false?
         }
 
         public override void Draw(SpriteBatch spriteBatch)
