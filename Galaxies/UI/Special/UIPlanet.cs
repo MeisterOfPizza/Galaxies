@@ -14,8 +14,8 @@ namespace Galaxies.UI.Special
         {
             var content = MainGame.Singleton.Content;
             
-            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), planet.Data.Name, TextAlign.MiddleLeft, 5, new Vector2(0, 0), 0, Color.White, new Vector2(300, 50), screen));
-            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), planet.Data.Description, TextAlign.TopLeft, 5, new Vector2(0, 50), 0, Color.White, new Vector2(300, 150), screen));
+            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), planet.Data.Name, TextAlign.MiddleLeft, 5, new Vector2(0, -75), 0, Color.White, new Vector2(300, 50), screen));
+            AddUIElement(new UIText(content.Load<SpriteFont>("Fonts/Arial"), planet.Data.Description, TextAlign.TopLeft, 5, new Vector2(0, 25), 0, Color.White, new Vector2(300, 150), screen));
         }
 
     }

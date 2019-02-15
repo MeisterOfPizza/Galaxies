@@ -141,7 +141,7 @@ namespace Galaxies.Core
         {
             if (Visable && sprite != null)
             {
-                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, (int)drawSize.X, (int)drawSize.Y), null, color, rotation, origin, SpriteEffects.None, 0f);
+                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, (int)drawSize.X, (int)drawSize.Y), null, color, rotation, new Vector2(sprite.Width / 2f, sprite.Height / 2f), SpriteEffects.None, 0f);
             }
         }
 

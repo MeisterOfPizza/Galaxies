@@ -1,4 +1,5 @@
-﻿using Galaxies.UI.Screens;
+﻿using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -79,7 +80,7 @@ namespace Galaxies.UIControllers
             return new Vector2(Window.ClientBounds.Width - width / 2f, Window.ClientBounds.Height - height / 2f);
         }
 
-        public static Vector2 Center(int width, int height)
+        public static Vector2 Center()
         {
             return new Vector2(Window.ClientBounds.Width / 2f, Window.ClientBounds.Height / 2f);
         }

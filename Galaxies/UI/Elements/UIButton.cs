@@ -15,7 +15,6 @@ namespace Galaxies.UI.Elements
         TextAlign  textAlign;
         string     text;
         Vector2    textPosition;
-        int        textPadding;
 
         #endregion
 
@@ -63,7 +62,7 @@ namespace Galaxies.UI.Elements
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;
             this.Text        = text;
-            this.textPadding = textPadding;
+            this.TextPadding = textPadding;
         }
 
         private void CalculateTextPosition()

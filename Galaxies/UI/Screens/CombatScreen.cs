@@ -23,12 +23,12 @@ namespace Galaxies.UI.Screens
                 arial,
                 "FIRE",
                 TextAlign.MiddleCenter,
-                10,
+                5,
                 actionBackground,
                 new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)),
                 0,
                 Color.White,
-                new Vector2(100),
+                new Vector2(250, 100),
                 CombatController.Battlefield.Player_Attack,
                 this));
 
@@ -36,12 +36,12 @@ namespace Galaxies.UI.Screens
                 arial,
                 "SHIELD UP",
                 TextAlign.MiddleCenter,
-                10,
+                5,
                 actionBackground,
-                new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)),
+                new Vector2(GameUIController.WidthPercent(0.3f), GameUIController.HeightPercent(0.9f)),
                 0,
                 Color.White,
-                new Vector2(100),
+                new Vector2(250, 100),
                 CombatController.Battlefield.Player_ShieldUp,
                 this));
         }
@@ -49,7 +49,7 @@ namespace Galaxies.UI.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-
+            
             CombatController.Battlefield.Player.Draw(spriteBatch);
             CombatController.Battlefield.Enemy.Draw(spriteBatch);
         }

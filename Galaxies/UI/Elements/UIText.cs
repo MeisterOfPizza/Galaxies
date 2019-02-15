@@ -70,8 +70,6 @@ namespace Galaxies.UI.Elements
             textPosition = TextHelper.Align(this);
             
             FormattedText = TextHelper.WrapText(this, Width);
-
-            SetDrawHeight((int)spriteFont.MeasureString(FormattedText).Y);
         }
 
         protected override void PositionChanged()

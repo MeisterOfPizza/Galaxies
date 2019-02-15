@@ -1,6 +1,7 @@
 ﻿using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Galaxies.UI.Elements
 {
@@ -37,11 +38,12 @@ namespace Galaxies.UI.Elements
 
         protected override void CalculatePositions()
         {
-            int currentY = BorderY - Height / 2;
-            
+            int currentY = BorderY;
+            float topY = Height / 2f - itemHeight / 2f;
+
             for (int i = minIndex; i <= maxIndex; i++)
             {
-                Container[i].Position = Position + new Vector2(0, 0);
+                Container[i].Position = Position - new Vector2(0, topY - currentY);
 
                 currentY += itemHeight + SpaceY;
             }
@@ -74,7 +76,7 @@ namespace Galaxies.UI.Elements
         {
             if (Visable && sprite != null)
             {
-                spriteBatch.Draw(sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Vector2.Zero, SpriteEffects.None, 0f);
+                spriteBatch.Draw(sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, new Vector2(sprite.Width / 2f, sprite.Height / 2f), SpriteEffects.None, 0f);
             }
             
             if (Container.Count > 0)
