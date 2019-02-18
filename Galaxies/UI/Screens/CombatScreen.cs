@@ -104,7 +104,7 @@ namespace Galaxies.UI.Screens
             playerEnergy.Text = "Energy: " + CombatController.Battlefield.Player.Energy;
 
             enemyHealth.Text = "Health: " + CombatController.Battlefield.Enemy.Health;
-            enemyEnergy.Text = "Health: " + CombatController.Battlefield.Enemy.Health;
+            enemyEnergy.Text = "Energy: " + CombatController.Battlefield.Enemy.Energy;
 
             base.Draw(spriteBatch);
 

@@ -70,7 +70,7 @@ namespace Galaxies.Entities
                 return currentEnergy;
             }
 
-            private set
+            protected set
             {
                 currentEnergy = value;
             }
@@ -112,6 +112,8 @@ namespace Galaxies.Entities
         {
             this.baseStats     = baseStats;
             this.modifiedStats = new ShipStats();
+            this.currentHealth = MaxHealth;
+            this.currentEnergy = MaxEnergy;
         }
 
         protected void CalculateStats()

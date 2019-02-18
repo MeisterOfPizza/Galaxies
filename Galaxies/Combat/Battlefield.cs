@@ -1,4 +1,5 @@
-﻿using Galaxies.Entities;
+﻿using Galaxies.Controllers;
+using Galaxies.Entities;
 
 namespace Galaxies.Combat
 {
@@ -16,9 +17,10 @@ namespace Galaxies.Combat
         /// </summary>
         public ShipEntity Enemy { get; private set; }
 
-        public bool TurnIsDone { get; private set; }
-
         public bool PlayerTurn { get; private set; }
+
+        public bool PlayerHasShieldUp { get; private set; }
+        public bool EnemyHasShieldUp  { get; private set; }
 
         public Battlefield(PlayerShip player, ShipEntity enemy)
         {
@@ -28,28 +30,58 @@ namespace Galaxies.Combat
 
         public void StartTurn()
         {
-            TurnIsDone = false;
+            PlayerTurn = !PlayerTurn;
 
             if (!PlayerTurn)
             {
                 Ai();
             }
+        }
 
-            //TODO: Update UI?
+        private void EndTurn()
+        {
+            if (!Player.IsAlive)
+            {
+                //TODO: End game
 
-            PlayerTurn = !PlayerTurn;
+                return;
+            }
+            else if (!Enemy.IsAlive)
+            {
+                //TODO: Give item drops?
+                PlanetEventController.TriggerNextEvent();
+
+                return;
+            }
+
+            StartTurn();
         }
 
         #region Player inputs
 
         public void Player_Attack()
         {
+            PlayerHasShieldUp = false;
 
+            if (Player.Energy > PlayerShip.FIRE_ENERGY_COST)
+            {
+                Player.Attack(Enemy);
+            }
+
+            EndTurn();
         }
 
         public void Player_ShieldUp()
         {
+            //If the player already has their shield up, then regen some energy:
+            if (PlayerHasShieldUp)
+            {
+                Player.RegenEnergy();
+            }
 
+            PlayerHasShieldUp = true;
+
+            EndTurn();
         }
 
         #endregion
@@ -65,7 +97,7 @@ namespace Galaxies.Combat
 
             //TODO: Call UI?
 
-            TurnIsDone = true;
+            EndTurn();
         }
 
         #endregion

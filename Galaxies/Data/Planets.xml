@@ -5,6 +5,11 @@
     <Description>Home planet of Humans</Description>
     <SpriteName>Sprites/UI/Column</SpriteName>
     <OnVisitEvents>
+      <ItemDrop>
+        <ItemIds>
+          <Id>0</Id>
+        </ItemIds>
+      </ItemDrop>
       <Combat>
         <EnemyIds>
           <EnemyId>test</EnemyId>

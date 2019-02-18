@@ -1,4 +1,5 @@
-﻿using Galaxies.Datas.Space;
+﻿using Galaxies.Controllers;
+using Galaxies.Datas.Space;
 using Galaxies.Space.Events;
 
 namespace Galaxies.Space
@@ -10,6 +11,8 @@ namespace Galaxies.Space
         public PlanetData Data { get; private set; }
 
         public PlanetEvent[] OnVisit { get; set; }
+
+        public bool Visited { get; private set; }
 
         public Planet(PlanetData data)
         {
@@ -25,10 +28,10 @@ namespace Galaxies.Space
 
         public void Visit()
         {
-            foreach (PlanetEvent @event in OnVisit)
-            {
-                @event.Trigger();
-            }
+            PlanetEventController.SetEventQueue(OnVisit);
+            PlanetEventController.TriggerNextEvent();
+
+            Visited = true;
         }
 
     }

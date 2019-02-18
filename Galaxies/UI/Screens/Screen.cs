@@ -155,7 +155,7 @@ namespace Galaxies.UI.Screens
         /// <typeparam name="T">UIElement descendant of type T.</typeparam>
         /// <param name="uiElement">The UI Element to add.</param>
         /// <returns>Returns the craeted UI Element.</returns>
-        protected T AddUIElement<T>(T uiElement) where T : UIElement
+        public T AddUIElement<T>(T uiElement) where T : UIElement
         {
             UIElements.Add(uiElement);
 
@@ -186,6 +186,19 @@ namespace Galaxies.UI.Screens
             {
                 ClickableElements[0].Select();
             }
+        }
+
+        #endregion
+
+        #region Removing UI Elements
+
+        /// <summary>
+        /// Removes the UI Element.
+        /// </summary>
+        public void RemoveUIElement(UIElement uiElement)
+        {
+            UIElements.Remove(uiElement);
+            RemoveUIClickable(uiElement);
         }
 
         #endregion
