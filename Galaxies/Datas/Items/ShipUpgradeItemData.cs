@@ -5,7 +5,7 @@ namespace Galaxies.Datas.Items
 {
 
     [XmlRoot(Namespace = "", ElementName = "ShipUpgrade")]
-    class ShipUpgradeItemData : ItemData
+    public class ShipUpgradeItemData : ItemData
     {
 
         [XmlElement("PurchaseGG", typeof(int), IsNullable = false)]

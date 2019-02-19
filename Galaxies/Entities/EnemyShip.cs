@@ -25,7 +25,7 @@ namespace Galaxies.Entities
 
             foreach (string id in Data.ShipUpgradeIds)
             {
-                //Inventory.AddItem(new ShipUpgrade(DataController.LoadData<ShipUpgradeItemData>(id, DataFileType.Items), Inventory));
+                Inventory.AddItem(new ShipUpgrade(DataController.LoadData<ShipUpgradeItemData>(id, DataFileType.Items), Inventory));
             }
         }
 

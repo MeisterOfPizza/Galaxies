@@ -1,6 +1,5 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Entities;
-using Microsoft.Xna.Framework;
 
 namespace Galaxies.Combat
 {

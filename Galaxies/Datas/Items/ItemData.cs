@@ -3,7 +3,7 @@
 namespace Galaxies.Datas.Items
 {
 
-    enum ItemType
+    public enum ItemType
     {
         ShipUpgrade,
         Artifact,
@@ -11,7 +11,7 @@ namespace Galaxies.Datas.Items
     }
 
     [XmlRoot(Namespace = "", ElementName = "Item")]
-    abstract class ItemData : Data
+    public abstract class ItemData : Data
     {
 
         [XmlElement("SpriteName", IsNullable = false)]

@@ -4,7 +4,7 @@ namespace Galaxies.Datas.Items
 {
 
     [XmlRoot(Namespace = "", ElementName = "StarChart")]
-    class StarChartItemData : ItemData
+    public class StarChartItemData : ItemData
     {
 
         [XmlElement("Planetary SystemId", IsNullable = false)]
