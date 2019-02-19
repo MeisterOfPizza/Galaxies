@@ -12,6 +12,12 @@ namespace Galaxies.UI
     class UIElement : GameObject
     {
 
+        #region Protected Variables
+
+        protected Screen screen;
+
+        #endregion
+
         #region Private Properties
 
         private OnClickEvent OnClick      { get; set; }
@@ -23,8 +29,6 @@ namespace Galaxies.UI
 
         public bool IsFocused    { get; protected set; }
         public bool CanBeClicked { get; private set; }
-
-        protected Screen Screen { get; set; }
 
         #endregion
 
@@ -43,13 +47,21 @@ namespace Galaxies.UI
                 {
                     if (value)
                     {
-                        Screen.AddUIClickable(this);
+                        screen.AddUIClickable(this);
                     }
                     else
                     {
-                        Screen.RemoveUIClickable(this);
+                        screen.RemoveUIClickable(this);
                     }
                 }
+            }
+        }
+
+        public Screen Screen
+        {
+            get
+            {
+                return screen;
             }
         }
 
@@ -60,7 +72,7 @@ namespace Galaxies.UI
         public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size)
         {
             this.OnClick      = onClick;
-            this.Screen       = screen;
+            this.screen       = screen;
             this.CanBeClicked = canBeClicked;
 
             DefaultColor = Color;

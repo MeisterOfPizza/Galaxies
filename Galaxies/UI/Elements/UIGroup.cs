@@ -29,7 +29,7 @@ namespace Galaxies.UI.Elements
             if (uiElement.CanBeClicked)
             {
                 //Add the UI Element to the screen's clickable items.
-                Screen.AddClickableUIElement(uiElement);
+                screen.AddClickableUIElement(uiElement);
             }
 
             return uiElement;

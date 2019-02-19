@@ -30,6 +30,26 @@ namespace Galaxies.UIControllers
             }
         }
 
+        #region Windows helpers
+
+        public static int WindowWidth
+        {
+            get
+            {
+                return Window.ClientBounds.Width;
+            }
+        }
+
+        public static int WindowHeight
+        {
+            get
+            {
+                return Window.ClientBounds.Height;
+            }
+        }
+
+        #endregion
+
         #region Screens
 
         public static void CreateMenuScreen()

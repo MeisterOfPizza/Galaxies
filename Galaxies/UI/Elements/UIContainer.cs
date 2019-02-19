@@ -45,7 +45,7 @@ namespace Galaxies.UI
             if (uiElement.CanBeClicked)
             {
                 //Add the UI Element to the screen's clickable items.
-                Screen.AddClickableUIElement(uiElement);
+                screen.AddClickableUIElement(uiElement);
             }
 
             CalculatePositions();
@@ -70,7 +70,7 @@ namespace Galaxies.UI
                 if (uiElements[i].CanBeClicked)
                 {
                     //Add the UI Element to the screen's clickable items.
-                    Screen.AddClickableUIElement(uiElements[i]);
+                    screen.AddClickableUIElement(uiElements[i]);
                 }
             }
 

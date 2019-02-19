@@ -1,5 +1,6 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Entities;
+using Microsoft.Xna.Framework;
 
 namespace Galaxies.Combat
 {
@@ -90,10 +91,23 @@ namespace Galaxies.Combat
 
         private void Ai()
         {
-            //TODO: Create a combat Ai.
+            //HACK: Very poor combat Ai.
 
-            //Just attack the player for now:
-            Enemy.Attack(Player);
+            if (Enemy.Energy < EnemyShip.FIRE_ENERGY_COST)
+            {
+                if (EnemyHasShieldUp)
+                {
+                    Enemy.RegenEnergy();
+                }
+
+                EnemyHasShieldUp = true;
+            }
+            else
+            {
+                EnemyHasShieldUp = false;
+
+                Enemy.Attack(Player);
+            }
 
             //TODO: Call UI?
 

@@ -1,6 +1,8 @@
-﻿using Galaxies.Datas.Space;
+﻿using Galaxies.Controllers;
+using Galaxies.Datas.Space;
 using Galaxies.UI;
 using Galaxies.UI.Elements;
+using Galaxies.UI.Screens;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,6 +23,8 @@ namespace Galaxies.Space.Events
             }
         }
 
+        private UIMessageBox messageBox;
+
         public ItemDropPlanetEvent(ItemDropPlanetEventData data)
         {
             this.data = data;
@@ -28,7 +32,7 @@ namespace Galaxies.Space.Events
 
         public override void Trigger()
         {
-            GameUIController.CurrentScreen.AddUIElement(new UIMessageBox(
+            messageBox = GameUIController.CurrentScreen.AddUIElement(new UIMessageBox(
                 MainGame.Singleton.Content.Load<SpriteFont>("Fonts/Arial"),
                 "Item drops 1 2 3 4 5",
                 TextAlign.MiddleCenter,
@@ -38,14 +42,19 @@ namespace Galaxies.Space.Events
                 0,
                 Color.White,
                 new Vector2(500, 150),
-                GiveItems,
+                _Trigger,
                 GameUIController.CurrentScreen
                 ));
         }
 
-        private void GiveItems()
+        /// <summary>
+        /// Give the player the items.
+        /// </summary>
+        private void _Trigger()
         {
-
+            messageBox.Screen.RemoveUIElement(messageBox);
+            messageBox.Screen.RemoveUIElement(messageBox.OkBtn);
+            PlanetEventController.TriggerNextEvent();
         }
 
     }

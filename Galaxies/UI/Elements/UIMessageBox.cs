@@ -1,5 +1,4 @@
-﻿using Galaxies.Controllers;
-using Galaxies.UI.Screens;
+﻿using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,9 +8,9 @@ namespace Galaxies.UI.Elements
     class UIMessageBox : UIGroup
     {
 
-        UIButton okBtn;
+        public UIButton OkBtn { get; protected set; }
 
-        public UIMessageBox(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen) : base(backgroundSprite, position, rotation, color, size, onClick, screen, false)
+        public UIMessageBox(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen) : base(backgroundSprite, position, rotation, color, size, null, screen, false)
         {
             AddUIElement(new UIText(
                 spriteFont,
@@ -20,12 +19,12 @@ namespace Galaxies.UI.Elements
                 textPadding,
                 new Vector2(0, Height / 2 - 100),
                 0,
-                Color.Wheat,
+                Color.White,
                 new Vector2(Width, Height - 50),
                 screen
                 ));
 
-            okBtn = AddUIElement(new UIButton(
+            OkBtn = AddUIElement(new UIButton(
                 spriteFont,
                 "Ok",
                 TextAlign.MiddleCenter,
@@ -35,17 +34,12 @@ namespace Galaxies.UI.Elements
                 0,
                 Color.White,
                 new Vector2(100, 50),
-                new OnClickEvent(onClick + Clicked),
+                onClick,
                 screen
                 ));
 
             CalculatePositions();
-        }
-
-        private void Clicked()
-        {
-            Screen.RemoveUIElement(this);
-            PlanetEventController.TriggerNextEvent();
+            Screen.SelectLast();
         }
 
     }

@@ -113,6 +113,19 @@ namespace Galaxies.UI.Screens
             }
         }
 
+        /// <summary>
+        /// Select the last (or most recent added) UI Clickable.
+        /// </summary>
+        public void SelectLast()
+        {
+            if (ClickableElements.Count > 0)
+            {
+                ClickableElements[SelectedIndex].Deselect();
+                SelectedIndex = ClickableElements.Count - 1;
+                ClickableElements[SelectedIndex].Select();
+            }
+        }
+
         #region Handling clickables
 
         /// <summary>
