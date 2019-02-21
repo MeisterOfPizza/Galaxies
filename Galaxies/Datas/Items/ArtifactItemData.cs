@@ -1,8 +1,11 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
+using Galaxies.Items;
 
 namespace Galaxies.Datas.Items
 {
 
+    [Obsolete("Use ItemDropPlanetEventData instead.", true)] //TODO: Remove obsolete
     [XmlRoot(Namespace = "", ElementName = "Artifact")]
     class ArtifactItemData : ItemData
     {
@@ -19,6 +22,11 @@ namespace Galaxies.Datas.Items
             {
                 return ItemType.Artifact;
             }
+        }
+
+        public override Item CreateItem(Inventory inventory)
+        {
+            throw new NotImplementedException();
         }
 
     }

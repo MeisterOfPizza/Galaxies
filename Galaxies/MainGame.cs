@@ -7,11 +7,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Galaxies
 {
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
     public class MainGame : Game
     {
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -45,13 +47,11 @@ namespace Galaxies
 
             DataController.Initialize();
 
-            //TEST:
+            //TEST: Adding a planetary system
             GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
 
             GameUIController.Window = Window;
             GameUIController.CreateGalaxyScreen();
-
-            //TEST: Adding a planetary system
         }
 
         /// <summary>
@@ -111,5 +111,7 @@ namespace Galaxies
 
             base.Draw(gameTime);
         }
+
     }
+
 }

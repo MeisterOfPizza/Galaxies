@@ -6,14 +6,22 @@
     <SpriteName>Sprites/UI/Column</SpriteName>
     <OnVisitEvents>
       <ItemDrop>
-        <ItemIds>
-          <Id>0</Id>
-        </ItemIds>
+        <ItemPointers>
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+        </ItemPointers>
       </ItemDrop>
       <Combat>
-        <EnemyIds>
-          <EnemyId>test</EnemyId>
-        </EnemyIds>
+        <EnemyPointers>
+          <EnemyPointer id="test" />
+        </EnemyPointers>
       </Combat>
     </OnVisitEvents>
   </Planet>

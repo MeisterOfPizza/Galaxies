@@ -1,5 +1,8 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Datas.Enemies;
+using Galaxies.Datas.Helpers;
 using Galaxies.Datas.Space;
+using Galaxies.Extensions;
 using Galaxies.UI;
 using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
@@ -24,6 +27,11 @@ namespace Galaxies.Space.Events
 
         private UIMessageBox messageBox;
 
+        /// <summary>
+        /// Randomly selected enemy.
+        /// </summary>
+        public EnemyShipData EnemyShipData { get; private set; }
+
         public CombatPlanetEvent(CombatPlanetEventData data)
         {
             this.data = data;
@@ -31,10 +39,13 @@ namespace Galaxies.Space.Events
 
         public override void Trigger()
         {
+            var dataPointer = data.EnemyPointers[Random.Next(data.EnemyPointers.Length)];
+            EnemyShipData = DataController.LoadData<EnemyShipData>(dataPointer.Id, DataFileType.Enemies);
+
             messageBox = GameUIController.CurrentScreen.AddUIElement(new UIMessageBox(
                 MainGame.Singleton.Content.Load<SpriteFont>("Fonts/Arial"),
-                "Meeting enemy XYZ",
-                TextAlign.MiddleCenter,
+                "Detected a hostile ship! [" + EnemyShipData.Name + "]",
+                TextAlign.TopCenter,
                 5,
                 MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/Column"),
                 GameUIController.Center(),

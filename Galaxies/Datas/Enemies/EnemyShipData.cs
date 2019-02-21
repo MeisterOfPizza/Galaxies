@@ -1,4 +1,5 @@
-﻿using Galaxies.Entities;
+﻿using Galaxies.Datas.Helpers;
+using Galaxies.Entities;
 using System.Xml.Serialization;
 
 namespace Galaxies.Datas.Enemies
@@ -19,7 +20,7 @@ namespace Galaxies.Datas.Enemies
         public string[] ShipUpgradeIds { get; set; }
 
         [XmlElement("Color", typeof(ColorData), IsNullable = true)]
-        public ColorData Color { get; set; }
+        public ColorData Color { get; set; } = new ColorData();
 
     }
 

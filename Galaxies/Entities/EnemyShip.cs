@@ -21,6 +21,8 @@ namespace Galaxies.Entities
 
         public EnemyShip(EnemyShipData data, Vector2 size) : base(SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor(), size, Vector2.Zero, data.BaseShipStats)
         {
+            this.Inventory = new Inventory(this);
+
             this.Data = data;
 
             foreach (string id in Data.ShipUpgradeIds)

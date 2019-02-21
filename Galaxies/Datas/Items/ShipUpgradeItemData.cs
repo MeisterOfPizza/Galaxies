@@ -1,4 +1,5 @@
 ﻿using Galaxies.Entities;
+using Galaxies.Items;
 using System.Xml.Serialization;
 
 namespace Galaxies.Datas.Items
@@ -23,6 +24,11 @@ namespace Galaxies.Datas.Items
             {
                 return ItemType.ShipUpgrade;
             }
+        }
+
+        public override Item CreateItem(Inventory inventory)
+        {
+            return new ShipUpgrade(this, inventory);
         }
 
     }

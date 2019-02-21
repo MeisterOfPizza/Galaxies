@@ -7,7 +7,7 @@ namespace Galaxies.Core
     /// <summary>
     /// Base class for all object in scene.
     /// </summary>
-    abstract class GameObject
+    public abstract class GameObject
     {
 
         #region Fields

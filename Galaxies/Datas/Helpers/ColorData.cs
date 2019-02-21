@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Xml.Serialization;
 
-namespace Galaxies.Datas
+namespace Galaxies.Datas.Helpers
 {
 
     [XmlRoot(Namespace = "", ElementName = "Color")]

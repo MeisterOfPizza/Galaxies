@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.Items
 {
 
-    abstract class Item : GameObject
+    public abstract class Item : GameObject
     {
 
         public ItemData  Data      { get; protected set; }

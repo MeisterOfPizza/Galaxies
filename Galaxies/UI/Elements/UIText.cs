@@ -67,9 +67,9 @@ namespace Galaxies.UI.Elements
 
         private void CalculateTextPosition()
         {
-            textPosition = TextHelper.Align(this);
-            
             FormattedText = TextHelper.WrapText(this, Width);
+            
+            textPosition = TextHelper.Align(this);
         }
 
         protected override void PositionChanged()

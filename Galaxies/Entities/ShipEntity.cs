@@ -138,6 +138,9 @@ namespace Galaxies.Entities
             }
 
             modifiedStats = new ShipStats(newHealth, newShield, newDamage, newEnergy, newEnergyRegen);
+
+            currentHealth = MaxHealth;
+            currentEnergy = MaxEnergy;
         }
 
         public virtual void Attack(ShipEntity defender)

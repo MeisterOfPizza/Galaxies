@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using Galaxies.Items;
 
 namespace Galaxies.Datas.Items
 {
@@ -16,6 +17,11 @@ namespace Galaxies.Datas.Items
             {
                 return ItemType.StarChart;
             }
+        }
+
+        public override Item CreateItem(Inventory inventory)
+        {
+            return new StarChart(this, inventory);
         }
 
     }

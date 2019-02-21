@@ -47,9 +47,10 @@
     <Compile Include="Controllers\PlanetEventController.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
-    <Compile Include="Datas\ColorData.cs" />
+    <Compile Include="Datas\Helpers\ColorData.cs" />
     <Compile Include="Datas\Data.cs" />
     <Compile Include="Datas\Enemies\EnemyShipData.cs" />
+    <Compile Include="Datas\Helpers\DataPointer.cs" />
     <Compile Include="Datas\Items\ArtifactItemData.cs" />
     <Compile Include="Datas\Items\ItemData.cs" />
     <Compile Include="Datas\Items\ShipUpgradeItemData.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Extensions\SpriteHelper.cs" />
     <Compile Include="Items\Interfaces\IInventoryOwner.cs" />
     <Compile Include="Items\Inventory.cs" />
+    <Compile Include="Items\StarChart.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ShipUpgrade.cs" />
@@ -83,7 +85,6 @@
     <Compile Include="Space\Planet.cs" />
     <Compile Include="Space\PlanetarySystem.cs" />
     <Compile Include="UIControllers\GameUIController.cs" />
-    <Compile Include="UI\Debug\UITextAlignments.cs" />
     <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
@@ -122,6 +123,7 @@
     </Content>
     <Content Include="Data\Items.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\PlanetarySystems.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -134,7 +136,9 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\Debug\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Content\Fonts\Arial.spritefont" />
   </ItemGroup>

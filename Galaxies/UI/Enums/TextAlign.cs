@@ -26,7 +26,7 @@ namespace Galaxies.UI
         /// </summary>
         public static Vector2 Align<T>(T textElement) where T : UIElement, ITextElement<T>
         {
-            Vector2 size = textElement.SpriteFont.MeasureString(textElement.Text);
+            Vector2 size = textElement.SpriteFont.MeasureString(textElement.FormattedText);
 
             textElement.FormattedTextOrigin = size / 2f;
 

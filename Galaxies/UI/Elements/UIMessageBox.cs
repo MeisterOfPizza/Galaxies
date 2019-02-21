@@ -17,10 +17,10 @@ namespace Galaxies.UI.Elements
                 text,
                 textAlign,
                 textPadding,
-                new Vector2(0, Height / 2 - 100),
+                new Vector2(0, -32.5f), //Half of 65
                 0,
                 Color.White,
-                new Vector2(Width, Height - 50),
+                new Vector2(Width, Height - 65),
                 screen
                 ));
 
@@ -30,14 +30,14 @@ namespace Galaxies.UI.Elements
                 TextAlign.MiddleCenter,
                 5,
                 backgroundSprite,
-                new Vector2(0, Height / 2 - 25),
+                new Vector2(0, Height / 2 - 35),
                 0,
                 Color.White,
                 new Vector2(100, 50),
                 onClick,
                 screen
                 ));
-
+            
             CalculatePositions();
             Screen.SelectLast();
         }

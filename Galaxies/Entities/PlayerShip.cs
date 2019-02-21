@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Galaxies.Items;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Entities
@@ -17,6 +18,8 @@ namespace Galaxies.Entities
 
         public PlayerShip(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, size, speed, baseStats)
         {
+            this.Inventory = new Inventory(this);
+
             Singleton = this;
         }
 

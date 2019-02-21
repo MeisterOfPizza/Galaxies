@@ -1,4 +1,5 @@
-﻿using Galaxies.Space.Events;
+﻿using Galaxies.Datas.Helpers;
+using Galaxies.Space.Events;
 using System.Xml.Serialization;
 
 namespace Galaxies.Datas.Space
@@ -8,9 +9,9 @@ namespace Galaxies.Datas.Space
     public class CombatPlanetEventData : PlanetEventData
     {
 
-        [XmlArray("EnemyIds", IsNullable = false)]
-        [XmlArrayItem("EnemyId", IsNullable = false)]
-        public string[] EnemyIds { get; set; }
+        [XmlArray("EnemyPointers", IsNullable = false)]
+        [XmlArrayItem("EnemyPointer", typeof(DataPointer), IsNullable = false)]
+        public DataPointer[] EnemyPointers { get; set; }
 
         public override PlanetEvent CreateEvent()
         {

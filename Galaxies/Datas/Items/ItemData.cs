@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using Galaxies.Datas.Helpers;
+using System.Xml.Serialization;
+using Galaxies.Items;
 
 namespace Galaxies.Datas.Items
 {
@@ -6,7 +8,7 @@ namespace Galaxies.Datas.Items
     public enum ItemType
     {
         ShipUpgrade,
-        Artifact,
+        Artifact, //TODO: Remove obsolete
         StarChart
     }
 
@@ -18,9 +20,11 @@ namespace Galaxies.Datas.Items
         public string SpriteName { get; set; }
 
         [XmlElement("Color", typeof(ColorData), IsNullable = true)]
-        public ColorData Color { get; set; }
+        public ColorData Color { get; set; } = new ColorData();
 
         public abstract ItemType ItemType { get; }
+
+        public abstract Item CreateItem(Inventory inventory);
 
     }
 
