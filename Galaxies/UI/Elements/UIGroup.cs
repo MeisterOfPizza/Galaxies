@@ -1,4 +1,5 @@
-﻿using Galaxies.UI.Screens;
+﻿using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Galaxies.UI.Elements
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
 
-        public UIGroup(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size, onClick, screen, canBeClicked)
+        public UIGroup(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, EventArg onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size, onClick, screen, canBeClicked)
         {
 
         }

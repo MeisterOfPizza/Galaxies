@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Datas.Enemies;
 using Galaxies.Datas.Helpers;
 using Galaxies.Datas.Space;
@@ -52,7 +53,7 @@ namespace Galaxies.Space.Events
                 0,
                 Color.White,
                 new Vector2(500, 150),
-                _Trigger,
+                new EventArg0(_Trigger),
                 GameUIController.CurrentScreen
                 ));
         }

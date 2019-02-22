@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Extensions;
 using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
@@ -34,7 +35,7 @@ namespace Galaxies.UI.Screens
                 0,
                 Color.White,
                 new Vector2(250, 100),
-                CombatController.Battlefield.Player_Attack,
+                new EventArg0(CombatController.Battlefield.Player_Attack),
                 this));
 
             AddUIElement(new UIButton(
@@ -47,7 +48,7 @@ namespace Galaxies.UI.Screens
                 0,
                 Color.White,
                 new Vector2(250, 100),
-                CombatController.Battlefield.Player_ShieldUp,
+                new EventArg0(CombatController.Battlefield.Player_ShieldUp),
                 this));
 
             //Health, shield and energy bars for the player:

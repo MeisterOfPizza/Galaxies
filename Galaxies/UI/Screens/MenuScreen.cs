@@ -1,4 +1,5 @@
-﻿using Galaxies.Extensions;
+﻿using Galaxies.Core;
+using Galaxies.Extensions;
 using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
@@ -20,7 +21,7 @@ namespace Galaxies.UI.Screens
                 new UIButton(SpriteHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),
                 new UIButton(SpriteHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),
                 new UIButton(SpriteHelper.Arial_Font, "Options", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),
-                new UIButton(SpriteHelper.Arial_Font, "Exit", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), MainGame.Singleton.Exit, this)
+                new UIButton(SpriteHelper.Arial_Font, "Exit", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), new EventArg0(MainGame.Singleton.Exit), this)
                 );
         }
 
