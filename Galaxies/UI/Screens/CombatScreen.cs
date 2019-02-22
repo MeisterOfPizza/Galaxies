@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Extensions;
 using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
@@ -11,19 +12,20 @@ namespace Galaxies.UI.Screens
     class CombatScreen : Screen
     {
 
-        UIText playerStats;
-        UIText enemyStats;
+        UIProgressBar playerHealthBar;
+        UIProgressBar playerShieldBar;
+        UIProgressBar playerEnergyBar;
+
+        UIProgressBar enemyHealthBar;
+        UIProgressBar enemyShieldBar;
+        UIProgressBar enemyEnergyBar;
 
         public override void CreateUI(ContentManager content)
         {
-            CombatController.Battlefield.Player.Position = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
-            CombatController.Battlefield.Enemy.Position  = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
-
-            var arial = content.Load<SpriteFont>("Fonts/Arial");
             var actionBackground = content.Load<Texture2D>("Sprites/UI/Column");
 
             AddUIElement(new UIButton(
-                arial,
+                SpriteHelper.Arial_Font,
                 "FIRE",
                 TextAlign.MiddleCenter,
                 5,
@@ -36,7 +38,7 @@ namespace Galaxies.UI.Screens
                 this));
 
             AddUIElement(new UIButton(
-                arial,
+                SpriteHelper.Arial_Font,
                 "SHIELD UP",
                 TextAlign.MiddleCenter,
                 5,
@@ -48,36 +50,102 @@ namespace Galaxies.UI.Screens
                 CombatController.Battlefield.Player_ShieldUp,
                 this));
 
-            //Health, shield and energy text for the player:
-            playerStats = AddUIElement(new UIText(
-                arial,
-                "Health: ",
-                TextAlign.MiddleCenter,
-                5,
-                new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.3f)),
+            //Health, shield and energy bars for the player:
+            playerHealthBar = AddUIElement(new UIProgressBar(
+                SpriteHelper.Box4x4_Sprite,
+                SpriteHelper.Box4x4_Sprite,
+                new Vector2(GameUIController.WidthPercent(0.15f), GameUIController.HeightPercent(0.3f)),
                 0,
-                Color.White,
-                new Vector2(400, 100),
+                Color.Red,
+                Color.LawnGreen,
+                new Vector2(300, 25),
+                Vector2.Zero,
+                0,
                 this));
 
-            //Health, shield and energy text for the enemy:
-            enemyStats = AddUIElement(new UIText(
-                arial,
-                "Health: ",
+            playerShieldBar = AddUIElement(new UIProgressBar(
+                SpriteHelper.Box4x4_Sprite,
+                SpriteHelper.Box4x4_Sprite,
+                new Vector2(GameUIController.WidthPercent(0.15f), GameUIController.HeightPercent(0.35f)),
+                0,
+                Color.DarkBlue,
+                Color.Cyan,
+                new Vector2(300, 25),
+                Vector2.Zero,
+                0,
+                this));
+
+            playerEnergyBar = AddUIElement(new UIProgressBar(
+                SpriteHelper.Box4x4_Sprite,
+                SpriteHelper.Box4x4_Sprite,
+                new Vector2(GameUIController.WidthPercent(0.15f), GameUIController.HeightPercent(0.4f)),
+                0,
+                Color.Black,
+                Color.Yellow,
+                new Vector2(300, 25),
+                Vector2.Zero,
+                0,
+                this));
+
+            //Name text for the enemy:
+            AddUIElement(new UIText(
+                SpriteHelper.Arial_Font,
+                CombatController.Battlefield.Enemy.Data.Name,
                 TextAlign.MiddleCenter,
                 5,
-                new Vector2(GameUIController.WidthPercent(0.7f), GameUIController.HeightPercent(0.3f)),
+                new Vector2(GameUIController.WidthPercent(0.85f), GameUIController.HeightPercent(0.25f)),
                 0,
                 Color.White,
-                new Vector2(400, 100),
+                new Vector2(250, 100),
+                this));
+
+            //Health, shield and energy bars for the enemy:
+            enemyHealthBar = AddUIElement(new UIProgressBar(
+                SpriteHelper.Box4x4_Sprite,
+                SpriteHelper.Box4x4_Sprite,
+                new Vector2(GameUIController.WidthPercent(0.85f), GameUIController.HeightPercent(0.3f)),
+                0,
+                Color.Red,
+                Color.LawnGreen,
+                new Vector2(300, 25),
+                Vector2.Zero,
+                0,
+                this));
+
+            enemyShieldBar = AddUIElement(new UIProgressBar(
+                SpriteHelper.Box4x4_Sprite,
+                SpriteHelper.Box4x4_Sprite,
+                new Vector2(GameUIController.WidthPercent(0.85f), GameUIController.HeightPercent(0.35f)),
+                0,
+                Color.DarkBlue,
+                Color.Cyan,
+                new Vector2(300, 25),
+                Vector2.Zero,
+                0,
+                this));
+
+            enemyEnergyBar = AddUIElement(new UIProgressBar(
+                SpriteHelper.Box4x4_Sprite,
+                SpriteHelper.Box4x4_Sprite,
+                new Vector2(GameUIController.WidthPercent(0.85f), GameUIController.HeightPercent(0.4f)),
+                0,
+                Color.Black,
+                Color.Yellow,
+                new Vector2(300, 25),
+                Vector2.Zero,
+                0,
                 this));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            playerStats.Text = "Health: " + CombatController.Battlefield.Player.Health + "\nShield: " + CombatController.Battlefield.Player.Shield + "\nEnergy: " + CombatController.Battlefield.Player.Energy;
+            playerHealthBar.Progress = CombatController.Battlefield.Player.Health / (float)CombatController.Battlefield.Player.MaxHealth;
+            playerShieldBar.Progress = CombatController.Battlefield.Player.Shield / (float)CombatController.Battlefield.Player.MaxShield;
+            playerEnergyBar.Progress = CombatController.Battlefield.Player.Energy / (float)CombatController.Battlefield.Player.MaxEnergy;
 
-            enemyStats.Text = "Health: " + CombatController.Battlefield.Enemy.Health + "\nShield: " + CombatController.Battlefield.Enemy.Shield + "\nEnergy: " + CombatController.Battlefield.Enemy.Energy;
+            enemyHealthBar.Progress = CombatController.Battlefield.Enemy.Health / (float)CombatController.Battlefield.Enemy.MaxHealth;
+            enemyShieldBar.Progress = CombatController.Battlefield.Enemy.Shield / (float)CombatController.Battlefield.Enemy.MaxShield;
+            enemyEnergyBar.Progress = CombatController.Battlefield.Enemy.Energy / (float)CombatController.Battlefield.Enemy.MaxEnergy;
 
             base.Draw(spriteBatch);
 

@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Extensions;
 using Galaxies.Space;
 using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
@@ -28,7 +29,7 @@ namespace Galaxies.UI.Screens
             }
 
             AddUIElement(new UIButton(
-                content.Load<SpriteFont>("Fonts/Arial"),
+                SpriteHelper.Arial_Font,
                 "Exit solar system",
                 TextAlign.MiddleCenter,
                 5,

@@ -74,9 +74,9 @@ namespace Galaxies.UI.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Visable && sprite != null)
+            if (Visable && Sprite != null)
             {
-                spriteBatch.Draw(sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, new Vector2(sprite.Width / 2f, sprite.Height / 2f), SpriteEffects.None, 0f);
+                spriteBatch.Draw(Sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Origin, SpriteEffects.None, 0f);
             }
             
             if (Container.Count > 0)

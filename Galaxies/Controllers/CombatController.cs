@@ -15,6 +15,7 @@ namespace Galaxies.Controllers
         public static void StartBattle(CombatPlanetEvent @event)
         {
             Battlefield = new Battlefield(PlayerShip.Singleton, new EnemyShip(@event.EnemyShipData, new Vector2(100)));
+            Battlefield.StartTurn();
         }
 
         public static void Draw(SpriteBatch spriteBatch)

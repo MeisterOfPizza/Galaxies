@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Extensions;
 using Galaxies.Space;
 using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
@@ -21,11 +22,10 @@ namespace Galaxies.UI.Screens
             var galaxyBackgroundSprite = content.Load<Texture2D>("Sprites/UI/Galaxy Background");
             var statsSprite            = content.Load<Texture2D>("Sprites/UI/Stats");
             */
-            var arialFont              = content.Load<SpriteFont>("Fonts/Arial");
 
             var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.TopLeftCorner(300, 600), 0, Color.White, new Vector2(300, 600), this, 5, 5, 200));
 
-            AddUIElement(new UIButton(arialFont, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100), 0, Color.White, new Vector2(100, 100), GameUIController.CreateMenuScreen, this));
+            AddUIElement(new UIButton(SpriteHelper.Arial_Font, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100), 0, Color.White, new Vector2(100, 100), GameUIController.CreateMenuScreen, this));
             
             //Creating visitables
             foreach (IVisitable visitable in GalaxyController.Visitables)

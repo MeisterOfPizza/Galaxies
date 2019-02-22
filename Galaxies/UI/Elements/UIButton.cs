@@ -83,7 +83,7 @@ namespace Galaxies.UI.Elements
         {
             if (Visable)
             {
-                if (sprite != null)
+                if (Sprite != null)
                 {
                     base.Draw(spriteBatch);
                 }

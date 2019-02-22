@@ -34,7 +34,7 @@ namespace Galaxies.Entities
                 return currentHealth;
             }
 
-            private set
+            protected set
             {
                 currentHealth = value;
             }
@@ -53,6 +53,11 @@ namespace Galaxies.Entities
             get
             {
                 return currentShield;
+            }
+
+            protected set
+            {
+                currentShield = value;
             }
         }
 
@@ -167,7 +172,7 @@ namespace Galaxies.Entities
                 int tempDmg = damage;
 
                 damage = MathHelper.Clamp(damage - currentShield, 0, damage);
-                currentShield = MathHelper.Clamp(currentShield - tempDmg, 0, currentShield);
+                Shield = MathHelper.Clamp(Shield - tempDmg, 0, currentShield);
             }
 
             Health -= damage;

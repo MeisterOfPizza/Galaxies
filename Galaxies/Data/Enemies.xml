@@ -5,7 +5,7 @@
     <Description>Basic fighter.</Description>
     <SpriteName>Sprites/Player Ships/Player Ship 1</SpriteName>
     <BaseShipStats>
-      <Health>10</Health>
+      <Health>50</Health>
       <Shield>25</Shield>
       <Damage>10</Damage>
       <Energy>50</Energy>
@@ -21,11 +21,11 @@
     <Description>Basic bomber.</Description>
     <SpriteName>Sprites/Player Ships/Player Ship 2</SpriteName>
     <BaseShipStats>
-      <Health>15</Health>
+      <Health>25</Health>
       <Shield>25</Shield>
-      <Damage>10</Damage>
+      <Damage>35</Damage>
       <Energy>50</Energy>
-      <EnergyRegen>5</EnergyRegen>
+      <EnergyRegen>15</EnergyRegen>
     </BaseShipStats>
     <Color r="255" g="0" b="0"></Color>
   </EnemyShip>

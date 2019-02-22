@@ -90,6 +90,7 @@
     <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
+    <Compile Include="UI\Elements\UIProgressBar.cs" />
     <Compile Include="UI\Elements\UIScrollableColumn.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
@@ -115,7 +116,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Sprites\Box 4x4.png" />
     <Content Include="Content\Sprites\Effects\Bullet.png" />
+    <Content Include="Content\Sprites\Effects\Shield.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 1.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 2.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 3.png" />

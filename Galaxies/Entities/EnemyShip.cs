@@ -17,7 +17,7 @@ namespace Galaxies.Entities
 
         #endregion
 
-        private EnemyShipData Data { get; set; }
+        public EnemyShipData Data { get; private set; }
 
         public EnemyShip(EnemyShipData data, Vector2 size) : base(SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor(), size, Vector2.Zero, data.BaseShipStats)
         {

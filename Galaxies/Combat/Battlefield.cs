@@ -2,6 +2,7 @@
 using Galaxies.Core;
 using Galaxies.Entities;
 using Galaxies.Extensions;
+using Galaxies.UI;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,18 +29,30 @@ namespace Galaxies.Combat
 
         private List<Bullet> Bullets { get; set; }
 
-        private EventArg0 PlayerShotEvent;
-        private EventArg0 EnemyShotEvent;
+        private UIElement playerShieldEffect;
+        private UIElement enemyShieldEffect;
+
+        private EventArg0 playerShotEvent;
+        private EventArg0 enemyShotEvent;
 
         public Battlefield(PlayerShip player, EnemyShip enemy)
         {
             this.Player = player;
             this.Enemy  = enemy;
 
+            Player.Position = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
+            Enemy.Position  = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
+
             this.Bullets = new List<Bullet>();
 
-            PlayerShotEvent = new EventArg0(AttackEnemy, EndAwaitEventCallbacks, EndTurn);
-            EnemyShotEvent  = new EventArg0(AttackPlayer, EndAwaitEventCallbacks, EndTurn);
+            playerShotEvent = new EventArg0(AttackEnemy, EndAwaitEventCallbacks, EndTurn);
+            enemyShotEvent  = new EventArg0(AttackPlayer, EndAwaitEventCallbacks, EndTurn);
+
+            playerShieldEffect = new UIElement(SpriteHelper.Shield_Sprite, Player.Position, 0, Color.White, Player.Size * 2, null, GameUIController.CurrentScreen, false);
+            enemyShieldEffect  = new UIElement(SpriteHelper.Shield_Sprite, Enemy.Position, 0, Color.White, Enemy.Size * 2, null, GameUIController.CurrentScreen, false);
+
+            playerShieldEffect.Visable = false;
+            enemyShieldEffect.Visable  = false;
         }
 
         public void StartTurn()
@@ -62,8 +75,9 @@ namespace Galaxies.Combat
             }
             else if (!Enemy.IsAlive)
             {
-                //TODO: Give item drops?
-                GameUIController.CreatePlanetarySystemScreen();
+                Player.RefillStats(); //Refill player's stats to ready them for the next battle.
+
+                GameUIController.CreatePlanetarySystemScreen(); //Exit the combat screen.
                 PlanetEventController.TriggerNextEvent();
 
                 return;
@@ -79,18 +93,15 @@ namespace Galaxies.Combat
             if (AwaitEventCallbacks) return; //Return if we're still waiting for an event callback.
 
             Player.HasShieldUp = false;
+            playerShieldEffect.Visable = false;
 
-            if (Player.Energy > PlayerShip.FIRE_ENERGY_COST)
+            if (Player.Energy >= PlayerShip.FIRE_ENERGY_COST)
             {
                 Player.TakeEnergy(); //Remove energy because the player shot.
 
-                Bullets.Add(CreateBullet(0, Player.Position, new Vector2(50f, 0), Enemy, PlayerShotEvent));
+                Bullets.Add(CreateBullet(0, Player.Position, new Vector2(50f, 0), Enemy, playerShotEvent));
 
                 AwaitEventCallbacks = true;
-            }
-            else
-            {
-                EndTurn();
             }
         }
 
@@ -105,6 +116,7 @@ namespace Galaxies.Combat
             }
 
             Player.HasShieldUp = true;
+            playerShieldEffect.Visable = true;
 
             EndTurn();
         }
@@ -125,16 +137,18 @@ namespace Galaxies.Combat
                 }
 
                 Enemy.HasShieldUp = true;
+                enemyShieldEffect.Visable = true;
 
                 EndTurn();
             }
             else
             {
                 Enemy.HasShieldUp = false;
+                enemyShieldEffect.Visable = false;
 
                 Enemy.TakeEnergy(); //Remove energy because the enemy shot.
 
-                Bullets.Add(CreateBullet(180, Enemy.Position, new Vector2(-50f, 0), Player, EnemyShotEvent));
+                Bullets.Add(CreateBullet(180, Enemy.Position, new Vector2(-50f, 0), Player, enemyShotEvent));
                 
                 AwaitEventCallbacks = true;
             }
@@ -173,7 +187,7 @@ namespace Galaxies.Combat
 
         private Bullet CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg eventArg)
         {
-            return new Bullet(SpriteHelper.BulletSprite, position, rotation, Color.White, new Vector2(100), speed, target, eventArg);
+            return new Bullet(SpriteHelper.Bullet_Sprite, position, rotation, Color.White, new Vector2(100), speed, target, eventArg);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -182,6 +196,9 @@ namespace Galaxies.Combat
             {
                 bullet.Draw(spriteBatch);
             }
+
+            playerShieldEffect.Draw(spriteBatch);
+            enemyShieldEffect.Draw(spriteBatch);
         }
 
         public void Update()

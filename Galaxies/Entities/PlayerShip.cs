@@ -23,6 +23,13 @@ namespace Galaxies.Entities
             Singleton = this;
         }
 
+        public void RefillStats()
+        {
+            Health = MaxHealth;
+            Shield = MaxShield;
+            Energy = MaxEnergy;
+        }
+
         public override void TakeEnergy()
         {
             Energy -= FIRE_ENERGY_COST;

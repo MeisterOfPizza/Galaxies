@@ -8,14 +8,6 @@
       <ItemDrop>
         <ItemPointers>
           <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
         </ItemPointers>
       </ItemDrop>
       <Combat>
@@ -25,14 +17,6 @@
       </Combat>
       <ItemDrop>
         <ItemPointers>
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
-          <ItemPointer id="0" type="su" />
           <ItemPointer id="0" type="su" />
         </ItemPointers>
       </ItemDrop>
@@ -49,7 +33,6 @@
       </Combat>
       <ItemDrop>
         <ItemPointers>
-          <ItemPointer id="0" type="su" />
           <ItemPointer id="0" type="su" />
         </ItemPointers>
       </ItemDrop>
