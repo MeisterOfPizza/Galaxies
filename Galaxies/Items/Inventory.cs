@@ -3,7 +3,7 @@
 namespace Galaxies.Items
 {
 
-    class Inventory
+    public class Inventory
     {
 
         public IInventoryOwner Owner { get; set; }

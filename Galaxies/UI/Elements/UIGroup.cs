@@ -6,12 +6,15 @@ using System.Collections.Generic;
 namespace Galaxies.UI.Elements
 {
 
+    /// <summary>
+    /// Groups UI Elements into one single head element. This can be useful when dealing with text and texture based components that needs to be positioned together.
+    /// </summary>
     class UIGroup : UIElement
     {
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
 
-        public UIGroup(Texture2D sprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, onClick, screen, canBeClicked)
+        public UIGroup(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size, onClick, screen, canBeClicked)
         {
 
         }
@@ -26,7 +29,7 @@ namespace Galaxies.UI.Elements
             if (uiElement.CanBeClicked)
             {
                 //Add the UI Element to the screen's clickable items.
-                Screen.AddClickableUIElement(uiElement);
+                screen.AddClickableUIElement(uiElement);
             }
 
             return uiElement;

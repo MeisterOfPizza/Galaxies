@@ -1,5 +1,13 @@
-﻿using Galaxies.Datas.Space;
-using System;
+﻿using Galaxies.Controllers;
+using Galaxies.Datas.Enemies;
+using Galaxies.Datas.Helpers;
+using Galaxies.Datas.Space;
+using Galaxies.Extensions;
+using Galaxies.UI;
+using Galaxies.UI.Elements;
+using Galaxies.UIControllers;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Space.Events
 {
@@ -7,7 +15,7 @@ namespace Galaxies.Space.Events
     class CombatPlanetEvent : PlanetEvent
     {
 
-        private CombatPlanetEventData data;
+        public CombatPlanetEventData data;
 
         public override PlanetEventData Data
         {
@@ -17,6 +25,13 @@ namespace Galaxies.Space.Events
             }
         }
 
+        private UIMessageBox messageBox;
+
+        /// <summary>
+        /// Randomly selected enemy.
+        /// </summary>
+        public EnemyShipData EnemyShipData { get; private set; }
+
         public CombatPlanetEvent(CombatPlanetEventData data)
         {
             this.data = data;
@@ -24,7 +39,33 @@ namespace Galaxies.Space.Events
 
         public override void Trigger()
         {
-            throw new NotImplementedException();
+            var dataPointer = data.EnemyPointers[Random.Next(data.EnemyPointers.Length)];
+            EnemyShipData = DataController.LoadData<EnemyShipData>(dataPointer.Id, DataFileType.Enemies);
+
+            messageBox = GameUIController.CurrentScreen.AddUIElement(new UIMessageBox(
+                MainGame.Singleton.Content.Load<SpriteFont>("Fonts/Arial"),
+                "Detected a hostile ship! [" + EnemyShipData.Name + "]",
+                TextAlign.TopCenter,
+                5,
+                MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/Column"),
+                GameUIController.Center(),
+                0,
+                Color.White,
+                new Vector2(500, 150),
+                _Trigger,
+                GameUIController.CurrentScreen
+                ));
+        }
+
+        /// <summary>
+        /// Enter combat.
+        /// </summary>
+        private void _Trigger()
+        {
+            messageBox.Screen.RemoveUIElement(messageBox); //HACK: Really needed? If we're discarding the current screen, do we really need to remove the UI Element first?
+            messageBox.Screen.RemoveUIElement(messageBox.OkBtn);
+            CombatController.StartBattle(this);
+            GameUIController.CreateCombatScreen();
         }
 
     }

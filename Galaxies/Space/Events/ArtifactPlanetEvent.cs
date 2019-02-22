@@ -8,7 +8,7 @@ namespace Galaxies.Space.Events
     class ArtifactPlanetEvent : PlanetEvent
     {
 
-        private ArtifactPlanetEventData data;
+        public ArtifactPlanetEventData data;
 
         public override PlanetEventData Data
         {

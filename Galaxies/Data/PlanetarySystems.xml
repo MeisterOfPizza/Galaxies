@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Collection>
+  <PlanetarySystem id="test">
+    <Name>Sol</Name>
+    <Description>Home system of Humans</Description>
+    <SpriteName>Sprites/UI/Column</SpriteName>
+    <MinRandomPlanets>0</MinRandomPlanets>
+    <MaxRandomPlanets>0</MaxRandomPlanets>
+    <PlanetIds>
+      <PlanetId>test</PlanetId>
+    </PlanetIds>
+  </PlanetarySystem>
+</Collection>

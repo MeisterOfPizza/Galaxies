@@ -1,4 +1,4 @@
-﻿using Galaxies.Controllers;
+﻿using Galaxies.Extensions;
 using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
@@ -13,16 +13,14 @@ namespace Galaxies.UI.Screens
 
         public override void CreateUI(ContentManager content)
         {
-            var arialFont      = content.Load<SpriteFont>("Fonts/Arial");
             var textBackground = content.Load<Texture2D>("Sprites/UI/Column");
 
-            var container = AddUIElement(new UIColumn(content.Load<Texture2D>("Sprites/Transparent"), GameUIController.Center(100, 500), 0, Color.White, this, 5, 5));
-            container.SetDrawSize(100, 500);
-            container.AddUIElements(250, 100,
-                new UIButton(arialFont, "New Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new UIElement.OnClickEvent(GameController.StartNewGame), this),
-                new UIButton(arialFont, "Load Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, null, this),
-                new UIButton(arialFont, "Options", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, null, this),
-                new UIButton(arialFont, "Exit", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new UIElement.OnClickEvent(MainGame.Singleton.Exit), this)
+            var container = AddUIElement(new UIColumn(content.Load<Texture2D>("Sprites/Transparent"), GameUIController.Center(), 0, Color.White, new Vector2(250, 400), this, 5, 5));
+            container.AddUIElements(
+                new UIButton(SpriteHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),
+                new UIButton(SpriteHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),
+                new UIButton(SpriteHelper.Arial_Font, "Options", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),
+                new UIButton(SpriteHelper.Arial_Font, "Exit", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), MainGame.Singleton.Exit, this)
                 );
         }
 

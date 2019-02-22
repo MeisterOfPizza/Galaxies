@@ -22,7 +22,7 @@ namespace Galaxies.UI
 
         private bool ResponsiveSize { get; set; }
 
-        public UIContainer(Texture2D sprite, Vector2 position, float rotation, Color color, Screen screen, int spaceX, int spaceY, int borderX, int borderY, bool responsiveSize) : base(sprite, position, rotation, color, null, screen, false)
+        public UIContainer(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, int spaceX, int spaceY, int borderX, int borderY, bool responsiveSize) : base(sprite, position, rotation, color, size, null, screen, false)
         {
             this.SpaceX  = spaceX;
             this.SpaceY  = spaceY;
@@ -45,7 +45,7 @@ namespace Galaxies.UI
             if (uiElement.CanBeClicked)
             {
                 //Add the UI Element to the screen's clickable items.
-                Screen.AddClickableUIElement(uiElement);
+                screen.AddClickableUIElement(uiElement);
             }
 
             CalculatePositions();
@@ -59,9 +59,9 @@ namespace Galaxies.UI
         }
 
         /// <summary>
-        /// Adds multiple new UI Elements to the container and sets their draw width and draw height equal to <paramref name="drawWidth"/> and <paramref name="drawHeight"/>.
+        /// Adds multiple new UI Elements to the container.
         /// </summary>
-        public void AddUIElements(int drawWidth, int drawHeight, params UIElement[] uiElements)
+        public void AddUIElements(params UIElement[] uiElements)
         {
             for (int i = 0; i < uiElements.Length; i++)
             {
@@ -70,10 +70,8 @@ namespace Galaxies.UI
                 if (uiElements[i].CanBeClicked)
                 {
                     //Add the UI Element to the screen's clickable items.
-                    Screen.AddClickableUIElement(uiElements[i]);
+                    screen.AddClickableUIElement(uiElements[i]);
                 }
-
-                uiElements[i].SetDrawSize(drawWidth, drawHeight);
             }
 
             CalculatePositions();
@@ -86,12 +84,12 @@ namespace Galaxies.UI
 
         public override void Select()
         {
-            //Do nothing
+            //Do nothing, TODO: Remove as we already have Clickable set to false?
         }
 
         public override void Deselect()
         {
-            //Do nothing
+            //Do nothing, TODO: Remove as we already have Clickable set to false?
         }
 
         public override void Draw(SpriteBatch spriteBatch)

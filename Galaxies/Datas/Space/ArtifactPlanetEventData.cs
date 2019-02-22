@@ -7,7 +7,7 @@ namespace Galaxies.Datas.Space
 
     [Obsolete("Use ItemDropPlanetEventData instead.", true)] //TODO: Remove obsolete
     [XmlRoot(Namespace = "", ElementName = "Artifact")]
-    class ArtifactPlanetEventData : PlanetEventData
+    public class ArtifactPlanetEventData : PlanetEventData
     {
 
         [XmlElement("MinGalacticGold", typeof(int), IsNullable = false)]

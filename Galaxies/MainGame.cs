@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Extensions;
 using Galaxies.Progression;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
@@ -7,11 +8,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Galaxies
 {
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
     public class MainGame : Game
     {
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -41,11 +44,16 @@ namespace Galaxies
         {
             // TODO: Add your initialization logic here
 
-            GameUIController.Window = Window;
-
-            GameUIController.CreateGalaxyScreen(); //TODO: Change to CreateMenuScreen().
-
             base.Initialize();
+
+            DataController.Initialize();
+            SpriteHelper.Initialize(Content);
+
+            //TEST: Adding a planetary system
+            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
+
+            GameUIController.Window = Window;
+            GameUIController.CreateGalaxyScreen();
         }
 
         /// <summary>
@@ -83,7 +91,7 @@ namespace Galaxies
 
             // TODO: Add your update logic here
 
-            GameController.UpdateGame(gameTime);
+            GameController.Update(gameTime);
             GameUIController.Update(gameTime);
 
             base.Update(gameTime);
@@ -100,10 +108,13 @@ namespace Galaxies
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
+            GameController.Draw(spriteBatch);
             GameUIController.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
     }
+
 }

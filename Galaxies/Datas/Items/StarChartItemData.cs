@@ -1,10 +1,11 @@
 ﻿using System.Xml.Serialization;
+using Galaxies.Items;
 
 namespace Galaxies.Datas.Items
 {
 
     [XmlRoot(Namespace = "", ElementName = "StarChart")]
-    class StarChartItemData : ItemData
+    public class StarChartItemData : ItemData
     {
 
         [XmlElement("Planetary SystemId", IsNullable = false)]
@@ -16,6 +17,11 @@ namespace Galaxies.Datas.Items
             {
                 return ItemType.StarChart;
             }
+        }
+
+        public override Item CreateItem(Inventory inventory)
+        {
+            return new StarChart(this, inventory);
         }
 
     }

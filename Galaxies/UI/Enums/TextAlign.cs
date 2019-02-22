@@ -26,31 +26,39 @@ namespace Galaxies.UI
         /// </summary>
         public static Vector2 Align<T>(T textElement) where T : UIElement, ITextElement<T>
         {
-            Vector2 size = textElement.SpriteFont.MeasureString(textElement.Text);
+            Vector2 size = textElement.SpriteFont.MeasureString(textElement.FormattedText);
+
+            textElement.FormattedTextOrigin = size / 2f;
+
+            float xBorder = -textElement.Width / 2f + size.X / 2f + textElement.TextPadding; //Default = left //This is the x coordinate for the left align
+            float yBorder = -textElement.Height / 2f + textElement.TextPadding + size.Y / 2f; //Default = top //This is the y coordinate for the top align
+
+            //Let's use these x/y Borders and just invert them (* -1) when we need to draw on the opposite side of the align.
+            //They're called border because it's the closest that we can get to the text elements border.
 
             switch (textElement.TextAlign)
             {
                 case TextAlign.TopLeft:
-                    return new Vector2(textElement.TextPadding, textElement.TextPadding);
+                    return new Vector2(xBorder, yBorder);
                 case TextAlign.TopCenter:
-                    return new Vector2(textElement.Width / 2f - size.X / 2f, textElement.TextPadding);
+                    return new Vector2(0, yBorder);
                 case TextAlign.TopRight:
-                    return new Vector2(textElement.Width - size.X - textElement.TextPadding, textElement.TextPadding);
+                    return new Vector2(-xBorder, yBorder);
                 case TextAlign.MiddleLeft:
-                    return new Vector2(textElement.TextPadding, textElement.Height / 2f - size.Y / 2f);
+                    return new Vector2(xBorder, 0);
                 case TextAlign.MiddleCenter:
-                    return new Vector2(textElement.Width / 2f - size.X / 2f, textElement.Height / 2f - size.Y / 2f);
+                    return Vector2.Zero;
                 case TextAlign.MiddleRight:
-                    return new Vector2(textElement.Width - size.X - textElement.TextPadding, textElement.Height / 2f - size.Y / 2f);
+                    return new Vector2(-xBorder, 0);
                 case TextAlign.BottomLeft:
-                    return new Vector2(textElement.TextPadding, textElement.Height - size.Y / 2f);
+                    return new Vector2(xBorder, -yBorder);
                 case TextAlign.BottomCenter:
-                    return new Vector2(textElement.Width / 2f - size.X / 2f, textElement.Height - size.Y / 2f);
+                    return new Vector2(0, -yBorder);
                 case TextAlign.BottomRight:
-                    return new Vector2(textElement.Width - size.X - textElement.TextPadding, textElement.Height - size.Y / 2f);
+                    return new Vector2(-xBorder, -yBorder);
             }
 
-            return Vector2.Zero;
+            return Vector2.Zero; //Should not be able to happen...
         }
 
         /// <summary>

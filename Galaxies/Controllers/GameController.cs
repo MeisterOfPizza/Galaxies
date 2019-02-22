@@ -1,22 +1,26 @@
 ﻿using Galaxies.Entities;
 using Galaxies.Progression;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Controllers
 {
 
+    enum GameState
+    {
+        MainMenu,
+        Galaxy,
+        PlanetarySystem,
+        Combat,
+        Citadel
+    }
+
     static class GameController
     {
 
-        public static PlayerShip Player { get; private set; }
+        public static GameState GameState { get; set; }
 
         public static SaveFile CurrentSaveFile { get; private set; }
-
-        public static void StartNewGame()
-        {
-            
-        }
 
         public static void LoadGame(SaveFile saveFile)
         {
@@ -35,6 +39,7 @@ namespace Galaxies.Controllers
         private static void LoadNewGame()
         {
             CurrentSaveFile.IsNewGame = false;
+            PlayerShip.CreateNewPlayer();
         }
         
         private static void LoadSaveGame(SaveFile saveFile)
@@ -42,9 +47,40 @@ namespace Galaxies.Controllers
 
         }
 
-        public static void UpdateGame(GameTime gameTime)
+        public static void Draw(SpriteBatch spriteBatch)
         {
+            switch (GameState)
+            {
+                case GameState.MainMenu:
+                    break;
+                case GameState.Galaxy:
+                    break;
+                case GameState.PlanetarySystem:
+                    break;
+                case GameState.Combat:
+                    CombatController.Draw(spriteBatch);
+                    break;
+                case GameState.Citadel:
+                    break;
+            }
+        }
 
+        public static void Update(GameTime gameTime)
+        {
+            switch (GameState)
+            {
+                case GameState.MainMenu:
+                    break;
+                case GameState.Galaxy:
+                    break;
+                case GameState.PlanetarySystem:
+                    break;
+                case GameState.Combat:
+                    CombatController.Update();
+                    break;
+                case GameState.Citadel:
+                    break;
+            }
         }
 
     }

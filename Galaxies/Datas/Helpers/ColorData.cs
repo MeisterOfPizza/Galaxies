@@ -1,20 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Xml.Serialization;
 
-namespace Galaxies.Datas
+namespace Galaxies.Datas.Helpers
 {
 
     [XmlRoot(Namespace = "", ElementName = "Color")]
-    class ColorData
+    public class ColorData
     {
 
-        [XmlAttribute("r", typeof(byte))]
+        [XmlAttribute("r")]
         public byte R { get; set; } = byte.MaxValue;
 
-        [XmlAttribute("g", typeof(byte))]
+        [XmlAttribute("g")]
         public byte G { get; set; } = byte.MaxValue;
 
-        [XmlAttribute("b", typeof(byte))]
+        [XmlAttribute("b")]
         public byte B { get; set; } = byte.MaxValue;
 
         public Color GetColor()

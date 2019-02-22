@@ -1,26 +1,30 @@
-﻿using System.Xml.Serialization;
+﻿using Galaxies.Datas.Helpers;
+using System.Xml.Serialization;
+using Galaxies.Items;
 
 namespace Galaxies.Datas.Items
 {
 
-    enum ItemType
+    public enum ItemType
     {
         ShipUpgrade,
-        Artifact,
+        Artifact, //TODO: Remove obsolete
         StarChart
     }
 
     [XmlRoot(Namespace = "", ElementName = "Item")]
-    abstract class ItemData : Data
+    public abstract class ItemData : Data
     {
 
         [XmlElement("SpriteName", IsNullable = false)]
         public string SpriteName { get; set; }
 
         [XmlElement("Color", typeof(ColorData), IsNullable = true)]
-        public ColorData Color { get; set; }
+        public ColorData Color { get; set; } = new ColorData();
 
         public abstract ItemType ItemType { get; }
+
+        public abstract Item CreateItem(Inventory inventory);
 
     }
 

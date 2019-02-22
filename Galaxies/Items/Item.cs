@@ -6,13 +6,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.Items
 {
 
-    abstract class Item : GameObject
+    public abstract class Item : GameObject
     {
 
         public ItemData  Data      { get; protected set; }
         public Inventory Inventory { get; private set; }
 
-        public Item(ItemData data, Inventory inventory) : base(MainGame.Singleton.Content.Load<Texture2D>(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor())
+        public Item(ItemData data, Inventory inventory) : base(MainGame.Singleton.Content.Load<Texture2D>(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor(), new Vector2(50, 50))
         {
             this.Data      = data;
             this.Inventory = inventory;

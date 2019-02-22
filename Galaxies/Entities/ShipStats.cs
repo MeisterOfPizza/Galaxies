@@ -4,23 +4,31 @@ namespace Galaxies.Entities
 {
 
     [XmlRoot(Namespace = "", ElementName = "ShipStats")]
-    struct ShipStats
+    public struct ShipStats
     {
 
         [XmlElement("Health", typeof(int), IsNullable = false)]
         public int Health { get; set; }
 
-        [XmlElement("Armor", typeof(int), IsNullable = false)]
-        public int Armor { get; set; }
+        [XmlElement("Shield", typeof(int), IsNullable = false)]
+        public int Shield { get; set; }
 
         [XmlElement("Damage", typeof(int), IsNullable = false)]
         public int Damage { get; set; }
 
-        public ShipStats(int health, int armor, int damage)
+        [XmlElement("Energy", typeof(int), IsNullable = false)]
+        public int Energy { get; set; }
+
+        [XmlElement("EnergyRegen", typeof(int), IsNullable = false)]
+        public int EnergyRegen { get; set; }
+
+        public ShipStats(int health, int shield, int damage, int energy, int energyRegen)
         {
-            this.Health = health;
-            this.Armor  = armor;
-            this.Damage = damage;
+            this.Health      = health;
+            this.Shield      = shield;
+            this.Damage      = damage;
+            this.Energy      = energy;
+            this.EnergyRegen = energyRegen;
         }
 
     }

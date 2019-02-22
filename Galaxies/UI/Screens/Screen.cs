@@ -32,7 +32,7 @@ namespace Galaxies.UI.Screens
         /// <summary>
         /// Look for keystrokes or mouse movement.
         /// </summary>
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             selectionCooldown += gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -79,7 +79,10 @@ namespace Galaxies.UI.Screens
 
                     ClickableElements[SelectedIndex].Select();
 
-                    SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    if (SelectCallbacks != null)
+                    {
+                        SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    }
                 }
                 else if (keyboardState.IsKeyDown(Keys.Down) || (keyboardState.IsKeyDown(Keys.Tab) && keyboardState.IsKeyDown(Keys.LeftShift)))
                 {
@@ -94,7 +97,10 @@ namespace Galaxies.UI.Screens
 
                     ClickableElements[SelectedIndex].Select();
 
-                    SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    if (SelectCallbacks != null)
+                    {
+                        SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                    }
                 }
             }
         }
@@ -104,6 +110,19 @@ namespace Galaxies.UI.Screens
             if (SelectedIndex >= 0 && SelectedIndex < ClickableElements.Count && ClickableElements.Count > 0)
             {
                 ClickableElements[SelectedIndex].Click();
+            }
+        }
+
+        /// <summary>
+        /// Select the last (or most recent added) UI Clickable.
+        /// </summary>
+        public void SelectLast()
+        {
+            if (ClickableElements.Count > 0)
+            {
+                ClickableElements[SelectedIndex].Deselect();
+                SelectedIndex = ClickableElements.Count - 1;
+                ClickableElements[SelectedIndex].Select();
             }
         }
 
@@ -144,12 +163,12 @@ namespace Galaxies.UI.Screens
         #region Adding UI Elements
 
         /// <summary>
-        /// Adds a UI Element and makes it selectable if is has <see cref="UIElement.CanBeClicked"/> set to true.
+        /// Adds a UI Element and makes it selectable (and clickable!) if is has <see cref="UIElement.CanBeClicked"/> set to true.
         /// </summary>
         /// <typeparam name="T">UIElement descendant of type T.</typeparam>
         /// <param name="uiElement">The UI Element to add.</param>
         /// <returns>Returns the craeted UI Element.</returns>
-        protected T AddUIElement<T>(T uiElement) where T : UIElement
+        public T AddUIElement<T>(T uiElement) where T : UIElement
         {
             UIElements.Add(uiElement);
 
@@ -180,6 +199,19 @@ namespace Galaxies.UI.Screens
             {
                 ClickableElements[0].Select();
             }
+        }
+
+        #endregion
+
+        #region Removing UI Elements
+
+        /// <summary>
+        /// Removes the UI Element.
+        /// </summary>
+        public void RemoveUIElement(UIElement uiElement)
+        {
+            UIElements.Remove(uiElement);
+            RemoveUIClickable(uiElement);
         }
 
         #endregion

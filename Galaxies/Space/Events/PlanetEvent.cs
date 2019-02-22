@@ -3,7 +3,7 @@
 namespace Galaxies.Space.Events
 {
 
-    abstract class PlanetEvent
+    public abstract class PlanetEvent
     {
 
         public abstract PlanetEventData Data { get; }

@@ -1,11 +1,12 @@
 ﻿using Galaxies.Entities;
+using Galaxies.Items;
 using System.Xml.Serialization;
 
 namespace Galaxies.Datas.Items
 {
 
     [XmlRoot(Namespace = "", ElementName = "ShipUpgrade")]
-    class ShipUpgradeItemData : ItemData
+    public class ShipUpgradeItemData : ItemData
     {
 
         [XmlElement("PurchaseGG", typeof(int), IsNullable = false)]
@@ -23,6 +24,11 @@ namespace Galaxies.Datas.Items
             {
                 return ItemType.ShipUpgrade;
             }
+        }
+
+        public override Item CreateItem(Inventory inventory)
+        {
+            return new ShipUpgrade(this, inventory);
         }
 
     }

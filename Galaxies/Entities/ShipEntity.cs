@@ -19,6 +19,8 @@ namespace Galaxies.Entities
         ShipStats baseStats;
         ShipStats modifiedStats;
         int       currentHealth;
+        int       currentShield;
+        int       currentEnergy;
         bool      isAlive = true;
 
         #endregion
@@ -32,7 +34,7 @@ namespace Galaxies.Entities
                 return currentHealth;
             }
 
-            set
+            protected set
             {
                 currentHealth = value;
             }
@@ -46,11 +48,24 @@ namespace Galaxies.Entities
             }
         }
 
-        public int Armor
+        public int Shield
         {
             get
             {
-                return baseStats.Armor + modifiedStats.Armor;
+                return currentShield;
+            }
+
+            protected set
+            {
+                currentShield = value;
+            }
+        }
+
+        public int MaxShield
+        {
+            get
+            {
+                return baseStats.Shield + modifiedStats.Shield;
             }
         }
 
@@ -61,6 +76,37 @@ namespace Galaxies.Entities
                 return baseStats.Damage + modifiedStats.Damage;
             }
         }
+
+        public int Energy
+        {
+            get
+            {
+                return currentEnergy;
+            }
+
+            protected set
+            {
+                currentEnergy = value;
+            }
+        }
+
+        public int MaxEnergy
+        {
+            get
+            {
+                return baseStats.Energy + modifiedStats.Energy;
+            }
+        }
+
+        public int EnergyRegen
+        {
+            get
+            {
+                return baseStats.EnergyRegen + modifiedStats.EnergyRegen;
+            }
+        }
+
+        public bool HasShieldUp { get; set; }
 
         public bool IsAlive
         {
@@ -78,10 +124,12 @@ namespace Galaxies.Entities
 
         #endregion
 
-        public ShipEntity(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, speed)
+        public ShipEntity(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, size, speed)
         {
             this.baseStats     = baseStats;
             this.modifiedStats = new ShipStats();
+            this.currentHealth = MaxHealth;
+            this.currentEnergy = MaxEnergy;
         }
 
         protected void CalculateStats()
@@ -90,23 +138,44 @@ namespace Galaxies.Entities
                 .Where(i => i.Data.ItemType == ItemType.ShipUpgrade)
                 .Select(i => ((ShipUpgradeItemData)i.Data).ShipStats);
 
-            int newHealth = 0;
-            int newArmor  = 0;
-            int newDamage = 0;
+            int newHealth      = 0;
+            int newShield      = 0;
+            int newDamage      = 0;
+            int newEnergy      = 0;
+            int newEnergyRegen = 0;
 
             foreach (ShipStats stats in shipUpgradeShipStats)
             {
-                newHealth += stats.Health;
-                newArmor  += stats.Armor;
-                newDamage += stats.Damage;
+                newHealth      += stats.Health;
+                newShield      += stats.Shield;
+                newDamage      += stats.Damage;
+                newEnergy      += stats.Energy;
+                newEnergyRegen += stats.EnergyRegen;
             }
 
-            modifiedStats = new ShipStats(newHealth, newArmor, newDamage);
+            modifiedStats = new ShipStats(newHealth, newShield, newDamage, newEnergy, newEnergyRegen);
+
+            currentHealth = MaxHealth;
+            currentShield = MaxShield;
+            currentEnergy = MaxEnergy;
         }
 
-        public virtual void TakeDamage(int dmg)
+        public virtual void Attack(ShipEntity defender)
         {
-            Health -= dmg;
+            defender.Defend(Damage);
+        }
+
+        public virtual void Defend(int damage)
+        {
+            if (HasShieldUp)
+            {
+                int tempDmg = damage;
+
+                damage = MathHelper.Clamp(damage - currentShield, 0, damage);
+                Shield = MathHelper.Clamp(Shield - tempDmg, 0, currentShield);
+            }
+
+            Health -= damage;
 
             if (Health <= 0)
             {
@@ -114,9 +183,11 @@ namespace Galaxies.Entities
             }
         }
 
-        public virtual void DoDamage(ShipEntity entity)
+        public abstract void TakeEnergy();
+
+        public virtual void RegenEnergy()
         {
-            entity.TakeDamage(Damage);
+            Energy = MathHelper.Clamp(Energy + EnergyRegen, 0, MaxEnergy);
         }
 
         public void Die()

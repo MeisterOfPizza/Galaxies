@@ -51,12 +51,13 @@ namespace Galaxies.UI.Elements
             }
         }
 
-        public string FormattedText { get; set; }
-        public int    TextPadding   { get; set; }
+        public string  FormattedText       { get; set; }
+        public int     TextPadding         { get; set; }
+        public Vector2 FormattedTextOrigin { get; set; }
 
         #endregion
 
-        public UIText(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Vector2 position, float rotation, Color color, Screen screen) : base(null, position, rotation, color, null, screen, false)
+        public UIText(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Vector2 position, float rotation, Color color, Vector2 size, Screen screen) : base(null, position, rotation, color, size, null, screen, false)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;
@@ -66,11 +67,9 @@ namespace Galaxies.UI.Elements
 
         private void CalculateTextPosition()
         {
-            textPosition = TextHelper.Align(this);
-            
             FormattedText = TextHelper.WrapText(this, Width);
-
-            SetDrawHeight((int)spriteFont.MeasureString(FormattedText).Y);
+            
+            textPosition = TextHelper.Align(this);
         }
 
         protected override void PositionChanged()
@@ -82,12 +81,9 @@ namespace Galaxies.UI.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Visable)
+            if (Visable && spriteFont != null)
             {
-                if (spriteFont != null)
-                {
-                    spriteBatch.DrawString(spriteFont, FormattedText, Position + textPosition, Color);
-                }
+                spriteBatch.DrawString(spriteFont, FormattedText, Position + textPosition, Color, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
             }
         }
 

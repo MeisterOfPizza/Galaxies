@@ -16,17 +16,18 @@ namespace Galaxies.UI.Elements
         /// </summary>
         protected int ResponsiveMaxY;
 
-        public UIColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Screen screen, int spaceY, int borderY, bool responsiveSize = true) : base(sprite, position, rotation, color, screen, 0, spaceY, 0, borderY, responsiveSize)
+        public UIColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, int spaceY, int borderY, bool responsiveSize = true) : base(sprite, position, rotation, color, size, screen, 0, spaceY, 0, borderY, responsiveSize)
         {
         }
 
         protected override void CalculatePositions()
         {
             int currentY = BorderY;
+            float topY = -Height / 2f;
 
             for (int i = 0; i < Container.Count; i++)
             {
-                Container[i].Position = Position + new Vector2((Width - Container[i].Width) / 2f, currentY);
+                Container[i].Position = Position + new Vector2(0, topY + currentY + Container[i].Height / 2f);
 
                 currentY += Container[i].Height + SpaceY;
             }

@@ -1,6 +1,7 @@
-﻿using Galaxies.UI.Screens;
+﻿using Galaxies.Controllers;
+using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -30,17 +31,57 @@ namespace Galaxies.UIControllers
             }
         }
 
+        #region Windows helpers
+
+        public static int WindowWidth
+        {
+            get
+            {
+                return Window.ClientBounds.Width;
+            }
+        }
+
+        public static int WindowHeight
+        {
+            get
+            {
+                return Window.ClientBounds.Height;
+            }
+        }
+
+        #endregion
+
         #region Screens
 
         public static void CreateMenuScreen()
         {
+            GameController.GameState = GameState.MainMenu;
+
             CurrentScreen = new MenuScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
         public static void CreateGalaxyScreen()
         {
+            GameController.GameState = GameState.Galaxy;
+
             CurrentScreen = new GalaxyScreen();
+            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+        }
+
+        public static void CreatePlanetarySystemScreen()
+        {
+            GameController.GameState = GameState.PlanetarySystem;
+
+            CurrentScreen = new PlanetarySystemScreen();
+            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+        }
+
+        public static void CreateCombatScreen()
+        {
+            GameController.GameState = GameState.Combat;
+
+            CurrentScreen = new CombatScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
@@ -48,29 +89,29 @@ namespace Galaxies.UIControllers
 
         #region Position helpers
 
-        public static Vector2 TopLeftCorner()
+        public static Vector2 TopLeftCorner(int width, int height)
         {
-            return Vector2.Zero;
+            return new Vector2(width / 2f, height / 2f);
         }
 
         public static Vector2 TopRightCorner(int width, int height)
         {
-            return new Vector2(Window.ClientBounds.Width - width, 0);
+            return new Vector2(Window.ClientBounds.Width - width / 2f, height / 2f);
         }
 
         public static Vector2 BottomLeftCorner(int width, int height)
         {
-            return new Vector2(0, Window.ClientBounds.Height - height);
+            return new Vector2(width / 2f, Window.ClientBounds.Height - height / 2f);
         }
 
         public static Vector2 BottomRightCorner(int width, int height)
         {
-            return new Vector2(Window.ClientBounds.Width - width, Window.ClientBounds.Height - height);
+            return new Vector2(Window.ClientBounds.Width - width / 2f, Window.ClientBounds.Height - height / 2f);
         }
 
-        public static Vector2 Center(int width, int height)
+        public static Vector2 Center()
         {
-            return new Vector2(Window.ClientBounds.Width / 2f - width / 2f, Window.ClientBounds.Height / 2f - height / 2f);
+            return new Vector2(Window.ClientBounds.Width / 2f, Window.ClientBounds.Height / 2f);
         }
 
         public static int WidthPercent(float percent)

@@ -1,7 +1,7 @@
 ﻿namespace Galaxies.Items
 {
 
-    interface IInventoryOwner
+    public interface IInventoryOwner
     {
 
         Inventory Inventory { get; set; }

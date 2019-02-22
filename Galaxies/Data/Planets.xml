@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Collection>
+  <Planet id="test">
+    <Name>Earth</Name>
+    <Description>Home planet of Humans</Description>
+    <SpriteName>Sprites/UI/Column</SpriteName>
+    <OnVisitEvents>
+      <ItemDrop>
+        <ItemPointers>
+          <ItemPointer id="0" type="su" />
+        </ItemPointers>
+      </ItemDrop>
+      <Combat>
+        <EnemyPointers>
+          <EnemyPointer id="test2" />
+        </EnemyPointers>
+      </Combat>
+      <ItemDrop>
+        <ItemPointers>
+          <ItemPointer id="0" type="su" />
+        </ItemPointers>
+      </ItemDrop>
+      <Combat>
+        <EnemyPointers>
+          <EnemyPointer id="test1" />
+        </EnemyPointers>
+      </Combat>
+      <Combat>
+        <EnemyPointers>
+          <EnemyPointer id="test1" />
+          <EnemyPointer id="test2" />
+        </EnemyPointers>
+      </Combat>
+      <ItemDrop>
+        <ItemPointers>
+          <ItemPointer id="0" type="su" />
+        </ItemPointers>
+      </ItemDrop>
+      <ItemDrop>
+        <ItemPointers>
+        </ItemPointers>
+      </ItemDrop>
+    </OnVisitEvents>
+  </Planet>
+</Collection>

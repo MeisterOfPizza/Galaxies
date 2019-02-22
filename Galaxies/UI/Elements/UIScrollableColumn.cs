@@ -1,6 +1,7 @@
 ﻿using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Galaxies.UI.Elements
 {
@@ -28,7 +29,7 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private int maxIndex;
 
-        public UIScrollableColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Screen screen, int spaceY, int borderY, int itemHeight) : base(sprite, position, rotation, color, screen, spaceY, borderY, true)
+        public UIScrollableColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, int spaceY, int borderY, int itemHeight) : base(sprite, position, rotation, color, size, screen, spaceY, borderY, true)
         {
             this.itemHeight = itemHeight;
 
@@ -38,10 +39,11 @@ namespace Galaxies.UI.Elements
         protected override void CalculatePositions()
         {
             int currentY = BorderY;
-            
+            float topY = Height / 2f - itemHeight / 2f;
+
             for (int i = minIndex; i <= maxIndex; i++)
             {
-                Container[i].Position = Position + new Vector2((Width - Container[i].Width) / 2f, currentY);
+                Container[i].Position = Position - new Vector2(0, topY - currentY);
 
                 currentY += itemHeight + SpaceY;
             }
@@ -72,9 +74,9 @@ namespace Galaxies.UI.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Visable && sprite != null)
+            if (Visable && Sprite != null)
             {
-                spriteBatch.Draw(sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Vector2.Zero, SpriteEffects.None, 0f);
+                spriteBatch.Draw(Sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Origin, SpriteEffects.None, 0f);
             }
             
             if (Container.Count > 0)

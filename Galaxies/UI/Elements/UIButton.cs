@@ -15,7 +15,6 @@ namespace Galaxies.UI.Elements
         TextAlign  textAlign;
         string     text;
         Vector2    textPosition;
-        int        textPadding;
 
         #endregion
 
@@ -52,24 +51,25 @@ namespace Galaxies.UI.Elements
             }
         }
 
-        public string FormattedText { get; set; }
-        public int    TextPadding   { get; set; }
+        public string  FormattedText       { get; set; }
+        public int     TextPadding         { get; set; }
+        public Vector2 FormattedTextOrigin { get; set; }
 
         #endregion
 
-        public UIButton(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(backgroundSprite, position, rotation, color, onClick, screen, canBeClicked)
+        public UIButton(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(backgroundSprite, position, rotation, color, size, onClick, screen, canBeClicked)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;
             this.Text        = text;
-            this.textPadding = textPadding;
+            this.TextPadding = textPadding;
         }
 
         private void CalculateTextPosition()
         {
-            textPosition = TextHelper.Align(this);
-
             FormattedText = TextHelper.WrapText(this, Width);
+
+            textPosition = TextHelper.Align(this);
         }
 
         protected override void PositionChanged()
@@ -83,12 +83,15 @@ namespace Galaxies.UI.Elements
         {
             if (Visable)
             {
-                if (sprite != null)
+                if (Sprite != null)
                 {
                     base.Draw(spriteBatch);
                 }
 
-                spriteBatch.DrawString(spriteFont, FormattedText, Position + textPosition, Color);
+                if (spriteFont != null)
+                {
+                    spriteBatch.DrawString(spriteFont, FormattedText, Position + textPosition, Color, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
+                }
             }
         }
 
