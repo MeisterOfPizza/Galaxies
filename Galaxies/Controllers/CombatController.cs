@@ -2,6 +2,7 @@
 using Galaxies.Entities;
 using Galaxies.Space.Events;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Controllers
 {
@@ -16,9 +17,14 @@ namespace Galaxies.Controllers
             Battlefield = new Battlefield(PlayerShip.Singleton, new EnemyShip(@event.EnemyShipData, new Vector2(100)));
         }
 
+        public static void Draw(SpriteBatch spriteBatch)
+        {
+            Battlefield.Draw(spriteBatch);
+        }
+
         public static void Update()
         {
-
+            Battlefield.Update();
         }
 
     }

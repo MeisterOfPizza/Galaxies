@@ -45,6 +45,7 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
+    <Compile Include="Core\Events.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
     <Compile Include="Datas\Helpers\ColorData.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Datas\Space\PlanetarySystemData.cs" />
     <Compile Include="Datas\Space\PlanetData.cs" />
     <Compile Include="Datas\Space\PlanetEventData.cs" />
+    <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\EnemyShip.cs" />
     <Compile Include="Entities\PlayerShip.cs" />
     <Compile Include="Entities\ShipEntity.cs" />
@@ -113,6 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Sprites\Effects\Bullet.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 1.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 2.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 3.png" />

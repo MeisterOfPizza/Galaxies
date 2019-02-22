@@ -23,10 +23,8 @@ namespace Galaxies.Entities
             Singleton = this;
         }
 
-        public override void Attack(ShipEntity defender)
+        public override void TakeEnergy()
         {
-            base.Attack(defender);
-
             Energy -= FIRE_ENERGY_COST;
         }
 

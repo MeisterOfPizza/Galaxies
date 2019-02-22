@@ -1,7 +1,7 @@
 ﻿using Galaxies.Entities;
 using Galaxies.Progression;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Controllers
 {
@@ -45,6 +45,24 @@ namespace Galaxies.Controllers
         private static void LoadSaveGame(SaveFile saveFile)
         {
 
+        }
+
+        public static void Draw(SpriteBatch spriteBatch)
+        {
+            switch (GameState)
+            {
+                case GameState.MainMenu:
+                    break;
+                case GameState.Galaxy:
+                    break;
+                case GameState.PlanetarySystem:
+                    break;
+                case GameState.Combat:
+                    CombatController.Draw(spriteBatch);
+                    break;
+                case GameState.Citadel:
+                    break;
+            }
         }
 
         public static void Update(GameTime gameTime)

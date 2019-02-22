@@ -1,4 +1,5 @@
-﻿using Galaxies.Core;
+﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -54,24 +55,32 @@ namespace Galaxies.UIControllers
 
         public static void CreateMenuScreen()
         {
+            GameController.GameState = GameState.MainMenu;
+
             CurrentScreen = new MenuScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
         public static void CreateGalaxyScreen()
         {
+            GameController.GameState = GameState.Galaxy;
+
             CurrentScreen = new GalaxyScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
         public static void CreatePlanetarySystemScreen()
         {
+            GameController.GameState = GameState.PlanetarySystem;
+
             CurrentScreen = new PlanetarySystemScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
         public static void CreateCombatScreen()
         {
+            GameController.GameState = GameState.Combat;
+
             CurrentScreen = new CombatScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }

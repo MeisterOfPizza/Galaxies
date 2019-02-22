@@ -20,9 +20,43 @@
       </ItemDrop>
       <Combat>
         <EnemyPointers>
-          <EnemyPointer id="test" />
+          <EnemyPointer id="test2" />
         </EnemyPointers>
       </Combat>
+      <ItemDrop>
+        <ItemPointers>
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+        </ItemPointers>
+      </ItemDrop>
+      <Combat>
+        <EnemyPointers>
+          <EnemyPointer id="test1" />
+        </EnemyPointers>
+      </Combat>
+      <Combat>
+        <EnemyPointers>
+          <EnemyPointer id="test1" />
+          <EnemyPointer id="test2" />
+        </EnemyPointers>
+      </Combat>
+      <ItemDrop>
+        <ItemPointers>
+          <ItemPointer id="0" type="su" />
+          <ItemPointer id="0" type="su" />
+        </ItemPointers>
+      </ItemDrop>
+      <ItemDrop>
+        <ItemPointers>
+        </ItemPointers>
+      </ItemDrop>
     </OnVisitEvents>
   </Planet>
 </Collection>

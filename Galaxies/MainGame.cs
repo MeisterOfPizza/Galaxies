@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Extensions;
 using Galaxies.Progression;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
@@ -46,6 +47,7 @@ namespace Galaxies
             base.Initialize();
 
             DataController.Initialize();
+            SpriteHelper.Initialize(Content);
 
             //TEST: Adding a planetary system
             GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
@@ -106,6 +108,7 @@ namespace Galaxies
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
+            GameController.Draw(spriteBatch);
             GameUIController.Draw(spriteBatch);
             spriteBatch.End();
 

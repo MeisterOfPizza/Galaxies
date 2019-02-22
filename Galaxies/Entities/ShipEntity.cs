@@ -19,6 +19,7 @@ namespace Galaxies.Entities
         ShipStats baseStats;
         ShipStats modifiedStats;
         int       currentHealth;
+        int       currentShield;
         int       currentEnergy;
         bool      isAlive = true;
 
@@ -48,6 +49,14 @@ namespace Galaxies.Entities
         }
 
         public int Shield
+        {
+            get
+            {
+                return currentShield;
+            }
+        }
+
+        public int MaxShield
         {
             get
             {
@@ -91,6 +100,8 @@ namespace Galaxies.Entities
                 return baseStats.EnergyRegen + modifiedStats.EnergyRegen;
             }
         }
+
+        public bool HasShieldUp { get; set; }
 
         public bool IsAlive
         {
@@ -140,6 +151,7 @@ namespace Galaxies.Entities
             modifiedStats = new ShipStats(newHealth, newShield, newDamage, newEnergy, newEnergyRegen);
 
             currentHealth = MaxHealth;
+            currentShield = MaxShield;
             currentEnergy = MaxEnergy;
         }
 
@@ -150,6 +162,14 @@ namespace Galaxies.Entities
 
         public virtual void Defend(int damage)
         {
+            if (HasShieldUp)
+            {
+                int tempDmg = damage;
+
+                damage = MathHelper.Clamp(damage - currentShield, 0, damage);
+                currentShield = MathHelper.Clamp(currentShield - tempDmg, 0, currentShield);
+            }
+
             Health -= damage;
 
             if (Health <= 0)
@@ -157,6 +177,8 @@ namespace Galaxies.Entities
                 Die();
             }
         }
+
+        public abstract void TakeEnergy();
 
         public virtual void RegenEnergy()
         {

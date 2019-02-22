@@ -1,5 +1,11 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Entities;
+using Galaxies.Extensions;
+using Galaxies.UIControllers;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Galaxies.Combat
 {
@@ -10,22 +16,30 @@ namespace Galaxies.Combat
         /// <summary>
         /// The attacker, this is the player.
         /// </summary>
-        public ShipEntity Player { get; private set; }
+        public PlayerShip Player { get; private set; }
 
         /// <summary>
         /// The enemy that the player is fighting against.
         /// </summary>
-        public ShipEntity Enemy { get; private set; }
+        public EnemyShip Enemy { get; private set; }
 
-        public bool PlayerTurn { get; private set; }
+        private bool AwaitEventCallbacks { get; set; }
+        private bool PlayerTurn          { get; set; }
 
-        public bool PlayerHasShieldUp { get; private set; }
-        public bool EnemyHasShieldUp  { get; private set; }
+        private List<Bullet> Bullets { get; set; }
 
-        public Battlefield(PlayerShip player, ShipEntity enemy)
+        private EventArg0 PlayerShotEvent;
+        private EventArg0 EnemyShotEvent;
+
+        public Battlefield(PlayerShip player, EnemyShip enemy)
         {
             this.Player = player;
             this.Enemy  = enemy;
+
+            this.Bullets = new List<Bullet>();
+
+            PlayerShotEvent = new EventArg0(AttackEnemy, EndAwaitEventCallbacks, EndTurn);
+            EnemyShotEvent  = new EventArg0(AttackPlayer, EndAwaitEventCallbacks, EndTurn);
         }
 
         public void StartTurn()
@@ -49,6 +63,7 @@ namespace Galaxies.Combat
             else if (!Enemy.IsAlive)
             {
                 //TODO: Give item drops?
+                GameUIController.CreatePlanetarySystemScreen();
                 PlanetEventController.TriggerNextEvent();
 
                 return;
@@ -61,25 +76,35 @@ namespace Galaxies.Combat
 
         public void Player_Attack()
         {
-            PlayerHasShieldUp = false;
+            if (AwaitEventCallbacks) return; //Return if we're still waiting for an event callback.
+
+            Player.HasShieldUp = false;
 
             if (Player.Energy > PlayerShip.FIRE_ENERGY_COST)
             {
-                Player.Attack(Enemy);
-            }
+                Player.TakeEnergy(); //Remove energy because the player shot.
 
-            EndTurn();
+                Bullets.Add(CreateBullet(0, Player.Position, new Vector2(50f, 0), Enemy, PlayerShotEvent));
+
+                AwaitEventCallbacks = true;
+            }
+            else
+            {
+                EndTurn();
+            }
         }
 
         public void Player_ShieldUp()
         {
+            if (AwaitEventCallbacks) return; //Return if we're still waiting for an event callback.
+
             //If the player already has their shield up, then regen some energy:
-            if (PlayerHasShieldUp)
+            if (Player.HasShieldUp)
             {
                 Player.RegenEnergy();
             }
 
-            PlayerHasShieldUp = true;
+            Player.HasShieldUp = true;
 
             EndTurn();
         }
@@ -94,23 +119,82 @@ namespace Galaxies.Combat
 
             if (Enemy.Energy < EnemyShip.FIRE_ENERGY_COST)
             {
-                if (EnemyHasShieldUp)
+                if (Enemy.HasShieldUp)
                 {
                     Enemy.RegenEnergy();
                 }
 
-                EnemyHasShieldUp = true;
+                Enemy.HasShieldUp = true;
+
+                EndTurn();
             }
             else
             {
-                EnemyHasShieldUp = false;
+                Enemy.HasShieldUp = false;
 
-                Enemy.Attack(Player);
+                Enemy.TakeEnergy(); //Remove energy because the enemy shot.
+
+                Bullets.Add(CreateBullet(180, Enemy.Position, new Vector2(-50f, 0), Player, EnemyShotEvent));
+                
+                AwaitEventCallbacks = true;
             }
 
             //TODO: Call UI?
+        }
 
-            EndTurn();
+        #endregion
+
+        #region Helpers
+
+        #region Event callback helpers
+
+        private void EndAwaitEventCallbacks()
+        {
+            AwaitEventCallbacks = false;
+        }
+
+        /// <summary>
+        /// Attack the player (for event callbacks).
+        /// </summary>
+        private void AttackPlayer()
+        {
+            Enemy.Attack(Player);
+        }
+
+        /// <summary>
+        /// Attack the enemy (for event callbacks).
+        /// </summary>
+        private void AttackEnemy()
+        {
+            Player.Attack(Enemy);
+        }
+
+        #endregion
+
+        private Bullet CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg eventArg)
+        {
+            return new Bullet(SpriteHelper.BulletSprite, position, rotation, Color.White, new Vector2(100), speed, target, eventArg);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Bullet bullet in Bullets)
+            {
+                bullet.Draw(spriteBatch);
+            }
+        }
+
+        public void Update()
+        {
+            foreach (Bullet bullet in Bullets.ToArray())
+            {
+                bullet.Move();
+
+                if (bullet.Destroyed)
+                {
+                    Bullets.Remove(bullet);
+                }
+            }
         }
 
         #endregion

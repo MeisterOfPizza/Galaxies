@@ -25,16 +25,17 @@ namespace Galaxies.Entities
 
             this.Data = data;
 
-            foreach (string id in Data.ShipUpgradeIds)
+            if (Data.ShipUpgradeIds != null)
             {
-                Inventory.AddItem(new ShipUpgrade(DataController.LoadData<ShipUpgradeItemData>(id, DataFileType.Items), Inventory));
+                foreach (string id in Data.ShipUpgradeIds)
+                {
+                    Inventory.AddItem(new ShipUpgrade(DataController.LoadData<ShipUpgradeItemData>(id, DataFileType.Items), Inventory));
+                }
             }
         }
 
-        public override void Attack(ShipEntity defender)
+        public override void TakeEnergy()
         {
-            base.Attack(defender);
-
             Energy -= FIRE_ENERGY_COST;
         }
 

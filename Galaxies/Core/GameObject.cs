@@ -145,6 +145,14 @@ namespace Galaxies.Core
             }
         }
 
+        public bool Intersect(GameObject other)
+        {
+            Rectangle thisRect  = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+            Rectangle otherRect = new Rectangle((int)other.Position.X, (int)other.Position.Y, (int)other.Size.X, (int)other.Size.Y);
+
+            return thisRect.Intersects(otherRect);
+        }
+
     }
 
 }
