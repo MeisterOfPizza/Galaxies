@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Extensions;
 using Galaxies.Space;
 using Galaxies.UI.Elements;
@@ -24,7 +25,7 @@ namespace Galaxies.UI.Screens
             {
                 if (!planet.Visited)
                 {
-                    planetsColumn.AddUIElement(new UIPlanet(column, Vector2.Zero, planet.Visit, this, planet));
+                    planetsColumn.AddUIElement(new UIPlanet(column, Vector2.Zero, new EventArg0(planet.Visit), this, planet));
                 }
             }
 
@@ -38,7 +39,7 @@ namespace Galaxies.UI.Screens
                 0,
                 Color.White,
                 new Vector2(300, 50),
-                GameUIController.CreateGalaxyScreen,
+                new EventArg0(GameUIController.CreateGalaxyScreen),
                 this
                 ));
         }

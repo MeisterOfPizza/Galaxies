@@ -1,4 +1,5 @@
-﻿using Galaxies.UI.Interfaces;
+﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -57,7 +58,7 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIButton(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen, bool canBeClicked = true) : base(backgroundSprite, position, rotation, color, size, onClick, screen, canBeClicked)
+        public UIButton(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, EventArg onClick, Screen screen, bool canBeClicked = true) : base(backgroundSprite, position, rotation, color, size, onClick, screen, canBeClicked)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;

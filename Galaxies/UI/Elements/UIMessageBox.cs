@@ -1,4 +1,5 @@
-﻿using Galaxies.UI.Screens;
+﻿using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,7 +11,7 @@ namespace Galaxies.UI.Elements
 
         public UIButton OkBtn { get; protected set; }
 
-        public UIMessageBox(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, OnClickEvent onClick, Screen screen) : base(backgroundSprite, position, rotation, color, size, null, screen, false)
+        public UIMessageBox(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, EventArg onClick, Screen screen) : base(backgroundSprite, position, rotation, color, size, null, screen, false)
         {
             AddUIElement(new UIText(
                 spriteFont,

@@ -45,7 +45,10 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
-    <Compile Include="Core\Events.cs" />
+    <Compile Include="Core\EventArg0.cs" />
+    <Compile Include="Core\EventArg.cs" />
+    <Compile Include="Core\EventArg1.cs" />
+    <Compile Include="Core\EventArgArray.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
     <Compile Include="Datas\Helpers\ColorData.cs" />
