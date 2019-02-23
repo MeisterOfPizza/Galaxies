@@ -1,6 +1,9 @@
-﻿using Galaxies.Core;
+﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Extensions;
+using Galaxies.Space;
 using Galaxies.UI.Elements;
+using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -16,17 +19,15 @@ namespace Galaxies.UI.Screens
         {
             var column = content.Load<Texture2D>("Sprites/UI/Column");
 
-            /*
-            var planetsColumn = AddUIElement(new UIScrollableColumn(column, GameUIController.TopLeftCorner(300, 600), 0, Color.White, new Vector2(300, 600), this, new Vector4(5, 0, 5, 0), Vector2.Zero, 200));
+            var planetsColumn = AddUIElement(new UIScrollableColumn(new Transform(Alignment.TopLeft, new Vector2(300, 600)), column, this, new Vector4(5, 0, 5, 0), Vector2.Zero, 200));
 
             foreach (Planet planet in PlanetarySystemController.CurrentPlanetarySystem.Planets)
             {
                 if (!planet.Visited)
                 {
-                    planetsColumn.AddUIElement(new UIPlanet(column, Vector2.Zero, new EventArg0(planet.Visit), this, planet));
+                    planetsColumn.AddUIElement(new UIPlanet(new Transform(Vector2.Zero), column, new EventArg0(planet.Visit), this, planet));
                 }
             }
-            */
             
             var testGrid = AddUIElement(new UIScrollableGrid(
                 new Transform(Alignment.MiddleCenter, new Vector2(600, 300)),
