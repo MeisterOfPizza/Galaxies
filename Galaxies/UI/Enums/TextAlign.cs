@@ -30,8 +30,8 @@ namespace Galaxies.UI
 
             textElement.FormattedTextOrigin = size / 2f;
 
-            float xBorder = -textElement.Width / 2f + size.X / 2f + textElement.TextPadding; //Default = left //This is the x coordinate for the left align
-            float yBorder = -textElement.Height / 2f + textElement.TextPadding + size.Y / 2f; //Default = top //This is the y coordinate for the top align
+            float xBorder = -textElement.Transform.Width / 2f + size.X / 2f + textElement.TextPadding; //Default = left //This is the x coordinate for the left align
+            float yBorder = -textElement.Transform.Height / 2f + textElement.TextPadding + size.Y / 2f; //Default = top //This is the y coordinate for the top align
 
             //Let's use these x/y Borders and just invert them (* -1) when we need to draw on the opposite side of the align.
             //They're called border because it's the closest that we can get to the text elements border.

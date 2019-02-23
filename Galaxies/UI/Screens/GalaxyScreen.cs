@@ -25,9 +25,9 @@ namespace Galaxies.UI.Screens
             */
 
             //var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.TopLeftCorner(300, 600), 0, Color.White, new Vector2(300, 600), this, new Vector4(5, 0, 5, 0), new Vector2(0, 5), 200));
-            var visitablesColumn = AddUIElement(new UIScrollableColumn(columnSprite, GameUIController.Center(), 0, Color.White, new Vector2(300, 600), this, new Vector4(5, 0, 5, 0), new Vector2(0, 5), 200));
+            var visitablesColumn = AddUIElement(new UIScrollableColumn(new Transform(Alignment.MiddleCenter, new Vector2(300, 600)), columnSprite, this, new Vector4(5, 0, 5, 0), new Vector2(0, 5), 200));
 
-            AddUIElement(new UIButton(SpriteHelper.Arial_Font, "Menu", TextAlign.MiddleCenter, 5, columnSprite, GameUIController.BottomLeftCorner(100, 100), 0, Color.White, new Vector2(100, 100), new EventArg0(GameUIController.CreateMenuScreen), this));
+            AddUIElement(new UIButton(new Transform(Alignment.BottomLeft, new Vector2(100, 100)), SpriteHelper.Arial_Font, "Menu", TextAlign.MiddleCenter, 5, columnSprite, new EventArg0(GameUIController.CreateMenuScreen), this));
             
             //Creating visitables
             foreach (IVisitable visitable in GalaxyController.Visitables)
@@ -35,7 +35,7 @@ namespace Galaxies.UI.Screens
                 ///<see cref="PlanetarySystem.Visit"/> and <see cref="Citadel.Visit"/>
                 for (int i = 0; i < 10; i++)
                 {
-                    visitablesColumn.AddUIElement(new UIPlanetarySystem(columnSprite, Vector2.Zero, new EventArg0(visitable.Visit), this, visitable));
+                    visitablesColumn.AddUIElement(new UIPlanetarySystem(new Transform(Vector2.Zero), columnSprite, new EventArg0(visitable.Visit), this, visitable));
                 }
             }
 

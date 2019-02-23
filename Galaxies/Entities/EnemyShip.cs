@@ -1,4 +1,5 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Datas.Enemies;
 using Galaxies.Datas.Items;
 using Galaxies.Extensions;
@@ -19,8 +20,10 @@ namespace Galaxies.Entities
 
         public EnemyShipData Data { get; private set; }
 
-        public EnemyShip(EnemyShipData data, Vector2 size) : base(SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, 0, data.Color.GetColor(), size, Vector2.Zero, data.BaseShipStats)
+        public EnemyShip(EnemyShipData data, Vector2 size) : base(new Transform(size), SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, data.BaseShipStats)
         {
+            this.Color = data.Color.GetColor();
+
             this.Inventory = new Inventory(this);
 
             this.Data = data;

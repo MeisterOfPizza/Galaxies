@@ -12,46 +12,21 @@ namespace Galaxies.Core
 
         #region Fields
 
-        Texture2D sprite;
-        Vector2   position;
-        Vector2   origin;
-        float     rotation = 0;
-        Color     color    = Color.White;
+        protected Transform transform;
 
-        /// <summary>
-        /// Rectangle draw width and height.
-        /// </summary>
-        Vector2 drawSize;
+        Texture2D sprite;
+        Vector2   origin;
+        Color     color    = Color.White;
 
         #endregion
 
         #region Properties
 
-        public Vector2 Position
+        public Transform Transform
         {
             get
             {
-                return position;
-            }
-
-            set
-            {
-                position = value;
-
-                PositionChanged();
-            }
-        }
-
-        public float Rotation
-        {
-            get
-            {
-                return rotation;
-            }
-
-            set
-            {
-                rotation = value;
+                return transform;
             }
         }
 
@@ -65,30 +40,6 @@ namespace Galaxies.Core
             set
             {
                 color = value;
-            }
-        }
-
-        public int Width
-        {
-            get
-            {
-                return (int)drawSize.X;
-            }
-        }
-
-        public int Height
-        {
-            get
-            {
-                return (int)drawSize.Y;
-            }
-        }
-
-        public Vector2 Size
-        {
-            get
-            {
-                return drawSize;
             }
         }
 
@@ -122,14 +73,12 @@ namespace Galaxies.Core
 
         #endregion
 
-        public GameObject(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size)
+        public GameObject(Transform transform, Texture2D sprite)
         {
-            this.sprite   = sprite;
-            this.position = position;
-            this.rotation = rotation;
-            this.color    = color;
+            this.transform = transform;
+            this.transform.SetGameObject(this);
 
-            this.drawSize = size;
+            this.sprite = sprite;
 
             if (sprite != null)
             {
@@ -137,28 +86,7 @@ namespace Galaxies.Core
             }
         }
 
-        public void SetDrawWidth(int width)
-        {
-            this.drawSize = new Vector2(width, drawSize.Y);
-
-            SizeChanged();
-        }
-
-        public void SetDrawHeight(int height)
-        {
-            this.drawSize = new Vector2(drawSize.X, height);
-
-            SizeChanged();
-        }
-
-        public void SetDrawSize(int width, int height)
-        {
-            this.drawSize = new Vector2(width, height);
-
-            SizeChanged();
-        }
-
-        protected virtual void PositionChanged()
+        public virtual void PositionChanged()
         {
             //Do nothing here
             //We'll leave this method blank (and not modified as abstract).
@@ -166,7 +94,7 @@ namespace Galaxies.Core
             //It looks ugly but it's the best we can do.
         }
 
-        protected virtual void SizeChanged()
+        public virtual void SizeChanged()
         {
             //Do nothing here
             //We'll leave this method blank (and not modified as abstract).
@@ -178,14 +106,14 @@ namespace Galaxies.Core
         {
             if (Visable && sprite != null)
             {
-                spriteBatch.Draw(sprite, new Rectangle((int)position.X, (int)position.Y, (int)drawSize.X, (int)drawSize.Y), null, color, rotation, Origin, SpriteEffects.None, 0f);
+                spriteBatch.Draw(sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, color, transform.Rotation, Origin, SpriteEffects.None, 0f);
             }
         }
 
         public bool Intersect(GameObject other)
         {
-            Rectangle thisRect  = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
-            Rectangle otherRect = new Rectangle((int)other.Position.X, (int)other.Position.Y, (int)other.Size.X, (int)other.Size.Y);
+            Rectangle thisRect  = new Rectangle((int)transform.X, (int)transform.Y, (int)transform.RawWidth, (int)transform.RawHeight);
+            Rectangle otherRect = new Rectangle((int)other.Transform.X, (int)other.Transform.Y, (int)other.Transform.RawWidth, (int)other.Transform.RawHeight);
 
             return thisRect.Intersects(otherRect);
         }

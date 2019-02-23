@@ -58,15 +58,12 @@ namespace Galaxies.Space.Events
             }
 
             messageBox = GameUIController.CurrentScreen.AddUIElement(new UIMessageBox(
+                new Transform(Alignment.MiddleCenter, new Vector2(500, 250)),
                 MainGame.Singleton.Content.Load<SpriteFont>("Fonts/Arial"),
                 itemNames,
                 TextAlign.TopCenter,
                 5,
                 MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/Column"),
-                GameUIController.Center(),
-                0,
-                Color.White,
-                new Vector2(500, 250),
                 new EventArg0(_Trigger),
                 GameUIController.CurrentScreen
                 ));

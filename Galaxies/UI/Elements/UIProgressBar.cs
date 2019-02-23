@@ -1,4 +1,5 @@
-﻿using Galaxies.UI.Screens;
+﻿using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -43,8 +44,10 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIProgressBar(Texture2D background, Texture2D bar, Vector2 position, float rotation, Color backgroundColor, Color barColor, Vector2 size, Vector2 barPadding, float progress, Screen screen) : base(background, position, rotation, backgroundColor, size, null, screen, false)
+        public UIProgressBar(Transform transform, Texture2D background, Color backgroundColor, Texture2D bar, Color barColor, Vector2 barPadding, float progress, Screen screen) : base(transform, background, null, screen, false)
         {
+            this.Color = backgroundColor;
+
             this.bar        = bar;
             this.barPadding = barPadding * 2; //To account for both sides (top <=> bottom and left <=> right).
             this.BarColor   = barColor;
@@ -57,14 +60,14 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private void CalculateBarWidth()
         {
-            barWidth = (int)((Size.X - barPadding.X) * progress); //Apply padding on both sides, then multiply by progress.
+            barWidth = (int)((transform.Width - barPadding.X) * progress); //Apply padding on both sides, then multiply by progress.
 
-            barPosition = Position;
-            barPosition.X -= Size.X / 2 - barPadding.X / 2f; //Go to left side, but move right with a value of barPadding.X / 2 (because it is already accounted for both sides from before).
+            barPosition = transform.Position;
+            barPosition.X -= transform.Width / 2 - barPadding.X / 2f; //Go to left side, but move right with a value of barPadding.X / 2 (because it is already accounted for both sides from before).
             barPosition.X += barWidth / 2f; //Go right half of the bar width.
         }
 
-        protected override void SizeChanged()
+        public override void SizeChanged()
         {
             base.SizeChanged();
 
@@ -77,12 +80,12 @@ namespace Galaxies.UI.Elements
             {
                 if (Sprite != null)
                 {
-                    spriteBatch.Draw(Sprite, new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y), null, Color, Rotation, Origin, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(Sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, Color, transform.Rotation, Origin, SpriteEffects.None, 0f);
                 }
 
                 if (bar != null)
                 {
-                    spriteBatch.Draw(bar, new Rectangle((int)barPosition.X, (int)barPosition.Y, barWidth, (int)(Size.Y - barPadding.Y)), null, BarColor, Rotation, Origin, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(bar, new Rectangle((int)barPosition.X, (int)barPosition.Y, barWidth, (int)(transform.RawHeight - barPadding.Y)), null, BarColor, transform.Rotation, Origin, SpriteEffects.None, 0f);
                 }
             }
         }

@@ -44,15 +44,12 @@ namespace Galaxies.Space.Events
             EnemyShipData = DataController.LoadData<EnemyShipData>(dataPointer.Id, DataFileType.Enemies);
 
             messageBox = GameUIController.CurrentScreen.AddUIElement(new UIMessageBox(
+                new Transform(Alignment.MiddleCenter, new Vector2(500, 150)),
                 MainGame.Singleton.Content.Load<SpriteFont>("Fonts/Arial"),
                 "Detected a hostile ship! [" + EnemyShipData.Name + "]",
                 TextAlign.TopCenter,
                 5,
                 MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/Column"),
-                GameUIController.Center(),
-                0,
-                Color.White,
-                new Vector2(500, 150),
                 new EventArg0(_Trigger),
                 GameUIController.CurrentScreen
                 ));

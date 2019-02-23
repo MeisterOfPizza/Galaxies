@@ -2,7 +2,6 @@
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,8 +27,8 @@ namespace Galaxies.UI.Elements
 
         private int maxRows;
 
-        public UIScrollableGrid(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, Vector4 padding, Vector2 spacing, Vector2 itemSize)
-            : base(sprite, position, rotation, color, size, screen, padding, spacing, true)
+        public UIScrollableGrid(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, Vector2 itemSize)
+            : base(transform, sprite, screen, padding, spacing, true)
         {
             this.itemSize = itemSize;
 
@@ -40,13 +39,12 @@ namespace Galaxies.UI.Elements
         {
             int goFrom = MathHelper.Clamp(minRowIndex * maxFitPerViewX, 0, Container.Count);
             int goTo   = MathHelper.Clamp(maxRowIndex * maxFitPerViewX + maxFitPerViewX, 0, Container.Count);
-
-            //int maxIndex = Container.Count - 1;
+            
             int currentX = (int)Padding.W; //Apply left padding.
             int currentY = (int)Padding.X; //Apply top padding.
 
-            float startX = Width / 2f - itemSize.X / 2f; //Position of the first element from the left.
-            float startY = Height / 2f - itemSize.Y / 2f; //Position of the first element from the top.
+            float startX = transform.Width / 2f - itemSize.X / 2f; //Position of the first element from the left.
+            float startY = transform.Height / 2f - itemSize.Y / 2f; //Position of the first element from the top.
 
             for (int x = 0; x < maxFitPerViewX; x++)
             {
@@ -54,7 +52,7 @@ namespace Galaxies.UI.Elements
                 {
                     if (goFrom < goTo)
                     {
-                        Container[goFrom++].Position = Position - new Vector2(startX - currentX, startY - currentY);
+                        Container[goFrom++].Transform.Position = transform.Position - new Vector2(startX - currentX, startY - currentY);
 
                         currentX += (int)(itemSize.X + Spacing.X);
                     }
@@ -71,13 +69,13 @@ namespace Galaxies.UI.Elements
 
         protected override void CalculateSize()
         {
-            maxFitPerViewX = MathHelper.Clamp(Width / (int)itemSize.X, 1, int.MaxValue);
-            maxFitPerViewY = MathHelper.Clamp(Height / (int)itemSize.Y, 1, int.MaxValue);
-            
+            maxFitPerViewX = MathHelper.Clamp(transform.RawWidth / (int)itemSize.X, 1, int.MaxValue);
+            maxFitPerViewY = MathHelper.Clamp(transform.RawHeight / (int)itemSize.Y, 1, int.MaxValue);
+
             //Set size with the addition of padding and spacing.
-            SetDrawSize(
-                (int)(RawSize.X + Padding.W + Padding.Y + (maxFitPerViewX - 1) * Spacing.X), 
-                (int)(RawSize.Y + Padding.X + Padding.Z + (maxFitPerViewY - 1) * Spacing.Y)
+            transform.Size = new Vector2(
+                RawSize.X + Padding.W + Padding.Y + (maxFitPerViewX - 1) * Spacing.X,
+                RawSize.Y + Padding.X + Padding.Z + (maxFitPerViewY - 1) * Spacing.Y
                 );
         }
 
@@ -142,7 +140,7 @@ namespace Galaxies.UI.Elements
             {
                 if (Sprite != null)
                 {
-                    spriteBatch.Draw(Sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Origin, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(Sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, Color, transform.Rotation, Origin, SpriteEffects.None, 0f);
                 }
 
                 if (Container.Count > 0)

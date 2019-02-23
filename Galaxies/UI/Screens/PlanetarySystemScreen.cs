@@ -1,9 +1,6 @@
-﻿using Galaxies.Controllers;
-using Galaxies.Core;
+﻿using Galaxies.Core;
 using Galaxies.Extensions;
-using Galaxies.Space;
 using Galaxies.UI.Elements;
-using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -31,12 +28,9 @@ namespace Galaxies.UI.Screens
             }
             */
             
-            testGrid = AddUIElement(new UIScrollableGrid(
+            var testGrid = AddUIElement(new UIScrollableGrid(
+                new Transform(Alignment.MiddleCenter, new Vector2(600, 300)),
                 column,
-                GameUIController.Center(),
-                0,
-                Color.White,
-                new Vector2(600, 300),
                 this,
                 new Vector4(5),
                 new Vector2(5),
@@ -59,46 +53,28 @@ namespace Galaxies.UI.Screens
 
             for (int i = 0; i < 14; i++)
             {
-                var item = testGrid.AddUIElement(new UIButton(
+                testGrid.AddUIElement(new UIButton(
+                    new Transform(new Vector2(200, 100)),
                     SpriteHelper.Arial_Font,
                     (i + 1).ToString(),
                     TextAlign.MiddleCenter,
                     0,
                     column,
-                    Vector2.Zero,
-                    0,
-                    Color.White,
-                    new Vector2(200, 100),
                     null,
                     this
                     ));
-
-                item.SetOnClick(new EventArg1<UIElement>(TestMethod, item));
             }
 
             AddUIElement(new UIButton(
+                new Transform(Alignment.BottomRight, new Vector2(300, 50)),
                 SpriteHelper.Arial_Font,
                 "Exit solar system",
                 TextAlign.MiddleCenter,
                 5,
                 column,
-                GameUIController.BottomRightCorner(300, 50),
-                0,
-                Color.White,
-                new Vector2(300, 50),
                 new EventArg0(GameUIController.CreateGalaxyScreen),
                 this
                 ));
-        }
-
-        UIScrollableGrid testGrid;
-        UIScrollableColumn testColumn;
-
-        //TEST: REMOVE!!!
-        private void TestMethod(UIElement element)
-        {
-            testGrid.RemoveUIElement(element);
-            //testColumn.RemoveUIElement(element);
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using Galaxies.UI.Interfaces;
+﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -57,7 +58,7 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIText(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Vector2 position, float rotation, Color color, Vector2 size, Screen screen) : base(null, position, rotation, color, size, null, screen, false)
+        public UIText(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Screen screen) : base(transform, null, null, screen, false)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;
@@ -67,12 +68,12 @@ namespace Galaxies.UI.Elements
 
         private void CalculateTextPosition()
         {
-            FormattedText = TextHelper.WrapText(this, Width);
+            FormattedText = TextHelper.WrapText(this, transform.Width);
             
             textPosition = TextHelper.Align(this);
         }
 
-        protected override void PositionChanged()
+        public override void PositionChanged()
         {
             base.PositionChanged();
 
@@ -83,7 +84,7 @@ namespace Galaxies.UI.Elements
         {
             if (Visable && spriteFont != null)
             {
-                spriteBatch.DrawString(spriteFont, FormattedText, Position + textPosition, Color, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(spriteFont, FormattedText, transform.Position + textPosition, Color, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
             }
         }
 

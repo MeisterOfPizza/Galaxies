@@ -29,8 +29,8 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private int maxIndex;
 
-        public UIScrollableColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, Vector4 padding, Vector2 spacing, int itemHeight)
-            : base(sprite, position, rotation, color, size, screen, padding, spacing, true)
+        public UIScrollableColumn(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, int itemHeight)
+            : base(transform, sprite, screen, padding, spacing, true)
         {
             this.itemHeight = itemHeight;
 
@@ -40,13 +40,13 @@ namespace Galaxies.UI.Elements
         protected override void CalculatePositions()
         {
             int currentY = (int)Padding.X;
-            float startY = Height / 2f - itemHeight / 2f;
+            float startY = transform.Height / 2f - itemHeight / 2f;
 
             for (int i = minIndex; i <= maxIndex; i++)
             {
                 if (i < Container.Count)
                 {
-                    Container[i].Position = Position - new Vector2(0, startY - currentY);
+                    Container[i].Transform.Position = transform.Position - new Vector2(0, startY - currentY);
 
                     currentY += itemHeight + (int)Spacing.Y;
                 }
@@ -64,9 +64,9 @@ namespace Galaxies.UI.Elements
             CalculateFitPerView();
 
             //Set size with the addition of padding and spacing.
-            SetDrawSize(
-                (int)(RawSize.X + Padding.W + Padding.Y),
-                (int)(RawSize.Y + Padding.X + Padding.Z + maxFitPerView * Spacing.Y)
+            transform.Size = new Vector2(
+                RawSize.X + Padding.W + Padding.Y,
+                RawSize.Y + Padding.X + Padding.Z + maxFitPerView * Spacing.Y
                 );
         }
 
@@ -105,7 +105,7 @@ namespace Galaxies.UI.Elements
             {
                 if (Sprite != null)
                 {
-                    spriteBatch.Draw(Sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Origin, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(Sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, Color, transform.Rotation, Origin, SpriteEffects.None, 0f);
                 }
 
                 if (Container.Count > 0)

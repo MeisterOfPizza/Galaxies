@@ -11,30 +11,24 @@ namespace Galaxies.UI.Elements
 
         public UIButton OkBtn { get; protected set; }
 
-        public UIMessageBox(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, EventArg onClick, Screen screen) : base(backgroundSprite, position, rotation, color, size, null, screen, false)
+        public UIMessageBox(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, EventArg onClick, Screen screen) : base(transform, backgroundSprite, null, screen, false)
         {
             AddUIElement(new UIText(
+                new Transform(new Vector2(0, -32.5f) /*Half of 65*/, new Vector2(transform.Width, transform.Height - 65)),
                 spriteFont,
                 text,
                 textAlign,
                 textPadding,
-                new Vector2(0, -32.5f), //Half of 65
-                0,
-                Color.White,
-                new Vector2(Width, Height - 65),
                 screen
                 ));
 
             OkBtn = AddUIElement(new UIButton(
+                new Transform(new Vector2(0, transform.Height / 2 - 35), new Vector2(100, 50)),
                 spriteFont,
                 "Ok",
                 TextAlign.MiddleCenter,
                 5,
                 backgroundSprite,
-                new Vector2(0, Height / 2 - 35),
-                0,
-                Color.White,
-                new Vector2(100, 50),
                 onClick,
                 screen
                 ));

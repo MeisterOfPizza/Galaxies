@@ -14,7 +14,7 @@ namespace Galaxies.Entities
 
         public bool Destroyed { get; private set; }
 
-        public Bullet(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Vector2 speed, GameObject target, EventArg onHit) : base(sprite, position, rotation, color, size, speed)
+        public Bullet(Transform transform, Texture2D sprite, Vector2 speed, GameObject target, EventArg onHit) : base(transform, sprite, speed)
         {
             this.target = target;
             this.onHit  = onHit;
@@ -32,7 +32,7 @@ namespace Galaxies.Entities
                 Destroyed = true;
                 onHit.Invoke();
             }
-            else if (Position.X < 0 || Position.X > GameUIController.WindowWidth)
+            else if (transform.Position.X < 0 || transform.Position.X > GameUIController.WindowWidth)
             {
                 Destroyed = true;
                 onHit.Invoke();

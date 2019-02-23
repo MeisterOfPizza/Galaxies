@@ -15,7 +15,7 @@ namespace Galaxies.UI.Elements
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
 
-        public UIGroup(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, EventArg onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size, onClick, screen, canBeClicked)
+        public UIGroup(Transform transform, Texture2D sprite, EventArg onClick, Screen screen, bool canBeClicked = true) : base(transform, sprite, onClick, screen, canBeClicked)
         {
 
         }
@@ -25,7 +25,7 @@ namespace Galaxies.UI.Elements
         /// </summary>
         public T AddUIElement<T>(T uiElement) where T : UIElement
         {
-            GroupElements.Add(new UIGroupElement(uiElement, uiElement.Position));
+            GroupElements.Add(new UIGroupElement(uiElement, uiElement.Transform.Position));
 
             if (uiElement.CanBeClicked)
             {
@@ -36,7 +36,7 @@ namespace Galaxies.UI.Elements
             return uiElement;
         }
 
-        protected override void PositionChanged()
+        public override void PositionChanged()
         {
             base.PositionChanged();
 
@@ -47,7 +47,7 @@ namespace Galaxies.UI.Elements
         {
             foreach (UIGroupElement groupElement in GroupElements)
             {
-                groupElement.UIElement.Position = Position + groupElement.GroupPosition;
+                groupElement.UIElement.Transform.Position = transform.Position + groupElement.GroupPosition;
             }
         }
 

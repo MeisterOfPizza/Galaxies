@@ -51,6 +51,7 @@
     <Compile Include="Core\EventArgList.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
+    <Compile Include="Core\Transform.cs" />
     <Compile Include="Datas\Helpers\ColorData.cs" />
     <Compile Include="Datas\Data.cs" />
     <Compile Include="Datas\Enemies\EnemyShipData.cs" />
