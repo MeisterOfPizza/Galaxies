@@ -16,7 +16,7 @@ namespace Galaxies.UI.Screens
         {
             var textBackground = content.Load<Texture2D>("Sprites/UI/Column");
 
-            var container = AddUIElement(new UIColumn(content.Load<Texture2D>("Sprites/Transparent"), GameUIController.Center(), 0, Color.White, new Vector2(250, 400), this, 5, 5));
+            var container = AddUIElement(new UIColumn(content.Load<Texture2D>("Sprites/Transparent"), GameUIController.Center(), 0, Color.White, new Vector2(250, 410), this, new Vector4(5, 0, 5, 0), new Vector2(0, 5)));
             container.AddUIElements(
                 new UIButton(SpriteHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),
                 new UIButton(SpriteHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, Vector2.Zero, 0, Color.White, new Vector2(250, 100), null, this),

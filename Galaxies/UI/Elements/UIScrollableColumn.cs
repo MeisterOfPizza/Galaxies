@@ -1,7 +1,7 @@
-﻿using Galaxies.UI.Screens;
+﻿using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Galaxies.UI.Elements
 {
@@ -29,31 +29,58 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private int maxIndex;
 
-        public UIScrollableColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, int spaceY, int borderY, int itemHeight) : base(sprite, position, rotation, color, size, screen, spaceY, borderY, true)
+        public UIScrollableColumn(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, Vector4 padding, Vector2 spacing, int itemHeight)
+            : base(sprite, position, rotation, color, size, screen, padding, spacing, true)
         {
             this.itemHeight = itemHeight;
 
-            screen.SelectCallbacks += SelectedChanged;
+            screen.SelectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
         }
 
         protected override void CalculatePositions()
         {
-            int currentY = BorderY;
-            float topY = Height / 2f - itemHeight / 2f;
+            int currentY = (int)Padding.X;
+            float startY = Height / 2f - itemHeight / 2f;
 
             for (int i = minIndex; i <= maxIndex; i++)
             {
-                Container[i].Position = Position - new Vector2(0, topY - currentY);
+                if (i < Container.Count)
+                {
+                    Container[i].Position = Position - new Vector2(0, startY - currentY);
 
-                currentY += itemHeight + SpaceY;
+                    currentY += itemHeight + (int)Spacing.Y;
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            ResponsiveMaxY = currentY + BorderY; //Not used by this class, but may be used later down the road?
+            ResponsiveMaxY = currentY + (int)Padding.Z; //Not used by this class, but may be used later down the road?
         }
 
         protected override void CalculateSize()
         {
             CalculateFitPerView();
+
+            //Set size with the addition of padding and spacing.
+            SetDrawSize(
+                (int)(RawSize.X + Padding.W + Padding.Y),
+                (int)(RawSize.Y + Padding.X + Padding.Z + maxFitPerView * Spacing.Y)
+                );
+        }
+
+        protected override void UIElementRemoved(UIElement removedElement, int removedIndex)
+        {
+            base.UIElementRemoved(removedElement, removedIndex);
+
+            if (Container.Count > 0)
+            {
+                CalculateIndexRange(MathHelper.Clamp(removedIndex, 0, Container.Count - 1));
+
+                CalculateSize();
+                CalculatePositions();
+            }
         }
 
         /// <summary>
@@ -74,16 +101,22 @@ namespace Galaxies.UI.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Visable && Sprite != null)
+            if (Visable)
             {
-                spriteBatch.Draw(Sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Origin, SpriteEffects.None, 0f);
-            }
-            
-            if (Container.Count > 0)
-            {
-                for (int i = minIndex; i <= maxIndex; i++)
+                if (Sprite != null)
                 {
-                    Container[i].Draw(spriteBatch);
+                    spriteBatch.Draw(Sprite, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), null, Color, Rotation, Origin, SpriteEffects.None, 0f);
+                }
+
+                if (Container.Count > 0)
+                {
+                    for (int i = minIndex; i <= maxIndex; i++)
+                    {
+                        if (i < Container.Count)
+                        {
+                            Container[i].Draw(spriteBatch);
+                        }
+                    }
                 }
             }
         }
@@ -95,16 +128,7 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private void CalculateFitPerView()
         {
-            maxFitPerView = 0;
-
-            int totHeight = 0;
-
-            while (totHeight <= Height - itemHeight)
-            {
-                totHeight += itemHeight;
-                maxFitPerView++;
-            }
-
+            maxFitPerView = (int)(RawSize.Y / itemHeight);
             maxFitPerView--; //Account for index value.
         }
 
