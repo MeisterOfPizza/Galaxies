@@ -11,6 +11,11 @@
 
         public T1 Arg1 { get; private set; }
 
+        public EventArg1()
+        {
+
+        }
+
         public EventArg1(_EventArg1<T1> @event, T1 arg1)
         {
             this.Event = @event;
@@ -38,6 +43,22 @@
             }
 
             return Event != null;
+        }
+
+        /// <summary>
+        /// Takes one argument.
+        /// </summary>
+        public override void SetArguments(params object[] args)
+        {
+            if (args != null && args.Length > 0)
+            {
+                Arg1 = (T1)args[0];
+            }
+        }
+
+        public override void AddEvent(object @event)
+        {
+            Event += (_EventArg1<T1>)@event;
         }
 
     }

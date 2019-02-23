@@ -19,7 +19,8 @@ namespace Galaxies.UI.Screens
         {
             var column = content.Load<Texture2D>("Sprites/UI/Column");
 
-            var planetsColumn = AddUIElement(new UIScrollableColumn(column, GameUIController.TopLeftCorner(300, 600), 0, Color.White, new Vector2(300, 600), this, 5, 0, 200));
+            /*
+            var planetsColumn = AddUIElement(new UIScrollableColumn(column, GameUIController.TopLeftCorner(300, 600), 0, Color.White, new Vector2(300, 600), this, new Vector4(5, 0, 5, 0), Vector2.Zero, 200));
 
             foreach (Planet planet in PlanetarySystemController.CurrentPlanetarySystem.Planets)
             {
@@ -27,6 +28,52 @@ namespace Galaxies.UI.Screens
                 {
                     planetsColumn.AddUIElement(new UIPlanet(column, Vector2.Zero, new EventArg0(planet.Visit), this, planet));
                 }
+            }
+            */
+            
+            testGrid = AddUIElement(new UIScrollableGrid(
+                column,
+                GameUIController.Center(),
+                0,
+                Color.White,
+                new Vector2(600, 300),
+                this,
+                new Vector4(5),
+                new Vector2(5),
+                new Vector2(200, 100)
+                ));
+
+            /*
+            testColumn = AddUIElement(new UIScrollableColumn(
+                column,
+                GameUIController.Center(),
+                0,
+                Color.White,
+                new Vector2(200, 300),
+                this,
+                new Vector4(5),
+                new Vector2(5),
+                100
+                ));
+                */
+
+            for (int i = 0; i < 14; i++)
+            {
+                var item = testGrid.AddUIElement(new UIButton(
+                    SpriteHelper.Arial_Font,
+                    (i + 1).ToString(),
+                    TextAlign.MiddleCenter,
+                    0,
+                    column,
+                    Vector2.Zero,
+                    0,
+                    Color.White,
+                    new Vector2(200, 100),
+                    null,
+                    this
+                    ));
+
+                item.SetOnClick(new EventArg1<UIElement>(TestMethod, item));
             }
 
             AddUIElement(new UIButton(
@@ -42,6 +89,16 @@ namespace Galaxies.UI.Screens
                 new EventArg0(GameUIController.CreateGalaxyScreen),
                 this
                 ));
+        }
+
+        UIScrollableGrid testGrid;
+        UIScrollableColumn testColumn;
+
+        //TEST: REMOVE!!!
+        private void TestMethod(UIElement element)
+        {
+            testGrid.RemoveUIElement(element);
+            //testColumn.RemoveUIElement(element);
         }
 
     }

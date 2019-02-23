@@ -9,6 +9,11 @@
 
         public _EventArg0 Event { get; private set; }
 
+        public EventArg0()
+        {
+
+        }
+
         public EventArg0(_EventArg0 @event)
         {
             this.Event = @event;
@@ -33,6 +38,11 @@
             }
 
             return Event != null;
+        }
+
+        public override void AddEvent(object @event)
+        {
+            Event += (_EventArg0)@event;
         }
 
     }

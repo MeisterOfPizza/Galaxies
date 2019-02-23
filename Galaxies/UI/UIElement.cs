@@ -84,6 +84,11 @@ namespace Galaxies.UI
             }
         }
 
+        public void SetOnClick(EventArg @event)
+        {
+            this.OnClick = @event;
+        }
+
         public virtual void Select()
         {
             IsFocused = true;

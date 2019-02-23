@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Galaxies.Core;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,13 +20,16 @@ namespace Galaxies.UI.Screens
         /// </summary>
         protected List<UIElement> ClickableElements { get; set; } = new List<UIElement>();
 
-        protected int SelectedIndex;
+        protected int selectedIndex;
 
         private double selectionCooldown;
 
-        public SelectCallback SelectCallbacks { get; set; }
+        public EventArg1<UIElement> SelectCallbacks { get; set; }
 
-        public delegate void SelectCallback(UIElement uiElement);
+        public Screen()
+        {
+            SelectCallbacks = new EventArg1<UIElement>();
+        }
 
         public abstract void CreateUI(ContentManager content);
 
@@ -68,48 +72,64 @@ namespace Galaxies.UI.Screens
             {
                 if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Tab))
                 {
-                    ClickableElements[SelectedIndex].Deselect();
+                    ClickableElements[selectedIndex].Deselect();
 
-                    SelectedIndex--;
+                    selectedIndex--;
 
-                    if (SelectedIndex < 0)
+                    if (selectedIndex < 0)
                     {
-                        SelectedIndex = ClickableElements.Count - 1;
+                        selectedIndex = ClickableElements.Count - 1;
                     }
 
-                    ClickableElements[SelectedIndex].Select();
+                    ClickableElements[selectedIndex].Select();
 
                     if (SelectCallbacks != null)
                     {
-                        SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                        SelectCallbacks.SetArguments(ClickableElements[selectedIndex]);
+                        SelectCallbacks.Invoke();
                     }
                 }
                 else if (keyboardState.IsKeyDown(Keys.Down) || (keyboardState.IsKeyDown(Keys.Tab) && keyboardState.IsKeyDown(Keys.LeftShift)))
                 {
-                    ClickableElements[SelectedIndex].Deselect();
+                    ClickableElements[selectedIndex].Deselect();
 
-                    SelectedIndex++;
+                    selectedIndex++;
 
-                    if (SelectedIndex > ClickableElements.Count - 1)
+                    if (selectedIndex > ClickableElements.Count - 1)
                     {
-                        SelectedIndex = 0;
+                        selectedIndex = 0;
                     }
 
-                    ClickableElements[SelectedIndex].Select();
+                    ClickableElements[selectedIndex].Select();
 
                     if (SelectCallbacks != null)
                     {
-                        SelectCallbacks.Invoke(ClickableElements[SelectedIndex]);
+                        SelectCallbacks.SetArguments(ClickableElements[selectedIndex]);
+                        SelectCallbacks.Invoke();
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// The already selected element was unselected, either because it got removed or because it can't be clicked anymore.
+        /// Eitherway, reselect the next item.
+        /// </summary>
+        private void ReselectElement()
+        {
+            if (ClickableElements.Count > 0)
+            {
+                selectedIndex = MathHelper.Clamp(selectedIndex, 0, ClickableElements.Count - 1);
+
+                ClickableElements[selectedIndex].Select();
+            }
+        }
+
         protected void ClickSelected()
         {
-            if (SelectedIndex >= 0 && SelectedIndex < ClickableElements.Count && ClickableElements.Count > 0)
+            if (selectedIndex >= 0 && selectedIndex < ClickableElements.Count && ClickableElements.Count > 0)
             {
-                ClickableElements[SelectedIndex].Click();
+                ClickableElements[selectedIndex].Click();
             }
         }
 
@@ -120,9 +140,9 @@ namespace Galaxies.UI.Screens
         {
             if (ClickableElements.Count > 0)
             {
-                ClickableElements[SelectedIndex].Deselect();
-                SelectedIndex = ClickableElements.Count - 1;
-                ClickableElements[SelectedIndex].Select();
+                ClickableElements[selectedIndex].Deselect();
+                selectedIndex = ClickableElements.Count - 1;
+                ClickableElements[selectedIndex].Select();
             }
         }
 
@@ -154,7 +174,7 @@ namespace Galaxies.UI.Screens
             {
                 ClickableElements.Remove(uiElement);
 
-                SelectedIndex = 0;
+                ReselectElement();
             }
         }
 

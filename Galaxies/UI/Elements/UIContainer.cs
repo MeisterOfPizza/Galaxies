@@ -15,25 +15,47 @@ namespace Galaxies.UI
 
         protected List<UIElement> Container { get; private set; } = new List<UIElement>();
 
-        protected int SpaceX  { get; set; }
-        protected int SpaceY  { get; set; }
-        protected int BorderX { get; set; }
-        protected int BorderY { get; set; }
+        /// <summary>
+        /// Raw size, without any padding or spacing applied.
+        /// </summary>
+        protected Vector2 RawSize { get; private set; }
+
+        /// <summary>
+        /// Padding inwards. Top, right, bottom, left.
+        /// </summary>
+        protected Vector4 Padding { get; private set; }
+
+        /// <summary>
+        /// Space between items. X (left and right) and Y (top and bottom).
+        /// </summary>
+        protected Vector2 Spacing { get; private set; }
 
         private bool ResponsiveSize { get; set; }
 
-        public UIContainer(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, int spaceX, int spaceY, int borderX, int borderY, bool responsiveSize) : base(sprite, position, rotation, color, size, null, screen, false)
+        public UIContainer(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, Vector4 padding, Vector2 spacing, bool responsiveSize)
+            : base(sprite, new Vector2(position.X - (padding.W + padding.Y) / 2f, position.Y - (padding.X + padding.Z / 2f)), rotation, color, new Vector2(size.X + padding.W + padding.Y, size.Y + padding.X + padding.Z), null, screen, false)
         {
-            this.SpaceX  = spaceX;
-            this.SpaceY  = spaceY;
-            this.BorderX = borderX;
-            this.BorderY = borderY;
+            this.RawSize = size;
+
+            this.Padding = padding;
+            this.Spacing = spacing;
 
             this.ResponsiveSize = responsiveSize;
         }
 
         protected abstract void CalculatePositions();
         protected abstract void CalculateSize();
+
+        #region Adding UI Elements
+
+        /// <summary>
+        /// Called whenever a new UI Element is added to the container.
+        /// </summary>
+        protected virtual void UIElementAdded(UIElement addedElement)
+        {
+            //Do nothing here.
+            //This method will not be utilized by every child, therefore, keep it overridable.
+        }
 
         /// <summary>
         /// Adds a new UI Element to the container.
@@ -55,6 +77,8 @@ namespace Galaxies.UI
                 CalculateSize();
             }
 
+            UIElementAdded(uiElement);
+
             return uiElement;
         }
 
@@ -72,6 +96,8 @@ namespace Galaxies.UI
                     //Add the UI Element to the screen's clickable items.
                     screen.AddClickableUIElement(uiElements[i]);
                 }
+
+                UIElementAdded(uiElements[i]);
             }
 
             CalculatePositions();
@@ -81,6 +107,41 @@ namespace Galaxies.UI
                 CalculateSize();
             }
         }
+
+        #endregion
+
+        #region Removing UI Elements
+
+        /// <summary>
+        /// Called whenever a UI Element is removed from the container.
+        /// </summary>
+        /// <param name="removedElement"></param>
+        protected virtual void UIElementRemoved(UIElement removedElement, int removedIndex)
+        {
+            //Do nothing here.
+            //This method will not be utilized by every child, therefore, keep it overridable.
+        }
+
+        /// <summary>
+        /// Removes the UI Element from the container and repositions all existing elements.
+        /// </summary>
+        public bool RemoveUIElement(UIElement uiElement)
+        {
+            int  index = Container.IndexOf(uiElement);
+            bool value = Container.Remove(uiElement);
+
+            screen.RemoveUIElement(uiElement);
+
+            //Don't call the method unless the item existed.
+            if (value)
+            {
+                UIElementRemoved(uiElement, index);
+            }
+
+            return value;
+        }
+
+        #endregion
 
         public override void Select()
         {
