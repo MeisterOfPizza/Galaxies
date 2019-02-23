@@ -124,7 +124,7 @@ namespace Galaxies.Entities
 
         #endregion
 
-        public ShipEntity(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Vector2 speed, ShipStats baseStats) : base(sprite, position, rotation, color, size, speed)
+        public ShipEntity(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats) : base(transform, sprite, speed)
         {
             this.baseStats     = baseStats;
             this.modifiedStats = new ShipStats();

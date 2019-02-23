@@ -40,16 +40,16 @@ namespace Galaxies.Combat
             this.Player = player;
             this.Enemy  = enemy;
 
-            Player.Position = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
-            Enemy.Position  = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
+            Player.Transform.Position = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
+            Enemy.Transform.Position  = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
 
             this.Bullets = new List<Bullet>();
 
             playerShotEvent = new EventArg0(AttackEnemy, EndAwaitEventCallbacks, EndTurn);
             enemyShotEvent  = new EventArg0(AttackPlayer, EndAwaitEventCallbacks, EndTurn);
 
-            playerShieldEffect = new UIElement(SpriteHelper.Shield_Sprite, Player.Position, 0, Color.White, Player.Size * 2, null, GameUIController.CurrentScreen, false);
-            enemyShieldEffect  = new UIElement(SpriteHelper.Shield_Sprite, Enemy.Position, 0, Color.White, Enemy.Size * 2, null, GameUIController.CurrentScreen, false);
+            playerShieldEffect = new UIElement(new Transform(Player.Transform.Position, Player.Transform.Size * 2), SpriteHelper.Shield_Sprite, null, GameUIController.CurrentScreen, false);
+            enemyShieldEffect  = new UIElement(new Transform(Enemy.Transform.Position, Enemy.Transform.Size * 2), SpriteHelper.Shield_Sprite, null, GameUIController.CurrentScreen, false);
 
             playerShieldEffect.Visable = false;
             enemyShieldEffect.Visable  = false;
@@ -99,7 +99,7 @@ namespace Galaxies.Combat
             {
                 Player.TakeEnergy(); //Remove energy because the player shot.
 
-                Bullets.Add(CreateBullet(0, Player.Position, new Vector2(50f, 0), Enemy, playerShotEvent));
+                Bullets.Add(CreateBullet(0, Player.Transform.Position, new Vector2(50f, 0), Enemy, playerShotEvent));
 
                 AwaitEventCallbacks = true;
             }
@@ -148,7 +148,7 @@ namespace Galaxies.Combat
 
                 Enemy.TakeEnergy(); //Remove energy because the enemy shot.
 
-                Bullets.Add(CreateBullet(180, Enemy.Position, new Vector2(-50f, 0), Player, enemyShotEvent));
+                Bullets.Add(CreateBullet(180, Enemy.Transform.Position, new Vector2(-50f, 0), Player, enemyShotEvent));
                 
                 AwaitEventCallbacks = true;
             }
@@ -187,7 +187,7 @@ namespace Galaxies.Combat
 
         private Bullet CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg eventArg)
         {
-            return new Bullet(SpriteHelper.Bullet_Sprite, position, rotation, Color.White, new Vector2(100), speed, target, eventArg);
+            return new Bullet(new Transform(position, new Vector2(100), rotation), SpriteHelper.Bullet_Sprite, speed, target, eventArg);
         }
 
         public void Draw(SpriteBatch spriteBatch)

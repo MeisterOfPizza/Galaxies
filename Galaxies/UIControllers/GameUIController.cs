@@ -1,5 +1,4 @@
 ﻿using Galaxies.Controllers;
-using Galaxies.Core;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -88,31 +87,6 @@ namespace Galaxies.UIControllers
         #endregion
 
         #region Position helpers
-
-        public static Vector2 TopLeftCorner(int width, int height)
-        {
-            return new Vector2(width / 2f, height / 2f);
-        }
-
-        public static Vector2 TopRightCorner(int width, int height)
-        {
-            return new Vector2(Window.ClientBounds.Width - width / 2f, height / 2f);
-        }
-
-        public static Vector2 BottomLeftCorner(int width, int height)
-        {
-            return new Vector2(width / 2f, Window.ClientBounds.Height - height / 2f);
-        }
-
-        public static Vector2 BottomRightCorner(int width, int height)
-        {
-            return new Vector2(Window.ClientBounds.Width - width / 2f, Window.ClientBounds.Height - height / 2f);
-        }
-
-        public static Vector2 Center()
-        {
-            return new Vector2(Window.ClientBounds.Width / 2f, Window.ClientBounds.Height / 2f);
-        }
 
         public static int WidthPercent(float percent)
         {

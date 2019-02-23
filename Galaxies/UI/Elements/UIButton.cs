@@ -58,7 +58,8 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIButton(SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Vector2 position, float rotation, Color color, Vector2 size, EventArg onClick, Screen screen, bool canBeClicked = true) : base(backgroundSprite, position, rotation, color, size, onClick, screen, canBeClicked)
+        public UIButton(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, EventArg onClick, Screen screen, bool canBeClicked = true)
+            : base(transform, backgroundSprite, onClick, screen, canBeClicked)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;
@@ -68,12 +69,12 @@ namespace Galaxies.UI.Elements
 
         private void CalculateTextPosition()
         {
-            FormattedText = TextHelper.WrapText(this, Width);
+            FormattedText = TextHelper.WrapText(this, transform.Width);
 
             textPosition = TextHelper.Align(this);
         }
 
-        protected override void PositionChanged()
+        public override void PositionChanged()
         {
             base.PositionChanged();
 
@@ -91,7 +92,7 @@ namespace Galaxies.UI.Elements
 
                 if (spriteFont != null)
                 {
-                    spriteBatch.DrawString(spriteFont, FormattedText, Position + textPosition, Color, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(spriteFont, FormattedText, transform.Position + textPosition, Color, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
                 }
             }
         }

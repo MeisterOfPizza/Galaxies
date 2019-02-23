@@ -67,7 +67,7 @@ namespace Galaxies.UI
 
         private bool visable = true;
 
-        public UIElement(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, EventArg onClick, Screen screen, bool canBeClicked = true) : base(sprite, position, rotation, color, size)
+        public UIElement(Transform transform, Texture2D sprite, EventArg onClick, Screen screen, bool canBeClicked = true) : base(transform, sprite)
         {
             this.OnClick      = onClick;
             this.screen       = screen;

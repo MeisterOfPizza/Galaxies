@@ -1,4 +1,5 @@
-﻿using Galaxies.UI.Screens;
+﻿using Galaxies.Core;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -32,10 +33,12 @@ namespace Galaxies.UI
 
         private bool ResponsiveSize { get; set; }
 
-        public UIContainer(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Screen screen, Vector4 padding, Vector2 spacing, bool responsiveSize)
-            : base(sprite, new Vector2(position.X - (padding.W + padding.Y) / 2f, position.Y - (padding.X + padding.Z / 2f)), rotation, color, new Vector2(size.X + padding.W + padding.Y, size.Y + padding.X + padding.Z), null, screen, false)
+        public UIContainer(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, bool responsiveSize)
+            : base(transform, sprite, null, screen, false)
         {
-            this.RawSize = size;
+            this.RawSize = transform.Size;
+
+            transform.Size = new Vector2(transform.Width + padding.W + padding.Y, transform.Height + padding.X + padding.Z);
 
             this.Padding = padding;
             this.Spacing = spacing;

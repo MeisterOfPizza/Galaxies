@@ -33,14 +33,14 @@ namespace Galaxies.Core
 
         #endregion
 
-        public MovingObject(Texture2D sprite, Vector2 position, float rotation, Color color, Vector2 size, Vector2 speed) : base(sprite, position, rotation, color, size)
+        public MovingObject(Transform transform, Texture2D sprite, Vector2 speed) : base(transform, sprite)
         {
             this.speed = speed;
         }
 
         public virtual void Move()
         {
-            Position += speed;
+            transform.Position += speed;
         }
 
     }
