@@ -112,8 +112,8 @@ namespace Galaxies.Core
 
         public bool Intersect(GameObject other)
         {
-            Rectangle thisRect  = new Rectangle((int)transform.X, (int)transform.Y, (int)transform.RawWidth, (int)transform.RawHeight);
-            Rectangle otherRect = new Rectangle((int)other.Transform.X, (int)other.Transform.Y, (int)other.Transform.RawWidth, (int)other.Transform.RawHeight);
+            Rectangle thisRect  = new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight);
+            Rectangle otherRect = new Rectangle(other.Transform.RawX, other.Transform.RawY, other.Transform.RawWidth, other.Transform.RawHeight);
 
             return thisRect.Intersects(otherRect);
         }
