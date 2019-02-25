@@ -44,9 +44,9 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIProgressBar(Transform transform, Texture2D background, Color backgroundColor, Texture2D bar, Color barColor, Vector2 barPadding, float progress, Screen screen) : base(transform, background, null, screen, false)
+        public UIProgressBar(Transform transform, Texture2D background, Color backgroundColor, Texture2D bar, Color barColor, Vector2 barPadding, float progress, Screen screen) : base(transform, background, screen)
         {
-            this.Color = backgroundColor;
+            this.SetColor(backgroundColor);
 
             this.bar        = bar;
             this.barPadding = barPadding * 2; //To account for both sides (top <=> bottom and left <=> right).

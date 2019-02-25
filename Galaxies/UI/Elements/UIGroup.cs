@@ -15,7 +15,7 @@ namespace Galaxies.UI.Elements
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
 
-        public UIGroup(Transform transform, Texture2D sprite, EventArg onClick, Screen screen, bool canBeClicked = true) : base(transform, sprite, onClick, screen, canBeClicked)
+        public UIGroup(Transform transform, Texture2D sprite, Screen screen) : base(transform, sprite, screen)
         {
 
         }
@@ -27,20 +27,10 @@ namespace Galaxies.UI.Elements
         {
             GroupElements.Add(new UIGroupElement(uiElement, uiElement.Transform.Position));
 
-            if (uiElement.CanBeClicked)
-            {
-                //Add the UI Element to the screen's clickable items.
-                screen.AddClickableUIElement(uiElement);
-            }
+            //Add the UI Element to the screen's clickable items.
+            screen.AddInteractable(uiElement); //Returns false if it wasn't an interactable.
 
             return uiElement;
-        }
-
-        public override void PositionChanged()
-        {
-            base.PositionChanged();
-
-            CalculatePositions();
         }
 
         public void CalculatePositions()
@@ -49,6 +39,15 @@ namespace Galaxies.UI.Elements
             {
                 groupElement.UIElement.Transform.Position = transform.Position + groupElement.GroupPosition;
             }
+        }
+
+        #region Overriden methods
+
+        public override void PositionChanged()
+        {
+            base.PositionChanged();
+
+            CalculatePositions();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -60,6 +59,8 @@ namespace Galaxies.UI.Elements
                 groupElement.UIElement.Draw(spriteBatch);
             }
         }
+
+        #endregion
 
         protected class UIGroupElement
         {

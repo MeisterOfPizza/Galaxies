@@ -52,12 +52,19 @@ namespace Galaxies.UIControllers
 
         #region Screens
 
+        private static void CreateScreen()
+        {
+            MouseController.CurrentScreen = CurrentScreen;
+        }
+
         public static void CreateMenuScreen()
         {
             GameController.GameState = GameState.MainMenu;
 
             CurrentScreen = new MenuScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
+
+            CreateScreen();
         }
 
         public static void CreateGalaxyScreen()
@@ -66,6 +73,8 @@ namespace Galaxies.UIControllers
 
             CurrentScreen = new GalaxyScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
+
+            CreateScreen();
         }
 
         public static void CreatePlanetarySystemScreen()
@@ -74,6 +83,8 @@ namespace Galaxies.UIControllers
 
             CurrentScreen = new PlanetarySystemScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
+
+            CreateScreen();
         }
 
         public static void CreateCombatScreen()
@@ -82,6 +93,8 @@ namespace Galaxies.UIControllers
 
             CurrentScreen = new CombatScreen();
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
+
+            CreateScreen();
         }
 
         #endregion

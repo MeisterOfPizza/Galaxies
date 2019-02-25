@@ -22,7 +22,7 @@ namespace Galaxies.Entities
 
         public EnemyShip(EnemyShipData data, Vector2 size) : base(new Transform(size), SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, data.BaseShipStats)
         {
-            this.Color = data.Color.GetColor();
+            this.SetColor(data.Color.GetColor());
 
             this.Inventory = new Inventory(this);
 

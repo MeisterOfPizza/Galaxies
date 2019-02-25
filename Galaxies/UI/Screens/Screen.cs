@@ -1,4 +1,5 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,12 +14,10 @@ namespace Galaxies.UI.Screens
 
         private const double SELECT_COOLDOWN = 0.15f;
 
-        private List<UIElement> UIElements { get; set; } = new List<UIElement>();
+        public List<UIElement> UIElements { get; protected set; } = new List<UIElement>();
 
-        /// <summary>
-        /// Clickable UI Elements. An element is also selectable if it's clickable, and vice versa.
-        /// </summary>
-        protected List<UIElement> ClickableElements { get; set; } = new List<UIElement>();
+        public List<IInteractable> Interactables { get; protected set; } = new List<IInteractable>();
+        public List<IScrollable>   Scrollables   { get; protected set; } = new List<IScrollable>();
 
         protected int selectedIndex;
 
@@ -62,49 +61,52 @@ namespace Galaxies.UI.Screens
         {
             foreach (UIElement elem in UIElements)
             {
-                elem.Draw(spriteBatch);
+                if (elem.Visable)
+                {
+                    elem.Draw(spriteBatch);
+                }
             }
         }
 
         private void CycleSelected(KeyboardState keyboardState)
         {
-            if (ClickableElements.Count > 0)
+            if (Interactables.Count > 0)
             {
                 if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Tab))
                 {
-                    ClickableElements[selectedIndex].Deselect();
+                    Interactables[selectedIndex].Deselect();
 
                     selectedIndex--;
 
                     if (selectedIndex < 0)
                     {
-                        selectedIndex = ClickableElements.Count - 1;
+                        selectedIndex = Interactables.Count - 1;
                     }
 
-                    ClickableElements[selectedIndex].Select();
+                    Interactables[selectedIndex].Select();
 
                     if (SelectCallbacks != null)
                     {
-                        SelectCallbacks.SetArguments(ClickableElements[selectedIndex]);
+                        SelectCallbacks.SetArguments(Interactables[selectedIndex]);
                         SelectCallbacks.Invoke();
                     }
                 }
                 else if (keyboardState.IsKeyDown(Keys.Down) || (keyboardState.IsKeyDown(Keys.Tab) && keyboardState.IsKeyDown(Keys.LeftShift)))
                 {
-                    ClickableElements[selectedIndex].Deselect();
+                    Interactables[selectedIndex].Deselect();
 
                     selectedIndex++;
 
-                    if (selectedIndex > ClickableElements.Count - 1)
+                    if (selectedIndex > Interactables.Count - 1)
                     {
                         selectedIndex = 0;
                     }
 
-                    ClickableElements[selectedIndex].Select();
+                    Interactables[selectedIndex].Select();
 
                     if (SelectCallbacks != null)
                     {
-                        SelectCallbacks.SetArguments(ClickableElements[selectedIndex]);
+                        SelectCallbacks.SetArguments(Interactables[selectedIndex]);
                         SelectCallbacks.Invoke();
                     }
                 }
@@ -112,69 +114,63 @@ namespace Galaxies.UI.Screens
         }
 
         /// <summary>
-        /// The already selected element was unselected, either because it got removed or because it can't be clicked anymore.
+        /// The already selected Interactable was unselected, either because it got removed or because it can't be clicked anymore.
         /// Eitherway, reselect the next item.
         /// </summary>
-        private void ReselectElement()
+        private void ReselectInteractable()
         {
-            if (ClickableElements.Count > 0)
+            if (Interactables.Count > 0)
             {
-                selectedIndex = MathHelper.Clamp(selectedIndex, 0, ClickableElements.Count - 1);
+                selectedIndex = MathHelper.Clamp(selectedIndex, 0, Interactables.Count - 1);
 
-                ClickableElements[selectedIndex].Select();
+                Interactables[selectedIndex].Select();
             }
         }
 
         protected void ClickSelected()
         {
-            if (selectedIndex >= 0 && selectedIndex < ClickableElements.Count && ClickableElements.Count > 0)
+            if (selectedIndex >= 0 && selectedIndex < Interactables.Count && Interactables.Count > 0)
             {
-                ClickableElements[selectedIndex].Click();
+                Interactables[selectedIndex].Click();
             }
         }
 
         /// <summary>
-        /// Select the last (or most recent added) UI Clickable.
+        /// Select the last (or most recent added) Interactable.
         /// </summary>
         public void SelectLast()
         {
-            if (ClickableElements.Count > 0)
+            if (Interactables.Count > 0)
             {
-                ClickableElements[selectedIndex].Deselect();
-                selectedIndex = ClickableElements.Count - 1;
-                ClickableElements[selectedIndex].Select();
+                Interactables[selectedIndex].Deselect();
+                selectedIndex = Interactables.Count - 1;
+                Interactables[selectedIndex].Select();
             }
         }
 
-        #region Handling clickables
-
-        /// <summary>
-        /// Adds an already existing UI Clickable Element to the <see cref="ClickableElements"/> list.
-        /// This is NOT the same as <see cref="AddClickableUIElement(UIElement)"/>!
-        /// Use that if you want to add a new UI Element that's clickable.
-        /// Mainly called after altering <see cref="UIElement.Visable"/> property.
-        /// </summary>
-        public void AddUIClickable(UIElement uiElement)
+        public void Select(int index)
         {
-            if (!ClickableElements.Contains(uiElement))
+            if (index >= 0 && index < Interactables.Count)
             {
-                ClickableElements.Add(uiElement);
+                selectedIndex = index;
             }
         }
 
+        #region Managing interactables
+
         /// <summary>
-        /// Removes an already existing UI Clickable Element from the <see cref="ClickableElements"/> list.
-        /// Mainly called after altering <see cref="UIElement.Visable"/> property.
+        /// Removes an already existing Interactable from the <see cref="Interactables"/> list.
+        /// Often called after altering <see cref="GameObject.Visable"/> property.
         /// </summary>
-        public void RemoveUIClickable(UIElement uiElement)
+        public void RemoveInteractable(IInteractable interactable)
         {
-            var index = ClickableElements.IndexOf(uiElement);
+            var index = Interactables.IndexOf(interactable);
 
             if (index != -1)
             {
-                ClickableElements.Remove(uiElement);
+                Interactables.Remove(interactable);
 
-                ReselectElement();
+                ReselectInteractable();
             }
         }
 
@@ -183,7 +179,7 @@ namespace Galaxies.UI.Screens
         #region Adding UI Elements
 
         /// <summary>
-        /// Adds a UI Element and makes it selectable (and clickable!) if is has <see cref="UIElement.CanBeClicked"/> set to true.
+        /// Adds a UI Element and makes it interactable if it implements <see cref="IInteractable"/> and scrollable if it implements <see cref="IScrollable"/>.
         /// </summary>
         /// <typeparam name="T">UIElement descendant of type T.</typeparam>
         /// <param name="uiElement">The UI Element to add.</param>
@@ -192,33 +188,50 @@ namespace Galaxies.UI.Screens
         {
             UIElements.Add(uiElement);
 
-            if (uiElement.CanBeClicked)
+            if (uiElement is IInteractable interactable)
             {
-                ClickableElements.Add(uiElement);
+                Interactables.Add(interactable);
+
+                //Select the first Interactable if interactable is the only UI Element.
+                if (Interactables.Count == 1 && Interactables[0] == uiElement)
+                {
+                    Interactables[0].Select();
+                }
             }
 
-            //Select the first UI Element if uiElement is the only UI Element.
-            if (ClickableElements.Count == 1 && ClickableElements[0] == uiElement)
+            if (uiElement is IScrollable scrollable)
             {
-                ClickableElements[0].Select();
+                Scrollables.Add(scrollable);
             }
 
             return uiElement;
         }
 
         /// <summary>
-        /// Adds the UI Element to the <see cref="ClickableElements"/> list.
+        /// Adds the Interactable to the <see cref="Interactables"/> list.
         /// Mainly used by <see cref="UIContainer"/>.
         /// </summary>
-        public void AddClickableUIElement(UIElement uiElement)
+        public void AddInteractable(IInteractable interactable)
         {
-            ClickableElements.Add(uiElement);
+            Interactables.Add(interactable);
 
-            //Select the first UI Element if uiElement is the only UI Element.
-            if (ClickableElements.Count == 1 && ClickableElements[0] == uiElement)
+            //Select the first Interactable if interactable is the only UI Element.
+            if (Interactables.Count == 1 && Interactables[0] == interactable)
             {
-                ClickableElements[0].Select();
+                Interactables[0].Select();
             }
+        }
+
+        public bool AddInteractable(UIElement uiElement)
+        {
+            if (uiElement is IInteractable interactable)
+            {
+                AddInteractable(interactable);
+
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
@@ -231,7 +244,16 @@ namespace Galaxies.UI.Screens
         public void RemoveUIElement(UIElement uiElement)
         {
             UIElements.Remove(uiElement);
-            RemoveUIClickable(uiElement);
+
+            if (uiElement is IInteractable interactable)
+            {
+                RemoveInteractable(interactable);
+            }
+
+            if (uiElement is IScrollable scrollable)
+            {
+                Scrollables.Remove(scrollable);
+            }
         }
 
         #endregion

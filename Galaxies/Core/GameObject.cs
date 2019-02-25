@@ -13,10 +13,10 @@ namespace Galaxies.Core
         #region Fields
 
         protected Transform transform;
+        protected Color     color = Color.White;
 
         Texture2D sprite;
         Vector2   origin;
-        Color     color    = Color.White;
 
         #endregion
 
@@ -35,11 +35,6 @@ namespace Galaxies.Core
             get
             {
                 return color;
-            }
-
-            set
-            {
-                color = value;
             }
         }
 
@@ -86,6 +81,8 @@ namespace Galaxies.Core
             }
         }
 
+        #region Virtual methods
+
         public virtual void PositionChanged()
         {
             //Do nothing here
@@ -102,6 +99,11 @@ namespace Galaxies.Core
             //It looks ugly but it's the best we can do.
         }
 
+        public virtual void SetColor(Color color)
+        {
+            this.color = color;
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (Visable && sprite != null)
@@ -110,13 +112,21 @@ namespace Galaxies.Core
             }
         }
 
+        #endregion
+
+        #region Helpers
+
+        public bool Contains(Vector2 position)
+        {
+            return transform.Collider.Contains(position);
+        }
+
         public bool Intersect(GameObject other)
         {
-            Rectangle thisRect  = new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight);
-            Rectangle otherRect = new Rectangle(other.Transform.RawX, other.Transform.RawY, other.Transform.RawWidth, other.Transform.RawHeight);
-
-            return thisRect.Intersects(otherRect);
+            return transform.Collider.Intersects(other.Transform.Collider);
         }
+
+        #endregion
 
     }
 

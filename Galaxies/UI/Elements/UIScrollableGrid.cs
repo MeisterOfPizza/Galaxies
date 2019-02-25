@@ -1,4 +1,5 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +9,7 @@ using System.Linq;
 namespace Galaxies.UI.Elements
 {
 
-    class UIScrollableGrid : UIContainer
+    class UIScrollableGrid : UIContainer, IScrollable
     {
 
         /// <summary>
@@ -27,6 +28,12 @@ namespace Galaxies.UI.Elements
 
         private int maxRows;
 
+        #region IScrollable
+
+        public bool IsScrollable { get; set; } = true;
+
+        #endregion
+
         public UIScrollableGrid(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, Vector2 itemSize)
             : base(transform, sprite, screen, padding, spacing, true)
         {
@@ -37,6 +44,8 @@ namespace Galaxies.UI.Elements
 
         protected override void CalculatePositions()
         {
+            HideAll();
+
             int goFrom = MathHelper.Clamp(minRowIndex * maxFitPerViewX, 0, Container.Count);
             int goTo   = MathHelper.Clamp(maxRowIndex * maxFitPerViewX + maxFitPerViewX, 0, Container.Count);
             
@@ -52,6 +61,7 @@ namespace Galaxies.UI.Elements
                 {
                     if (goFrom < goTo)
                     {
+                        Container[goFrom].Visable = true;
                         Container[goFrom++].Transform.Position = transform.Position - new Vector2(startX - currentX, startY - currentY);
 
                         currentX += (int)(itemSize.X + Spacing.X);
@@ -153,6 +163,24 @@ namespace Galaxies.UI.Elements
                         Container[i].Draw(spriteBatch);
                     }
                 }
+            }
+        }
+
+        public void MouseScroll(int value)
+        {
+            if (value < 0) //Scroll down
+            {
+                minRowIndex = MathHelper.Clamp(minRowIndex + 1, 0, maxRows - maxFitPerViewY + 1);
+                maxRowIndex = MathHelper.Clamp(maxRowIndex + 1, maxFitPerViewY - 1, maxRows);
+
+                CalculatePositions();
+            }
+            else if (value > 0) //Scroll up
+            {
+                minRowIndex = MathHelper.Clamp(minRowIndex - 1, 0, maxRows - maxFitPerViewY);
+                maxRowIndex = MathHelper.Clamp(maxRowIndex - 1, maxFitPerViewY - 1, maxRows - 1);
+
+                CalculatePositions();
             }
         }
 

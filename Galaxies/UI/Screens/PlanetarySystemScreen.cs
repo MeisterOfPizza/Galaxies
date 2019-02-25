@@ -52,7 +52,7 @@ namespace Galaxies.UI.Screens
                 ));
                 */
 
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 100; i++)
             {
                 testGrid.AddUIElement(new UIButton(
                     new Transform(new Vector2(200, 100)),

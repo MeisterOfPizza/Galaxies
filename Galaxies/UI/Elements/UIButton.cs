@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.UI.Elements
 {
 
-    class UIButton : UIElement, ITextElement<UIButton>
+    class UIButton : UIElement, ITextElement<UIButton>, IInteractable
     {
 
         #region Fields
@@ -58,13 +58,27 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIButton(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, EventArg onClick, Screen screen, bool canBeClicked = true)
-            : base(transform, backgroundSprite, onClick, screen, canBeClicked)
+        #region IInteractable
+
+        public bool IsInteractable { get; set; } = true;
+        public bool IsSelected     { get; set; }
+
+        public EventArg OnClick { get; set; }
+
+        public Color DefaultColor { get; set; }
+
+        #endregion
+
+        public UIButton(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, EventArg onClick, Screen screen)
+            : base(transform, backgroundSprite, screen)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;
             this.Text        = text;
             this.TextPadding = textPadding;
+
+            this.OnClick      = onClick;
+            this.DefaultColor = Color;
         }
 
         private void CalculateTextPosition()
@@ -74,11 +88,20 @@ namespace Galaxies.UI.Elements
             textPosition = TextHelper.Align(this);
         }
 
+        #region Overriden methods
+
         public override void PositionChanged()
         {
             base.PositionChanged();
 
             CalculateTextPosition();
+        }
+
+        public override void SetColor(Color color)
+        {
+            base.SetColor(color);
+
+            DefaultColor = color;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -97,6 +120,44 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        #endregion
+
+        public void SetOnClick(EventArg @event)
+        {
+            this.OnClick = @event;
+        }
+
+        public void Click()
+        {
+            if (OnClick != null)
+            {
+                OnClick.Invoke();
+            }
+        }
+
+        public void Select()
+        {
+            color = Color.Red;
+
+            IsSelected = true;
+        }
+
+        public void Deselect()
+        {
+            color = DefaultColor;
+
+            IsSelected = false;
+        }
+
+        public void MouseEnter()
+        {
+            Select();
+        }
+
+        public void MouseExit()
+        {
+            Deselect();
+        }
     }
 
 }

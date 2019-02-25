@@ -34,7 +34,7 @@ namespace Galaxies.UI
         private bool ResponsiveSize { get; set; }
 
         public UIContainer(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, bool responsiveSize)
-            : base(transform, sprite, null, screen, false)
+            : base(transform, sprite, screen)
         {
             this.RawSize = transform.Size;
 
@@ -67,11 +67,8 @@ namespace Galaxies.UI
         {
             Container.Add(uiElement);
 
-            if (uiElement.CanBeClicked)
-            {
-                //Add the UI Element to the screen's clickable items.
-                screen.AddClickableUIElement(uiElement);
-            }
+            //Add the UI Element to the screen's clickable items.
+            screen.AddInteractable(uiElement); //Returns false if it wasn't an interactable.
 
             CalculatePositions();
 
@@ -94,11 +91,8 @@ namespace Galaxies.UI
             {
                 Container.Add(uiElements[i]);
 
-                if (uiElements[i].CanBeClicked)
-                {
-                    //Add the UI Element to the screen's clickable items.
-                    screen.AddClickableUIElement(uiElements[i]);
-                }
+                //Add the UI Element to the screen's clickable items.
+                screen.AddInteractable(uiElements[i]); //Returns false if it wasn't an interactable.
 
                 UIElementAdded(uiElements[i]);
             }
@@ -146,16 +140,6 @@ namespace Galaxies.UI
 
         #endregion
 
-        public override void Select()
-        {
-            //Do nothing, TODO: Remove as we already have Clickable set to false?
-        }
-
-        public override void Deselect()
-        {
-            //Do nothing, TODO: Remove as we already have Clickable set to false?
-        }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
@@ -165,6 +149,21 @@ namespace Galaxies.UI
                 element.Draw(spriteBatch);
             }
         }
+
+        #region Helpers
+
+        /// <summary>
+        /// Hides all the elements inside the container.
+        /// </summary>
+        protected void HideAll()
+        {
+            for (int i = 0; i < Container.Count; i++)
+            {
+                Container[i].Visable = false;
+            }
+        }
+
+        #endregion
 
     }
 
