@@ -1,14 +1,16 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Galaxies.UI.Elements
 {
 
-    class UIScrollableGrid : UIContainer
+    class UIScrollableGrid : UIContainer, IScrollable
     {
 
         /// <summary>
@@ -27,16 +29,26 @@ namespace Galaxies.UI.Elements
 
         private int maxRows;
 
+        #region IScrollable
+
+        public bool IsScrollable { get; set; } = true;
+
+        #endregion
+
         public UIScrollableGrid(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, Vector2 itemSize)
             : base(transform, sprite, screen, padding, spacing, true)
         {
             this.itemSize = itemSize;
 
-            Screen.SelectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
+            Screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
         }
+
+        #region Overriden methods
 
         protected override void CalculatePositions()
         {
+            HideAll();
+
             int goFrom = MathHelper.Clamp(minRowIndex * maxFitPerViewX, 0, Container.Count);
             int goTo   = MathHelper.Clamp(maxRowIndex * maxFitPerViewX + maxFitPerViewX, 0, Container.Count);
             
@@ -52,6 +64,7 @@ namespace Galaxies.UI.Elements
                 {
                     if (goFrom < goTo)
                     {
+                        Container[goFrom].Visable = true;
                         Container[goFrom++].Transform.Position = transform.Position - new Vector2(startX - currentX, startY - currentY);
 
                         currentX += (int)(itemSize.X + Spacing.X);
@@ -71,6 +84,8 @@ namespace Galaxies.UI.Elements
         {
             maxFitPerViewX = MathHelper.Clamp(transform.RawWidth / (int)itemSize.X, 1, int.MaxValue);
             maxFitPerViewY = MathHelper.Clamp(transform.RawHeight / (int)itemSize.Y, 1, int.MaxValue);
+
+            maxRows = (int)Math.Ceiling((double)Container.Count / maxFitPerViewX); //Recount max rows.
 
             //Set size with the addition of padding and spacing.
             transform.Size = new Vector2(
@@ -118,22 +133,6 @@ namespace Galaxies.UI.Elements
             }
         }
 
-        /// <summary>
-        /// Callback method whenever the player selects a new UI Element from the current screen.
-        /// </summary>
-        /// <param name="newSelected">Newly selected element.</param>
-        protected void SelectedChanged(UIElement newSelected)
-        {
-            int index = Container.IndexOf(newSelected);
-
-            if (index != -1)
-            {
-                CalculateIndexRange(newSelected);
-
-                CalculatePositions();
-            }
-        }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (Visable)
@@ -156,7 +155,47 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        #endregion
+
+        #region IScrollable
+
+        public void MouseScroll(int value)
+        {
+            if (value < 0) //Scroll down
+            {
+                minRowIndex = MathHelper.Clamp(minRowIndex + 1, 0, maxRows - maxFitPerViewY + 1);
+                maxRowIndex = MathHelper.Clamp(maxRowIndex + 1, maxFitPerViewY - 1, maxRows);
+
+                CalculatePositions();
+            }
+            else if (value > 0) //Scroll up
+            {
+                minRowIndex = MathHelper.Clamp(minRowIndex - 1, 0, maxRows - maxFitPerViewY);
+                maxRowIndex = MathHelper.Clamp(maxRowIndex - 1, maxFitPerViewY - 1, maxRows - 1);
+
+                CalculatePositions();
+            }
+        }
+
+        #endregion
+
         #region Helpers
+
+        /// <summary>
+        /// Callback method whenever the player selects a new UI Element from the current screen.
+        /// </summary>
+        /// <param name="newSelected">Newly selected element.</param>
+        protected void SelectedChanged(UIElement newSelected)
+        {
+            int index = Container.IndexOf(newSelected);
+
+            if (index != -1)
+            {
+                CalculateIndexRange(newSelected);
+
+                CalculatePositions();
+            }
+        }
 
         private void CalculateIndexRange(UIElement element)
         {

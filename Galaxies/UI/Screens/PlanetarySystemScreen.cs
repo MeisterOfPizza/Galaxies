@@ -29,7 +29,7 @@ namespace Galaxies.UI.Screens
                 }
             }
             
-            var testGrid = AddUIElement(new UIScrollableGrid(
+            testGrid = AddUIElement(new UIScrollableGrid(
                 new Transform(Alignment.MiddleCenter, new Vector2(600, 300)),
                 column,
                 this,
@@ -52,9 +52,9 @@ namespace Galaxies.UI.Screens
                 ));
                 */
 
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 100; i++)
             {
-                testGrid.AddUIElement(new UIButton(
+                var btn = testGrid.AddUIElement(new UIButton(
                     new Transform(new Vector2(200, 100)),
                     SpriteHelper.Arial_Font,
                     (i + 1).ToString(),
@@ -64,6 +64,8 @@ namespace Galaxies.UI.Screens
                     null,
                     this
                     ));
+
+                btn.SetOnClick(new EventArg1<UIElement>(Test, testGrid));
             }
 
             AddUIElement(new UIButton(
@@ -76,6 +78,13 @@ namespace Galaxies.UI.Screens
                 new EventArg0(GameUIController.CreateGalaxyScreen),
                 this
                 ));
+        }
+
+        UIScrollableGrid testGrid;
+
+        void Test(UIElement element)
+        {
+            testGrid.RemoveUIElement(element);
         }
 
     }

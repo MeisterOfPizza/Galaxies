@@ -1,4 +1,5 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.UI.Elements
 {
 
-    class UIScrollableColumn : UIColumn
+    class UIScrollableColumn : UIColumn, IScrollable
     {
         
         /// <summary>
@@ -29,16 +30,26 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private int maxIndex;
 
+        #region IScrollable
+
+        public bool IsScrollable { get; set; } = true;
+
+        #endregion
+
         public UIScrollableColumn(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, int itemHeight)
             : base(transform, sprite, screen, padding, spacing, true)
         {
             this.itemHeight = itemHeight;
 
-            screen.SelectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
+            screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
         }
+
+        #region Overriden methods
 
         protected override void CalculatePositions()
         {
+            HideAll();
+
             int currentY = (int)Padding.X;
             float startY = transform.Height / 2f - itemHeight / 2f;
 
@@ -46,6 +57,7 @@ namespace Galaxies.UI.Elements
             {
                 if (i < Container.Count)
                 {
+                    Container[i].Visable = true;
                     Container[i].Transform.Position = transform.Position - new Vector2(0, startY - currentY);
 
                     currentY += itemHeight + (int)Spacing.Y;
@@ -83,21 +95,7 @@ namespace Galaxies.UI.Elements
             }
         }
 
-        /// <summary>
-        /// Callback method whenever the player selects a new UI Element from the current screen.
-        /// </summary>
-        /// <param name="newSelected">Newly selected element.</param>
-        protected void SelectedChanged(UIElement newSelected)
-        {
-            int index = Container.IndexOf(newSelected);
-
-            if (index != -1)
-            {
-                CalculateIndexRange(index);
-
-                CalculatePositions();
-            }
-        }
+        #endregion
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -120,6 +118,28 @@ namespace Galaxies.UI.Elements
                 }
             }
         }
+
+        #region IScrollable
+
+        public void MouseScroll(int value)
+        {
+            if (value < 0) //Scroll down
+            {
+                minIndex = MathHelper.Clamp(minIndex + 1, 0, Container.Count - 1 - maxFitPerView);
+                maxIndex = MathHelper.Clamp(maxIndex + 1, maxFitPerView, Container.Count - 1);
+
+                CalculatePositions();
+            }
+            else if (value > 0) //Scroll up
+            {
+                minIndex = MathHelper.Clamp(minIndex - 1, 0, Container.Count - 1 - maxFitPerView);
+                maxIndex = MathHelper.Clamp(maxIndex - 1, maxFitPerView, Container.Count - 1);
+
+                CalculatePositions();
+            }
+        }
+
+        #endregion
 
         #region Helpers
 
@@ -148,6 +168,22 @@ namespace Galaxies.UI.Elements
                 maxIndex = MathHelper.Clamp(selectedIndex, 0, Container.Count - 1);
 
                 minIndex = MathHelper.Clamp(maxIndex - maxFitPerView, 0, Container.Count - 1);
+            }
+        }
+
+        /// <summary>
+        /// Callback method whenever the player selects a new Interactable from the current screen.
+        /// </summary>
+        /// <param name="newSelected">Newly selected element.</param>
+        protected void SelectedChanged(UIElement newSelected)
+        {
+            int index = Container.IndexOf(newSelected);
+
+            if (index != -1)
+            {
+                CalculateIndexRange(index);
+
+                CalculatePositions();
             }
         }
 

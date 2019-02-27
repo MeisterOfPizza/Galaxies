@@ -58,7 +58,7 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UIText(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Screen screen) : base(transform, null, null, screen, false)
+        public UIText(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Screen screen) : base(transform, null, screen)
         {
             this.spriteFont  = spriteFont;
             this.textAlign   = textAlign;

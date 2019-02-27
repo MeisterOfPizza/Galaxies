@@ -48,8 +48,8 @@ namespace Galaxies.Combat
             playerShotEvent = new EventArg0(AttackEnemy, EndAwaitEventCallbacks, EndTurn);
             enemyShotEvent  = new EventArg0(AttackPlayer, EndAwaitEventCallbacks, EndTurn);
 
-            playerShieldEffect = new UIElement(new Transform(Player.Transform.Position, Player.Transform.Size * 2), SpriteHelper.Shield_Sprite, null, GameUIController.CurrentScreen, false);
-            enemyShieldEffect  = new UIElement(new Transform(Enemy.Transform.Position, Enemy.Transform.Size * 2), SpriteHelper.Shield_Sprite, null, GameUIController.CurrentScreen, false);
+            playerShieldEffect = new UIElement(new Transform(Player.Transform.Position, Player.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
+            enemyShieldEffect  = new UIElement(new Transform(Enemy.Transform.Position, Enemy.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
 
             playerShieldEffect.Visable = false;
             enemyShieldEffect.Visable  = false;

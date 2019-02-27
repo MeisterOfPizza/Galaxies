@@ -99,6 +99,9 @@
     <Compile Include="UI\Elements\UIScrollableGrid.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
+    <Compile Include="UI\Interfaces\IContainer.cs" />
+    <Compile Include="UI\Interfaces\IInteractable.cs" />
+    <Compile Include="UI\Interfaces\IScrollable.cs" />
     <Compile Include="UI\Interfaces\ITextElement.cs" />
     <Compile Include="UI\Screens\CombatScreen.cs" />
     <Compile Include="UI\Screens\GalaxyScreen.cs" />

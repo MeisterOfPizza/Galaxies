@@ -32,6 +32,7 @@ namespace Galaxies.Core
     {
 
         public GameObject GameObject { get; private set; }
+        public Rectangle  Collider   { get; private set; }
 
         /* Fields and properties */
 
@@ -220,6 +221,8 @@ namespace Galaxies.Core
 
             percentage = new Vector2(RawX / (float)GameUIController.WindowWidth, RawY / (float)GameUIController.WindowHeight);
 
+            CreateCollider();
+
             if (GameObject != null)
             {
                 GameObject.PositionChanged();
@@ -245,12 +248,12 @@ namespace Galaxies.Core
             this.RawWidth  = (int)size.X;
             this.RawHeight = (int)size.Y;
 
+            SetAlignment(alignment);
+
             if (GameObject != null)
             {
                 GameObject.SizeChanged();
             }
-
-            SetAlignment(alignment);
         }
 
         /// <summary>
@@ -315,6 +318,7 @@ namespace Galaxies.Core
                     break;
                 default:
                 case Alignment.Custom:
+                    CreateCollider(); //Create a new collider, just in case a change in size has occurred.
                     //Do nothing, the GameObject stays in the same position.
                     break;
             }
@@ -330,6 +334,16 @@ namespace Galaxies.Core
         public void SetGameObject(GameObject gameObject)
         {
             this.GameObject = gameObject;
+
+            CreateCollider();
+        }
+
+        /// <summary>
+        /// Creates the collider.
+        /// </summary>
+        private void CreateCollider()
+        {
+            Collider = new Rectangle((Position - halfSize).ToPoint(), Size.ToPoint());
         }
 
         #endregion

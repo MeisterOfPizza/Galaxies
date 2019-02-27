@@ -81,7 +81,6 @@ namespace Galaxies.Space.Events
             }
 
             messageBox.Screen.RemoveUIElement(messageBox);
-            messageBox.Screen.RemoveUIElement(messageBox.OkBtn);
             PlanetEventController.TriggerNextEvent();
         }
 

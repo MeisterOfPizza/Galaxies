@@ -31,6 +31,8 @@ namespace Galaxies
 
             //graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
 
+            IsMouseVisible = true;
+
             Singleton = this;
         }
 

@@ -14,7 +14,7 @@ namespace Galaxies.Items
 
         public Item(ItemData data, Inventory inventory) : base(new Transform(new Vector2(50, 50)), MainGame.Singleton.Content.Load<Texture2D>(data.SpriteName))
         {
-            this.Color = data.Color.GetColor();
+            this.SetColor(data.Color.GetColor());
 
             this.Data      = data;
             this.Inventory = inventory;
