@@ -95,7 +95,6 @@ namespace Galaxies
 
             GameController.Update(gameTime);
             GameUIController.Update(gameTime);
-            MouseController.Update(gameTime);
 
             base.Update(gameTime);
         }

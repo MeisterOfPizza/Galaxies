@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework;
 namespace Galaxies.UI.Interfaces
 {
 
+    /// <summary>
+    /// Marks this UI Element as an interactable.
+    /// </summary>
     interface IInteractable
     {
 

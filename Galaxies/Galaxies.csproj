@@ -43,7 +43,6 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
-    <Compile Include="Controllers\MouseController.cs" />
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
     <Compile Include="Core\EventArg0.cs" />
@@ -100,6 +99,7 @@
     <Compile Include="UI\Elements\UIScrollableGrid.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
+    <Compile Include="UI\Interfaces\IContainer.cs" />
     <Compile Include="UI\Interfaces\IInteractable.cs" />
     <Compile Include="UI\Interfaces\IScrollable.cs" />
     <Compile Include="UI\Interfaces\ITextElement.cs" />

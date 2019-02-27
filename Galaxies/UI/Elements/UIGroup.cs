@@ -1,8 +1,10 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Galaxies.UI.Elements
 {
@@ -10,10 +12,22 @@ namespace Galaxies.UI.Elements
     /// <summary>
     /// Groups UI Elements into one single head element. This can be useful when dealing with text and texture based components that needs to be positioned together.
     /// </summary>
-    class UIGroup : UIElement
+    class UIGroup : UIElement, IContainer
     {
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
+
+        #region IContainer
+
+        public IList<UIElement> Children
+        {
+            get
+            {
+                return GroupElements.Select(ge => ge.UIElement).ToList();
+            }
+        }
+
+        #endregion
 
         public UIGroup(Transform transform, Texture2D sprite, Screen screen) : base(transform, sprite, screen)
         {

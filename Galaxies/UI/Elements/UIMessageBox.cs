@@ -34,7 +34,7 @@ namespace Galaxies.UI.Elements
                 ));
             
             CalculatePositions();
-            Screen.SelectLast();
+            Screen.ForceFocus(OkBtn);
         }
 
     }

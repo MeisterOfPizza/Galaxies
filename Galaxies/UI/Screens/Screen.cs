@@ -12,165 +12,326 @@ namespace Galaxies.UI.Screens
     abstract class Screen
     {
 
-        private const double SELECT_COOLDOWN = 0.15f;
+        #region Constants
 
+        /// <summary>
+        /// Delay between switches of interactables with the keyboard.
+        /// </summary>
+        private const double KB_SELECT_COOLDOWN = 0.15f;
+
+        #endregion
+
+        #region Containers
+
+        /// <summary>
+        /// All UI Elements on the screen.
+        /// </summary>
         public List<UIElement> UIElements { get; protected set; } = new List<UIElement>();
 
+        /// <summary>
+        /// All UI Elements that are interactable and currently on the screen.
+        /// </summary>
         public List<IInteractable> Interactables { get; protected set; } = new List<IInteractable>();
-        public List<IScrollable>   Scrollables   { get; protected set; } = new List<IScrollable>();
 
-        protected int selectedIndex;
+        /// <summary>
+        /// All UI Elements that are scrollable and currently on the screen.
+        /// </summary>
+        public List<IScrollable> Scrollables { get; protected set; } = new List<IScrollable>();
 
-        private double selectionCooldown;
+        #endregion
 
-        public EventArg1<UIElement> SelectCallbacks { get; set; }
+        #region Focus
+
+        /// <summary>
+        /// The focused interactable.
+        /// </summary>
+        private IInteractable ForceFocusedInteractable { get; set; }
+
+        /// <summary>
+        /// Is the focus forced?
+        /// </summary>
+        private bool ForceFocusOn { get; set; }
+
+        #endregion
+
+        #region Keyboard selection
+
+        /// <summary>
+        /// Selected interactable made with the keyboard.
+        /// </summary>
+        protected IInteractable kb_selectedInteractable { get; private set; }
+
+        /// <summary>
+        /// How long since the last selection with the keyboard was made.
+        /// </summary>
+        protected double kb_selectionCooldown { get; private set; }
+
+        #endregion
+
+        #region Mouse selection
+
+        /// <summary>
+        /// Selected interactable made with the mouse (interactable beneath the cursor).
+        /// </summary>
+        protected IInteractable ms_selectedInteractable { get; private set; }
+
+        /// <summary>
+        /// Latest position of the cursor (last frame).
+        /// </summary>
+        protected Point ms_lastPosition { get; private set; }
+
+        /// <summary>
+        /// Has the user released the [left] mouse button?
+        /// </summary>
+        protected bool ms_hasReleasedButton { get; private set; } = true;
+
+        /// <summary>
+        /// Scroll wheel value.
+        /// </summary>
+        protected int ms_scrollWheelValue { get; private set; }
+
+        #endregion
+
+        /// <summary>
+        /// Events called wheneever a new selection with the keyboard was made.
+        /// </summary>
+        public EventArg1<UIElement> kb_selectCallbacks { get; private set; }
 
         public Screen()
         {
-            SelectCallbacks = new EventArg1<UIElement>();
+            kb_selectCallbacks = new EventArg1<UIElement>();
         }
 
         public abstract void CreateUI(ContentManager content);
+
+        #region Screen updates
 
         /// <summary>
         /// Look for keystrokes or mouse movement.
         /// </summary>
         public virtual void Update(GameTime gameTime)
         {
-            selectionCooldown += gameTime.ElapsedGameTime.TotalSeconds;
+            KeyboardUpdate(gameTime);
+            MouseUpdate();
+        }
 
-            if (selectionCooldown > SELECT_COOLDOWN)
+        private void KeyboardUpdate(GameTime gameTime)
+        {
+            kb_selectionCooldown += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (kb_selectionCooldown > KB_SELECT_COOLDOWN)
             {
                 KeyboardState keyboardState = Keyboard.GetState();
 
                 if (keyboardState.GetPressedKeys().Length > 0)
                 {
-                    CycleSelected(keyboardState);
+                    KeyboardSelection(keyboardState);
 
                     if (keyboardState.IsKeyDown(Keys.Enter))
                     {
-                        ClickSelected();
+                        KeyboardClickEvent();
                     }
 
-                    selectionCooldown = 0;
+                    kb_selectionCooldown = 0;
                 }
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        private void MouseUpdate()
         {
-            foreach (UIElement elem in UIElements)
+            MouseState state = Mouse.GetState();
+
+            //Check if the user has scrolled since last updates:
+            if (state.ScrollWheelValue != ms_scrollWheelValue)
             {
-                if (elem.Visable)
-                {
-                    elem.Draw(spriteBatch);
-                }
+                int scrollValue = MathHelper.Clamp(state.ScrollWheelValue - ms_scrollWheelValue, -1, 1);
+
+                MouseScrollWheelEvent(scrollValue);
+            }
+
+            //Update the scroll wheel value:
+            ms_scrollWheelValue = state.ScrollWheelValue;
+
+            //Check if the user has moved the mouse since last update:
+            if (ms_lastPosition != state.Position)
+            {
+                MouseMovementEvent();
+            }
+
+            //Update the mouse position:
+            ms_lastPosition = state.Position;
+
+            //Check if the user has clicked the left mouse button AND has released it since last click:
+            if (state.LeftButton == ButtonState.Pressed && ms_hasReleasedButton)
+            {
+                MouseClickEvent();
+
+                //We don't know if they've released it yet:
+                ms_hasReleasedButton = false;
+            }
+
+            //Check if the user has released the left mouse button:
+            if (state.LeftButton == ButtonState.Released)
+            {
+                //They have, reset it so they can click the left mouse button again:
+                ms_hasReleasedButton = true;
             }
         }
 
-        private void CycleSelected(KeyboardState keyboardState)
+        #endregion
+
+        #region Keyboard selection
+
+        private void KeyboardSelection(KeyboardState keyboardState)
         {
             if (Interactables.Count > 0)
             {
+                //If no interactable has been selected, select the first one:
+                if (kb_selectedInteractable == null && keyboardState.GetPressedKeys().Length > 0)
+                {
+                    kb_selectedInteractable = Interactables[0];
+                    kb_selectedInteractable.Select();
+
+                    return;
+                }
+
                 if (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.Tab))
                 {
-                    Interactables[selectedIndex].Deselect();
+                    int nextIndex = Interactables.IndexOf(kb_selectedInteractable) - 1;
 
-                    selectedIndex--;
-
-                    if (selectedIndex < 0)
+                    if (nextIndex < 0)
                     {
-                        selectedIndex = Interactables.Count - 1;
+                        nextIndex = Interactables.Count - 1;
                     }
 
-                    Interactables[selectedIndex].Select();
-
-                    if (SelectCallbacks != null)
+                    //Only deselect the current interactable if it's not currently selected by the mouse.
+                    if (kb_selectedInteractable != ms_selectedInteractable)
                     {
-                        SelectCallbacks.SetArguments(Interactables[selectedIndex]);
-                        SelectCallbacks.Invoke();
+                        kb_selectedInteractable.Deselect();
                     }
+
+                    kb_selectedInteractable = Interactables[nextIndex];
+                    kb_selectedInteractable.Select();
                 }
                 else if (keyboardState.IsKeyDown(Keys.Down) || (keyboardState.IsKeyDown(Keys.Tab) && keyboardState.IsKeyDown(Keys.LeftShift)))
                 {
-                    Interactables[selectedIndex].Deselect();
+                    int nextIndex = Interactables.IndexOf(kb_selectedInteractable) + 1;
 
-                    selectedIndex++;
-
-                    if (selectedIndex > Interactables.Count - 1)
+                    if (nextIndex >= Interactables.Count)
                     {
-                        selectedIndex = 0;
+                        nextIndex = 0;
                     }
 
-                    Interactables[selectedIndex].Select();
-
-                    if (SelectCallbacks != null)
+                    //Only deselect the current interactable if it's not currently selected by the mouse.
+                    if (kb_selectedInteractable != ms_selectedInteractable)
                     {
-                        SelectCallbacks.SetArguments(Interactables[selectedIndex]);
-                        SelectCallbacks.Invoke();
+                        kb_selectedInteractable.Deselect();
+                    }
+
+                    kb_selectedInteractable = Interactables[nextIndex];
+                    kb_selectedInteractable.Select();
+                }
+
+                //Keyboard selection callback:
+                if (kb_selectCallbacks != null)
+                {
+                    kb_selectCallbacks.SetArguments(kb_selectedInteractable);
+                    kb_selectCallbacks.Invoke();
+                }
+            }
+        }
+
+        private void KeyboardClickEvent()
+        {
+            if (kb_selectedInteractable != null && kb_selectedInteractable.IsInteractable)
+            {
+                if (!ForceFocusOn)
+                {
+                    kb_selectedInteractable.Click();
+                }
+                else if (ForceFocusOn && ForceFocusedInteractable == kb_selectedInteractable)
+                {
+                    kb_selectedInteractable.Click();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Mouse selection
+
+        /// <summary>
+        /// Mouse scroll event
+        /// </summary>
+        private void MouseScrollWheelEvent(int value)
+        {
+            Vector2 mousePos = ms_lastPosition.ToVector2();
+
+            //WARNING: Might procude an error, as scrolling can remove scrollables and cause the count to go down?
+            for (int i = 0; i < Scrollables.Count; i++)
+            {
+                if (Scrollables[i].IsScrollable && UIElements[i].Contains(mousePos))
+                {
+                    Scrollables[i].MouseScroll(value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Mouse movement event
+        /// </summary>
+        private void MouseMovementEvent()
+        {
+            Vector2 mousePos = ms_lastPosition.ToVector2();
+
+            //Deselect the current interactable beneath the mouse if the mouse is no longer inside the interactable.
+            if (ms_selectedInteractable != null && ms_selectedInteractable.IsInteractable)
+            {
+                if (!((GameObject)ms_selectedInteractable).Contains(mousePos) && ms_selectedInteractable != kb_selectedInteractable)
+                {
+                    ms_selectedInteractable.MouseExit();
+
+                    ms_selectedInteractable = null;
+                }
+            }
+
+            //Go through all the interactables, from the top one to the bottom one ("layers", z-index).
+            //WARNING: Might procude an error, as selecting and deselecting can remove interactables and cause the count to go down?
+            for (int i = Interactables.Count - 1; i >= 0; i--)
+            {
+                if (Interactables[i].IsInteractable)
+                {
+                    GameObject interactable = (GameObject)Interactables[i];
+
+                    if (interactable.Visable && interactable.Contains(mousePos))
+                    {
+                        if (ms_selectedInteractable != Interactables[i])
+                        {
+                            ms_selectedInteractable = Interactables[i];
+                            ms_selectedInteractable.MouseEnter(); //Select the new one.
+                        }
+
+                        return; //We only want to select the one at the top.
                     }
                 }
             }
         }
 
         /// <summary>
-        /// The already selected Interactable was unselected, either because it got removed or because it can't be clicked anymore.
-        /// Eitherway, reselect the next item.
+        /// Mouse click event
         /// </summary>
-        private void ReselectInteractable()
+        private void MouseClickEvent()
         {
-            if (Interactables.Count > 0)
+            if (ms_selectedInteractable != null && ms_selectedInteractable.IsInteractable)
             {
-                selectedIndex = MathHelper.Clamp(selectedIndex, 0, Interactables.Count - 1);
-
-                Interactables[selectedIndex].Select();
-            }
-        }
-
-        protected void ClickSelected()
-        {
-            if (selectedIndex >= 0 && selectedIndex < Interactables.Count && Interactables.Count > 0)
-            {
-                Interactables[selectedIndex].Click();
-            }
-        }
-
-        /// <summary>
-        /// Select the last (or most recent added) Interactable.
-        /// </summary>
-        public void SelectLast()
-        {
-            if (Interactables.Count > 0)
-            {
-                Interactables[selectedIndex].Deselect();
-                selectedIndex = Interactables.Count - 1;
-                Interactables[selectedIndex].Select();
-            }
-        }
-
-        public void Select(int index)
-        {
-            if (index >= 0 && index < Interactables.Count)
-            {
-                selectedIndex = index;
-            }
-        }
-
-        #region Managing interactables
-
-        /// <summary>
-        /// Removes an already existing Interactable from the <see cref="Interactables"/> list.
-        /// Often called after altering <see cref="GameObject.Visable"/> property.
-        /// </summary>
-        public void RemoveInteractable(IInteractable interactable)
-        {
-            var index = Interactables.IndexOf(interactable);
-
-            if (index != -1)
-            {
-                Interactables.Remove(interactable);
-
-                ReselectInteractable();
+                if (!ForceFocusOn)
+                {
+                    ms_selectedInteractable.Click();
+                }
+                else if (ForceFocusOn && ForceFocusedInteractable == ms_selectedInteractable)
+                {
+                    ms_selectedInteractable.Click();
+                }
             }
         }
 
@@ -191,12 +352,6 @@ namespace Galaxies.UI.Screens
             if (uiElement is IInteractable interactable)
             {
                 Interactables.Add(interactable);
-
-                //Select the first Interactable if interactable is the only UI Element.
-                if (Interactables.Count == 1 && Interactables[0] == uiElement)
-                {
-                    Interactables[0].Select();
-                }
             }
 
             if (uiElement is IScrollable scrollable)
@@ -208,25 +363,15 @@ namespace Galaxies.UI.Screens
         }
 
         /// <summary>
-        /// Adds the Interactable to the <see cref="Interactables"/> list.
-        /// Mainly used by <see cref="UIContainer"/>.
+        /// Tries to add the UI Element as an interactable. Returns true if it succeeded, false if it didn't.
         /// </summary>
-        public void AddInteractable(IInteractable interactable)
-        {
-            Interactables.Add(interactable);
-
-            //Select the first Interactable if interactable is the only UI Element.
-            if (Interactables.Count == 1 && Interactables[0] == interactable)
-            {
-                Interactables[0].Select();
-            }
-        }
-
+        /// <param name="uiElement"></param>
+        /// <returns></returns>
         public bool AddInteractable(UIElement uiElement)
         {
             if (uiElement is IInteractable interactable)
             {
-                AddInteractable(interactable);
+                Interactables.Add(interactable);
 
                 return true;
             }
@@ -247,12 +392,56 @@ namespace Galaxies.UI.Screens
 
             if (uiElement is IInteractable interactable)
             {
-                RemoveInteractable(interactable);
+                Interactables.Remove(interactable);
+
+                //Deactivate forced focus:
+                if (ForceFocusedInteractable == interactable)
+                {
+                    ForceFocusOn = false;
+                    ForceFocusedInteractable = null;
+                }
             }
 
             if (uiElement is IScrollable scrollable)
             {
                 Scrollables.Remove(scrollable);
+            }
+
+            if (uiElement is IContainer container)
+            {
+                foreach (UIElement child in container.Children)
+                {
+                    RemoveUIElement(child);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Focus
+
+        /// <summary>
+        /// Only allows the user the interact with the given interactable.
+        /// </summary>
+        public void ForceFocus(IInteractable interactable)
+        {
+            ForceFocusedInteractable = interactable;
+
+            ForceFocusOn = true;
+        }
+
+        #endregion
+
+        #region Drawing
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (UIElement elem in UIElements)
+            {
+                if (elem.Visable)
+                {
+                    elem.Draw(spriteBatch);
+                }
             }
         }
 

@@ -3,6 +3,7 @@ using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,8 +40,10 @@ namespace Galaxies.UI.Elements
         {
             this.itemSize = itemSize;
 
-            Screen.SelectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
+            Screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
         }
+
+        #region Overriden methods
 
         protected override void CalculatePositions()
         {
@@ -81,6 +84,8 @@ namespace Galaxies.UI.Elements
         {
             maxFitPerViewX = MathHelper.Clamp(transform.RawWidth / (int)itemSize.X, 1, int.MaxValue);
             maxFitPerViewY = MathHelper.Clamp(transform.RawHeight / (int)itemSize.Y, 1, int.MaxValue);
+
+            maxRows = (int)Math.Ceiling((double)Container.Count / maxFitPerViewX); //Recount max rows.
 
             //Set size with the addition of padding and spacing.
             transform.Size = new Vector2(
@@ -128,22 +133,6 @@ namespace Galaxies.UI.Elements
             }
         }
 
-        /// <summary>
-        /// Callback method whenever the player selects a new UI Element from the current screen.
-        /// </summary>
-        /// <param name="newSelected">Newly selected element.</param>
-        protected void SelectedChanged(UIElement newSelected)
-        {
-            int index = Container.IndexOf(newSelected);
-
-            if (index != -1)
-            {
-                CalculateIndexRange(newSelected);
-
-                CalculatePositions();
-            }
-        }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (Visable)
@@ -166,6 +155,10 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        #endregion
+
+        #region IScrollable
+
         public void MouseScroll(int value)
         {
             if (value < 0) //Scroll down
@@ -184,7 +177,25 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        #endregion
+
         #region Helpers
+
+        /// <summary>
+        /// Callback method whenever the player selects a new UI Element from the current screen.
+        /// </summary>
+        /// <param name="newSelected">Newly selected element.</param>
+        protected void SelectedChanged(UIElement newSelected)
+        {
+            int index = Container.IndexOf(newSelected);
+
+            if (index != -1)
+            {
+                CalculateIndexRange(newSelected);
+
+                CalculatePositions();
+            }
+        }
 
         private void CalculateIndexRange(UIElement element)
         {

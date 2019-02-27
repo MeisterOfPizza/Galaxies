@@ -41,7 +41,7 @@ namespace Galaxies.UI.Elements
         {
             this.itemHeight = itemHeight;
 
-            screen.SelectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
+            screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
         }
 
         #region Overriden methods

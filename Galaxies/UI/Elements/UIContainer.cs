@@ -1,4 +1,5 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@ namespace Galaxies.UI
     /// Allows the element to have a subset of UI Element children, while also enabling an easy way of selecting them.
     /// Disables the ability to click this element.
     /// </summary>
-    abstract class UIContainer : UIElement
+    abstract class UIContainer : UIElement, IContainer
     {
 
         protected List<UIElement> Container { get; private set; } = new List<UIElement>();
@@ -32,6 +33,18 @@ namespace Galaxies.UI
         protected Vector2 Spacing { get; private set; }
 
         private bool ResponsiveSize { get; set; }
+
+        #region IContainer
+
+        public IList<UIElement> Children
+        {
+            get
+            {
+                return Container;
+            }
+        }
+
+        #endregion
 
         public UIContainer(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, bool responsiveSize)
             : base(transform, sprite, screen)
