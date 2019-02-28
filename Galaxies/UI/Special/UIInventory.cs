@@ -5,6 +5,7 @@ using Galaxies.Items;
 using Galaxies.UI.Elements;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace Galaxies.UI.Special
 {
@@ -14,7 +15,9 @@ namespace Galaxies.UI.Special
 
         public UIScrollableGrid ItemGrid { get; private set; }
 
-        public UIInventory(Transform transform, Screen screen) : base(transform, null, screen)
+        public UIItem[] Items { get; private set; }
+
+        public UIInventory(Transform transform, Screen screen, IList<Item> items) : base(transform, null, screen)
         {
             AddUIElement(new UIText(
                 new Transform(Transform.SetPosition(Alignment.MiddleCenter, new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)), new Vector2(transform.Width, 50)),
@@ -34,18 +37,18 @@ namespace Galaxies.UI.Special
                 new Vector2(400, 300)
                 ));
 
-            foreach (Item item in PlayerShip.Singleton.Inventory.Items)
-            {
-                var itemPointer = item; //Create a new pointer (reference).
+            Items = new UIItem[items.Count];
 
-                ItemGrid.AddUIElement(
-                    new UIItem(
-                        new Transform(new Vector2(400, 300)),
-                        SpriteHelper.GetSprite("Sprites/UI/Column"),
-                        screen,
-                        itemPointer
-                        )
-                );
+            for (int i = 0; i < items.Count; i++)
+            {
+                var itemPointer = items[i]; //Create a new pointer (reference).
+
+                Items[i] = ItemGrid.AddUIElement(new UIItem(
+                    new Transform(new Vector2(400, 300)),
+                    SpriteHelper.GetSprite("Sprites/UI/Column"),
+                    screen,
+                    itemPointer
+                    ));
             }
 
             AddUIElement(
