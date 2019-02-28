@@ -48,6 +48,7 @@
     <Compile Include="Core\EventArg0.cs" />
     <Compile Include="Core\EventArg.cs" />
     <Compile Include="Core\EventArg1.cs" />
+    <Compile Include="Core\EventArg2.cs" />
     <Compile Include="Core\EventArgList.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
@@ -109,6 +110,8 @@
     <Compile Include="UI\Screens\PlanetarySystemScreen.cs" />
     <Compile Include="UI\Screens\Screen.cs" />
     <Compile Include="UI\Elements\UIContainer.cs" />
+    <Compile Include="UI\Special\UIInventory.cs" />
+    <Compile Include="UI\Special\UIItem.cs" />
     <Compile Include="UI\Special\UIPlanet.cs" />
     <Compile Include="UI\Special\UIPlanetarySystem.cs" />
     <Compile Include="UI\Elements\UIMessageBox.cs" />

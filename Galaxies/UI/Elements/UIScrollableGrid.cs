@@ -41,6 +41,9 @@ namespace Galaxies.UI.Elements
             this.itemSize = itemSize;
 
             Screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
+
+            CalculateSize();
+            CalculatePositions();
         }
 
         #region Overriden methods
@@ -58,9 +61,9 @@ namespace Galaxies.UI.Elements
             float startX = transform.Width / 2f - itemSize.X / 2f; //Position of the first element from the left.
             float startY = transform.Height / 2f - itemSize.Y / 2f; //Position of the first element from the top.
 
-            for (int x = 0; x < maxFitPerViewX; x++)
+            for (int y = 0; y < maxFitPerViewY; y++)
             {
-                for (int y = 0; y < maxFitPerViewY; y++)
+                for (int x = 0; x < maxFitPerViewX; x++)
                 {
                     if (goFrom < goTo)
                     {

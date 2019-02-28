@@ -348,6 +348,61 @@ namespace Galaxies.Core
 
         #endregion
 
+        /* Static methods */
+
+        #region Positioning
+        
+        /// <summary>
+        /// Creates a new position.
+        /// </summary>
+        /// <param name="alignment">Base alignment.</param>
+        /// <param name="offset">Offset from alignment.</param>
+        /// <param name="size">Size of the GameObject.</param>
+        /// <returns>Position</returns>
+        public static Vector2 SetPosition(Alignment alignment, Vector2 offset, Vector2 size)
+        {
+            Vector2 position = offset;
+            Vector2 halfSize = size / 2f;
+
+            switch (alignment)
+            {
+                case Alignment.TopLeft:
+                    position += halfSize;
+                    break;
+                case Alignment.TopCenter:
+                    position += new Vector2(GameUIController.WindowWidth / 2f, halfSize.Y);
+                    break;
+                case Alignment.TopRight:
+                    position += new Vector2(GameUIController.WindowWidth - halfSize.X, halfSize.Y);
+                    break;
+                case Alignment.MiddleLeft:
+                    position += new Vector2(halfSize.X, GameUIController.WindowHeight / 2f);
+                    break;
+                case Alignment.MiddleCenter:
+                    position += new Vector2(GameUIController.WindowWidth / 2f, GameUIController.WindowHeight / 2f);
+                    break;
+                case Alignment.MiddleRight:
+                    position += new Vector2(GameUIController.WindowWidth - halfSize.X, GameUIController.WindowHeight / 2f);
+                    break;
+                case Alignment.BottomLeft:
+                    position += new Vector2(halfSize.X, GameUIController.WindowHeight - halfSize.Y);
+                    break;
+                case Alignment.BottomCenter:
+                    position += new Vector2(GameUIController.WindowWidth / 2f, GameUIController.WindowHeight - halfSize.Y);
+                    break;
+                case Alignment.BottomRight:
+                    position += new Vector2(GameUIController.WindowWidth - halfSize.X, GameUIController.WindowHeight - halfSize.Y);
+                    break;
+                default:
+                case Alignment.Custom:
+                    break;
+            }
+
+            return position;
+        }
+
+        #endregion
+
     }
 
 }

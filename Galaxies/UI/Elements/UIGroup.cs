@@ -43,6 +43,7 @@ namespace Galaxies.UI.Elements
 
             //Add the UI Element to the screen's clickable items.
             screen.AddInteractable(uiElement); //Returns false if it wasn't an interactable.
+            screen.AddScrollable(uiElement); //Returns false if it wasn't a scrollable.
 
             return uiElement;
         }
