@@ -1,25 +1,37 @@
-﻿using Galaxies.Core;
-using Galaxies.Datas.Items;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Galaxies.Datas.Items;
 
 namespace Galaxies.Items
 {
 
-    public abstract class Item : GameObject
+    public abstract class Item
     {
 
         public ItemData  Data      { get; protected set; }
         public Inventory Inventory { get; private set; }
 
-        public Item(ItemData data, Inventory inventory) : base(new Transform(new Vector2(50, 50)), MainGame.Singleton.Content.Load<Texture2D>(data.SpriteName))
-        {
-            this.SetColor(data.Color.GetColor());
+        #region Helpers
 
+        /// <summary>
+        /// Can this item be sold?
+        /// </summary>
+        public abstract bool CanSell { get; }
+
+        /// <summary>
+        /// How much does purchasing this item cost the player?
+        /// </summary>
+        public virtual int PurchaseGG { get; }
+
+        /// <summary>
+        /// How much does selling this item yield the player?
+        /// </summary>
+        public virtual int SellGG { get; }
+
+        #endregion
+
+        public Item(ItemData data, Inventory inventory)
+        {
             this.Data      = data;
             this.Inventory = inventory;
-
-            Visable = false;
         }
 
         public virtual void ChangeInventory(Inventory newInventory)

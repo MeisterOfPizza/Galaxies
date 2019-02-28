@@ -54,6 +54,12 @@ namespace Galaxies
             //TEST: Adding a planetary system
             GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
 
+            //TEST: Adding items to player's inventory
+            for (int i = 0; i < 10; i++)
+            {
+                Entities.PlayerShip.Singleton.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(Entities.PlayerShip.Singleton.Inventory));
+            }
+
             GameUIController.Window = Window;
             GameUIController.CreateGalaxyScreen();
         }

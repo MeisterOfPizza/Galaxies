@@ -82,6 +82,7 @@ namespace Galaxies.UI
 
             //Add the UI Element to the screen's clickable items.
             screen.AddInteractable(uiElement); //Returns false if it wasn't an interactable.
+            screen.AddScrollable(uiElement); //Returns false if it wasn't a scrollable.
 
             CalculatePositions();
 
@@ -106,6 +107,7 @@ namespace Galaxies.UI
 
                 //Add the UI Element to the screen's clickable items.
                 screen.AddInteractable(uiElements[i]); //Returns false if it wasn't an interactable.
+                screen.AddScrollable(uiElements[i]); //Returns false if it wasn't a scrollable.
 
                 UIElementAdded(uiElements[i]);
             }

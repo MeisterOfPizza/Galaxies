@@ -268,11 +268,13 @@ namespace Galaxies.UI.Screens
             Vector2 mousePos = ms_lastPosition.ToVector2();
 
             //WARNING: Might procude an error, as scrolling can remove scrollables and cause the count to go down?
-            for (int i = 0; i < Scrollables.Count; i++)
+            for (int i = Scrollables.Count - 1; i >= 0; i--)
             {
-                if (Scrollables[i].IsScrollable && UIElements[i].Contains(mousePos))
+                if (Scrollables[i].IsScrollable && ((GameObject)Scrollables[i]).Contains(mousePos))
                 {
                     Scrollables[i].MouseScroll(value);
+
+                    return;
                 }
             }
         }
@@ -365,13 +367,26 @@ namespace Galaxies.UI.Screens
         /// <summary>
         /// Tries to add the UI Element as an interactable. Returns true if it succeeded, false if it didn't.
         /// </summary>
-        /// <param name="uiElement"></param>
-        /// <returns></returns>
         public bool AddInteractable(UIElement uiElement)
         {
             if (uiElement is IInteractable interactable)
             {
                 Interactables.Add(interactable);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Tries to add the UI Element as a scrollable. Returns true if it succeeded, false if it didn't.
+        /// </summary>
+        public bool AddScrollable(UIElement uiElement)
+        {
+            if (uiElement is IScrollable scrollable)
+            {
+                Scrollables.Add(scrollable);
 
                 return true;
             }

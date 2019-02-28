@@ -39,6 +39,17 @@ namespace Galaxies.UI.Screens
                 }
             }
 
+            AddUIElement(new UIButton(
+                new Transform(Alignment.BottomRight, new Vector2(250, 50)),
+                SpriteHelper.Arial_Font,
+                "Inventory",
+                TextAlign.MiddleCenter,
+                5,
+                columnSprite,
+                new EventArg1<Screen>(InventoryUIController.CreateWindow, this),
+                this
+                ));
+
             /*
             AddUIElement(new UIElement(backToMenuSprite, GameUIController.BottomLeftCorner(backToMenuSprite.Width, backToMenuSprite.Height), 0, Color.White, null)); //TODO: Back to menu
             AddUIElement(new UIElement(galaxyBackgroundSprite, Vector2.Zero, 0, Color.White, null));

@@ -109,6 +109,9 @@
     <Compile Include="UI\Screens\PlanetarySystemScreen.cs" />
     <Compile Include="UI\Screens\Screen.cs" />
     <Compile Include="UI\Elements\UIContainer.cs" />
+    <Compile Include="UIControllers\InventoryUIController.cs" />
+    <Compile Include="UI\Special\UIInventory.cs" />
+    <Compile Include="UI\Special\UIItem.cs" />
     <Compile Include="UI\Special\UIPlanet.cs" />
     <Compile Include="UI\Special\UIPlanetarySystem.cs" />
     <Compile Include="UI\Elements\UIMessageBox.cs" />
