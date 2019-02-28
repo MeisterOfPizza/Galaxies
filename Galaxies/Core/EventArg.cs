@@ -3,6 +3,7 @@
     
     delegate void _EventArg0();
     delegate void _EventArg1<T1>(T1 t1);
+    delegate void _EventArg2<T1, T2>(T1 t1, T2 t2);
 
     /// <summary>
     /// Base class for all events.

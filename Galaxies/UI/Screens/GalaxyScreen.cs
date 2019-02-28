@@ -15,6 +15,8 @@ namespace Galaxies.UI.Screens
     class GalaxyScreen : Screen
     {
 
+        private UIInventory inventory;
+
         public override void CreateUI(ContentManager content)
         {
             var columnSprite           = content.Load<Texture2D>("Sprites/UI/Column");
@@ -46,7 +48,7 @@ namespace Galaxies.UI.Screens
                 TextAlign.MiddleCenter,
                 5,
                 columnSprite,
-                new EventArg1<Screen>(InventoryUIController.CreateWindow, this),
+                new EventArg0(CreateInventory),
                 this
                 ));
 
@@ -55,6 +57,18 @@ namespace Galaxies.UI.Screens
             AddUIElement(new UIElement(galaxyBackgroundSprite, Vector2.Zero, 0, Color.White, null));
             AddUIElement(new ListBox(statsSprite, GameUIController.BottomRightCorner(statsSprite.Width, statsSprite.Height), 0, Color.White, null));
             */
+        }
+
+        private void CreateInventory()
+        {
+            if (inventory != null && UIElements.Contains(inventory)) //Check if it hasn't already been removed.
+            {
+                RemoveUIElement(inventory);
+            }
+            else
+            {
+                inventory = AddUIElement(new UIInventory(new Transform(Alignment.MiddleCenter, new Vector2(1200, 600)), this));
+            }
         }
 
     }
