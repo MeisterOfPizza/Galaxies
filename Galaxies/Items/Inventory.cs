@@ -22,6 +22,13 @@ namespace Galaxies.Items
             Owner.InventoryChanged(item);
         }
 
+        public void AddItems(IList<Item> items)
+        {
+            Items.AddRange(items);
+
+            Owner.InventoryChanged(items);
+        }
+
         public void RemoveItem(Item item)
         {
             Items.Remove(item);

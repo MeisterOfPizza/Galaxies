@@ -3,6 +3,7 @@ using Galaxies.Datas.Items;
 using Galaxies.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using System.Linq;
 
 //Disable "[...] is never assigned to [...]" warnings.
@@ -16,12 +17,13 @@ namespace Galaxies.Entities
 
         #region Fields
 
-        ShipStats baseStats;
-        ShipStats modifiedStats;
-        int       currentHealth;
-        int       currentShield;
-        int       currentEnergy;
-        bool      isAlive = true;
+        protected ShipStats baseStats;
+        protected ShipStats modifiedStats;
+
+        int  currentHealth;
+        int  currentShield;
+        int  currentEnergy;
+        bool isAlive = true;
 
         #endregion
 
@@ -205,6 +207,13 @@ namespace Galaxies.Entities
             {
                 CalculateStats();
             }
+        }
+
+        public void InventoryChanged(IList<Item> changedItems)
+        {
+            //We only care to update stats if the changed item was of type ShipUpgrade,
+            //however, we don't want to look through the whole list, so just update in case.
+            CalculateStats();
         }
 
         #endregion

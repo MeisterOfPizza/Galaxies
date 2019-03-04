@@ -45,6 +45,7 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Core\EventArg0.cs" />
     <Compile Include="Core\EventArg.cs" />
     <Compile Include="Core\EventArg1.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="UI\Interfaces\IInteractable.cs" />
     <Compile Include="UI\Interfaces\IScrollable.cs" />
     <Compile Include="UI\Interfaces\ITextElement.cs" />
+    <Compile Include="UI\Screens\CitadelScreen.cs" />
     <Compile Include="UI\Screens\CombatScreen.cs" />
     <Compile Include="UI\Screens\GalaxyScreen.cs" />
     <Compile Include="UI\Screens\MenuScreen.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="UI\Special\UIPlanet.cs" />
     <Compile Include="UI\Special\UIPlanetarySystem.cs" />
     <Compile Include="UI\Elements\UIMessageBox.cs" />
+    <Compile Include="UI\Special\UITopInfo.cs" />
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
