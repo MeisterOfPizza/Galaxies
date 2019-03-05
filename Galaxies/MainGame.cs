@@ -57,7 +57,13 @@ namespace Galaxies
             //TEST: Adding items to player's inventory
             for (int i = 0; i < 10; i++)
             {
-                Entities.PlayerShip.Singleton.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(Entities.PlayerShip.Singleton.Inventory));
+                PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
+            }
+
+            //TEST: Adding items to merchant's inventory
+            for (int i = 0; i < 10; i++)
+            {
+                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
             }
 
             GameUIController.Window = Window;

@@ -16,16 +16,6 @@ namespace Galaxies.Items
         /// </summary>
         public abstract bool CanSell { get; }
 
-        /// <summary>
-        /// How much does purchasing this item cost the player?
-        /// </summary>
-        public virtual int PurchaseGG { get; }
-
-        /// <summary>
-        /// How much does selling this item yield the player?
-        /// </summary>
-        public virtual int SellGG { get; }
-
         #endregion
 
         public Item(ItemData data, Inventory inventory)

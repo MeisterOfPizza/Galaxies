@@ -43,6 +43,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\MerchantController.cs" />
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Core\EventArg.cs" />
     <Compile Include="Core\EventArg1.cs" />
     <Compile Include="Core\EventArg2.cs" />
+    <Compile Include="Core\EventArg3.cs" />
     <Compile Include="Core\EventArgList.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
@@ -68,6 +70,8 @@
     <Compile Include="Datas\Space\PlanetarySystemData.cs" />
     <Compile Include="Datas\Space\PlanetData.cs" />
     <Compile Include="Datas\Space\PlanetEventData.cs" />
+    <Compile Include="Economy\Balance.cs" />
+    <Compile Include="Economy\Trader.cs" />
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\EnemyShip.cs" />
     <Compile Include="Entities\PlayerShip.cs" />

@@ -68,7 +68,7 @@ namespace Galaxies.UI.Screens
             }
             else
             {
-                inventory = AddUIElement(new UIInventory(new Transform(Alignment.MiddleCenter, new Vector2(1200, 600)), this, PlayerShip.Singleton.Inventory.Items));
+                inventory = AddUIElement(new UIInventory(new Transform(Alignment.MiddleCenter, new Vector2(1200, 600)), this, PlayerController.Player.Inventory.Items));
             }
         }
 

@@ -39,7 +39,8 @@ namespace Galaxies.Controllers
         private static void LoadNewGame()
         {
             CurrentSaveFile.IsNewGame = false;
-            PlayerShip.CreateNewPlayer();
+            PlayerController.CreateNewPlayer();
+            MerchantController.CreateMerchant();
         }
         
         private static void LoadSaveGame(SaveFile saveFile)

@@ -77,7 +77,7 @@ namespace Galaxies.Progression
         public SaveFile_Player()
         {
             PlayerShip = new SaveFile_PlayerShip(PlayerController.Ship.BaseStats, PlayerController.Ship.ModifiedStats);
-            Inventory  = new SaveFile_Inventory(PlayerController.Inventory);
+            Inventory  = new SaveFile_Inventory(PlayerController.Player.Inventory);
         }
 
     }

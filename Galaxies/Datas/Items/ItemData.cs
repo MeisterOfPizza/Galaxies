@@ -22,6 +22,9 @@ namespace Galaxies.Datas.Items
         [XmlElement("Color", typeof(ColorData), IsNullable = true)]
         public ColorData Color { get; set; } = new ColorData();
 
+        [XmlElement("GalacticGoldValue", typeof(int), IsNullable = false)]
+        public int GalacticGoldValue { get; set; }
+
         public abstract ItemType ItemType { get; }
 
         public abstract Item CreateItem(Inventory inventory);
