@@ -171,8 +171,6 @@
     <Content Include="Content\Sprites\Box 4x4.png" />
     <Content Include="Content\Sprites\Effects\Bullet.png" />
     <Content Include="Content\Sprites\Effects\Shield.png" />
-    <Content Include="Content\Sprites\Faded Circle.png" />
-    <Content Include="Content\Sprites\Filled Circle.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 1.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 2.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 3.png" />
