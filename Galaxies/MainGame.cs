@@ -55,13 +55,13 @@ namespace Galaxies
             GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
 
             //TEST: Adding items to player's inventory
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 9; i++)
             {
                 PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
             }
 
             //TEST: Adding items to merchant's inventory
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 9; i++)
             {
                 MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
             }

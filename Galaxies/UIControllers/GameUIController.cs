@@ -84,6 +84,17 @@ namespace Galaxies.UIControllers
             CurrentScreen.CreateUI(MainGame.Singleton.Content);
         }
 
+        public static void CreateCitadelScreen()
+        {
+            //Refill the player's stats:
+            PlayerController.Ship.RefillStats();
+
+            GameController.GameState = GameState.Citadel;
+
+            CurrentScreen = new CitadelScreen();
+            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+        }
+
         #endregion
 
         #region Position helpers

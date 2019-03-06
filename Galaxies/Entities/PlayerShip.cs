@@ -1,6 +1,5 @@
 ﻿using Galaxies.Core;
 using Galaxies.Items;
-using Galaxies.Progression;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -39,13 +38,6 @@ namespace Galaxies.Entities
         public PlayerShip(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats) : base(transform, sprite, speed, baseStats)
         {
             this.Inventory = new Inventory(this);
-        }
-
-        public void RefillStats()
-        {
-            Health = MaxHealth;
-            Shield = MaxShield;
-            Energy = MaxEnergy;
         }
 
         public override void TakeEnergy()

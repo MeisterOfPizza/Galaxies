@@ -75,8 +75,6 @@ namespace Galaxies.Combat
             }
             else if (!Enemy.IsAlive)
             {
-                Player.RefillStats(); //Refill player's stats to ready them for the next battle.
-
                 GameUIController.CreatePlanetarySystemScreen(); //Exit the combat screen.
                 PlanetEventController.TriggerNextEvent();
 

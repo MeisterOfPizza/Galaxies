@@ -17,6 +17,25 @@ namespace Galaxies.UI.Elements
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
 
+        public override bool Visable
+        {
+            get
+            {
+                return visable;
+            }
+
+            set
+            {
+                visable = value;
+
+                //Make every child visable/invisable.
+                foreach (UIGroupElement groupElement in GroupElements)
+                {
+                    groupElement.UIElement.Visable = value;
+                }
+            }
+        }
+
         #region IContainer
 
         public IList<UIElement> Children

@@ -35,6 +35,9 @@ namespace Galaxies.Entities
                     Inventory.AddItem(new ShipUpgrade(DataController.LoadData<ShipUpgradeItemData>(id, DataFileType.Items), Inventory));
                 }
             }
+
+            //Update the new stats:
+            RefillStats();
         }
 
         public override void TakeEnergy()

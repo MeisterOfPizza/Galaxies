@@ -32,7 +32,29 @@ namespace Galaxies.UI
         /// </summary>
         protected Vector2 Spacing { get; private set; }
 
+        /// <summary>
+        /// Allows the use of <see cref="CalculateSize"/>.
+        /// </summary>
         private bool ResponsiveSize { get; set; }
+
+        public override bool Visable
+        {
+            get
+            {
+                return visable;
+            }
+
+            set
+            {
+                visable = value;
+
+                //Make every child visable/invisable.
+                foreach (UIElement element in Container)
+                {
+                    element.Visable = value;
+                }
+            }
+        }
 
         #region IContainer
 

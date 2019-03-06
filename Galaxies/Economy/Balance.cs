@@ -6,6 +6,16 @@
 
         public int GalacticGold { get; private set; }
 
+        public Balance()
+        {
+            GalacticGold = 0;
+        }
+
+        public Balance(int galacticGold)
+        {
+            this.GalacticGold = galacticGold;
+        }
+
         public bool Extract(int amount)
         {
             if (GalacticGold >= amount)

@@ -60,6 +60,8 @@ namespace Galaxies.UI.Special
                 onPurchase,
                 screen
                 ));
+
+            CalculatePositions();
         }
 
         public void CreateSellButton(EventArg onSell)
@@ -74,6 +76,8 @@ namespace Galaxies.UI.Special
                 onSell,
                 screen
                 ));
+
+            CalculatePositions();
         }
 
     }

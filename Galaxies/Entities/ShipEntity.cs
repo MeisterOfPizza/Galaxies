@@ -130,7 +130,9 @@ namespace Galaxies.Entities
         {
             this.baseStats     = baseStats;
             this.modifiedStats = new ShipStats();
+
             this.currentHealth = MaxHealth;
+            this.currentShield = MaxShield;
             this.currentEnergy = MaxEnergy;
         }
 
@@ -156,10 +158,13 @@ namespace Galaxies.Entities
             }
 
             modifiedStats = new ShipStats(newHealth, newShield, newDamage, newEnergy, newEnergyRegen);
+        }
 
-            currentHealth = MaxHealth;
-            currentShield = MaxShield;
-            currentEnergy = MaxEnergy;
+        public void RefillStats()
+        {
+            Health = MaxHealth;
+            Shield = MaxShield;
+            Energy = MaxEnergy;
         }
 
         public virtual void Attack(ShipEntity defender)
