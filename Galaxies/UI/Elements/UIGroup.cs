@@ -64,6 +64,8 @@ namespace Galaxies.UI.Elements
             screen.AddInteractable(uiElement); //Returns false if it wasn't an interactable.
             screen.AddScrollable(uiElement); //Returns false if it wasn't a scrollable.
 
+            CalculatePositions();
+
             return uiElement;
         }
 

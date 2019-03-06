@@ -63,7 +63,7 @@ namespace Galaxies
             //TEST: Adding items to merchant's inventory
             for (int i = 0; i < 9; i++)
             {
-                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
+                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
             }
 
             GameUIController.Window = Window;
@@ -107,6 +107,7 @@ namespace Galaxies
 
             GameController.Update(gameTime);
             GameUIController.Update(gameTime);
+            TickController.Update(gameTime);
 
             base.Update(gameTime);
         }

@@ -19,7 +19,7 @@ namespace Galaxies.UI.Special
         public UIInventory(Transform transform, Screen screen, IList<Item> items, string title, bool closeButton) : base(transform, null, screen)
         {
             AddUIElement(new UIText(
-                new Transform(transform.Position + new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)),
+                new Transform(new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)),
                 SpriteHelper.Arial_Font,
                 title,
                 TextAlign.MiddleLeft,
@@ -28,7 +28,7 @@ namespace Galaxies.UI.Special
                 ));
 
             ItemGrid = AddUIElement(new UIScrollableGrid(
-                new Transform(transform.Position, transform.Size),
+                new Transform(transform.Size),
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
                 screen,
                 new Vector4(10),
@@ -53,7 +53,7 @@ namespace Galaxies.UI.Special
             if (closeButton)
             {
                 AddUIElement(new UIButton(
-                    new Transform(transform.Position + new Vector2(0, transform.Height / 2f + 50), new Vector2(100, 50)),
+                    new Transform(new Vector2(0, transform.Height / 2f + 50), new Vector2(100, 50)),
                     SpriteHelper.Arial_Font,
                     "Close",
                     TextAlign.MiddleCenter,

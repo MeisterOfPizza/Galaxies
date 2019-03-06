@@ -19,12 +19,7 @@ namespace Galaxies.Controllers
         /// </summary>
         public static void CreateNewPlayer()
         {
-            Ship = new PlayerShip(
-                new Transform(new Vector2(100)),
-                SpriteHelper.GetSprite("Sprites/Player Ships/Player Ship 1"),
-                Vector2.Zero,
-                new ShipStats(100, 100, 10, 1000, 50)
-                );
+            Ship = ShipyardController.PlayerShip_Template_Fighter;
 
             Player = new Trader(Ship.Inventory, new Balance());
         }

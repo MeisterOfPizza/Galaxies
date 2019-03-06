@@ -18,10 +18,10 @@ namespace Galaxies.UI.Special
         public UITopInfo(Screen screen) : base(new Transform(Alignment.TopCenter, new Vector2(GameUIController.WindowWidth, 75)), SpriteHelper.Box4x4_Sprite, screen)
         {
             galacticGoldText = AddUIElement(new UIText(
-                new Transform(Alignment.TopLeft, new Vector2(250, 75)),
+                new Transform(new Vector2(-transform.Width / 2f + 250, 0), new Vector2(250, 75)),
                 SpriteHelper.Arial_Font,
                 PlayerController.Player.Balance.GalacticGold + " GG",
-                TextAlign.MiddleCenter,
+                TextAlign.MiddleLeft,
                 5,
                 screen
                 ));
@@ -30,7 +30,7 @@ namespace Galaxies.UI.Special
 
             //Player health bar:
             AddUIElement(new UIProgressBar(
-                new Transform(Transform.SetPosition(Alignment.TopRight, new Vector2(-700, 25), progressBarSize), progressBarSize),
+                new Transform(new Vector2(transform.Width / 2f - progressBarSize.X - 600, 0), progressBarSize),
                 SpriteHelper.Box4x4_Sprite,
                 Color.Red,
                 SpriteHelper.Box4x4_Sprite,
@@ -42,7 +42,7 @@ namespace Galaxies.UI.Special
 
             //Player shield bar:
             AddUIElement(new UIProgressBar(
-                new Transform(Transform.SetPosition(Alignment.TopRight, new Vector2(-400, 25), progressBarSize), progressBarSize),
+                new Transform(new Vector2(transform.Width / 2f - progressBarSize.X - 300, 0), progressBarSize),
                 SpriteHelper.Box4x4_Sprite,
                 Color.DarkBlue,
                 SpriteHelper.Box4x4_Sprite,
@@ -54,7 +54,7 @@ namespace Galaxies.UI.Special
 
             //Player energy bar:
             AddUIElement(new UIProgressBar(
-                new Transform(Transform.SetPosition(Alignment.TopRight, new Vector2(-100, 25), progressBarSize), progressBarSize),
+                new Transform(new Vector2(transform.Width / 2f - progressBarSize.X, 0), progressBarSize),
                 SpriteHelper.Box4x4_Sprite,
                 Color.Black,
                 SpriteHelper.Box4x4_Sprite,

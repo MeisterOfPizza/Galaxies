@@ -93,6 +93,11 @@ namespace Galaxies.Core
             }
         }
 
+        public void SetOrigin(Vector2 origin)
+        {
+            this.origin = origin;
+        }
+
         #region Virtual methods
 
         public virtual void PositionChanged()

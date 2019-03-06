@@ -17,6 +17,8 @@ namespace Galaxies.Entities
 
         #region Properties
 
+        public bool Unlocked { get; set; }
+
         public ShipStats BaseStats
         {
             get

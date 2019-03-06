@@ -86,8 +86,8 @@ namespace Galaxies.UIControllers
 
         public static void CreateCitadelScreen()
         {
-            //Refill the player's stats:
-            PlayerController.Ship.RefillStats();
+            //Refill the all the player ship template's stats:
+            ShipyardController.RefillShipStats();
 
             GameController.GameState = GameState.Citadel;
 
