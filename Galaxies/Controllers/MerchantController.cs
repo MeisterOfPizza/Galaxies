@@ -11,7 +11,7 @@ namespace Galaxies.Controllers
 
         public static void CreateMerchant()
         {
-            Merchant = new Trader(null, new Balance(1000));
+            Merchant = new Trader(null, new Balance(int.MaxValue));
             Merchant.Inventory = new Inventory(Merchant);
         }
 

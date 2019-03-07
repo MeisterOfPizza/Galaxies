@@ -17,7 +17,15 @@ namespace Galaxies.Entities
 
         #region Properties
 
+        /// <summary>
+        /// Is this PlayerShip unlocked yet?
+        /// </summary>
         public bool Unlocked { get; set; }
+
+        /// <summary>
+        /// What does this PlayerShip cost (GG)?
+        /// </summary>
+        public int Price { get; private set; }
 
         public ShipStats BaseStats
         {
@@ -37,9 +45,11 @@ namespace Galaxies.Entities
 
         #endregion
 
-        public PlayerShip(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats) : base(transform, sprite, speed, baseStats)
+        public PlayerShip(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats, int price) : base(transform, sprite, speed, baseStats)
         {
             this.Inventory = new Inventory(this);
+
+            this.Price = price;
         }
 
         public override void TakeEnergy()

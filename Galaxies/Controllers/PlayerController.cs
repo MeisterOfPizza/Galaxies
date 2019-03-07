@@ -1,9 +1,6 @@
-﻿using Galaxies.Core;
-using Galaxies.Economy;
+﻿using Galaxies.Economy;
 using Galaxies.Entities;
-using Galaxies.Extensions;
 using Galaxies.Items;
-using Microsoft.Xna.Framework;
 
 namespace Galaxies.Controllers
 {
@@ -29,12 +26,14 @@ namespace Galaxies.Controllers
             Ship = newShip;
 
             //Swap the two inventories.
-            foreach (Item item in Player.Inventory.Items)
+            foreach (Item item in Player.Inventory.Items.ToArray())
             {
                 item.ChangeInventory(newShip.Inventory);
             }
 
             Player.Inventory = Ship.Inventory;
+
+            Ship.RefillStats();
         }
 
     }

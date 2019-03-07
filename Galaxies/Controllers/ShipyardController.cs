@@ -21,21 +21,26 @@ namespace Galaxies.Controllers
                 new Transform(new Vector2(100)),
                 SpriteHelper.GetSprite("Sprites/Player Ships/Player Ship 1"),
                 Vector2.Zero,
-                new ShipStats(100, 100, 10, 1000, 50)
+                new ShipStats(100, 250, 15, 500, 75),
+                0
                 );
+
+            PlayerShip_Template_Fighter.Unlocked = true; //The default PlayerShip should ALWAYS be unlocked.
 
             PlayerShip_Template_Bomber = new PlayerShip(
                 new Transform(new Vector2(100)),
                 SpriteHelper.GetSprite("Sprites/Player Ships/Player Ship 2"),
                 Vector2.Zero,
-                new ShipStats(100, 100, 10, 1000, 50)
+                new ShipStats(500, 500, 10, 1250, 35),
+                1000
                 );
 
             PlayerShip_Template_Destroyer = new PlayerShip(
                 new Transform(new Vector2(100)),
                 SpriteHelper.GetSprite("Sprites/Player Ships/Player Ship 3"),
                 Vector2.Zero,
-                new ShipStats(100, 100, 10, 1000, 50)
+                new ShipStats(250, 1000, 50, 2000, 25),
+                2500
                 );
         }
 
@@ -44,6 +49,13 @@ namespace Galaxies.Controllers
             PlayerShip_Template_Fighter.RefillStats();
             PlayerShip_Template_Bomber.RefillStats();
             PlayerShip_Template_Destroyer.RefillStats();
+        }
+
+        public static void AssignPlayerShip(PlayerShip playerShip)
+        {
+            playerShip.Unlocked = true;
+
+            PlayerController.AssignNewShip(playerShip);
         }
 
     }

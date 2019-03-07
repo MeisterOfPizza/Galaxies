@@ -1,6 +1,5 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Core;
-using Galaxies.Entities;
 using Galaxies.Extensions;
 using Galaxies.Space;
 using Galaxies.UI.Elements;
@@ -20,6 +19,12 @@ namespace Galaxies.UI.Screens
 
         public override void CreateUI(ContentManager content)
         {
+            AddUIElement(new UIBackgroundAnimation(
+                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                SpriteHelper.Citadel_Background_Animation,
+                this
+                ));
+
             var columnSprite = content.Load<Texture2D>("Sprites/UI/Column");
 
             var visitablesColumn = AddUIElement(new UIScrollableColumn(new Transform(Alignment.MiddleCenter, new Vector2(300, 600)), columnSprite, this, new Vector4(5, 0, 5, 0), new Vector2(0, 5), 200));

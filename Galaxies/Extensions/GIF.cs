@@ -51,6 +51,8 @@ namespace Galaxies.Extensions
             if (Images.Length > 0)
             {
                 Bounds = Images[0].Bounds.Size.ToVector2();
+
+                Current = Images[0];
             }
 
             TickController.TickEvents.Add(new TickEvent(new EventArg0(Update), gifSpeed));
