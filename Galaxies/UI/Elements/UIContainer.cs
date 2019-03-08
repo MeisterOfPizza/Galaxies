@@ -177,6 +177,15 @@ namespace Galaxies.UI
 
         #endregion
 
+        #region Overriden methods
+
+        public override void PositionChanged()
+        {
+            base.PositionChanged();
+
+            CalculatePositions();
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
@@ -186,6 +195,8 @@ namespace Galaxies.UI
                 element.Draw(spriteBatch);
             }
         }
+
+        #endregion
 
         #region Helpers
 
