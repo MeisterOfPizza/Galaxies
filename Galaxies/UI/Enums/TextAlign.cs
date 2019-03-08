@@ -87,16 +87,24 @@ namespace Galaxies.UI
 
             foreach (string word in words)
             {
-                Vector2 size = textElement.SpriteFont.MeasureString(word); //Size of word
+                Vector2 size = textElement.SpriteFont.MeasureString(word); //Size of the word
 
-                if (lineWidth + size.X < maxLineWidth)
+                if (!word.Contains("\n")) //If it does not contain a line break, then continue.
                 {
-                    sb.Append(word + " ");
-                    lineWidth += size.X + spaceWidth;
+                    if (lineWidth + size.X < maxLineWidth)
+                    {
+                        sb.Append(word + " ");
+                        lineWidth += size.X + spaceWidth;
+                    }
+                    else //Line break
+                    {
+                        sb.Append("\n" + word + " ");
+                        lineWidth = size.X + spaceWidth;
+                    }
                 }
-                else //Line break
+                else
                 {
-                    sb.Append("\n" + word + " ");
+                    sb.Append(word);
                     lineWidth = size.X + spaceWidth;
                 }
             }

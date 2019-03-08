@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Galaxies.UIControllers;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,18 +40,16 @@ namespace Galaxies.Space
 
         #endregion
 
-        //NPCs, etc.
-
         public Citadel()
         {
-
+            //TODO: Refresh store? Refresh quests?
         }
 
         #region IVisitable
 
         public void Visit()
         {
-
+            GameUIController.CreateCitadelScreen();
         }
 
         #endregion

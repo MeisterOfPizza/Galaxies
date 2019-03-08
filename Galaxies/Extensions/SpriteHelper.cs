@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Galaxies.Extensions
 {
@@ -9,6 +11,12 @@ namespace Galaxies.Extensions
     /// </summary>
     static class SpriteHelper
     {
+
+        #region Helpers
+
+        private static string ContentDirectoryPath = Path.GetDirectoryName(Application.ExecutablePath) + "/Content";
+
+        #endregion
 
         #region Fonts
 
@@ -33,6 +41,16 @@ namespace Galaxies.Extensions
 
         #endregion
 
+        #region Animations
+
+        #region Backgrounds
+
+        public static GIF Citadel_Background_Animation { get; private set; }
+
+        #endregion
+
+        #endregion
+
         public static void Initialize(ContentManager content)
         {
             Arial_Font = content.Load<SpriteFont>("Fonts/Arial");
@@ -41,12 +59,39 @@ namespace Galaxies.Extensions
 
             Bullet_Sprite = content.Load<Texture2D>("Sprites/Effects/Bullet");
             Shield_Sprite = content.Load<Texture2D>("Sprites/Effects/Shield");
+
+            Citadel_Background_Animation = new GIF("Sprites/Backgrounds/Animated/space-background-1", 0.08);
         }
 
         public static Texture2D GetSprite(string spriteName)
         {
             //TODO: Implement try-catch?
             return MainGame.Singleton.Content.Load<Texture2D>(spriteName);
+        }
+
+        public static Texture2D[] GetSprites(string path)
+        {
+            ContentManager content = MainGame.Singleton.Content; //Create a new reference for quicker access.
+
+            DirectoryInfo dir = new DirectoryInfo(ContentDirectoryPath + "/" + path);
+
+            if (!dir.Exists) //The directory did not exist, return an empty array.
+            {
+                return new Texture2D[0];
+            }
+
+            FileInfo[] files = dir.GetFiles("*.xnb"); //Search for all files with the file extension .xnb (monogame files).
+
+            Texture2D[] result = new Texture2D[files.Length];
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                string name = Path.GetFileNameWithoutExtension(files[i].Name); //Get the file name alone.
+
+                result[i] = content.Load<Texture2D>(path + "/" + name);
+            }
+
+            return result;
         }
 
     }

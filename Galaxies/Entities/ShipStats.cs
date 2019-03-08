@@ -1,8 +1,10 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace Galaxies.Entities
 {
 
+    [Serializable]
     [XmlRoot(Namespace = "", ElementName = "ShipStats")]
     public struct ShipStats
     {

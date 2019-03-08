@@ -17,6 +17,25 @@ namespace Galaxies.UI.Elements
 
         protected List<UIGroupElement> GroupElements { get; private set; } = new List<UIGroupElement>();
 
+        public override bool Visable
+        {
+            get
+            {
+                return visable;
+            }
+
+            set
+            {
+                visable = value;
+
+                //Make every child visable/invisable.
+                foreach (UIGroupElement groupElement in GroupElements)
+                {
+                    groupElement.UIElement.Visable = value;
+                }
+            }
+        }
+
         #region IContainer
 
         public IList<UIElement> Children
@@ -34,6 +53,8 @@ namespace Galaxies.UI.Elements
 
         }
 
+        #region Managing UI Elements (adding and removing)
+
         /// <summary>
         /// Adds a new UI Element to the <see cref="GroupElements"/> list with the specified local position set as the <see cref="Core.GameObject.Position"/>.
         /// </summary>
@@ -45,8 +66,20 @@ namespace Galaxies.UI.Elements
             screen.AddInteractable(uiElement); //Returns false if it wasn't an interactable.
             screen.AddScrollable(uiElement); //Returns false if it wasn't a scrollable.
 
+            CalculatePositions();
+
             return uiElement;
         }
+
+        /// <summary>
+        /// Remove UIElement from group.
+        /// </summary>
+        public void RemoveUIElement(UIElement uiElement)
+        {
+            GroupElements.RemoveAll(ge => ge.UIElement == uiElement); //Only remove the items that have the same UIElement reference as parameter uiElement.
+        }
+
+        #endregion
 
         public void CalculatePositions()
         {

@@ -78,6 +78,9 @@ namespace Galaxies.UI.Screens
                 new EventArg0(GameUIController.CreateGalaxyScreen),
                 this
                 ));
+
+            //Add the Top Info bar:
+            AddUIElement(new UITopInfo(this));
         }
 
         UIScrollableGrid testGrid;

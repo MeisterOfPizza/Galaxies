@@ -14,6 +14,7 @@ namespace Galaxies.Core
 
         protected Transform transform;
         protected Color     color = Color.White;
+        protected bool      visable = true;
 
         Texture2D sprite;
         Vector2   origin;
@@ -46,14 +47,14 @@ namespace Galaxies.Core
             }
         }
 
-        protected Texture2D Sprite
+        public Texture2D Sprite
         {
             get
             {
                 return sprite;
             }
 
-            set
+            protected set
             {
                 sprite = value;
 
@@ -64,7 +65,18 @@ namespace Galaxies.Core
             }
         }
 
-        public virtual bool Visable { get; set; } = true;
+        public virtual bool Visable
+        {
+            get
+            {
+                return visable;
+            }
+
+            set
+            {
+                visable = value;
+            }
+        }
 
         #endregion
 
@@ -79,6 +91,11 @@ namespace Galaxies.Core
             {
                 origin = new Vector2(sprite.Width / 2f, sprite.Height / 2f);
             }
+        }
+
+        public void SetOrigin(Vector2 origin)
+        {
+            this.origin = origin;
         }
 
         #region Virtual methods

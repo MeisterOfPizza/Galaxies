@@ -270,11 +270,16 @@ namespace Galaxies.UI.Screens
             //WARNING: Might procude an error, as scrolling can remove scrollables and cause the count to go down?
             for (int i = Scrollables.Count - 1; i >= 0; i--)
             {
-                if (Scrollables[i].IsScrollable && ((GameObject)Scrollables[i]).Contains(mousePos))
+                if (Scrollables[i].IsScrollable)
                 {
-                    Scrollables[i].MouseScroll(value);
+                    GameObject scrollable = (GameObject)Scrollables[i];
 
-                    return;
+                    if (scrollable.Visable && scrollable.Contains(mousePos))
+                    {
+                        Scrollables[i].MouseScroll(value);
+
+                        return;
+                    }
                 }
             }
         }
@@ -414,6 +419,18 @@ namespace Galaxies.UI.Screens
                 {
                     ForceFocusOn = false;
                     ForceFocusedInteractable = null;
+                }
+
+                //Unselect it from the "keyboard":
+                if (kb_selectedInteractable == interactable)
+                {
+                    kb_selectedInteractable = null;
+                }
+
+                //Unselect it from the "mouse":
+                if (ms_selectedInteractable == interactable)
+                {
+                    ms_selectedInteractable = null;
                 }
             }
 

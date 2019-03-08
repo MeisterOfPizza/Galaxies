@@ -24,9 +24,19 @@ namespace Galaxies.UI.Elements
         private int     maxFitPerViewX;
         private int     maxFitPerViewY;
 
+        /// <summary>
+        /// The "top" row (position wise) of the visable container.
+        /// </summary>
         private int minRowIndex;
+
+        /// <summary>
+        /// The "bottom" row (position wise) of the visable container.
+        /// </summary>
         private int maxRowIndex;
 
+        /// <summary>
+        /// How many rows are there in total?
+        /// </summary>
         private int maxRows;
 
         #region IScrollable
@@ -110,6 +120,8 @@ namespace Galaxies.UI.Elements
             Grid.Add(addedElement, rowIndex);
 
             maxRows = rowIndex;
+
+            FixIndexRange();
         }
 
         protected override void UIElementRemoved(UIElement removedElement, int removedIndex)
@@ -220,6 +232,21 @@ namespace Galaxies.UI.Elements
                 maxRowIndex = MathHelper.Clamp(rowIndex, 0, maxRows);
 
                 minRowIndex = MathHelper.Clamp(maxRowIndex - fitY, 0, maxRows);
+            }
+        }
+
+        /// <summary>
+        /// Fixes the row index range (<see cref="minRowIndex"/> and <see cref="maxRowIndex"/>) if they're acting weird.
+        /// </summary>
+        private void FixIndexRange()
+        {
+            if ((maxRowIndex - minRowIndex) * maxFitPerViewX <= maxRowIndex * maxFitPerViewX)
+                //Are the amounts of displayed grid items between minRowIndex and maxRowIndex
+                //lower or equal to the maximum amount of grid items that should be displayed?
+            {
+                minRowIndex = MathHelper.Clamp(minRowIndex, 0, maxRows);
+
+                maxRowIndex = MathHelper.Clamp(minRowIndex + maxFitPerViewY - 1, 0, maxRows);
             }
         }
 

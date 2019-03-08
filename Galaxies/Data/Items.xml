@@ -4,8 +4,7 @@
     <Name>Strong hull</Name>
     <Description>A stronger hull reinforces the ship, allowing it to take more damage before it explodes.</Description>
     <SpriteName>Sprites/UI/Column</SpriteName>
-    <PurchaseGG>100</PurchaseGG>
-    <SellGG>10</SellGG>
+    <GalacticGoldValue>100</GalacticGoldValue>
     <ShipStats>
       <Health>10</Health>
       <Shield>5</Shield>

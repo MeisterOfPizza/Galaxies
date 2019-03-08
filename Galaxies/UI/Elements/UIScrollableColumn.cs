@@ -81,6 +81,13 @@ namespace Galaxies.UI.Elements
                 RawSize.Y + Padding.X + Padding.Z + maxFitPerView * Spacing.Y
                 );
         }
+        
+        protected override void UIElementAdded(UIElement addedElement)
+        {
+            base.UIElementAdded(addedElement);
+
+            FixIndexRange();
+        }
 
         protected override void UIElementRemoved(UIElement removedElement, int removedIndex)
         {
@@ -94,8 +101,6 @@ namespace Galaxies.UI.Elements
                 CalculatePositions();
             }
         }
-
-        #endregion
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -118,6 +123,8 @@ namespace Galaxies.UI.Elements
                 }
             }
         }
+
+        #endregion
 
         #region IScrollable
 
@@ -157,17 +164,34 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private void CalculateIndexRange(int selectedIndex)
         {
+            //Scroll down
             if (selectedIndex <= minIndex)
             {
                 minIndex = MathHelper.Clamp(selectedIndex, 0, Container.Count - 1);
 
                 maxIndex = MathHelper.Clamp(minIndex + maxFitPerView, 0, Container.Count - 1);
             }
+            //Scroll up
             else if (selectedIndex >= maxIndex)
             {
                 maxIndex = MathHelper.Clamp(selectedIndex, 0, Container.Count - 1);
 
                 minIndex = MathHelper.Clamp(maxIndex - maxFitPerView, 0, Container.Count - 1);
+            }
+        }
+
+        /// <summary>
+        /// Fixes the row index range (<see cref="minIndex"/> and <see cref="maxIndex"/>) if they're acting weird.
+        /// </summary>
+        private void FixIndexRange()
+        {
+            if ((maxIndex - maxIndex) * maxFitPerView <= maxIndex * maxFitPerView)
+                //Are the amounts of displayed items between minIndex and maxIndex
+                //lower or equal to the maximum amount of items that should be displayed?
+            {
+                minIndex = MathHelper.Clamp(minIndex, 0, Container.Count - 1);
+
+                maxIndex = MathHelper.Clamp(minIndex + maxFitPerView, 0, Container.Count - 1);
             }
         }
 

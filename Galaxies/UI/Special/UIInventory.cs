@@ -1,5 +1,4 @@
 ﻿using Galaxies.Core;
-using Galaxies.Entities;
 using Galaxies.Extensions;
 using Galaxies.Items;
 using Galaxies.UI.Elements;
@@ -17,19 +16,19 @@ namespace Galaxies.UI.Special
 
         public UIItem[] Items { get; private set; }
 
-        public UIInventory(Transform transform, Screen screen, IList<Item> items) : base(transform, null, screen)
+        public UIInventory(Transform transform, Screen screen, IList<Item> items, string title, bool closeButton) : base(transform, null, screen)
         {
             AddUIElement(new UIText(
-                new Transform(Transform.SetPosition(Alignment.MiddleCenter, new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)), new Vector2(transform.Width, 50)),
+                new Transform(new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)),
                 SpriteHelper.Arial_Font,
-                "Inventory",
+                title,
                 TextAlign.MiddleLeft,
                 5,
                 screen
                 ));
 
             ItemGrid = AddUIElement(new UIScrollableGrid(
-                new Transform(Alignment.MiddleCenter, new Vector2(transform.Width, transform.Height)),
+                new Transform(transform.Size),
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
                 screen,
                 new Vector4(10),
@@ -51,9 +50,10 @@ namespace Galaxies.UI.Special
                     ));
             }
 
-            AddUIElement(
-                new UIButton(
-                    new Transform(Transform.SetPosition(Alignment.MiddleCenter, new Vector2(0, transform.Height / 2f + 50), new Vector2(100, 50)), new Vector2(100, 50)),
+            if (closeButton)
+            {
+                AddUIElement(new UIButton(
+                    new Transform(new Vector2(0, transform.Height / 2f + 50), new Vector2(100, 50)),
                     SpriteHelper.Arial_Font,
                     "Close",
                     TextAlign.MiddleCenter,
@@ -61,8 +61,8 @@ namespace Galaxies.UI.Special
                     SpriteHelper.GetSprite("Sprites/UI/Column"),
                     new EventArg0(Close),
                     screen
-                    )
-                );
+                ));
+            }
         }
 
         public void Close()

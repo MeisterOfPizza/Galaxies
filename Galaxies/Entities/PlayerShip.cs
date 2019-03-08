@@ -15,36 +15,46 @@ namespace Galaxies.Entities
 
         #endregion
 
-        public static PlayerShip Singleton { get; private set; }
+        #region Properties
 
-        public PlayerShip(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats) : base(transform, sprite, speed, baseStats)
+        /// <summary>
+        /// Is this PlayerShip unlocked yet?
+        /// </summary>
+        public bool Unlocked { get; set; }
+
+        /// <summary>
+        /// What does this PlayerShip cost (GG)?
+        /// </summary>
+        public int Price { get; private set; }
+
+        public ShipStats BaseStats
+        {
+            get
+            {
+                return baseStats;
+            }
+        }
+
+        public ShipStats ModifiedStats
+        {
+            get
+            {
+                return modifiedStats;
+            }
+        }
+
+        #endregion
+
+        public PlayerShip(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats, int price) : base(transform, sprite, speed, baseStats)
         {
             this.Inventory = new Inventory(this);
 
-            Singleton = this;
-        }
-
-        public void RefillStats()
-        {
-            Health = MaxHealth;
-            Shield = MaxShield;
-            Energy = MaxEnergy;
+            this.Price = price;
         }
 
         public override void TakeEnergy()
         {
             Energy -= FIRE_ENERGY_COST;
-        }
-
-        public static void CreateNewPlayer()
-        {
-            var content = MainGame.Singleton.Content;
-
-            Singleton = new PlayerShip(
-                new Transform(new Vector2(100)),
-                content.Load<Texture2D>("Sprites/Player Ships/Player Ship 1"),
-                Vector2.Zero,
-                new ShipStats(100, 100, 10, 1000, 50));
         }
 
     }

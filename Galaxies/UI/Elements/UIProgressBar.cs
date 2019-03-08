@@ -74,6 +74,13 @@ namespace Galaxies.UI.Elements
             CalculateBarWidth();
         }
 
+        public override void PositionChanged()
+        {
+            base.PositionChanged();
+
+            CalculateBarWidth();
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (Visable)

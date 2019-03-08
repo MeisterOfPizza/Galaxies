@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        /// Takes one argument.
+        /// Takes two arguments.
         /// </summary>
         public override void SetArguments(params object[] args)
         {

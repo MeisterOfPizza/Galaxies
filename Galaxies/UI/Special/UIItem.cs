@@ -12,11 +12,11 @@ namespace Galaxies.UI.Special
     class UIItem : UIGroup
     {
 
-        private Item item;
+        public Item Item { get; private set; }
 
         public UIItem(Transform transform, Texture2D sprite, Screen screen, Item item) : base(transform, sprite, screen)
         {
-            this.item = item;
+            this.Item = item;
 
             Vector2 halfSize = new Vector2(transform.Width / 2f, transform.Height / 2f);
 
@@ -53,13 +53,15 @@ namespace Galaxies.UI.Special
             AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 125, transform.Height / 2f - 25), new Vector2(250, 50)),
                 SpriteHelper.Arial_Font,
-                "Buy [" + item.PurchaseGG + " GG]",
+                "Buy [" + Item.Data.GalacticGoldValue + " GG]",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite(item.Data.SpriteName),
+                SpriteHelper.GetSprite(Item.Data.SpriteName),
                 onPurchase,
                 screen
                 ));
+
+            CalculatePositions();
         }
 
         public void CreateSellButton(EventArg onSell)
@@ -67,13 +69,15 @@ namespace Galaxies.UI.Special
             AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 125, transform.Height / 2f - 25), new Vector2(250, 50)),
                 SpriteHelper.Arial_Font,
-                "Sell [" + item.SellGG + " GG]",
+                "Sell [" + Item.Data.GalacticGoldValue + " GG]",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite(item.Data.SpriteName),
+                SpriteHelper.GetSprite(Item.Data.SpriteName),
                 onSell,
                 screen
                 ));
+
+            CalculatePositions();
         }
 
     }

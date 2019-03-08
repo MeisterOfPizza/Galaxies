@@ -3,6 +3,7 @@ using Galaxies.Datas.Items;
 using Galaxies.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using System.Linq;
 
 //Disable "[...] is never assigned to [...]" warnings.
@@ -16,12 +17,13 @@ namespace Galaxies.Entities
 
         #region Fields
 
-        ShipStats baseStats;
-        ShipStats modifiedStats;
-        int       currentHealth;
-        int       currentShield;
-        int       currentEnergy;
-        bool      isAlive = true;
+        protected ShipStats baseStats;
+        protected ShipStats modifiedStats;
+
+        int  currentHealth;
+        int  currentShield;
+        int  currentEnergy;
+        bool isAlive = true;
 
         #endregion
 
@@ -128,7 +130,9 @@ namespace Galaxies.Entities
         {
             this.baseStats     = baseStats;
             this.modifiedStats = new ShipStats();
+
             this.currentHealth = MaxHealth;
+            this.currentShield = MaxShield;
             this.currentEnergy = MaxEnergy;
         }
 
@@ -154,10 +158,13 @@ namespace Galaxies.Entities
             }
 
             modifiedStats = new ShipStats(newHealth, newShield, newDamage, newEnergy, newEnergyRegen);
+        }
 
-            currentHealth = MaxHealth;
-            currentShield = MaxShield;
-            currentEnergy = MaxEnergy;
+        public void RefillStats()
+        {
+            Health = MaxHealth;
+            Shield = MaxShield;
+            Energy = MaxEnergy;
         }
 
         public virtual void Attack(ShipEntity defender)
@@ -205,6 +212,13 @@ namespace Galaxies.Entities
             {
                 CalculateStats();
             }
+        }
+
+        public void InventoryChanged(IList<Item> changedItems)
+        {
+            //We only care to update stats if the changed item was of type ShipUpgrade,
+            //however, we don't want to look through the whole list, so just update in case.
+            CalculateStats();
         }
 
         #endregion

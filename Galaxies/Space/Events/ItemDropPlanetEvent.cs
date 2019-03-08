@@ -42,7 +42,7 @@ namespace Galaxies.Space.Events
 
             for (int i = 0; i < items.Length; i++)
             {
-                items[i] = ((ItemData)dataObjs[i]).CreateItem(PlayerShip.Singleton.Inventory);
+                items[i] = ((ItemData)dataObjs[i]).CreateItem(PlayerController.Player.Inventory);
             }
 
             string itemNames = items.Length > 0 ? "You found " : "No items found";
@@ -74,11 +74,7 @@ namespace Galaxies.Space.Events
         /// </summary>
         private void _Trigger()
         {
-            //Give the player the items:
-            foreach (var item in items)
-            {
-                PlayerShip.Singleton.Inventory.AddItem(item);
-            }
+            PlayerController.Player.Inventory.AddItems(items);
 
             messageBox.Screen.RemoveUIElement(messageBox);
             PlanetEventController.TriggerNextEvent();

@@ -25,7 +25,7 @@ namespace Galaxies
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            graphics.PreferredBackBufferWidth  = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
             //graphics.ToggleFullScreen();
 
@@ -55,9 +55,16 @@ namespace Galaxies
             GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
 
             //TEST: Adding items to player's inventory
-            for (int i = 0; i < 10; i++)
+            PlayerController.Player.Balance.Deposit(10000);
+            for (int i = 0; i < 9; i++)
             {
-                Entities.PlayerShip.Singleton.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(Entities.PlayerShip.Singleton.Inventory));
+                PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
+            }
+
+            //TEST: Adding items to merchant's inventory
+            for (int i = 0; i < 9; i++)
+            {
+                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
             }
 
             GameUIController.Window = Window;
@@ -101,6 +108,7 @@ namespace Galaxies
 
             GameController.Update(gameTime);
             GameUIController.Update(gameTime);
+            TickController.Update(gameTime);
 
             base.Update(gameTime);
         }

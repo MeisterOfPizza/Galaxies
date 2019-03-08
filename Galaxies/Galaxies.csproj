@@ -43,12 +43,17 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\MerchantController.cs" />
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\ShipyardController.cs" />
+    <Compile Include="Controllers\TickController.cs" />
     <Compile Include="Core\EventArg0.cs" />
     <Compile Include="Core\EventArg.cs" />
     <Compile Include="Core\EventArg1.cs" />
     <Compile Include="Core\EventArg2.cs" />
+    <Compile Include="Core\EventArg3.cs" />
     <Compile Include="Core\EventArgList.cs" />
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
@@ -67,11 +72,14 @@
     <Compile Include="Datas\Space\PlanetarySystemData.cs" />
     <Compile Include="Datas\Space\PlanetData.cs" />
     <Compile Include="Datas\Space\PlanetEventData.cs" />
+    <Compile Include="Economy\Balance.cs" />
+    <Compile Include="Economy\Trader.cs" />
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\EnemyShip.cs" />
     <Compile Include="Entities\PlayerShip.cs" />
     <Compile Include="Entities\ShipEntity.cs" />
     <Compile Include="Entities\ShipStats.cs" />
+    <Compile Include="Extensions\GIF.cs" />
     <Compile Include="Extensions\Random.cs" />
     <Compile Include="Extensions\SpriteHelper.cs" />
     <Compile Include="Items\Interfaces\IInventoryOwner.cs" />
@@ -92,6 +100,7 @@
     <Compile Include="Space\Planet.cs" />
     <Compile Include="Space\PlanetarySystem.cs" />
     <Compile Include="UIControllers\GameUIController.cs" />
+    <Compile Include="UI\Elements\UIBackgroundAnimation.cs" />
     <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
@@ -104,6 +113,7 @@
     <Compile Include="UI\Interfaces\IInteractable.cs" />
     <Compile Include="UI\Interfaces\IScrollable.cs" />
     <Compile Include="UI\Interfaces\ITextElement.cs" />
+    <Compile Include="UI\Screens\CitadelScreen.cs" />
     <Compile Include="UI\Screens\CombatScreen.cs" />
     <Compile Include="UI\Screens\GalaxyScreen.cs" />
     <Compile Include="UI\Screens\MenuScreen.cs" />
@@ -115,6 +125,9 @@
     <Compile Include="UI\Special\UIPlanet.cs" />
     <Compile Include="UI\Special\UIPlanetarySystem.cs" />
     <Compile Include="UI\Elements\UIMessageBox.cs" />
+    <Compile Include="UI\Special\UIShipyard.cs" />
+    <Compile Include="UI\Special\UIShop.cs" />
+    <Compile Include="UI\Special\UITopInfo.cs" />
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +140,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1-anim.gif" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_00_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_01_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_02_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_03_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_04_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_05_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_06_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_07_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_08_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_09_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_10_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_11_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_12_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_13_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_14_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_15_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_16_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_17_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_18_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_19_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_20_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_21_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_22_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_23_delay-0.08s.png" />
+    <Content Include="Content\Sprites\Backgrounds\Static\space-background-1.png" />
+    <Content Include="Content\Sprites\Backgrounds\Static\space-background-2.png" />
+    <Content Include="Content\Sprites\Backgrounds\Static\space-background-3.png" />
     <Content Include="Content\Sprites\Box 4x4.png" />
     <Content Include="Content\Sprites\Effects\Bullet.png" />
     <Content Include="Content\Sprites\Effects\Shield.png" />
