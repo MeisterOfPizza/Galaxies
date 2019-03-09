@@ -84,6 +84,7 @@
     <Compile Include="Extensions\GIF.cs" />
     <Compile Include="Extensions\Random.cs" />
     <Compile Include="Extensions\SpriteHelper.cs" />
+    <Compile Include="Controllers\TextInputController.cs" />
     <Compile Include="Items\Interfaces\IInventoryOwner.cs" />
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="Items\StarChart.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
+    <Compile Include="UI\Elements\UIInputField.cs" />
     <Compile Include="UI\Elements\UIProgressBar.cs" />
     <Compile Include="UI\Elements\UIScrollableColumn.cs" />
     <Compile Include="UI\Elements\UIScrollableGrid.cs" />
@@ -123,11 +125,13 @@
     <Compile Include="UI\Screens\PlanetarySystemScreen.cs" />
     <Compile Include="UI\Screens\Screen.cs" />
     <Compile Include="UI\Elements\UIContainer.cs" />
+    <Compile Include="UI\Special\UICreateSaveFile.cs" />
     <Compile Include="UI\Special\UIInventory.cs" />
     <Compile Include="UI\Special\UIItem.cs" />
     <Compile Include="UI\Special\UIPlanet.cs" />
     <Compile Include="UI\Special\UIPlanetarySystem.cs" />
     <Compile Include="UI\Elements\UIMessageBox.cs" />
+    <Compile Include="UI\Special\UISaveFile.cs" />
     <Compile Include="UI\Special\UISaveFiles.cs" />
     <Compile Include="UI\Special\UIShipyard.cs" />
     <Compile Include="UI\Special\UIShop.cs" />

@@ -62,7 +62,10 @@ namespace Galaxies.UI.Special
         {
             Visable = false;
 
-            onClose.Invoke();
+            if (onClose != null)
+            {
+                onClose.Invoke();
+            }
         }
 
         private void UpdateUISaveFiles()

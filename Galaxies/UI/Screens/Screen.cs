@@ -113,6 +113,16 @@ namespace Galaxies.UI.Screens
         {
             KeyboardUpdate(gameTime);
             MouseUpdate();
+
+            UpdateUIElements(gameTime);
+        }
+
+        private void UpdateUIElements(GameTime gameTime)
+        {
+            foreach (var element in UIElements)
+            {
+                element.Update(gameTime);
+            }
         }
 
         private void KeyboardUpdate(GameTime gameTime)
@@ -446,6 +456,8 @@ namespace Galaxies.UI.Screens
                     RemoveUIElement(child);
                 }
             }
+
+            uiElement.OnDestroy();
         }
 
         #endregion
@@ -474,6 +486,21 @@ namespace Galaxies.UI.Screens
                 {
                     elem.Draw(spriteBatch);
                 }
+            }
+        }
+
+        #endregion
+
+        #region Screen
+
+        /// <summary>
+        /// Call this whenever this screen becomes obsolete.
+        /// </summary>
+        public void DestroyScreen()
+        {
+            foreach (UIElement element in UIElements)
+            {
+                element.OnDestroy();
             }
         }
 

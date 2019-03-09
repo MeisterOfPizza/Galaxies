@@ -14,10 +14,11 @@ namespace Galaxies.UI.Screens
 
         UIColumn uiMenu;
         UISaveFiles uiSaveFiles;
+        UICreateSaveFile uiCreateSaveFile;
 
         public override void CreateUI(ContentManager content)
         {
-            var textBackground = content.Load<Texture2D>("Sprites/UI/Column");
+            var textBackground = SpriteHelper.GetSprite("Sprites/UI/Column");
 
             uiMenu = AddUIElement(new UIColumn(
                 new Transform(Alignment.MiddleCenter, new Vector2(250, 400)),
@@ -28,7 +29,7 @@ namespace Galaxies.UI.Screens
                 ));
 
             uiMenu.AddUIElements(
-                new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, null, this),
+                new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(OpenUICreateSave), this),
                 new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(OpenUISaveFiles), this),
                 new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "Options", TextAlign.MiddleCenter, 5, textBackground, null, this),
                 new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "Exit", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(MainGame.Singleton.Exit), this)
@@ -39,10 +40,24 @@ namespace Galaxies.UI.Screens
                 this,
                 false,
                 "Load",
-                new EventArg0(OpenMenu)
+                new EventArg0(OpenUIMenu)
                 ));
 
             uiSaveFiles.Visable = false;
+
+            uiCreateSaveFile = AddUIElement(new UICreateSaveFile(
+                new Transform(Alignment.MiddleCenter, new Vector2(500, 400)),
+                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                this,
+                new EventArg0(OpenUIMenu)
+                ));
+
+            uiCreateSaveFile.Visable = false;
+        }
+
+        public void OpenUIMenu()
+        {
+            uiMenu.Visable = true;
         }
 
         private void OpenUISaveFiles()
@@ -51,9 +66,10 @@ namespace Galaxies.UI.Screens
             uiSaveFiles.Open();
         }
 
-        public void OpenMenu()
+        private void OpenUICreateSave()
         {
-            uiMenu.Visable = true;
+            uiMenu.Visable = false;
+            uiCreateSaveFile.Open();
         }
 
     }
