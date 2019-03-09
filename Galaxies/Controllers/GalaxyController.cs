@@ -24,18 +24,6 @@ namespace Galaxies.Controllers
             }
         }
 
-        public static void AppendSaveFile(SaveFile saveFile)
-        {
-            //Skip The Citadel index:
-            saveFile.PlanetarySystemIds = new string[Visitables.Count - 1];
-
-            //Skip The Citadel:
-            for (int i = 1; i < Visitables.Count; i++)
-            {
-                saveFile.PlanetarySystemIds[i - 1] = ((PlanetarySystem)Visitables[i]).Data.Id;
-            }
-        }
-
     }
 
 }

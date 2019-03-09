@@ -20,32 +20,30 @@ namespace Galaxies.Controllers
 
         public static GameState GameState { get; set; }
 
-        public static SaveFile CurrentSaveFile { get; private set; }
-
-        public static void LoadGame(SaveFile saveFile)
+        /*
+        public static void LoadGame()
         {
-            CurrentSaveFile = saveFile;
-
-            if (!CurrentSaveFile.IsNewGame) //TODO: Check if a save file exists, if so: check if it's valid.
+            if (!SaveFileController.CurrentSaveFile.IsNewGame) //TODO: Check if a save file exists, if so: check if it's valid.
             {
-                LoadSaveGame(saveFile);
+                LoadSaveGame(SaveFileController.CurrentSaveFile);
             }
             else
             {
                 LoadNewGame();
             }
         }
+        */
 
-        private static void LoadNewGame()
+        public static void NewGame()
         {
-            CurrentSaveFile.IsNewGame = false;
+            SaveFileController.CurrentSaveFile.IsNewGame = false;
 
             MerchantController.CreateMerchant();
-            ShipyardController.CreateShipyard();
             PlayerController.CreateNewPlayer();
+            ShipyardController.CreateShipyard();
         }
         
-        private static void LoadSaveGame(SaveFile saveFile)
+        public static void LoadGame(SaveFile saveFile)
         {
 
         }

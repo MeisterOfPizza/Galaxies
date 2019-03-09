@@ -39,7 +39,7 @@ namespace Galaxies
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
+        /// related content. Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize()
@@ -50,7 +50,9 @@ namespace Galaxies
 
             DataController.Initialize();
             SpriteHelper.Initialize(Content);
+            SaveFileController.Initialize();
 
+            /*
             //TEST: Adding a planetary system
             GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
 
@@ -66,9 +68,10 @@ namespace Galaxies
             {
                 MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
             }
+            */
 
             GameUIController.Window = Window;
-            GameUIController.CreateGalaxyScreen();
+            GameUIController.CreateMenuScreen();
         }
 
         /// <summary>
@@ -81,8 +84,6 @@ namespace Galaxies
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
-            GameController.LoadGame(new SaveFile());
         }
 
         /// <summary>

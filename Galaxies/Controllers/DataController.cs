@@ -36,6 +36,11 @@ namespace Galaxies.Controllers
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.Enemies, new DataFile(document));
+
+            file = File.Open("Data\\PlayerShipTemplates.xml", FileMode.Open);
+            document = new XmlDocument();
+            document.Load(file);
+            DataFiles.Add(DataFileType.PlayerShipTemplates, new DataFile(document));
         }
 
         /// <summary>
@@ -43,9 +48,7 @@ namespace Galaxies.Controllers
         /// </summary>
         public static T LoadData<T>(string id, DataFileType type) where T : Data
         {
-            var dataFile = DataFiles[type];
-
-            if (dataFile != null)
+            if (DataFiles.TryGetValue(type, out DataFile dataFile))
             {
                 XmlNode node = dataFile.GetNode(id);
 
@@ -62,6 +65,26 @@ namespace Galaxies.Controllers
             else
             {
                 //TODO: Add debug msg
+                return null;
+            }
+        }
+
+        public static T[] LoadAllData<T>(DataFileType type, string nodeName) where T : Data
+        {
+            if (DataFiles.TryGetValue(type, out DataFile dataFile))
+            {
+                XmlNodeList nodeList = dataFile.GetNodes(nodeName);
+                T[] nodes = new T[nodeList.Count];
+                
+                for (int i = 0; i < nodeList.Count; i++)
+                {
+                    nodes[i] = Deserialize<T>(nodeList[i]);
+                }
+
+                return nodes;
+            }
+            else
+            {
                 return null;
             }
         }
@@ -84,7 +107,8 @@ namespace Galaxies.Controllers
         PlanetarySystems,
         Planets,
         Items,
-        Enemies
+        Enemies,
+        PlayerShipTemplates
     }
 
     class DataFile
@@ -100,6 +124,11 @@ namespace Galaxies.Controllers
         public XmlNode GetNode(string id)
         {
             return Document.SelectSingleNode(string.Format("//*[@id='{0}']", id));
+        }
+
+        public XmlNodeList GetNodes(string nodeName)
+        {
+            return Document.SelectNodes("//" + nodeName);
         }
 
     }

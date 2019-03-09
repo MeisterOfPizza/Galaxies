@@ -161,18 +161,45 @@ namespace Galaxies.UI
         /// </summary>
         public bool RemoveUIElement(UIElement uiElement)
         {
-            int  index = Container.IndexOf(uiElement);
-            bool value = Container.Remove(uiElement);
+            int  index   = Container.IndexOf(uiElement);
+            bool existed = Container.Remove(uiElement);
 
             screen.RemoveUIElement(uiElement);
 
             //Don't call the method unless the item existed.
-            if (value)
+            if (existed)
             {
                 UIElementRemoved(uiElement, index);
             }
 
-            return value;
+            return existed;
+        }
+
+        /// <summary>
+        /// Clears the container.
+        /// </summary>
+        public void Clear()
+        {
+            foreach (UIElement element in Container.ToArray())
+            {
+                RemoveUIElement(element);
+            }
+        }
+
+        #endregion
+
+        #region Getting UI Elements
+
+        public UIElement GetUIElement(int index)
+        {
+            if (index >= 0 && index < Container.Count)
+            {
+                return Container[index];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         #endregion

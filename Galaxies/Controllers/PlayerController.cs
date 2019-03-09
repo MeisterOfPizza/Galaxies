@@ -16,19 +16,20 @@ namespace Galaxies.Controllers
         /// </summary>
         public static void CreateNewPlayer()
         {
-            Ship = ShipyardController.PlayerShip_Template_Fighter;
-
-            Player = new Trader(Ship.Inventory, new Balance());
+            Player = new Trader(null, new Balance());
         }
 
         public static void AssignNewShip(PlayerShip newShip)
         {
             Ship = newShip;
 
-            //Swap the two inventories.
-            foreach (Item item in Player.Inventory.Items.ToArray())
+            if (Player.Inventory != null)
             {
-                item.ChangeInventory(newShip.Inventory);
+                //Swap the two inventories.
+                foreach (Item item in Player.Inventory.Items.ToArray())
+                {
+                    item.ChangeInventory(newShip.Inventory);
+                }
             }
 
             Player.Inventory = Ship.Inventory;

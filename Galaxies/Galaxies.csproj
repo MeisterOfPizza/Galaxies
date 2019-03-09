@@ -47,6 +47,7 @@
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\SaveFileController.cs" />
     <Compile Include="Controllers\ShipyardController.cs" />
     <Compile Include="Controllers\TickController.cs" />
     <Compile Include="Core\EventArg0.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Datas\Items\ItemData.cs" />
     <Compile Include="Datas\Items\ShipUpgradeItemData.cs" />
     <Compile Include="Datas\Items\StarChartItemData.cs" />
+    <Compile Include="Datas\Player\PlayerShipTemplateData.cs" />
     <Compile Include="Datas\Space\ArtifactPlanetEventData.cs" />
     <Compile Include="Datas\Space\CombatPlanetEventData.cs" />
     <Compile Include="Datas\Space\ItemDropPlanetEventData.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ShipUpgrade.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Progression\PlayerShipTemplate.cs" />
     <Compile Include="Progression\SaveFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Space\Citadel.cs" />
@@ -125,6 +128,7 @@
     <Compile Include="UI\Special\UIPlanet.cs" />
     <Compile Include="UI\Special\UIPlanetarySystem.cs" />
     <Compile Include="UI\Elements\UIMessageBox.cs" />
+    <Compile Include="UI\Special\UISaveFiles.cs" />
     <Compile Include="UI\Special\UIShipyard.cs" />
     <Compile Include="UI\Special\UIShop.cs" />
     <Compile Include="UI\Special\UITopInfo.cs" />
@@ -187,6 +191,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Planets.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\PlayerShipTemplates.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
