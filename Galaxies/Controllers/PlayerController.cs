@@ -19,20 +19,34 @@ namespace Galaxies.Controllers
             Player = new Trader(null, new Balance());
         }
 
+        public static void AssignNewTrader(Trader trader)
+        {
+            if (Player != null && Player.Inventory != null)
+            {
+                trader.Inventory.AddItems(Player.Inventory.Items);
+            }
+
+            Player = trader;
+            Ship.Inventory = trader.Inventory;
+        }
+
         public static void AssignNewShip(PlayerShip newShip)
         {
             Ship = newShip;
 
-            if (Player.Inventory != null)
+            if (Player != null)
             {
-                //Swap the two inventories.
-                foreach (Item item in Player.Inventory.Items.ToArray())
+                if (Player.Inventory != null)
                 {
-                    item.ChangeInventory(newShip.Inventory);
+                    //Swap the two inventories.
+                    foreach (Item item in Player.Inventory.Items.ToArray())
+                    {
+                        item.ChangeInventory(newShip.Inventory);
+                    }
                 }
-            }
 
-            Player.Inventory = Ship.Inventory;
+                Player.Inventory = Ship.Inventory;
+            }
 
             Ship.RefillStats();
         }

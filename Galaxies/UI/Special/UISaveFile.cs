@@ -21,7 +21,7 @@ namespace Galaxies.UI.Special
 
             //Name of save file:
             AddUIElement(new UIText(
-                new Transform(new Vector2(transform.Width, 50), new Vector2(0, -transform.Height / 2f + 25)),
+                new Transform(new Vector2(0, -transform.Height / 2f + 25), new Vector2(transform.Width, 50)),
                 SpriteHelper.Arial_Font,
                 fileInfo.Name,
                 TextAlign.MiddleLeft,
@@ -31,7 +31,7 @@ namespace Galaxies.UI.Special
 
             //Date of save file:
             AddUIElement(new UIText(
-                new Transform(new Vector2(transform.Width, 50), new Vector2(0, -transform.Height / 2f + 75)),
+                new Transform(new Vector2(0, -transform.Height / 2f + 75), new Vector2(transform.Width, 50)),
                 SpriteHelper.Arial_Font,
                 fileInfo.LastWriteTime.ToString(),
                 TextAlign.MiddleCenter,
@@ -42,7 +42,7 @@ namespace Galaxies.UI.Special
             if (canSave)
             {
                 AddUIElement(new UIButton(
-                    new Transform(new Vector2(100, 50), new Vector2(-transform.Width / 2f + 50, transform.Height / 2f - 25)),
+                    new Transform(new Vector2(-transform.Width / 2f + 50, transform.Height / 2f - 25), new Vector2(100, 50)),
                     SpriteHelper.Arial_Font,
                     "Save",
                     TextAlign.MiddleLeft,
@@ -54,7 +54,7 @@ namespace Galaxies.UI.Special
             }
 
             AddUIElement(new UIButton(
-                new Transform(new Vector2(100, 50), new Vector2(transform.Width / 2f - 50, transform.Height / 2f - 25)),
+                new Transform(new Vector2(transform.Width / 2f - 50, transform.Height / 2f - 25), new Vector2(100, 50)),
                 SpriteHelper.Arial_Font,
                 "Load",
                 TextAlign.MiddleCenter,

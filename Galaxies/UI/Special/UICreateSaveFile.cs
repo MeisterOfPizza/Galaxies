@@ -1,5 +1,7 @@
-﻿using Galaxies.Core;
+﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Extensions;
+using Galaxies.Progression;
 using Galaxies.UI.Elements;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
@@ -11,19 +13,58 @@ namespace Galaxies.UI.Special
     class UICreateSaveFile : UIGroup
     {
 
+        UIInputField saveFileNameInputField;
+        UIInputField playerNameInputField;
+
         EventArg onClose;
 
         public UICreateSaveFile(Transform transform, Texture2D sprite, Screen screen, EventArg onClose) : base(transform, sprite, screen)
         {
             this.onClose = onClose;
 
-            AddUIElement(new UIInputField(
-                new Transform(new Vector2(0, -transform.Height / 2f + 25), new Vector2(transform.Width, 50)),
+            saveFileNameInputField = AddUIElement(new UIInputField(
+                new Transform(new Vector2(0, -transform.Height / 2f + 37.5f), new Vector2(transform.Width, 75)),
                 SpriteHelper.Arial_Font,
-                "SaveFile Name",
+                "Save file name",
+                20,
                 TextAlign.MiddleLeft,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
+                screen
+                ));
+
+            playerNameInputField = AddUIElement(new UIInputField(
+                new Transform(new Vector2(0, -transform.Height / 2f + 112.5f), new Vector2(transform.Width, 75)),
+                SpriteHelper.Arial_Font,
+                "Player name",
+                20,
+                TextAlign.MiddleLeft,
+                5,
+                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                screen
+                ));
+
+            //Create button:
+            AddUIElement(new UIButton(
+                new Transform(new Vector2(-55, transform.Height / 2f + 35), new Vector2(100, 50)),
+                SpriteHelper.Arial_Font,
+                "Create",
+                TextAlign.MiddleCenter,
+                5,
+                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                new EventArg0(CreateSaveFile),
+                screen
+                ));
+
+            //Close button:
+            AddUIElement(new UIButton(
+                new Transform(new Vector2(55, transform.Height / 2f + 35), new Vector2(100, 50)),
+                SpriteHelper.Arial_Font,
+                "Close",
+                TextAlign.MiddleCenter,
+                5,
+                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                new EventArg0(Close),
                 screen
                 ));
         }
@@ -36,12 +77,23 @@ namespace Galaxies.UI.Special
         public void Close()
         {
             Visable = false;
+
             //Reset input fields
+            saveFileNameInputField.SetText("");
+            playerNameInputField.SetText("");
 
             if (onClose != null)
             {
                 onClose.Invoke();
             }
+        }
+
+        private void CreateSaveFile()
+        {
+            SaveFile saveFile = new SaveFile(saveFileNameInputField.Text, playerNameInputField.Text);
+
+            GameController.NewGame();
+            SaveFileController.SaveGame(saveFile);
         }
 
     }

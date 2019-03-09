@@ -17,27 +17,31 @@ namespace Galaxies.UI.Elements
     {
 
         /// <summary>
-        /// Cooldown between keystrokes.
+        /// The text that the user has entered.
         /// </summary>
-        private const double INPUT_COOLDOWN = 0.25;
-
-        double timeSinceLastInput;
+        public string Text { get; private set; } = "";
 
         UIText inputFieldText;
         string placeholderText;
+        int    maxLength;
 
         #region IInteractable
 
         public bool     IsInteractable { get; set; } = true;
         public bool     IsSelected     { get; set; }
-        public EventArg OnClick        { get; set; }
         public Color    DefaultColor   { get; set; }
+
+        /// <summary>
+        /// This is repurposed to be used as an event caller for whenever a new text input event is called.
+        /// </summary>
+        public EventArg OnClick { get; set; }
 
         #endregion
 
-        public UIInputField(Transform transform, SpriteFont spriteFont, string placeholderText, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Screen screen) : base(transform, backgroundSprite, screen)
+        public UIInputField(Transform transform, SpriteFont spriteFont, string placeholderText, int maxLength, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, Screen screen) : base(transform, backgroundSprite, screen)
         {
             this.placeholderText = placeholderText;
+            this.maxLength       = maxLength;
             this.DefaultColor    = Color;
 
             this.OnClick = new EventArg1<TextInputEventArgs>(InputChanged, null); //Setup for input changes.
@@ -66,11 +70,29 @@ namespace Galaxies.UI.Elements
 
         private void InputChanged(TextInputEventArgs args)
         {
-            inputFieldText.Text = TextInputController.NewInput(args, inputFieldText.Text);
+            Text = TextInputController.NewInput(args, Text);
 
-            if (string.IsNullOrWhiteSpace(inputFieldText.Text))
+            if (Text.Length > maxLength)
+            {
+                //Limit the length of the input text:
+                Text = Text.Substring(0, maxLength);
+            }
+
+            inputFieldText.Text = string.IsNullOrWhiteSpace(Text) ? placeholderText : Text;
+        }
+
+        public void SetText(string text)
+        {
+            this.Text = text;
+
+            //If the given text is empty (or null), then set the new text as the placeholder text.
+            if (string.IsNullOrEmpty(text))
             {
                 inputFieldText.Text = placeholderText;
+            }
+            else
+            {
+                inputFieldText.Text = text;
             }
         }
 
@@ -85,7 +107,7 @@ namespace Galaxies.UI.Elements
 
         public void Click()
         {
-            //Do nothing here
+            TextInputController.SetTextInputListener((EventArg1<TextInputEventArgs>)OnClick);
         }
 
         public void Select()
@@ -93,8 +115,6 @@ namespace Galaxies.UI.Elements
             SetColor(Color.LightGray);
 
             IsSelected = true;
-
-            TextInputController.SetTextInputListener((EventArg1<TextInputEventArgs>)OnClick);
         }
 
         public void Deselect()

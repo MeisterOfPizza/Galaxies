@@ -51,6 +51,7 @@ namespace Galaxies
             DataController.Initialize();
             SpriteHelper.Initialize(Content);
             SaveFileController.Initialize();
+            ShipyardController.Initialize();
 
             /*
             //TEST: Adding a planetary system

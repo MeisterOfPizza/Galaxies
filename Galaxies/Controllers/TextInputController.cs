@@ -12,15 +12,19 @@ namespace Galaxies.Extensions
         public static EventHandler<TextInputEventArgs> TextInputListener { get; private set; }
         public static EventArg1<TextInputEventArgs>    OnInputEvent      { get; private set; }
 
+        /// <summary>
+        /// Adds the new input received by the <see cref="TextInputListener"/>.
+        /// </summary>
         public static string NewInput(TextInputEventArgs textInput, string text)
         {
             KeyboardState kbState = Keyboard.GetState();
 
-            if (kbState.IsKeyDown(Keys.Back))
+            if (kbState.IsKeyDown(Keys.Back) && !string.IsNullOrEmpty(text))
             {
                 text = text.Remove(text.Length - 1);
             }
-            else
+            else if (!kbState.IsKeyDown(Keys.Back))
+                //We still need to check whether or not the user pressed backspace, otherwise if the text is empty, then we'll end up adding the default character.
             {
                 text += textInput.Character;
             }

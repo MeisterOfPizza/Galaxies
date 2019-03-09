@@ -7,10 +7,10 @@ namespace Galaxies.Controllers
     static class ShipyardController
     {
         
-        public static PlayerShipTemplate[] PlayerShipTemplates       { get; private set; }
-        public static PlayerShipTemplate   CurrentPlayerShipTemplate { get; private set; }
+        public static PlayerShipTemplate[] PlayerShipTemplates       { get; set; }
+        public static PlayerShipTemplate   CurrentPlayerShipTemplate { get; set; }
 
-        public static void CreateShipyard()
+        public static void Initialize()
         {
             CreatePlayerShipTemplates();
         }
@@ -24,9 +24,6 @@ namespace Galaxies.Controllers
             {
                 PlayerShipTemplates[i] = new PlayerShipTemplate(playerShipTemplateDatas[i], i == 0 /* Always unlock the first one */);
             }
-
-            //Assign the first ship:
-            AssignPlayerShip(PlayerShipTemplates[0]);
         }
 
         public static void RefillShipStats()

@@ -34,11 +34,8 @@ namespace Galaxies.UI.Screens
             //Creating visitables
             foreach (IVisitable visitable in GalaxyController.Visitables)
             {
-                ///<see cref="PlanetarySystem.Visit"/> and <see cref="Citadel.Visit"/>
-                for (int i = 0; i < 10; i++)
-                {
-                    visitablesColumn.AddUIElement(new UIPlanetarySystem(new Transform(Vector2.Zero), columnSprite, new EventArg0(visitable.Visit), this, visitable));
-                }
+                ///<see cref="PlanetarySystem.Visit"/> and <see cref="Citadel.Visit"/>.
+                visitablesColumn.AddUIElement(new UIPlanetarySystem(new Transform(Vector2.Zero), columnSprite, new EventArg0(visitable.Visit), this, visitable));
             }
 
             AddUIElement(new UIButton(

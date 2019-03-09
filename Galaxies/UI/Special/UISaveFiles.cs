@@ -21,6 +21,7 @@ namespace Galaxies.UI.Special
             this.canSave = canSave;
             this.onClose = onClose;
 
+            //Title:
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, -transform.Height / 2f - 25), new Vector2(transform.Width, 50)),
                 SpriteHelper.Arial_Font,
@@ -30,6 +31,7 @@ namespace Galaxies.UI.Special
                 screen
                 ));
 
+            //Actual column with save files:
             uiSaveFileColumn = AddUIElement(new UIScrollableColumn(
                 new Transform(transform.Size),
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
@@ -39,8 +41,9 @@ namespace Galaxies.UI.Special
                 200
                 ));
 
+            //Close button:
             AddUIElement(new UIButton(
-                new Transform(new Vector2(0, transform.Height / 2f + 25), new Vector2(100, 50)),
+                new Transform(new Vector2(0, transform.Height / 2f + 35), new Vector2(100, 50)),
                 SpriteHelper.Arial_Font,
                 "Close",
                 TextAlign.MiddleCenter,

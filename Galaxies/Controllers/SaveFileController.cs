@@ -64,11 +64,11 @@ namespace Galaxies.Controllers
             return false; //There were no files, therefore no files with the same name as name exists.
         }
 
-        public static void SaveGame(string saveFileName)
+        public static void SaveGame(SaveFile saveFile)
         {
             if (!SaveFileDirectory.Exists) SaveFileDirectory.Create();
 
-            CurrentSaveFile = new SaveFile(CurrentSaveFile.PlayerName, saveFileName);
+            CurrentSaveFile = saveFile;
             CurrentSaveFile.Save();
 
             SerializeSaveFile(CurrentSaveFile);
@@ -78,7 +78,7 @@ namespace Galaxies.Controllers
         {
             if (!SaveFileDirectory.Exists) SaveFileDirectory.Create();
 
-            CurrentSaveFile = new SaveFile(CurrentSaveFile.PlayerName, fileInfo.Name);
+            CurrentSaveFile = new SaveFile(fileInfo.Name, CurrentSaveFile.PlayerName);
             CurrentSaveFile.Save();
 
             SerializeSaveFile(CurrentSaveFile);
@@ -88,13 +88,13 @@ namespace Galaxies.Controllers
         {
             CurrentSaveFile = DeserializeSaveFile(fileInfo);
 
-            //GameController.LoadGame();
+            GameController.LoadGame(CurrentSaveFile);
         }
 
         private static void SerializeSaveFile(SaveFile saveFile)
         {
             //Create the save file.
-            FileStream fs = new FileStream(saveFile.SaveFilePath, FileMode.Create);
+            FileStream fs = new FileStream(saveFile.SaveFilePath + ".sav", FileMode.Create);
 
             // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();

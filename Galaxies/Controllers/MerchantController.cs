@@ -9,7 +9,7 @@ namespace Galaxies.Controllers
 
         public static Trader Merchant { get; private set; }
 
-        public static void CreateMerchant()
+        public static void CreateNewMerchant()
         {
             Merchant = new Trader(null, new Balance(int.MaxValue / 2));
             Merchant.Inventory = new Inventory(Merchant);

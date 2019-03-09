@@ -46,7 +46,7 @@ namespace Galaxies.UI.Screens
             uiSaveFiles.Visable = false;
 
             uiCreateSaveFile = AddUIElement(new UICreateSaveFile(
-                new Transform(Alignment.MiddleCenter, new Vector2(500, 400)),
+                new Transform(Alignment.MiddleCenter, new Vector2(500, 200)),
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
                 this,
                 new EventArg0(OpenUIMenu)

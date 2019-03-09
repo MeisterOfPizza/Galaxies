@@ -1,5 +1,6 @@
 ﻿using Galaxies.Entities;
 using Galaxies.Progression;
+using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,32 +21,60 @@ namespace Galaxies.Controllers
 
         public static GameState GameState { get; set; }
 
-        /*
-        public static void LoadGame()
-        {
-            if (!SaveFileController.CurrentSaveFile.IsNewGame) //TODO: Check if a save file exists, if so: check if it's valid.
-            {
-                LoadSaveGame(SaveFileController.CurrentSaveFile);
-            }
-            else
-            {
-                LoadNewGame();
-            }
-        }
-        */
-
         public static void NewGame()
         {
-            SaveFileController.CurrentSaveFile.IsNewGame = false;
-
-            MerchantController.CreateMerchant();
+            MerchantController.CreateNewMerchant();
             PlayerController.CreateNewPlayer();
-            ShipyardController.CreateShipyard();
+
+            //Assign the player the first ship template:
+            ShipyardController.AssignPlayerShip(ShipyardController.PlayerShipTemplates[0]);
+
+            GameUIController.CreateGalaxyScreen();
+
+            Foo();
+        }
+
+        static void Foo()
+        {
+            //TEST: Adding a planetary system
+            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
+
+            //TEST: Adding items to player's inventory
+            PlayerController.Player.Balance.Deposit(10000);
+            for (int i = 0; i < 9; i++)
+            {
+                PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
+            }
+
+            //TEST: Adding items to merchant's inventory
+            for (int i = 0; i < 9; i++)
+            {
+                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
+            }
         }
         
         public static void LoadGame(SaveFile saveFile)
         {
+            //Default (these should always load):
+            saveFile.Load_PlanetarySystems();
+            saveFile.Load_Player();
 
+            MerchantController.CreateNewMerchant();
+
+            switch (saveFile.GameState)
+            {
+                default:
+                case SaveFile_GameState.Galaxy:
+                    GameUIController.CreateGalaxyScreen();
+                    break;
+                case SaveFile_GameState.PlanetarySystem:
+                    GameUIController.CreatePlanetarySystemScreen();
+                    saveFile.Load_CurrentPlanetarySystem();
+                    break;
+                case SaveFile_GameState.Citadel:
+                    GameUIController.CreateCitadelScreen();
+                    break;
+            }
         }
 
         public static void Draw(SpriteBatch spriteBatch)
