@@ -21,11 +21,6 @@ namespace Galaxies.Controllers
 
         public static void AssignNewTrader(Trader trader)
         {
-            if (Player != null && Player.Inventory != null)
-            {
-                trader.Inventory.AddItems(Player.Inventory.Items);
-            }
-
             Player = trader;
             Ship.Inventory = trader.Inventory;
         }

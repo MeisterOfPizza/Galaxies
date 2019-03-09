@@ -12,8 +12,8 @@ namespace Galaxies.UI.Screens
     class MenuScreen : Screen
     {
 
-        UIColumn uiMenu;
-        UISaveFiles uiSaveFiles;
+        UIColumn         uiMenu;
+        UISaveFiles      uiSaveFiles;
         UICreateSaveFile uiCreateSaveFile;
 
         public override void CreateUI(ContentManager content)
@@ -29,8 +29,8 @@ namespace Galaxies.UI.Screens
                 ));
 
             uiMenu.AddUIElements(
-                new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(OpenUICreateSave), this),
-                new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(OpenUISaveFiles), this),
+                new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(ToggleUICreateSave), this),
+                new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(ToggleUISaveFiles), this),
                 new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "Options", TextAlign.MiddleCenter, 5, textBackground, null, this),
                 new UIButton(new Transform(new Vector2(250, 100)), SpriteHelper.Arial_Font, "Exit", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(MainGame.Singleton.Exit), this)
                 );
@@ -40,7 +40,7 @@ namespace Galaxies.UI.Screens
                 this,
                 false,
                 "Load",
-                new EventArg0(OpenUIMenu)
+                new EventArg0(ToggleUISaveFiles)
                 ));
 
             uiSaveFiles.Visable = false;
@@ -49,27 +49,22 @@ namespace Galaxies.UI.Screens
                 new Transform(Alignment.MiddleCenter, new Vector2(500, 200)),
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
                 this,
-                new EventArg0(OpenUIMenu)
+                new EventArg0(ToggleUICreateSave)
                 ));
 
             uiCreateSaveFile.Visable = false;
         }
 
-        public void OpenUIMenu()
+        public void ToggleUISaveFiles()
         {
-            uiMenu.Visable = true;
+            uiMenu.Visable = !uiMenu.Visable;
+            uiSaveFiles.Visable = !uiSaveFiles.Visable;
         }
 
-        private void OpenUISaveFiles()
+        public void ToggleUICreateSave()
         {
-            uiMenu.Visable = false;
-            uiSaveFiles.Open();
-        }
-
-        private void OpenUICreateSave()
-        {
-            uiMenu.Visable = false;
-            uiCreateSaveFile.Open();
+            uiMenu.Visable = !uiMenu.Visable;
+            uiCreateSaveFile.Visable = !uiCreateSaveFile.Visable;
         }
 
     }

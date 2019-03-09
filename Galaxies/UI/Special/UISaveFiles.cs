@@ -16,6 +16,25 @@ namespace Galaxies.UI.Special
         bool               canSave;
         EventArg           onClose;
 
+        public override bool Visable
+        {
+            get
+            {
+                return base.Visable;
+            }
+
+            set
+            {
+                base.Visable = value;
+
+                if (value)
+                {
+                    //Get all files in directory:
+                    UpdateUISaveFiles();
+                }
+            }
+        }
+
         public UISaveFiles(Transform transform, Screen screen, bool canSave, string title, EventArg onClose) : base(transform, null, screen)
         {
             this.canSave = canSave;
@@ -49,26 +68,9 @@ namespace Galaxies.UI.Special
                 TextAlign.MiddleCenter,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg0(Close),
+                onClose,
                 screen
                 ));
-        }
-
-        public void Open()
-        {
-            Visable = true;
-
-            UpdateUISaveFiles();
-        }
-
-        public void Close()
-        {
-            Visable = false;
-
-            if (onClose != null)
-            {
-                onClose.Invoke();
-            }
         }
 
         private void UpdateUISaveFiles()

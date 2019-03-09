@@ -1,6 +1,5 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Datas.Items;
-using Galaxies.Datas.Player;
 using Galaxies.Datas.Space;
 using Galaxies.Economy;
 using Galaxies.Items;
@@ -38,7 +37,7 @@ namespace Galaxies.Progression
         public string SaveFileName { get; private set; }
 
         /// <summary>
-        /// Full path of the save file (except the extension, in this case, ".sav"). [SYSTEM]
+        /// Full path of the save file (including the extension ".sav"). [SYSTEM]
         /// </summary>
         public string SaveFilePath { get; private set; }
 
@@ -83,7 +82,7 @@ namespace Galaxies.Progression
         {
             this.PlayerName       = playerName;
             this.SaveFileName     = saveFileName;
-            this.SaveFilePath     = SaveFileController.LocalDocumentsSaveFilesDirectoryPath + "/" + saveFileName;
+            this.SaveFilePath     = SaveFileController.LocalDocumentsSaveFilesDirectoryPath + "/" + saveFileName + ".sav";
             this.SaveFileDateTime = DateTime.Now;
         }
 
@@ -149,7 +148,7 @@ namespace Galaxies.Progression
 
         #region Loading
 
-        public PlanetarySystem[] Load_PlanetarySystems()
+        public void Load_PlanetarySystems()
         {
             PlanetarySystem[] systems = new PlanetarySystem[PlanetarySystemIds.Length];
 
@@ -157,13 +156,16 @@ namespace Galaxies.Progression
             {
                 systems[i] = new PlanetarySystem(DataController.LoadData<PlanetarySystemData>(PlanetarySystemIds[i], DataFileType.PlanetarySystems));
             }
-
-            return systems;
+            
+            GalaxyController.AddVisitables(systems);
         }
 
-        public PlanetarySystem Load_CurrentPlanetarySystem()
+        public void Load_CurrentPlanetarySystem()
         {
-            return new PlanetarySystem(DataController.LoadData<PlanetarySystemData>(CurrentPlanetarySystem.Id, DataFileType.PlanetarySystems));
+            if (CurrentPlanetarySystem != null)
+            {
+                PlanetarySystemController.SetPlanetarySystem(new PlanetarySystem(DataController.LoadData<PlanetarySystemData>(CurrentPlanetarySystem.Id, DataFileType.PlanetarySystems)));
+            }
         }
 
         public void Load_Player()
@@ -172,6 +174,12 @@ namespace Galaxies.Progression
 
             Trader trader = new Trader(null, new Balance(PlayerTrader.PlayerBalance));
             Inventory inventory = new Inventory(trader);
+
+            foreach (var item in PlayerTrader.PlayerInventory.Items)
+            {
+                inventory.AddItem(item.GetItem(inventory));
+            }
+
             trader.Inventory = inventory;
 
             PlayerController.AssignNewTrader(trader);
@@ -318,6 +326,22 @@ namespace Galaxies.Progression
         {
             this.ItemId   = item.Data.Id;
             this.ItemType = item.Data.ItemType;
+        }
+
+        public Item GetItem(Inventory inventory)
+        {
+            if (ItemType == ItemType.ShipUpgrade)
+            {
+                return new ShipUpgrade(DataController.LoadData<ShipUpgradeItemData>(ItemId, DataFileType.Items), inventory);
+            }
+            else if (ItemType == ItemType.StarChart)
+            {
+                return new StarChart(DataController.LoadData<StarChartItemData>(ItemId, DataFileType.Items), inventory);
+            }
+            else
+            {
+                return default(Item);
+            }
         }
 
     }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Galaxies.Progression;
+using System;
 using System.IO;
-using Galaxies.Progression;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
 
 namespace Galaxies.Controllers
 {
@@ -50,20 +45,6 @@ namespace Galaxies.Controllers
             }
         }
 
-        private static bool SaveFileExists(string name)
-        {
-            if (!SaveFileDirectory.Exists) SaveFileDirectory.Create();
-
-            var files = SaveFileDirectory.GetFiles("*.sav*");
-
-            if (files != null)
-            {
-                return files.Any(f => f.Name.Equals(name));
-            }
-
-            return false; //There were no files, therefore no files with the same name as name exists.
-        }
-
         public static void SaveGame(SaveFile saveFile)
         {
             if (!SaveFileDirectory.Exists) SaveFileDirectory.Create();
@@ -78,7 +59,10 @@ namespace Galaxies.Controllers
         {
             if (!SaveFileDirectory.Exists) SaveFileDirectory.Create();
 
-            CurrentSaveFile = new SaveFile(fileInfo.Name, CurrentSaveFile.PlayerName);
+            //Remove the extension AND the dot:
+            string fileNameWithoutExtension = fileInfo.Name.Substring(0, fileInfo.Name.Length - 4);
+
+            CurrentSaveFile = new SaveFile(fileNameWithoutExtension, CurrentSaveFile.PlayerName);
             CurrentSaveFile.Save();
 
             SerializeSaveFile(CurrentSaveFile);
@@ -94,7 +78,7 @@ namespace Galaxies.Controllers
         private static void SerializeSaveFile(SaveFile saveFile)
         {
             //Create the save file.
-            FileStream fs = new FileStream(saveFile.SaveFilePath + ".sav", FileMode.Create);
+            FileStream fs = new FileStream(saveFile.SaveFilePath, FileMode.Create);
 
             // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();
@@ -106,7 +90,7 @@ namespace Galaxies.Controllers
             catch (Exception e)
             {
                 Console.WriteLine("Failed to serialize save file. Reason: " + e.Message);
-                throw;
+                throw e;
             }
             finally
             {
@@ -130,7 +114,7 @@ namespace Galaxies.Controllers
             catch (Exception e)
             {
                 Console.WriteLine("Failed to deserialize save file. Reason: " + e.Message);
-                throw;
+                throw e;
             }
             finally
             {

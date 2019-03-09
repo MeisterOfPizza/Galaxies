@@ -1,5 +1,4 @@
-﻿using Galaxies.Entities;
-using Galaxies.Progression;
+﻿using Galaxies.Progression;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,6 +28,8 @@ namespace Galaxies.Controllers
             //Assign the player the first ship template:
             ShipyardController.AssignPlayerShip(ShipyardController.PlayerShipTemplates[0]);
 
+            GalaxyController.Recreate();
+
             GameUIController.CreateGalaxyScreen();
 
             Foo();
@@ -55,11 +56,12 @@ namespace Galaxies.Controllers
         
         public static void LoadGame(SaveFile saveFile)
         {
+            GalaxyController.Recreate();
+            MerchantController.CreateNewMerchant();
+
             //Default (these should always load):
             saveFile.Load_PlanetarySystems();
             saveFile.Load_Player();
-
-            MerchantController.CreateNewMerchant();
 
             switch (saveFile.GameState)
             {

@@ -1,6 +1,4 @@
-﻿using Galaxies.Datas.Space;
-using Galaxies.Progression;
-using Galaxies.Space;
+﻿using Galaxies.Space;
 using System.Collections.Generic;
 
 namespace Galaxies.Controllers
@@ -11,17 +9,15 @@ namespace Galaxies.Controllers
 
         public static List<IVisitable> Visitables { get; private set; } = new List<IVisitable>();
 
-        static GalaxyController()
+        public static void Recreate()
         {
+            Visitables.Clear();
             Visitables.Add(new Citadel());
         }
 
-        public static void LoadSaveFile(SaveFile saveFile)
+        public static void AddVisitables(IList<IVisitable> visitables)
         {
-            foreach (string planetarySystemId in saveFile.PlanetarySystemIds)
-            {
-                Visitables.Add(new PlanetarySystem(DataController.LoadData<PlanetarySystemData>(planetarySystemId, DataFileType.PlanetarySystems)));
-            }
+            Visitables.AddRange(visitables);
         }
 
     }

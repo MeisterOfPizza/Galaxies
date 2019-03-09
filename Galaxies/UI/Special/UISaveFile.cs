@@ -34,7 +34,7 @@ namespace Galaxies.UI.Special
                 new Transform(new Vector2(0, -transform.Height / 2f + 75), new Vector2(transform.Width, 50)),
                 SpriteHelper.Arial_Font,
                 fileInfo.LastWriteTime.ToString(),
-                TextAlign.MiddleCenter,
+                TextAlign.MiddleLeft,
                 5,
                 screen
                 ));
@@ -45,7 +45,7 @@ namespace Galaxies.UI.Special
                     new Transform(new Vector2(-transform.Width / 2f + 50, transform.Height / 2f - 25), new Vector2(100, 50)),
                     SpriteHelper.Arial_Font,
                     "Save",
-                    TextAlign.MiddleLeft,
+                    TextAlign.MiddleCenter,
                     5,
                     SpriteHelper.GetSprite("Sprites/UI/Column"),
                     new EventArg1<FileInfo>(SaveFileController.SaveGame, FileInfo),

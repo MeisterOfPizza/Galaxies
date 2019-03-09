@@ -15,8 +15,27 @@ namespace Galaxies.UI.Special
 
         UIInputField saveFileNameInputField;
         UIInputField playerNameInputField;
+        EventArg     onClose;
 
-        EventArg onClose;
+        public override bool Visable
+        {
+            get
+            {
+                return base.Visable;
+            }
+
+            set
+            {
+                base.Visable = value;
+
+                if (!value)
+                {
+                    //Reset input fields
+                    saveFileNameInputField.SetText("");
+                    playerNameInputField.SetText("");
+                }
+            }
+        }
 
         public UICreateSaveFile(Transform transform, Texture2D sprite, Screen screen, EventArg onClose) : base(transform, sprite, screen)
         {
@@ -64,28 +83,9 @@ namespace Galaxies.UI.Special
                 TextAlign.MiddleCenter,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg0(Close),
+                onClose,
                 screen
                 ));
-        }
-
-        public void Open()
-        {
-            Visable = true;
-        }
-
-        public void Close()
-        {
-            Visable = false;
-
-            //Reset input fields
-            saveFileNameInputField.SetText("");
-            playerNameInputField.SetText("");
-
-            if (onClose != null)
-            {
-                onClose.Invoke();
-            }
         }
 
         private void CreateSaveFile()
