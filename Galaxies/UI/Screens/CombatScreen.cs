@@ -4,7 +4,6 @@ using Galaxies.Extensions;
 using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.UI.Screens
@@ -21,9 +20,9 @@ namespace Galaxies.UI.Screens
         UIProgressBar enemyShieldBar;
         UIProgressBar enemyEnergyBar;
 
-        public override void CreateUI(ContentManager content)
+        public override void CreateUI()
         {
-            var actionBackground = content.Load<Texture2D>("Sprites/UI/Column");
+            var actionBackground = SpriteHelper.GetSprite("Sprites/UI/Column");
 
             AddUIElement(new UIButton(
                 new Transform(new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)), new Vector2(250, 100)),

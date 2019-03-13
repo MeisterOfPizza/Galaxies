@@ -2,8 +2,8 @@
 using Galaxies.Extensions;
 using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
+using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.UI.Screens
@@ -16,13 +16,19 @@ namespace Galaxies.UI.Screens
         UISaveFiles      uiSaveFiles;
         UICreateSaveFile uiCreateSaveFile;
 
-        public override void CreateUI(ContentManager content)
+        public override void CreateUI()
         {
+            AddUIElement(new UIBackgroundAnimation(
+                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                SpriteHelper.Space_Background_Animation_2,
+                this
+                ));
+
             var textBackground = SpriteHelper.GetSprite("Sprites/UI/Column");
 
             uiMenu = AddUIElement(new UIColumn(
                 new Transform(Alignment.MiddleCenter, new Vector2(250, 400)),
-                content.Load<Texture2D>("Sprites/Transparent"),
+                SpriteHelper.GetSprite("Sprites/Transparent"),
                 this,
                 new Vector4(5, 0, 5, 0),
                 new Vector2(0, 5)

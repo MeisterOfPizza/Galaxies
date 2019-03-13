@@ -4,7 +4,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 
 namespace Galaxies.UI.Screens
 {
@@ -17,12 +16,12 @@ namespace Galaxies.UI.Screens
         UISaveFiles      uiSaveFiles;
         UICreateSaveFile uiCreateSaveFile;
 
-        public override void CreateUI(ContentManager content)
+        public override void CreateUI()
         {
             //Add background gif:
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, new Vector2(GameUIController.WindowWidth, GameUIController.WindowHeight)),
-                SpriteHelper.Citadel_Background_Animation,
+                Random.Next(2) == 0 ? SpriteHelper.Citadel_Background_Animation_1 : SpriteHelper.Citadel_Background_Animation_2,
                 this
                 ));
 

@@ -60,7 +60,7 @@ namespace Galaxies.UIControllers
             }
 
             CurrentScreen = newScreen;
-            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+            CurrentScreen.CreateUI();
         }
 
         public static void CreateMenuScreen()

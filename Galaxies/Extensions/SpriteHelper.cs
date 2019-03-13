@@ -20,7 +20,8 @@ namespace Galaxies.Extensions
 
         #region Fonts
 
-        public static SpriteFont Arial_Font { get; private set; }
+        public static SpriteFont Arial_Font  { get; private set; }
+        public static SpriteFont System_Font { get; private set; }
 
         #endregion
 
@@ -45,28 +46,42 @@ namespace Galaxies.Extensions
 
         #region Backgrounds
 
-        public static GIF Citadel_Background_Animation { get; private set; }
+        public static GIF Space_Background_Animation_1 { get; private set; }
+        public static GIF Space_Background_Animation_2 { get; private set; }
+
+        public static GIF Citadel_Background_Animation_1 { get; private set; }
+        public static GIF Citadel_Background_Animation_2 { get; private set; }
 
         #endregion
 
         #endregion
 
-        public static void Initialize(ContentManager content)
+        public static void Initialize()
         {
-            Arial_Font = content.Load<SpriteFont>("Fonts/Arial");
+            Arial_Font  = GetFont("Fonts/Arial");
 
-            Box4x4_Sprite = content.Load<Texture2D>("Sprites/Box 4x4");
+            Box4x4_Sprite = GetSprite("Sprites/Box 4x4");
 
-            Bullet_Sprite = content.Load<Texture2D>("Sprites/Effects/Bullet");
-            Shield_Sprite = content.Load<Texture2D>("Sprites/Effects/Shield");
+            Bullet_Sprite = GetSprite("Sprites/Effects/Bullet");
+            Shield_Sprite = GetSprite("Sprites/Effects/Shield");
 
-            Citadel_Background_Animation = new GIF("Sprites/Backgrounds/Animated/space-background-1", 0.08);
+            Space_Background_Animation_1 = new GIF("Sprites/Backgrounds/Animated/space-background-1", 0.08);
+            Space_Background_Animation_2 = new GIF("Sprites/Backgrounds/Animated/space-background-2", 0.03);
+
+            Citadel_Background_Animation_1 = new GIF("Sprites/Backgrounds/Animated/citadel-background-1", 0.05);
+            Citadel_Background_Animation_2 = new GIF("Sprites/Backgrounds/Animated/citadel-background-2", 0.10);
         }
 
         public static Texture2D GetSprite(string spriteName)
         {
-            //TODO: Implement try-catch?
+            //TODO: Implement try-catch? Return pink/purple error texture on fail?
             return MainGame.Singleton.Content.Load<Texture2D>(spriteName);
+        }
+
+        public static SpriteFont GetFont(string fontName)
+        {
+            //TODO: Implement try-catch? Return pink/purple error texture on fail?
+            return MainGame.Singleton.Content.Load<SpriteFont>(fontName);
         }
 
         public static Texture2D[] GetSprites(string path)

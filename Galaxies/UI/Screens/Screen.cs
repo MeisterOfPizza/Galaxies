@@ -102,7 +102,7 @@ namespace Galaxies.UI.Screens
             kb_selectCallbacks = new EventArg1<UIElement>();
         }
 
-        public abstract void CreateUI(ContentManager content);
+        public abstract void CreateUI();
 
         #region Screen updates
 

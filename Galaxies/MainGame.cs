@@ -49,7 +49,7 @@ namespace Galaxies
             base.Initialize();
 
             DataController.Initialize();
-            SpriteHelper.Initialize(Content);
+            SpriteHelper.Initialize();
             SaveFileController.Initialize();
             ShipyardController.Initialize();
 
@@ -114,6 +114,8 @@ namespace Galaxies
 
             base.Update(gameTime);
         }
+
+        int test;
 
         /// <summary>
         /// This is called when the game should draw itself.

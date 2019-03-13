@@ -6,8 +6,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.UI.Screens
 {
@@ -15,9 +13,15 @@ namespace Galaxies.UI.Screens
     class PlanetarySystemScreen : Screen
     {
 
-        public override void CreateUI(ContentManager content)
+        public override void CreateUI()
         {
-            var column = content.Load<Texture2D>("Sprites/UI/Column");
+            AddUIElement(new UIBackgroundAnimation(
+                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                SpriteHelper.Space_Background_Animation_1,
+                this
+                ));
+
+            var column = SpriteHelper.GetSprite("Sprites/UI/Column");
 
             var planetsColumn = AddUIElement(new UIScrollableColumn(new Transform(Alignment.TopLeft, new Vector2(300, 600)), column, this, new Vector4(5, 0, 5, 0), Vector2.Zero, 200));
 
@@ -27,45 +31,6 @@ namespace Galaxies.UI.Screens
                 {
                     planetsColumn.AddUIElement(new UIPlanet(new Transform(Vector2.Zero), column, new EventArg0(planet.Visit), this, planet));
                 }
-            }
-            
-            testGrid = AddUIElement(new UIScrollableGrid(
-                new Transform(Alignment.MiddleCenter, new Vector2(600, 300)),
-                column,
-                this,
-                new Vector4(5),
-                new Vector2(5),
-                new Vector2(200, 100)
-                ));
-
-            /*
-            testColumn = AddUIElement(new UIScrollableColumn(
-                column,
-                GameUIController.Center(),
-                0,
-                Color.White,
-                new Vector2(200, 300),
-                this,
-                new Vector4(5),
-                new Vector2(5),
-                100
-                ));
-                */
-
-            for (int i = 0; i < 100; i++)
-            {
-                var btn = testGrid.AddUIElement(new UIButton(
-                    new Transform(new Vector2(200, 100)),
-                    SpriteHelper.Arial_Font,
-                    (i + 1).ToString(),
-                    TextAlign.MiddleCenter,
-                    0,
-                    column,
-                    null,
-                    this
-                    ));
-
-                btn.SetOnClick(new EventArg1<UIElement>(Test, testGrid));
             }
 
             AddUIElement(new UIButton(
@@ -81,13 +46,6 @@ namespace Galaxies.UI.Screens
 
             //Add the Top Info bar:
             AddUIElement(new UITopInfo(this));
-        }
-
-        UIScrollableGrid testGrid;
-
-        void Test(UIElement element)
-        {
-            testGrid.RemoveUIElement(element);
         }
 
     }
