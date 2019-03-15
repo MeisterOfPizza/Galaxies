@@ -6,6 +6,7 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -15,11 +16,12 @@ namespace Galaxies.UI.Screens
 
         private UIInventory inventory;
 
-        public override void CreateUI()
+        public async override Task CreateUIAsync()
         {
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
-                SpriteHelper.Space_Background_Animation_1,
+                //SpriteHelper.Space_Background_Animation_1,
+                await SpriteHelper.GetGIFAsync("Sprites/Backgrounds/Animated/space-background-1", 0.08),
                 this
                 ));
 

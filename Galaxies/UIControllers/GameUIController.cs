@@ -3,6 +3,7 @@ using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Threading.Tasks;
 
 namespace Galaxies.UIControllers
 {
@@ -30,7 +31,7 @@ namespace Galaxies.UIControllers
             }
         }
 
-        #region Windows helpers
+        #region Window helpers
 
         public static int WindowWidth
         {
@@ -59,8 +60,27 @@ namespace Galaxies.UIControllers
                 CurrentScreen.DestroyScreen();
             }
 
+            CreateLoadingScreen();
+
+            CreateScreenAsync(newScreen).Wait();
+
+            int x = 0;
+
+            //Loading screen is automatically removed
+        }
+
+        private async static Task CreateScreenAsync(Screen newScreen)
+        {
+            await newScreen.CreateUIAsync();
             CurrentScreen = newScreen;
-            CurrentScreen.CreateUI();
+        }
+
+        private static void CreateLoadingScreen()
+        {
+            LoadingScreen loadingScreen = new LoadingScreen();
+            loadingScreen.CreateUIAsync();
+
+            CurrentScreen = loadingScreen;
         }
 
         public static void CreateMenuScreen()

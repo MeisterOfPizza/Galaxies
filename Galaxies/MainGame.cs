@@ -1,10 +1,11 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Extensions;
-using Galaxies.Progression;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Galaxies
 {
@@ -25,9 +26,12 @@ namespace Galaxies
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth  = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-            graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            //graphics.PreferredBackBufferWidth  = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            //graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
             //graphics.ToggleFullScreen();
+
+            graphics.PreferredBackBufferWidth  = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
 
             //graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
 
@@ -52,24 +56,6 @@ namespace Galaxies
             SpriteHelper.Initialize();
             SaveFileController.Initialize();
             ShipyardController.Initialize();
-
-            /*
-            //TEST: Adding a planetary system
-            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
-
-            //TEST: Adding items to player's inventory
-            PlayerController.Player.Balance.Deposit(10000);
-            for (int i = 0; i < 9; i++)
-            {
-                PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
-            }
-
-            //TEST: Adding items to merchant's inventory
-            for (int i = 0; i < 9; i++)
-            {
-                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
-            }
-            */
 
             GameUIController.Window = Window;
             GameUIController.CreateMenuScreen();

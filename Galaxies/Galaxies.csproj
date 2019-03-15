@@ -121,6 +121,7 @@
     <Compile Include="UI\Screens\CitadelScreen.cs" />
     <Compile Include="UI\Screens\CombatScreen.cs" />
     <Compile Include="UI\Screens\GalaxyScreen.cs" />
+    <Compile Include="UI\Screens\LoadingScreen.cs" />
     <Compile Include="UI\Screens\MenuScreen.cs" />
     <Compile Include="UI\Screens\PlanetarySystemScreen.cs" />
     <Compile Include="UI\Screens\Screen.cs" />

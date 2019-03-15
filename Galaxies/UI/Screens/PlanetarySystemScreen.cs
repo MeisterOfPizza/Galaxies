@@ -6,6 +6,7 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -13,7 +14,7 @@ namespace Galaxies.UI.Screens
     class PlanetarySystemScreen : Screen
     {
 
-        public override void CreateUI()
+        public async override Task CreateUIAsync()
         {
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
