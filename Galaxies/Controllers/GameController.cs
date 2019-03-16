@@ -1,5 +1,5 @@
-﻿using Galaxies.Entities;
-using Galaxies.Progression;
+﻿using Galaxies.Progression;
+using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,38 +20,50 @@ namespace Galaxies.Controllers
 
         public static GameState GameState { get; set; }
 
-        public static SaveFile CurrentSaveFile { get; private set; }
-
-        public static void LoadGame(SaveFile saveFile)
+        public static void NewGame()
         {
-            CurrentSaveFile = saveFile;
-
-            if (!CurrentSaveFile.IsNewGame) //TODO: Check if a save file exists, if so: check if it's valid.
-            {
-                LoadSaveGame(saveFile);
-            }
-            else
-            {
-                LoadNewGame();
-            }
-        }
-
-        private static void LoadNewGame()
-        {
-            CurrentSaveFile.IsNewGame = false;
-
-            MerchantController.CreateMerchant();
-            ShipyardController.CreateShipyard();
+            MerchantController.CreateNewMerchant();
             PlayerController.CreateNewPlayer();
+
+            //Assign the player the first ship template:
+            ShipyardController.AssignPlayerShip(ShipyardController.PlayerShipTemplates[0]);
+
+            GalaxyController.CreateNewGalaxy();
+
+            GameUIController.CreateGalaxyScreen();
         }
         
-        private static void LoadSaveGame(SaveFile saveFile)
+        public static void LoadGame(SaveFile saveFile)
         {
+            if (saveFile != null)
+            {
+                GalaxyController.ResetGalaxy();
+                MerchantController.CreateNewMerchant();
 
+                //Default (these should always load):
+                saveFile.Load_PlanetarySystems();
+                saveFile.Load_Player();
+
+                switch (saveFile.GameState)
+                {
+                    default:
+                    case SaveFile_GameState.Galaxy:
+                        GameUIController.CreateGalaxyScreen();
+                        break;
+                    case SaveFile_GameState.PlanetarySystem:
+                        GameUIController.CreatePlanetarySystemScreen();
+                        saveFile.Load_CurrentPlanetarySystem();
+                        break;
+                    case SaveFile_GameState.Citadel:
+                        GameUIController.CreateCitadelScreen();
+                        break;
+                }
+            }
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
+            //TODO: Clean up
             switch (GameState)
             {
                 case GameState.MainMenu:
@@ -70,6 +82,7 @@ namespace Galaxies.Controllers
 
         public static void Update(GameTime gameTime)
         {
+            //TODO: Clean up
             switch (GameState)
             {
                 case GameState.MainMenu:

@@ -102,7 +102,7 @@ namespace Galaxies.Core
 
         public virtual void PositionChanged()
         {
-            //Do nothing here
+            //Do nothing here.
             //We'll leave this method blank (and not modified as abstract).
             //This is because we don't want to override this method in ALL classes further down the line.
             //It looks ugly but it's the best we can do.
@@ -110,7 +110,7 @@ namespace Galaxies.Core
 
         public virtual void SizeChanged()
         {
-            //Do nothing here
+            //Do nothing here.
             //We'll leave this method blank (and not modified as abstract).
             //This is because we don't want to override this method in ALL classes further down the line.
             //It looks ugly but it's the best we can do.
@@ -127,6 +127,14 @@ namespace Galaxies.Core
             {
                 spriteBatch.Draw(sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, color, transform.Rotation, Origin, SpriteEffects.None, 0f);
             }
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
+            //Do nothing here.
+            //We'll leave this method blank (and not modified as abstract).
+            //This is because we don't want to override this method in ALL classes further down the line.
+            //It looks ugly but it's the best we can do.
         }
 
         #endregion

@@ -15,9 +15,14 @@ namespace Galaxies.UI.Elements
 
         public GIF Animation { get; private set; }
 
+        private double GIFUpdateInterval   { get; set; }
+        private double TimeSinceLastUpdate { get; set; }
+
         public UIBackgroundAnimation(Transform transform, GIF animation, Screen screen) : base(transform, null, screen)
         {
             this.Animation = animation;
+            Animation.Reset();
+            GIFUpdateInterval = Animation.GIFSpeed;
 
             SetOrigin(Animation.Bounds / 2f);
         }
@@ -27,6 +32,20 @@ namespace Galaxies.UI.Elements
             if (Visable && Animation != null)
             {
                 spriteBatch.Draw(Animation.Current, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, color, transform.Rotation, Origin, SpriteEffects.None, 0f);
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            TimeSinceLastUpdate += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (TimeSinceLastUpdate > GIFUpdateInterval)
+            {
+                Animation.Next();
+
+                TimeSinceLastUpdate = 0;
             }
         }
 

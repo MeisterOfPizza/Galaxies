@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Collection>
+  <MerchantShop id="default">
+    <Pointers>
+      <Pointer id="0" type="su" />
+    </Pointers>
+  </MerchantShop>
+</Collection>

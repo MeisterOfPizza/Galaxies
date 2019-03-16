@@ -1,7 +1,6 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Core;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Extensions
@@ -21,21 +20,6 @@ namespace Galaxies.Extensions
 
         public Texture2D Current { get; private set; }
 
-        private Texture2D Next
-        {
-            get
-            {
-                currentIndex++;
-
-                if (currentIndex >= Images.Length)
-                {
-                    currentIndex = 0;
-                }
-
-                return Images[currentIndex];
-            }
-        }
-
         private int currentIndex;
 
         /// <summary>
@@ -54,13 +38,24 @@ namespace Galaxies.Extensions
 
                 Current = Images[0];
             }
-
-            TickController.TickEvents.Add(new TickEvent(new EventArg0(Update), gifSpeed));
         }
 
-        private void Update()
+        public void Next()
         {
-            Current = Next;
+            currentIndex++;
+
+            if (currentIndex >= Images.Length)
+            {
+                currentIndex = 0;
+            }
+
+            Current = Images[currentIndex];
+        }
+
+        public void Reset()
+        {
+            if (Images.Length > 0) Current = Images[0];
+            currentIndex = 0;
         }
 
     }

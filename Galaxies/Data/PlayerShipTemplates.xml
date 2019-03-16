@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Collection>
+  <PlayerShipTemplate id="0">
+    <Name>Fighter</Name>
+    <SpriteName>Sprites/Player Ships/Player Ship 1</SpriteName>
+    <BaseShipStats>
+      <Health>100</Health>
+      <Shield>250</Shield>
+      <Damage>25</Damage>
+      <Energy>500</Energy>
+      <EnergyRegen>50</EnergyRegen>
+    </BaseShipStats>
+    <Price>0</Price>
+  </PlayerShipTemplate>
+  <PlayerShipTemplate id="1">
+    <Name>Bomber</Name>
+    <SpriteName>Sprites/Player Ships/Player Ship 2</SpriteName>
+    <BaseShipStats>
+      <Health>250</Health>
+      <Shield>500</Shield>
+      <Damage>50</Damage>
+      <Energy>250</Energy>
+      <EnergyRegen>75</EnergyRegen>
+    </BaseShipStats>
+    <Price>1000</Price>
+  </PlayerShipTemplate>
+  <PlayerShipTemplate id="2">
+    <Name>Destroyer</Name>
+    <SpriteName>Sprites/Player Ships/Player Ship 3</SpriteName>
+    <BaseShipStats>
+      <Health>500</Health>
+      <Shield>1000</Shield>
+      <Damage>75</Damage>
+      <Energy>1000</Energy>
+      <EnergyRegen>25</EnergyRegen>
+    </BaseShipStats>
+    <Price>2500</Price>
+  </PlayerShipTemplate>
+</Collection>

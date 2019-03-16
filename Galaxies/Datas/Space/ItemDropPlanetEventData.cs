@@ -26,11 +26,11 @@ namespace Galaxies.Datas.Space
 
             for (int i = 0; i < ItemPointers.Length; i++)
             {
-                if (ItemPointers[i].Type == DataPointer.TYPE_ITEM_SHIPUPGRADE)
+                if (ItemPointers[i].Type == DataPointer.ITEM_TYPE_SHIPUPGRADE)
                 {
                     dataObjs[i] = DataController.LoadData<ShipUpgradeItemData>(ItemPointers[i].Id, DataFileType.Items);
                 }
-                else if (ItemPointers[i].Type == DataPointer.TYPE_ITEM_STARCHART)
+                else if (ItemPointers[i].Type == DataPointer.ITEM_TYPE_STARCHART)
                 {
                     dataObjs[i] = DataController.LoadData<StarChartItemData>(ItemPointers[i].Id, DataFileType.Items);
                 }

@@ -1,7 +1,5 @@
-﻿using Galaxies.Core;
-using Galaxies.Entities;
-using Galaxies.Extensions;
-using Microsoft.Xna.Framework;
+﻿using Galaxies.Datas.Player;
+using Galaxies.Progression;
 
 namespace Galaxies.Controllers
 {
@@ -9,53 +7,37 @@ namespace Galaxies.Controllers
     static class ShipyardController
     {
         
-        public static PlayerShip PlayerShip_Template_Fighter   { get; private set; }
-        public static PlayerShip PlayerShip_Template_Bomber    { get; private set; }
-        public static PlayerShip PlayerShip_Template_Destroyer { get; private set; }
+        public static PlayerShipTemplate[] PlayerShipTemplates       { get; set; }
+        public static PlayerShipTemplate   CurrentPlayerShipTemplate { get; set; }
 
-        public static void CreateShipyard()
+        public static void Initialize()
         {
-            //Create the player ship templates:
+            CreatePlayerShipTemplates();
+        }
 
-            PlayerShip_Template_Fighter = new PlayerShip(
-                new Transform(new Vector2(100)),
-                SpriteHelper.GetSprite("Sprites/Player Ships/Player Ship 1"),
-                Vector2.Zero,
-                new ShipStats(100, 250, 15, 500, 75),
-                0
-                );
+        private static void CreatePlayerShipTemplates()
+        {
+            var playerShipTemplateDatas = DataController.LoadAllData<PlayerShipTemplateData>(DataFileType.PlayerShipTemplates, "PlayerShipTemplate");
+            PlayerShipTemplates = new PlayerShipTemplate[playerShipTemplateDatas.Length];
 
-            PlayerShip_Template_Fighter.Unlocked = true; //The default PlayerShip should ALWAYS be unlocked.
-
-            PlayerShip_Template_Bomber = new PlayerShip(
-                new Transform(new Vector2(100)),
-                SpriteHelper.GetSprite("Sprites/Player Ships/Player Ship 2"),
-                Vector2.Zero,
-                new ShipStats(500, 500, 10, 1250, 35),
-                1000
-                );
-
-            PlayerShip_Template_Destroyer = new PlayerShip(
-                new Transform(new Vector2(100)),
-                SpriteHelper.GetSprite("Sprites/Player Ships/Player Ship 3"),
-                Vector2.Zero,
-                new ShipStats(250, 1000, 50, 2000, 25),
-                2500
-                );
+            for (int i = 0; i < playerShipTemplateDatas.Length; i++)
+            {
+                PlayerShipTemplates[i] = new PlayerShipTemplate(playerShipTemplateDatas[i], i == 0 /* Always unlock the first one */);
+            }
         }
 
         public static void RefillShipStats()
         {
-            PlayerShip_Template_Fighter.RefillStats();
-            PlayerShip_Template_Bomber.RefillStats();
-            PlayerShip_Template_Destroyer.RefillStats();
+            CurrentPlayerShipTemplate.Ship.RefillStats();
         }
 
-        public static void AssignPlayerShip(PlayerShip playerShip)
+        public static void AssignPlayerShip(PlayerShipTemplate playerShipTemplate)
         {
-            playerShip.Unlocked = true;
+            playerShipTemplate.Unlocked = true;
 
-            PlayerController.AssignNewShip(playerShip);
+            CurrentPlayerShipTemplate = playerShipTemplate;
+
+            PlayerController.AssignNewShip(playerShipTemplate.Ship);
         }
 
     }

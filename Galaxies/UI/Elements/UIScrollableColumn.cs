@@ -87,6 +87,7 @@ namespace Galaxies.UI.Elements
             base.UIElementAdded(addedElement);
 
             FixIndexRange();
+            CalculatePositions();
         }
 
         protected override void UIElementRemoved(UIElement removedElement, int removedIndex)

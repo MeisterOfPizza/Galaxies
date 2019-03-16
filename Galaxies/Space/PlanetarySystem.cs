@@ -57,11 +57,6 @@ namespace Galaxies.Space
             {
                 Planets[i] = new Planet(DataController.LoadData<PlanetData>(Data.PlanetIds[i], DataFileType.Planets));
             }
-
-            for (int i = Data.PlanetIds.Length; i < Planets.Length; i++)
-            {
-                //Planets[i] = new Planet();
-            }
         }
 
         #region IVisitable
@@ -70,13 +65,12 @@ namespace Galaxies.Space
         {
             CreatePlanets();
 
-            GalaxyController.Visitables.Remove(this); //Remove this from visitable things.
+            GalaxyController.RemoveVisistable(this); //Remove this from visitable things.
             PlanetarySystemController.SetPlanetarySystem(this); //Set the current planetary system.
             GameUIController.CreatePlanetarySystemScreen(); //Create the UI.
         }
 
         #endregion
-
 
     }
 

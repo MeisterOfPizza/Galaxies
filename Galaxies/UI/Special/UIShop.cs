@@ -41,8 +41,6 @@ namespace Galaxies.UI.Special
                 ));
 
             SetupItemButtons();
-
-            CalculatePositions();
         }
 
         private void SetupItemButtons()

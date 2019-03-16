@@ -1,7 +1,6 @@
 ﻿using Galaxies.Core;
 using Galaxies.UI.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -102,7 +101,7 @@ namespace Galaxies.UI.Screens
             kb_selectCallbacks = new EventArg1<UIElement>();
         }
 
-        public abstract void CreateUI(ContentManager content);
+        public abstract void CreateUI();
 
         #region Screen updates
 
@@ -113,6 +112,16 @@ namespace Galaxies.UI.Screens
         {
             KeyboardUpdate(gameTime);
             MouseUpdate();
+
+            UpdateUIElements(gameTime);
+        }
+
+        private void UpdateUIElements(GameTime gameTime)
+        {
+            foreach (var element in UIElements)
+            {
+                element.Update(gameTime);
+            }
         }
 
         private void KeyboardUpdate(GameTime gameTime)
@@ -446,6 +455,8 @@ namespace Galaxies.UI.Screens
                     RemoveUIElement(child);
                 }
             }
+
+            uiElement.OnDestroy();
         }
 
         #endregion
@@ -474,6 +485,21 @@ namespace Galaxies.UI.Screens
                 {
                     elem.Draw(spriteBatch);
                 }
+            }
+        }
+
+        #endregion
+
+        #region Screen
+
+        /// <summary>
+        /// Call this whenever this screen becomes obsolete.
+        /// </summary>
+        public void DestroyScreen()
+        {
+            foreach (UIElement element in UIElements)
+            {
+                element.OnDestroy();
             }
         }
 

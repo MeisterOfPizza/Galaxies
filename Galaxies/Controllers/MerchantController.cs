@@ -1,4 +1,5 @@
-﻿using Galaxies.Economy;
+﻿using Galaxies.Datas.Merchant;
+using Galaxies.Economy;
 using Galaxies.Items;
 
 namespace Galaxies.Controllers
@@ -9,10 +10,22 @@ namespace Galaxies.Controllers
 
         public static Trader Merchant { get; private set; }
 
-        public static void CreateMerchant()
+        public static void CreateNewMerchant()
         {
             Merchant = new Trader(null, new Balance(int.MaxValue / 2));
             Merchant.Inventory = new Inventory(Merchant);
+
+            SetItems();
+        }
+
+        /// <summary>
+        /// Sets the items randomly.
+        /// </summary>
+        private static void SetItems()
+        {
+            var items = DataController.LoadData<MerchantShopData>("default", DataFileType.Merchant).GetItems(Merchant.Inventory);
+
+            Merchant.Inventory.AddItems(items);
         }
 
         public static void TradeItem(Item tradedItem, Trader buyer, Trader seller)

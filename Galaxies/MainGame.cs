@@ -1,6 +1,5 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Extensions;
-using Galaxies.Progression;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -39,7 +38,7 @@ namespace Galaxies
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
+        /// related content. Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize()
@@ -49,26 +48,13 @@ namespace Galaxies
             base.Initialize();
 
             DataController.Initialize();
-            SpriteHelper.Initialize(Content);
-
-            //TEST: Adding a planetary system
-            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
-
-            //TEST: Adding items to player's inventory
-            PlayerController.Player.Balance.Deposit(10000);
-            for (int i = 0; i < 9; i++)
-            {
-                PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
-            }
-
-            //TEST: Adding items to merchant's inventory
-            for (int i = 0; i < 9; i++)
-            {
-                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
-            }
+            SpriteHelper.Initialize();
+            SaveFileController.Initialize();
+            ShipyardController.Initialize();
+            GalaxyController.Initialize();
 
             GameUIController.Window = Window;
-            GameUIController.CreateGalaxyScreen();
+            GameUIController.CreateMenuScreen();
         }
 
         /// <summary>
@@ -81,8 +67,6 @@ namespace Galaxies
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-
-            GameController.LoadGame(new SaveFile());
         }
 
         /// <summary>
@@ -108,7 +92,6 @@ namespace Galaxies
 
             GameController.Update(gameTime);
             GameUIController.Update(gameTime);
-            TickController.Update(gameTime);
 
             base.Update(gameTime);
         }

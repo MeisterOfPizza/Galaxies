@@ -15,8 +15,10 @@ namespace Galaxies.Datas.Helpers
         
         */
 
-        public const string TYPE_ITEM_STARCHART   = "sc";
-        public const string TYPE_ITEM_SHIPUPGRADE = "su";
+        public const string ITEM_TYPE_STARCHART   = "sc";
+        public const string ITEM_TYPE_SHIPUPGRADE = "su";
+
+        public const string VISITABLE_TYPE_PLANETARYSYSTEM = "ps";
 
         #endregion
 

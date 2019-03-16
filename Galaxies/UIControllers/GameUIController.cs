@@ -52,36 +52,43 @@ namespace Galaxies.UIControllers
 
         #region Screens
 
+        private static void CreateScreen(Screen newScreen)
+        {
+            if (CurrentScreen != null)
+            {
+                CurrentScreen.DestroyScreen();
+            }
+
+            CurrentScreen = newScreen;
+            CurrentScreen.CreateUI();
+        }
+
         public static void CreateMenuScreen()
         {
             GameController.GameState = GameState.MainMenu;
 
-            CurrentScreen = new MenuScreen();
-            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+            CreateScreen(new MenuScreen());
         }
 
         public static void CreateGalaxyScreen()
         {
             GameController.GameState = GameState.Galaxy;
 
-            CurrentScreen = new GalaxyScreen();
-            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+            CreateScreen(new GalaxyScreen());
         }
 
         public static void CreatePlanetarySystemScreen()
         {
             GameController.GameState = GameState.PlanetarySystem;
 
-            CurrentScreen = new PlanetarySystemScreen();
-            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+            CreateScreen(new PlanetarySystemScreen());
         }
 
         public static void CreateCombatScreen()
         {
             GameController.GameState = GameState.Combat;
 
-            CurrentScreen = new CombatScreen();
-            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+            CreateScreen(new CombatScreen());
         }
 
         public static void CreateCitadelScreen()
@@ -91,8 +98,7 @@ namespace Galaxies.UIControllers
 
             GameController.GameState = GameState.Citadel;
 
-            CurrentScreen = new CitadelScreen();
-            CurrentScreen.CreateUI(MainGame.Singleton.Content);
+            CreateScreen(new CitadelScreen());
         }
 
         #endregion

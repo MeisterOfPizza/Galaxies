@@ -1,5 +1,4 @@
 ﻿using Galaxies.Datas.Space;
-using Galaxies.Progression;
 using Galaxies.Space;
 using System.Collections.Generic;
 
@@ -10,29 +9,40 @@ namespace Galaxies.Controllers
     {
 
         public static List<IVisitable> Visitables { get; private set; } = new List<IVisitable>();
+        
+        private static VisitablesData VisitablesData { get; set; }
 
-        static GalaxyController()
+        public static void Initialize()
         {
+            VisitablesData = DataController.LoadData<VisitablesData>("default", DataFileType.Visitables);
+        }
+
+        public static void CreateNewGalaxy()
+        {
+            ResetGalaxy();
+
+            Visitables.Add(VisitablesData.GetRandom());
+        }
+
+        public static void ResetGalaxy()
+        {
+            Visitables.Clear();
             Visitables.Add(new Citadel());
         }
 
-        public static void LoadSaveFile(SaveFile saveFile)
+        public static void AddVisitables(IList<IVisitable> visitables)
         {
-            foreach (string planetarySystemId in saveFile.PlanetarySystemIds)
-            {
-                Visitables.Add(new PlanetarySystem(DataController.LoadData<PlanetarySystemData>(planetarySystemId, DataFileType.PlanetarySystems)));
-            }
+            Visitables.AddRange(visitables);
         }
 
-        public static void AppendSaveFile(SaveFile saveFile)
+        public static void RemoveVisistable(IVisitable visitable)
         {
-            //Skip The Citadel index:
-            saveFile.PlanetarySystemIds = new string[Visitables.Count - 1];
+            Visitables.Remove(visitable);
 
-            //Skip The Citadel:
-            for (int i = 1; i < Visitables.Count; i++)
+            //Always allow the player to visit at least one planet for "free".
+            if (Visitables.Count <= 1)
             {
-                saveFile.PlanetarySystemIds[i - 1] = ((PlanetarySystem)Visitables[i]).Data.Id;
+                Visitables.Add(VisitablesData.GetRandom());
             }
         }
 

@@ -4,7 +4,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 
 namespace Galaxies.UI.Screens
 {
@@ -12,15 +11,16 @@ namespace Galaxies.UI.Screens
     class CitadelScreen : Screen
     {
 
-        UIShop uiShop;
-        UIShipyard uiShipyard;
+        UIShop      uiShop;
+        UIShipyard  uiShipyard;
+        UISaveFiles uiSaveFiles;
 
-        public override void CreateUI(ContentManager content)
+        public override void CreateUI()
         {
             //Add background gif:
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, new Vector2(GameUIController.WindowWidth, GameUIController.WindowHeight)),
-                SpriteHelper.Citadel_Background_Animation,
+                Random.Next(2) == 0 ? SpriteHelper.Citadel_Background_Animation_1 : SpriteHelper.Citadel_Background_Animation_2,
                 this
                 ));
 
@@ -40,7 +40,15 @@ namespace Galaxies.UI.Screens
 
             uiShipyard.Visable = false; //Hide the shipyard.
 
-            //TODO: Add save button (and saves scollable column).
+            uiSaveFiles = AddUIElement(new UISaveFiles(
+                new Transform(Alignment.MiddleCenter, new Vector2(250, 600)),
+                this,
+                true,
+                "Save & Load",
+                new EventArg0(ToggleUISaveFiles)
+                ));
+
+            uiSaveFiles.Visable = false;
 
             //Go back button:
             AddUIElement(new UIButton(
@@ -54,18 +62,6 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            //Open shop button:
-            AddUIElement(new UIButton(
-                new Transform(Transform.SetPosition(Alignment.BottomRight, new Vector2(-212.5f, 0), new Vector2(200, 50)), new Vector2(200, 50)),
-                SpriteHelper.Arial_Font,
-                "Shop",
-                TextAlign.MiddleCenter,
-                5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg0(ToggleShop),
-                this
-                ));
-
             //Open shipyard button:
             AddUIElement(new UIButton(
                 new Transform(Alignment.BottomRight, new Vector2(200, 50)),
@@ -74,7 +70,31 @@ namespace Galaxies.UI.Screens
                 TextAlign.MiddleCenter,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg0(ToggleShipyard),
+                new EventArg0(ToggleUIShipyard),
+                this
+                ));
+
+            //Open shop button:
+            AddUIElement(new UIButton(
+                new Transform(Transform.SetPosition(Alignment.BottomRight, new Vector2(-212.5f, 0), new Vector2(200, 50)), new Vector2(200, 50)),
+                SpriteHelper.Arial_Font,
+                "Shop",
+                TextAlign.MiddleCenter,
+                5,
+                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                new EventArg0(ToggleUIShop),
+                this
+                ));
+
+            //Open save files:
+            AddUIElement(new UIButton(
+                new Transform(Transform.SetPosition(Alignment.BottomRight, new Vector2(-425, 0), new Vector2(200, 50)), new Vector2(200, 50)),
+                SpriteHelper.Arial_Font,
+                "Save & Load",
+                TextAlign.MiddleCenter,
+                5,
+                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                new EventArg0(ToggleUISaveFiles),
                 this
                 ));
 
@@ -82,16 +102,25 @@ namespace Galaxies.UI.Screens
             AddUIElement(new UITopInfo(this));
         }
 
-        private void ToggleShop()
+        private void ToggleUIShop()
         {
             uiShop.Visable = !uiShop.Visable; //Switch the visibility
             uiShipyard.Visable = false;
+            uiSaveFiles.Visable = false;
         }
 
-        private void ToggleShipyard()
+        private void ToggleUIShipyard()
         {
-            uiShipyard.Visable = !uiShipyard.Visable;  //Switch the visibility
             uiShop.Visable = false;
+            uiShipyard.Visable = !uiShipyard.Visable;  //Switch the visibility
+            uiSaveFiles.Visable = false;
+        }
+
+        private void ToggleUISaveFiles()
+        {
+            uiShop.Visable = false;
+            uiShipyard.Visable = false;
+            uiSaveFiles.Visable = !uiSaveFiles.Visable; //Switch the visibility
         }
 
     }
