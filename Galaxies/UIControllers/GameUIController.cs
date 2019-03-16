@@ -101,6 +101,13 @@ namespace Galaxies.UIControllers
             CreateScreen(new CitadelScreen());
         }
 
+        public static void CreateGameOverScreen()
+        {
+            GameController.GameState = GameState.GameOver;
+
+            CreateScreen(new GameOverScreen());
+        }
+
         #endregion
 
         #region Position helpers

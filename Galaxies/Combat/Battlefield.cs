@@ -32,8 +32,8 @@ namespace Galaxies.Combat
         private UIElement playerShieldEffect;
         private UIElement enemyShieldEffect;
 
-        private EventArg0 playerShotEvent;
-        private EventArg0 enemyShotEvent;
+        private EventArgList playerShotEvent;
+        private EventArgList enemyShotEvent;
 
         public Battlefield(PlayerShip player, EnemyShip enemy)
         {
@@ -45,8 +45,8 @@ namespace Galaxies.Combat
 
             this.Bullets = new List<Bullet>();
 
-            playerShotEvent = new EventArg0(AttackEnemy, EndAwaitEventCallbacks, EndTurn);
-            enemyShotEvent  = new EventArg0(AttackPlayer, EndAwaitEventCallbacks, EndTurn);
+            playerShotEvent = new EventArgList(new EventArg1<ShipEntity>(Player.Attack, Enemy), new EventArg0(EndAwaitEventCallbacks, EndTurn));
+            enemyShotEvent  = new EventArgList(new EventArg1<ShipEntity>(Enemy.Attack, Player), new EventArg0(EndAwaitEventCallbacks, EndTurn));
 
             playerShieldEffect = new UIElement(new Transform(Player.Transform.Position, Player.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
             enemyShieldEffect  = new UIElement(new Transform(Enemy.Transform.Position, Enemy.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
@@ -69,7 +69,7 @@ namespace Galaxies.Combat
         {
             if (!Player.IsAlive)
             {
-                //TODO: End game
+                GameUIController.CreateGameOverScreen();
 
                 return;
             }
@@ -163,22 +163,6 @@ namespace Galaxies.Combat
         private void EndAwaitEventCallbacks()
         {
             AwaitEventCallbacks = false;
-        }
-
-        /// <summary>
-        /// Attack the player (for event callbacks).
-        /// </summary>
-        private void AttackPlayer()
-        {
-            Enemy.Attack(Player);
-        }
-
-        /// <summary>
-        /// Attack the enemy (for event callbacks).
-        /// </summary>
-        private void AttackEnemy()
-        {
-            Player.Attack(Enemy);
         }
 
         #endregion
