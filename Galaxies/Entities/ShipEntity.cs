@@ -165,6 +165,8 @@ namespace Galaxies.Entities
             Health = MaxHealth;
             Shield = MaxShield;
             Energy = MaxEnergy;
+
+            isAlive = true;
         }
 
         public virtual void Attack(ShipEntity defender)

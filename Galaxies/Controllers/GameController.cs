@@ -12,7 +12,8 @@ namespace Galaxies.Controllers
         Galaxy,
         PlanetarySystem,
         Combat,
-        Citadel
+        Citadel,
+        GameOver
     }
 
     static class GameController
@@ -66,16 +67,10 @@ namespace Galaxies.Controllers
             //TODO: Clean up
             switch (GameState)
             {
-                case GameState.MainMenu:
-                    break;
-                case GameState.Galaxy:
-                    break;
-                case GameState.PlanetarySystem:
-                    break;
                 case GameState.Combat:
                     CombatController.Draw(spriteBatch);
                     break;
-                case GameState.Citadel:
+                default:
                     break;
             }
         }
@@ -85,16 +80,10 @@ namespace Galaxies.Controllers
             //TODO: Clean up
             switch (GameState)
             {
-                case GameState.MainMenu:
-                    break;
-                case GameState.Galaxy:
-                    break;
-                case GameState.PlanetarySystem:
-                    break;
                 case GameState.Combat:
                     CombatController.Update();
                     break;
-                case GameState.Citadel:
+                default:
                     break;
             }
         }

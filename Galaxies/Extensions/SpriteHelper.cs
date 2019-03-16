@@ -21,7 +21,6 @@ namespace Galaxies.Extensions
         #region Fonts
 
         public static SpriteFont Arial_Font  { get; private set; }
-        public static SpriteFont System_Font { get; private set; }
 
         #endregion
 
