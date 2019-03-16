@@ -11,10 +11,9 @@ namespace Galaxies.UI.Screens
     class CitadelScreen : Screen
     {
 
-        UIShop           uiShop;
-        UIShipyard       uiShipyard;
-        UISaveFiles      uiSaveFiles;
-        UICreateSaveFile uiCreateSaveFile;
+        UIShop      uiShop;
+        UIShipyard  uiShipyard;
+        UISaveFiles uiSaveFiles;
 
         public override void CreateUI()
         {
@@ -45,20 +44,11 @@ namespace Galaxies.UI.Screens
                 new Transform(Alignment.MiddleCenter, new Vector2(250, 600)),
                 this,
                 true,
-                "Load",
+                "Save & Load",
                 new EventArg0(ToggleUISaveFiles)
                 ));
 
             uiSaveFiles.Visable = false;
-
-            uiCreateSaveFile = AddUIElement(new UICreateSaveFile(
-                new Transform(Alignment.MiddleCenter, new Vector2(500, 200)),
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
-                this,
-                new EventArg0(ToggleUICreateSaveFile)
-                ));
-
-            uiCreateSaveFile.Visable = false;
 
             //Go back button:
             AddUIElement(new UIButton(
@@ -100,23 +90,11 @@ namespace Galaxies.UI.Screens
             AddUIElement(new UIButton(
                 new Transform(Transform.SetPosition(Alignment.BottomRight, new Vector2(-425, 0), new Vector2(200, 50)), new Vector2(200, 50)),
                 SpriteHelper.Arial_Font,
-                "Load",
+                "Save & Load",
                 TextAlign.MiddleCenter,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
                 new EventArg0(ToggleUISaveFiles),
-                this
-                ));
-
-            //Open create save file:
-            AddUIElement(new UIButton(
-                new Transform(Transform.SetPosition(Alignment.BottomRight, new Vector2(-637.5f, 0), new Vector2(200, 50)), new Vector2(200, 50)),
-                SpriteHelper.Arial_Font,
-                "Save",
-                TextAlign.MiddleCenter,
-                5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg0(ToggleUICreateSaveFile),
                 this
                 ));
 
@@ -129,7 +107,6 @@ namespace Galaxies.UI.Screens
             uiShop.Visable = !uiShop.Visable; //Switch the visibility
             uiShipyard.Visable = false;
             uiSaveFiles.Visable = false;
-            uiCreateSaveFile.Visable = false;
         }
 
         private void ToggleUIShipyard()
@@ -137,7 +114,6 @@ namespace Galaxies.UI.Screens
             uiShop.Visable = false;
             uiShipyard.Visable = !uiShipyard.Visable;  //Switch the visibility
             uiSaveFiles.Visable = false;
-            uiCreateSaveFile.Visable = false;
         }
 
         private void ToggleUISaveFiles()
@@ -145,15 +121,6 @@ namespace Galaxies.UI.Screens
             uiShop.Visable = false;
             uiShipyard.Visable = false;
             uiSaveFiles.Visable = !uiSaveFiles.Visable; //Switch the visibility
-            uiCreateSaveFile.Visable = false;
-        }
-
-        private void ToggleUICreateSaveFile()
-        {
-            uiShop.Visable = false;
-            uiShipyard.Visable = false;
-            uiSaveFiles.Visable = false;
-            uiCreateSaveFile.Visable = !uiCreateSaveFile.Visable; //Switch the visibility
         }
 
     }

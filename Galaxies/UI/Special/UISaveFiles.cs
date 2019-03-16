@@ -62,7 +62,7 @@ namespace Galaxies.UI.Special
 
             //Close button:
             AddUIElement(new UIButton(
-                new Transform(new Vector2(0, transform.Height / 2f + 35), new Vector2(100, 50)),
+                new Transform(new Vector2(0, transform.Height / 2f + 40), new Vector2(100, 50)),
                 SpriteHelper.Arial_Font,
                 "Close",
                 TextAlign.MiddleCenter,

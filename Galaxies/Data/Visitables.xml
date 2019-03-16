@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Collection>
+  <Visitables id="default">
+    <Pointers>
+      <Pointer id="test" type="ps" />
+    </Pointers>
+  </Visitables>
+</Collection>

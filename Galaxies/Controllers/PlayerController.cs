@@ -17,6 +17,9 @@ namespace Galaxies.Controllers
         public static void CreateNewPlayer()
         {
             Player = new Trader(null, new Balance());
+
+            //Give the player the default starting money:
+            Player.Balance.Deposit(250);
         }
 
         public static void AssignNewTrader(Trader trader)

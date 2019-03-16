@@ -28,59 +28,42 @@ namespace Galaxies.Controllers
             //Assign the player the first ship template:
             ShipyardController.AssignPlayerShip(ShipyardController.PlayerShipTemplates[0]);
 
-            GalaxyController.Recreate();
+            GalaxyController.CreateNewGalaxy();
 
             GameUIController.CreateGalaxyScreen();
-
-            Foo();
-        }
-
-        static void Foo()
-        {
-            //TEST: Adding a planetary system
-            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
-
-            //TEST: Adding items to player's inventory
-            PlayerController.Player.Balance.Deposit(10000);
-            for (int i = 0; i < 9; i++)
-            {
-                PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
-            }
-
-            //TEST: Adding items to merchant's inventory
-            for (int i = 0; i < 9; i++)
-            {
-                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
-            }
         }
         
         public static void LoadGame(SaveFile saveFile)
         {
-            GalaxyController.Recreate();
-            MerchantController.CreateNewMerchant();
-
-            //Default (these should always load):
-            saveFile.Load_PlanetarySystems();
-            saveFile.Load_Player();
-
-            switch (saveFile.GameState)
+            if (saveFile != null)
             {
-                default:
-                case SaveFile_GameState.Galaxy:
-                    GameUIController.CreateGalaxyScreen();
-                    break;
-                case SaveFile_GameState.PlanetarySystem:
-                    GameUIController.CreatePlanetarySystemScreen();
-                    saveFile.Load_CurrentPlanetarySystem();
-                    break;
-                case SaveFile_GameState.Citadel:
-                    GameUIController.CreateCitadelScreen();
-                    break;
+                GalaxyController.ResetGalaxy();
+                MerchantController.CreateNewMerchant();
+
+                //Default (these should always load):
+                saveFile.Load_PlanetarySystems();
+                saveFile.Load_Player();
+
+                switch (saveFile.GameState)
+                {
+                    default:
+                    case SaveFile_GameState.Galaxy:
+                        GameUIController.CreateGalaxyScreen();
+                        break;
+                    case SaveFile_GameState.PlanetarySystem:
+                        GameUIController.CreatePlanetarySystemScreen();
+                        saveFile.Load_CurrentPlanetarySystem();
+                        break;
+                    case SaveFile_GameState.Citadel:
+                        GameUIController.CreateCitadelScreen();
+                        break;
+                }
             }
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
+            //TODO: Clean up
             switch (GameState)
             {
                 case GameState.MainMenu:
@@ -99,6 +82,7 @@ namespace Galaxies.Controllers
 
         public static void Update(GameTime gameTime)
         {
+            //TODO: Clean up
             switch (GameState)
             {
                 case GameState.MainMenu:

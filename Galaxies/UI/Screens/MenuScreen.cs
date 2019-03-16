@@ -4,7 +4,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.UI.Screens
 {
@@ -52,7 +51,7 @@ namespace Galaxies.UI.Screens
             uiSaveFiles.Visable = false;
 
             uiCreateSaveFile = AddUIElement(new UICreateSaveFile(
-                new Transform(Alignment.MiddleCenter, new Vector2(500, 200)),
+                new Transform(Alignment.MiddleCenter, new Vector2(500, 150)),
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
                 this,
                 new EventArg0(ToggleUICreateSave)

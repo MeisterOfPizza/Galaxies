@@ -41,6 +41,16 @@ namespace Galaxies.Controllers
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.PlayerShipTemplates, new DataFile(document));
+
+            file = File.Open("Data\\Merchant.xml", FileMode.Open);
+            document = new XmlDocument();
+            document.Load(file);
+            DataFiles.Add(DataFileType.Merchant, new DataFile(document));
+
+            file = File.Open("Data\\Visitables.xml", FileMode.Open);
+            document = new XmlDocument();
+            document.Load(file);
+            DataFiles.Add(DataFileType.Visitables, new DataFile(document));
         }
 
         /// <summary>
@@ -85,6 +95,7 @@ namespace Galaxies.Controllers
             }
             else
             {
+                //TODO: Add debug msg
                 return null;
             }
         }
@@ -108,7 +119,9 @@ namespace Galaxies.Controllers
         Planets,
         Items,
         Enemies,
-        PlayerShipTemplates
+        PlayerShipTemplates,
+        Merchant,
+        Visitables
     }
 
     class DataFile

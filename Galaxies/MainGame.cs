@@ -1,6 +1,5 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Extensions;
-using Galaxies.Progression;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -52,24 +51,7 @@ namespace Galaxies
             SpriteHelper.Initialize();
             SaveFileController.Initialize();
             ShipyardController.Initialize();
-
-            /*
-            //TEST: Adding a planetary system
-            GalaxyController.Visitables.Add(new Space.PlanetarySystem(DataController.LoadData<Datas.Space.PlanetarySystemData>("test", DataFileType.PlanetarySystems)));
-
-            //TEST: Adding items to player's inventory
-            PlayerController.Player.Balance.Deposit(10000);
-            for (int i = 0; i < 9; i++)
-            {
-                PlayerController.Player.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(PlayerController.Player.Inventory));
-            }
-
-            //TEST: Adding items to merchant's inventory
-            for (int i = 0; i < 9; i++)
-            {
-                MerchantController.Merchant.Inventory.AddItem(DataController.LoadData<Datas.Items.ShipUpgradeItemData>("0", DataFileType.Items).CreateItem(MerchantController.Merchant.Inventory));
-            }
-            */
+            GalaxyController.Initialize();
 
             GameUIController.Window = Window;
             GameUIController.CreateMenuScreen();
@@ -110,12 +92,9 @@ namespace Galaxies
 
             GameController.Update(gameTime);
             GameUIController.Update(gameTime);
-            TickController.Update(gameTime);
 
             base.Update(gameTime);
         }
-
-        int test;
 
         /// <summary>
         /// This is called when the game should draw itself.

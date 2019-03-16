@@ -3,7 +3,7 @@
 namespace Galaxies.Space
 {
 
-    interface IVisitable
+    public interface IVisitable
     {
 
         string    Name              { get; }
