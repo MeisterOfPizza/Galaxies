@@ -17,7 +17,7 @@ namespace Galaxies.UI.Screens
         UISaveFiles      uiSaveFiles;
         UICreateSaveFile uiCreateSaveFile;
 
-        public async override Task CreateUIAsync()
+        public async override void CreateUIAsync()
         {
             //Add background gif:
             AddUIElement(new UIBackgroundAnimation(

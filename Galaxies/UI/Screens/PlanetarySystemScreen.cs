@@ -14,7 +14,7 @@ namespace Galaxies.UI.Screens
     class PlanetarySystemScreen : Screen
     {
 
-        public async override Task CreateUIAsync()
+        public async override void CreateUIAsync()
         {
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),

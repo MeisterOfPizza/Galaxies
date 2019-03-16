@@ -16,7 +16,7 @@ namespace Galaxies.UI.Screens
         UISaveFiles      uiSaveFiles;
         UICreateSaveFile uiCreateSaveFile;
 
-        public async override Task CreateUIAsync()
+        public async override void CreateUIAsync()
         {
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
@@ -59,6 +59,8 @@ namespace Galaxies.UI.Screens
                 ));
 
             uiCreateSaveFile.Visable = false;
+
+            System.Console.WriteLine("Menu done");
         }
 
         public void ToggleUISaveFiles()

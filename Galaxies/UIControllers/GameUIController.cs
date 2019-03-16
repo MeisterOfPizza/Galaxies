@@ -1,8 +1,10 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Extensions;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Galaxies.UIControllers
@@ -62,17 +64,37 @@ namespace Galaxies.UIControllers
 
             CreateLoadingScreen();
 
-            CreateScreenAsync(newScreen).Wait();
+            //Task.Run(() => CreateScreenAsync(newScreen));
+            CreateScreenAsync(newScreen);
 
-            int x = 0;
+            //int x = 0;
 
             //Loading screen is automatically removed
         }
 
-        private async static Task CreateScreenAsync(Screen newScreen)
+        private async static void CreateScreenAsync(Screen newScreen)
         {
-            await newScreen.CreateUIAsync();
+            //await newScreen.CreateUIAsync();
+            await Task.Run(() => newScreen.CreateUIAsync());
+            //await Task.Run(() => DoSomethingAsync(newScreen.UIElements.Count));
+            //await newScreen.CreateUIAsync();
             CurrentScreen = newScreen;
+        }
+
+        static async void DoSomethingAsync(int x)
+        {
+            Stopwatch s = new Stopwatch();
+            s.Start();
+            while (s.Elapsed < TimeSpan.FromSeconds(10))
+            {
+                //Do something
+            }
+
+            s.Stop();
+
+            GIF g = SpriteHelper.Citadel_Background_Animation_1;
+
+            Console.WriteLine("DoSomething " + x);
         }
 
         private static void CreateLoadingScreen()

@@ -79,11 +79,6 @@ namespace Galaxies.Extensions
             return MainGame.Singleton.Content.Load<SpriteFont>(fontName);
         }
 
-        public async static Task<GIF> GetGIFAsync(string name, double time)
-        {
-            return new GIF(name, time);
-        }
-
         public static Texture2D[] GetSprites(string path)
         {
             ContentManager content = MainGame.Singleton.Content; //Create a new reference for quicker access.

@@ -10,7 +10,7 @@ namespace Galaxies.UI.Screens
     class LoadingScreen : Screen
     {
 
-        public override Task CreateUIAsync()
+        public override void CreateUIAsync()
         {
             AddUIElement(new UIText(
                 new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
@@ -20,8 +20,6 @@ namespace Galaxies.UI.Screens
                 0,
                 this
                 ));
-
-            return null;
         }
 
     }

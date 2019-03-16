@@ -21,7 +21,7 @@ namespace Galaxies.UI.Screens
         UIProgressBar enemyShieldBar;
         UIProgressBar enemyEnergyBar;
 
-        public async override Task CreateUIAsync()
+        public async override void CreateUIAsync()
         {
             var actionBackground = SpriteHelper.GetSprite("Sprites/UI/Column");
 

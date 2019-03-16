@@ -102,7 +102,7 @@ namespace Galaxies.UI.Screens
             kb_selectCallbacks = new EventArg1<UIElement>();
         }
 
-        public virtual async Task CreateUIAsync()
+        public virtual async void CreateUIAsync()
         {
 
         }

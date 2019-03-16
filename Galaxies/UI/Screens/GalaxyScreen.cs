@@ -16,12 +16,11 @@ namespace Galaxies.UI.Screens
 
         private UIInventory inventory;
 
-        public async override Task CreateUIAsync()
+        public async override void CreateUIAsync()
         {
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
-                //SpriteHelper.Space_Background_Animation_1,
-                await SpriteHelper.GetGIFAsync("Sprites/Backgrounds/Animated/space-background-1", 0.08),
+                SpriteHelper.Space_Background_Animation_1,
                 this
                 ));
 
