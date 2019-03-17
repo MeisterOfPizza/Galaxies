@@ -172,17 +172,17 @@ namespace Galaxies.Progression
         {
             Load_PlayerShipTemplates();
 
-            Trader trader = new Trader(null, new Balance(PlayerTrader.PlayerBalance));
+            PlayerTrader trader = new PlayerTrader(null, new Balance(PlayerTrader.PlayerBalance));
             Inventory inventory = new Inventory(trader);
+
+            trader.Inventory = inventory;
+
+            PlayerController.AssignNewTrader(trader);
 
             foreach (var item in PlayerTrader.PlayerInventory.Items)
             {
                 inventory.AddItem(item.GetItem(inventory));
             }
-
-            trader.Inventory = inventory;
-
-            PlayerController.AssignNewTrader(trader);
         }
 
         private void Load_PlayerShipTemplates()

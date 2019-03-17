@@ -1,10 +1,6 @@
 ﻿using Galaxies.Core;
-using Galaxies.Datas.Items;
-using Galaxies.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using System.Linq;
 
 //Disable "[...] is never assigned to [...]" warnings.
 #pragma warning disable 0649
@@ -12,7 +8,7 @@ using System.Linq;
 namespace Galaxies.Entities
 {
 
-    abstract class ShipEntity : MovingObject, IInventoryOwner
+    abstract class ShipEntity : MovingObject
     {
 
         #region Fields
@@ -120,12 +116,6 @@ namespace Galaxies.Entities
 
         #endregion
 
-        #region IInventoryOwner
-
-        public Inventory Inventory { get; set; }
-
-        #endregion
-
         public ShipEntity(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats) : base(transform, sprite, speed)
         {
             this.baseStats     = baseStats;
@@ -134,30 +124,6 @@ namespace Galaxies.Entities
             this.currentHealth = MaxHealth;
             this.currentShield = MaxShield;
             this.currentEnergy = MaxEnergy;
-        }
-
-        protected void CalculateStats()
-        {
-            var shipUpgradeShipStats = Inventory.Items
-                .Where(i => i.Data.ItemType == ItemType.ShipUpgrade)
-                .Select(i => ((ShipUpgradeItemData)i.Data).ShipStats);
-
-            int newHealth      = 0;
-            int newShield      = 0;
-            int newDamage      = 0;
-            int newEnergy      = 0;
-            int newEnergyRegen = 0;
-
-            foreach (ShipStats stats in shipUpgradeShipStats)
-            {
-                newHealth      += stats.Health;
-                newShield      += stats.Shield;
-                newDamage      += stats.Damage;
-                newEnergy      += stats.Energy;
-                newEnergyRegen += stats.EnergyRegen;
-            }
-
-            modifiedStats = new ShipStats(newHealth, newShield, newDamage, newEnergy, newEnergyRegen);
         }
 
         public void RefillStats()
@@ -204,26 +170,6 @@ namespace Galaxies.Entities
             Health  = 0;
             isAlive = false;
         }
-
-        #region IInventory
-
-        public void InventoryChanged(Item changedItem)
-        {
-            //We only care to update stats if the changed item was of type ShipUpgrade.
-            if (changedItem.Data.ItemType == ItemType.ShipUpgrade)
-            {
-                CalculateStats();
-            }
-        }
-
-        public void InventoryChanged(IList<Item> changedItems)
-        {
-            //We only care to update stats if the changed item was of type ShipUpgrade,
-            //however, we don't want to look through the whole list, so just update in case.
-            CalculateStats();
-        }
-
-        #endregion
 
     }
 
