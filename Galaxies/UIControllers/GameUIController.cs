@@ -14,23 +14,7 @@ namespace Galaxies.UIControllers
 
         public static GameWindow Window { get; set; }
 
-        public static void Update(GameTime gameTime)
-        {
-            if (CurrentScreen != null)
-            {
-                CurrentScreen.Update(gameTime);
-            }
-        }
-
-        public static void Draw(SpriteBatch spriteBatch)
-        {
-            if (CurrentScreen != null)
-            {
-                CurrentScreen.Draw(spriteBatch);
-            }
-        }
-
-        #region Windows helpers
+        #region Window helpers
 
         public static int WindowWidth
         {
@@ -49,6 +33,22 @@ namespace Galaxies.UIControllers
         }
 
         #endregion
+
+        public static void Update(GameTime gameTime)
+        {
+            if (CurrentScreen != null)
+            {
+                CurrentScreen.Update(gameTime);
+            }
+        }
+
+        public static void Draw(SpriteBatch spriteBatch)
+        {
+            if (CurrentScreen != null)
+            {
+                CurrentScreen.Draw(spriteBatch);
+            }
+        }
 
         #region Screens
 

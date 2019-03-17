@@ -1,4 +1,5 @@
-﻿using Galaxies.Datas.Player;
+﻿using Galaxies.Datas;
+using Galaxies.Datas.Player;
 using Galaxies.Progression;
 
 namespace Galaxies.Controllers

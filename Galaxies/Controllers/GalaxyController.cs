@@ -1,4 +1,5 @@
-﻿using Galaxies.Datas.Space;
+﻿using Galaxies.Datas;
+using Galaxies.Datas.Space;
 using Galaxies.Space;
 using Galaxies.UI.Screens;
 using Galaxies.UIControllers;

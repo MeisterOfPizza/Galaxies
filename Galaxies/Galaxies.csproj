@@ -58,6 +58,7 @@
     <Compile Include="Core\GameObject.cs" />
     <Compile Include="Core\MovingObject.cs" />
     <Compile Include="Core\Transform.cs" />
+    <Compile Include="Datas\DataFile.cs" />
     <Compile Include="Datas\Helpers\ColorData.cs" />
     <Compile Include="Datas\Data.cs" />
     <Compile Include="Datas\Enemies\EnemyShipData.cs" />
@@ -97,6 +98,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Progression\PlayerShipTemplate.cs" />
     <Compile Include="Progression\SaveFile.cs" />
+    <Compile Include="Progression\SaveFile_Inventory.cs" />
+    <Compile Include="Progression\SaveFile_Item.cs" />
+    <Compile Include="Progression\SaveFile_Planet.cs" />
+    <Compile Include="Progression\SaveFile_PlanetarySystem.cs" />
+    <Compile Include="Progression\SaveFile_PlayerShipTemplate.cs" />
+    <Compile Include="Progression\SaveFile_PlayerShipTemplates.cs" />
+    <Compile Include="Progression\SaveFile_Trader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Space\Citadel.cs" />
     <Compile Include="Space\Events\ArtifactPlanetEvent.cs" />

@@ -1,4 +1,5 @@
-﻿using Galaxies.Datas.Merchant;
+﻿using Galaxies.Datas;
+using Galaxies.Datas.Merchant;
 using Galaxies.Economy;
 using Galaxies.Items;
 
