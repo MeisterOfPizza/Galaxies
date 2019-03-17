@@ -13,4 +13,11 @@
       <EnergyRegen>0</EnergyRegen>
     </ShipStats>
   </ShipUpgrade>
+  <StarChart id="alpha_centauri">
+    <Name>Map of Alpha Centauri</Name>
+    <Description>Star chart to guide you to Alpha Centauri</Description>
+    <SpriteName>Sprites/UI/Column</SpriteName>
+    <GalacticGoldValue>250</GalacticGoldValue>
+    <PlanetarySystemId>alpha_centauri</PlanetarySystemId>
+  </StarChart>
 </Collection>

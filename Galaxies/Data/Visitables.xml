@@ -3,6 +3,7 @@
   <Visitables id="default">
     <Pointers>
       <Pointer id="test" type="ps" />
+      <Pointer id="alpha_centauri" type="ps" />
     </Pointers>
   </Visitables>
 </Collection>
