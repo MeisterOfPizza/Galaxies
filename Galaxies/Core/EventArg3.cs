@@ -21,9 +21,9 @@
         public EventArg3(_EventArg3<T1, T2, T3> @event, T1 arg1, T2 arg2, T3 arg3)
         {
             this.Event = @event;
-            this.Arg1 = arg1;
-            this.Arg2 = arg2;
-            this.Arg3 = arg3;
+            this.Arg1  = arg1;
+            this.Arg2  = arg2;
+            this.Arg3  = arg3;
         }
 
         public EventArg3(T1 arg1, T2 arg2, T3 arg3, params _EventArg3<T1, T2, T3>[] events)

@@ -1,6 +1,4 @@
-﻿using Galaxies.Controllers;
-using Galaxies.Core;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Extensions

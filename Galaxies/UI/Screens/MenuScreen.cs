@@ -60,13 +60,13 @@ namespace Galaxies.UI.Screens
             uiCreateSaveFile.Visable = false;
         }
 
-        public void ToggleUISaveFiles()
+        private void ToggleUISaveFiles()
         {
             uiMenu.Visable = !uiMenu.Visable;
             uiSaveFiles.Visable = !uiSaveFiles.Visable;
         }
 
-        public void ToggleUICreateSave()
+        private void ToggleUICreateSave()
         {
             uiMenu.Visable = !uiMenu.Visable;
             uiCreateSaveFile.Visable = !uiCreateSaveFile.Visable;

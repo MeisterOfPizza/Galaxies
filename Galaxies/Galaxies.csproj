@@ -117,6 +117,7 @@
     <Compile Include="UI\Elements\UIScrollableGrid.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
+    <Compile Include="UI\Extensions\TextHelper.cs" />
     <Compile Include="UI\Interfaces\IContainer.cs" />
     <Compile Include="UI\Interfaces\IInteractable.cs" />
     <Compile Include="UI\Interfaces\IScrollable.cs" />
@@ -401,9 +402,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Debug\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Content\Fonts\Arial.spritefont" />
   </ItemGroup>

@@ -15,14 +15,14 @@ namespace Galaxies.UI.Elements
 
         public GIF Animation { get; private set; }
 
-        private double GIFUpdateInterval   { get; set; }
-        private double TimeSinceLastUpdate { get; set; }
+        double gifUpdateInterval;
+        double timeSinceLastUpdate;
 
         public UIBackgroundAnimation(Transform transform, GIF animation, Screen screen) : base(transform, null, screen)
         {
             this.Animation = animation;
             Animation.Reset();
-            GIFUpdateInterval = Animation.GIFSpeed;
+            gifUpdateInterval = Animation.GIFSpeed;
 
             SetOrigin(Animation.Bounds / 2f);
         }
@@ -39,13 +39,13 @@ namespace Galaxies.UI.Elements
         {
             base.Update(gameTime);
 
-            TimeSinceLastUpdate += gameTime.ElapsedGameTime.TotalSeconds;
+            timeSinceLastUpdate += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (TimeSinceLastUpdate > GIFUpdateInterval)
+            if (timeSinceLastUpdate > gifUpdateInterval)
             {
                 Animation.Next();
 
-                TimeSinceLastUpdate = 0;
+                timeSinceLastUpdate = 0;
             }
         }
 

@@ -167,9 +167,9 @@ namespace Galaxies.Combat
 
         #endregion
 
-        private Bullet CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg eventArg)
+        private Bullet CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg onHit)
         {
-            return new Bullet(new Transform(position, new Vector2(100), rotation), SpriteHelper.Bullet_Sprite, speed, target, eventArg);
+            return new Bullet(new Transform(position, new Vector2(100), rotation), SpriteHelper.Bullet_Sprite, speed, target, onHit);
         }
 
         public void Draw(SpriteBatch spriteBatch)

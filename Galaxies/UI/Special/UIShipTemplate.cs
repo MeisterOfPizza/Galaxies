@@ -85,6 +85,7 @@ namespace Galaxies.UI.Special
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //TODO: Clean up (remove this)
             base.Draw(spriteBatch);
         }
 

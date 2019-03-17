@@ -12,14 +12,14 @@ namespace Galaxies.UI.Screens
     {
 
         List<UIElement> mainElements;
-        UISaveFiles uiLoad;
+        UISaveFiles     uiLoad;
 
         public override void CreateUI()
         {
             mainElements = new List<UIElement>();
 
             mainElements.Add(AddUIElement(new UIText(
-                new Transform(Transform.SetPosition(Alignment.MiddleCenter, new Vector2(0, -250), new Vector2(250, 50)), new Vector2(250, 50)),
+                new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(0, -250), new Vector2(250, 50)), new Vector2(250, 50)),
                 SpriteHelper.Arial_Font,
                 "Game Over",
                 TextAlign.MiddleCenter,
@@ -28,7 +28,7 @@ namespace Galaxies.UI.Screens
                 )));
 
             mainElements.Add(AddUIElement(new UIButton(
-                new Transform(Transform.SetPosition(Alignment.MiddleCenter, new Vector2(-60, 0), new Vector2(100, 50)), new Vector2(100, 50)),
+                new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(-60, 0), new Vector2(100, 50)), new Vector2(100, 50)),
                 SpriteHelper.Arial_Font,
                 "Load",
                 TextAlign.MiddleCenter,
@@ -39,7 +39,7 @@ namespace Galaxies.UI.Screens
                 )));
 
             mainElements.Add(AddUIElement(new UIButton(
-                new Transform(Transform.SetPosition(Alignment.MiddleCenter, new Vector2(60, 0), new Vector2(100, 50)), new Vector2(100, 50)),
+                new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(60, 0), new Vector2(100, 50)), new Vector2(100, 50)),
                 SpriteHelper.Arial_Font,
                 "Exit",
                 TextAlign.MiddleCenter,
@@ -60,7 +60,7 @@ namespace Galaxies.UI.Screens
             uiLoad.Visable = false;
         }
 
-        public void ToggleUILoad()
+        private void ToggleUILoad()
         {
             foreach (var elem in mainElements)
             {

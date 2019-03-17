@@ -76,7 +76,7 @@ namespace Galaxies.UI.Screens
 
             //Open shop button:
             AddUIElement(new UIButton(
-                new Transform(Transform.SetPosition(Alignment.BottomRight, new Vector2(-212.5f, 0), new Vector2(200, 50)), new Vector2(200, 50)),
+                new Transform(Transform.CreatePosition(Alignment.BottomRight, new Vector2(-212.5f, 0), new Vector2(200, 50)), new Vector2(200, 50)),
                 SpriteHelper.Arial_Font,
                 "Shop",
                 TextAlign.MiddleCenter,
@@ -88,7 +88,7 @@ namespace Galaxies.UI.Screens
 
             //Open save files:
             AddUIElement(new UIButton(
-                new Transform(Transform.SetPosition(Alignment.BottomRight, new Vector2(-425, 0), new Vector2(200, 50)), new Vector2(200, 50)),
+                new Transform(Transform.CreatePosition(Alignment.BottomRight, new Vector2(-425, 0), new Vector2(200, 50)), new Vector2(200, 50)),
                 SpriteHelper.Arial_Font,
                 "Save & Load",
                 TextAlign.MiddleCenter,

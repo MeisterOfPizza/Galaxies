@@ -14,8 +14,8 @@ namespace Galaxies.UI.Screens
     class GalaxyScreen : Screen
     {
 
-        private UIScrollableColumn visitablesColumn;
-        private UIInventory        uiInventory;
+        UIScrollableColumn visitablesColumn;
+        UIInventory        uiInventory;
 
         public override void CreateUI()
         {
@@ -76,13 +76,13 @@ namespace Galaxies.UI.Screens
 
             uiInventory.Visable = false;
 
-            SetupUIItemInUIInventory();
+            SetupUIItemsInUIInventory();
 
             //Add the Top Info bar:
             AddUIElement(new UITopInfo(this));
         }
 
-        private void SetupUIItemInUIInventory()
+        private void SetupUIItemsInUIInventory()
         {
             foreach (UIItem uiItem in uiInventory.Items)
             {
