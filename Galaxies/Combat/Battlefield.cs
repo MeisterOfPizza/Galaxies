@@ -150,8 +150,6 @@ namespace Galaxies.Combat
                 
                 AwaitEventCallbacks = true;
             }
-
-            //TODO: Call UI?
         }
 
         #endregion

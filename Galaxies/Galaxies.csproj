@@ -63,13 +63,11 @@
     <Compile Include="Datas\Data.cs" />
     <Compile Include="Datas\Enemies\EnemyShipData.cs" />
     <Compile Include="Datas\Helpers\DataPointer.cs" />
-    <Compile Include="Datas\Items\ArtifactItemData.cs" />
     <Compile Include="Datas\Items\ItemData.cs" />
     <Compile Include="Datas\Items\ShipUpgradeItemData.cs" />
     <Compile Include="Datas\Items\StarChartItemData.cs" />
     <Compile Include="Datas\Merchant\MerchantShopData.cs" />
     <Compile Include="Datas\Player\PlayerShipTemplateData.cs" />
-    <Compile Include="Datas\Space\ArtifactPlanetEventData.cs" />
     <Compile Include="Datas\Space\CombatPlanetEventData.cs" />
     <Compile Include="Datas\Space\ItemDropPlanetEventData.cs" />
     <Compile Include="Datas\Space\PlanetarySystemData.cs" />
@@ -107,7 +105,6 @@
     <Compile Include="Progression\SaveFile_Trader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Space\Citadel.cs" />
-    <Compile Include="Space\Events\ArtifactPlanetEvent.cs" />
     <Compile Include="Space\Events\CombatPlanetEvent.cs" />
     <Compile Include="Space\Events\ItemDropPlanetEvent.cs" />
     <Compile Include="Space\Events\PlanetEvent.cs" />
