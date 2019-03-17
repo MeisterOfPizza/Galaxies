@@ -77,6 +77,7 @@
     <Compile Include="Datas\Space\VisitablesData.cs" />
     <Compile Include="Debug\CrashHandler.cs" />
     <Compile Include="Economy\Balance.cs" />
+    <Compile Include="Economy\PlayerTrader.cs" />
     <Compile Include="Economy\Trader.cs" />
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\EnemyShip.cs" />
