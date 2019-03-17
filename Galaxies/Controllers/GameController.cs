@@ -64,7 +64,6 @@ namespace Galaxies.Controllers
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            //TODO: Clean up
             switch (GameState)
             {
                 case GameState.Combat:
@@ -77,7 +76,6 @@ namespace Galaxies.Controllers
 
         public static void Update(GameTime gameTime)
         {
-            //TODO: Clean up
             switch (GameState)
             {
                 case GameState.Combat:

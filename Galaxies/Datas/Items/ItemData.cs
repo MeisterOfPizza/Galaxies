@@ -8,7 +8,6 @@ namespace Galaxies.Datas.Items
     public enum ItemType
     {
         ShipUpgrade,
-        Artifact, //TODO: Remove obsolete
         StarChart
     }
 

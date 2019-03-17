@@ -359,7 +359,7 @@ namespace Galaxies.Core
         /// <param name="offset">Offset from alignment.</param>
         /// <param name="size">Size of the GameObject.</param>
         /// <returns>Position</returns>
-        public static Vector2 SetPosition(Alignment alignment, Vector2 offset, Vector2 size)
+        public static Vector2 CreatePosition(Alignment alignment, Vector2 offset, Vector2 size)
         {
             Vector2 position = offset;
             Vector2 halfSize = size / 2f;

@@ -1,5 +1,6 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Core;
+using Galaxies.Datas;
 using Galaxies.Datas.Enemies;
 using Galaxies.Datas.Helpers;
 using Galaxies.Datas.Space;

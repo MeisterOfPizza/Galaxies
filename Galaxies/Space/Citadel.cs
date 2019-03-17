@@ -42,7 +42,7 @@ namespace Galaxies.Space
 
         public Citadel()
         {
-            //TODO: Refresh store? Refresh quests?
+            //TODO: Refresh store:
         }
 
         #region IVisitable

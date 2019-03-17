@@ -1,4 +1,5 @@
 ﻿using Galaxies.Core;
+using Galaxies.UI.Extensions;
 using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
