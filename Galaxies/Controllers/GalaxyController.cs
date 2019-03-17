@@ -1,5 +1,7 @@
 ﻿using Galaxies.Datas.Space;
 using Galaxies.Space;
+using Galaxies.UI.Screens;
+using Galaxies.UIControllers;
 using System.Collections.Generic;
 
 namespace Galaxies.Controllers
@@ -30,9 +32,26 @@ namespace Galaxies.Controllers
             Visitables.Add(new Citadel());
         }
 
+        public static void AddVisitable(IVisitable visitable)
+        {
+            Visitables.Add(visitable);
+
+            //Update Galaxy UI:
+            if (GameController.GameState == GameState.Galaxy)
+            {
+                ((GalaxyScreen)GameUIController.CurrentScreen).UpdateUIVisitables();
+            }
+        }
+
         public static void AddVisitables(IList<IVisitable> visitables)
         {
             Visitables.AddRange(visitables);
+
+            //Update Galaxy UI:
+            if (GameController.GameState == GameState.Galaxy)
+            {
+                ((GalaxyScreen)GameUIController.CurrentScreen).UpdateUIVisitables();
+            }
         }
 
         public static void RemoveVisistable(IVisitable visitable)

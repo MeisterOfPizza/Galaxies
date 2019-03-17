@@ -8,7 +8,7 @@ namespace Galaxies.Datas.Items
     public class StarChartItemData : ItemData
     {
 
-        [XmlElement("Planetary SystemId", IsNullable = false)]
+        [XmlElement("PlanetarySystemId", IsNullable = false)]
         public string PlanetarySystemId { get; set; }
 
         public override ItemType ItemType

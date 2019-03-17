@@ -3,6 +3,7 @@
   <MerchantShop id="default">
     <Pointers>
       <Pointer id="0" type="su" />
+      <Pointer id="alpha_centauri" type="sc" />
     </Pointers>
   </MerchantShop>
 </Collection>

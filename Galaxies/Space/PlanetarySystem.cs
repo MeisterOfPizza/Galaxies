@@ -49,9 +49,7 @@ namespace Galaxies.Space
 
         private void CreatePlanets()
         {
-            int nRndPlanets = Random.Next(Data.MinRandomPlanets, Data.MaxRandomPlanets + 1);
-
-            Planets = new Planet[Data.PlanetIds.Length + nRndPlanets];
+            Planets = new Planet[Data.PlanetIds.Length];
 
             for (int i = 0; i < Data.PlanetIds.Length; i++)
             {
