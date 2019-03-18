@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Galaxies.Extensions
@@ -45,11 +46,11 @@ namespace Galaxies.Extensions
 
         #region Backgrounds
 
-        public static GIF Space_Background_Animation_1 { get; private set; }
-        public static GIF Space_Background_Animation_2 { get; private set; }
+        public static GIF Space_Background_Animation_1 { get { return new GIF("Sprites/Backgrounds/Animated/space-background-1", 0.08); } }
+        public static GIF Space_Background_Animation_2 { get { return new GIF("Sprites/Backgrounds/Animated/space-background-2", 0.03); } }
 
-        public static GIF Citadel_Background_Animation_1 { get; private set; }
-        public static GIF Citadel_Background_Animation_2 { get; private set; }
+        public static GIF Citadel_Background_Animation_1 { get { return new GIF("Sprites/Backgrounds/Animated/citadel-background-1", 0.05); } }
+        public static GIF Citadel_Background_Animation_2 { get { return new GIF("Sprites/Backgrounds/Animated/citadel-background-2", 0.10); } }
 
         #endregion
 
@@ -63,12 +64,6 @@ namespace Galaxies.Extensions
 
             Bullet_Sprite = GetSprite("Sprites/Effects/Bullet");
             Shield_Sprite = GetSprite("Sprites/Effects/Shield");
-
-            Space_Background_Animation_1 = new GIF("Sprites/Backgrounds/Animated/space-background-1", 0.08);
-            Space_Background_Animation_2 = new GIF("Sprites/Backgrounds/Animated/space-background-2", 0.03);
-
-            Citadel_Background_Animation_1 = new GIF("Sprites/Backgrounds/Animated/citadel-background-1", 0.05);
-            Citadel_Background_Animation_2 = new GIF("Sprites/Backgrounds/Animated/citadel-background-2", 0.10);
         }
 
         public static Texture2D GetSprite(string spriteName)

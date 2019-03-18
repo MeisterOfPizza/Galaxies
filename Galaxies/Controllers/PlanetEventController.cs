@@ -34,8 +34,11 @@ namespace Galaxies.Controllers
             }
             else
             {
-                //Return to the planetary screen
-                GameUIController.CreatePlanetarySystemScreen();
+                if (GameController.GameState != GameState.PlanetarySystem)
+                {
+                    //Return to the planetary screen
+                    GameUIController.CreatePlanetarySystemScreen();
+                }
             }
         }
 

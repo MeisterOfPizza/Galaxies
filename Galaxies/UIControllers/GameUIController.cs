@@ -1,8 +1,10 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Threading.Tasks;
 
 namespace Galaxies.UIControllers
 {
@@ -12,15 +14,23 @@ namespace Galaxies.UIControllers
 
         public static Screen CurrentScreen { get; private set; }
 
-        public static GameWindow Window { get; set; }
-
         #region Window helpers
+
+        static Vector2 windowSize;
+
+        public static Vector2 WindowSize
+        {
+            get
+            {
+                return windowSize;
+            }
+        }
 
         public static int WindowWidth
         {
             get
             {
-                return Window.ClientBounds.Width;
+                return (int)windowSize.X;
             }
         }
 
@@ -28,11 +38,16 @@ namespace Galaxies.UIControllers
         {
             get
             {
-                return Window.ClientBounds.Height;
+                return (int)windowSize.Y;
             }
         }
 
         #endregion
+
+        public static void Initialize()
+        {
+            windowSize = MainGame.Singleton.Window.ClientBounds.Size.ToVector2();
+        }
 
         public static void Update(GameTime gameTime)
         {
@@ -52,60 +67,90 @@ namespace Galaxies.UIControllers
 
         #region Screens
 
-        private static void CreateScreen(Screen newScreen)
+        private static void CreateScreen(Screen newScreen, EventArg onSwitchScreen)
         {
             if (CurrentScreen != null)
             {
                 CurrentScreen.DestroyScreen();
             }
 
-            CurrentScreen = newScreen;
-            CurrentScreen.CreateUI();
+            CreateLoadingScreen();
+
+            //Create new screen asynchronously:
+            Task.Run(() => CreateScreenAsync(newScreen, onSwitchScreen));
+
+            //Loading screen is then automatically removed when the new screen is done
         }
 
-        public static void CreateMenuScreen()
+        private async static void CreateScreenAsync(Screen newScreen, EventArg onSwitchScreen)
+        {
+            await Task.Run(() => newScreen.CreateUI()); //Await the creation of the UI to finish.
+
+            if (CurrentScreen != null)
+            {
+                //Properly destroy the loading screen
+                CurrentScreen.DestroyScreen();
+            }
+
+            CurrentScreen = newScreen;
+
+            if (onSwitchScreen != null)
+            {
+                onSwitchScreen.Invoke();
+            }
+        }
+
+        private static void CreateLoadingScreen()
+        {
+            LoadingScreen loadingScreen = new LoadingScreen();
+            loadingScreen.CreateUI();
+
+            CurrentScreen = loadingScreen;
+        }
+
+        public static void CreateMenuScreen(EventArg onSwitchScreen = null)
         {
             GameController.GameState = GameState.MainMenu;
 
-            CreateScreen(new MenuScreen());
+            CreateScreen(new MenuScreen(), onSwitchScreen);
         }
 
-        public static void CreateGalaxyScreen()
+        public static void CreateGalaxyScreen(EventArg onSwitchScreen = null)
         {
             GameController.GameState = GameState.Galaxy;
 
-            CreateScreen(new GalaxyScreen());
+            CreateScreen(new GalaxyScreen(), onSwitchScreen);
         }
 
-        public static void CreatePlanetarySystemScreen()
+        public static void CreatePlanetarySystemScreen(EventArg onSwitchScreen = null)
         {
             GameController.GameState = GameState.PlanetarySystem;
 
-            CreateScreen(new PlanetarySystemScreen());
+            CreateScreen(new PlanetarySystemScreen(), onSwitchScreen);
         }
 
-        public static void CreateCombatScreen()
+        public static void CreateCombatScreen(EventArg onSwitchScreen = null)
         {
             GameController.GameState = GameState.Combat;
 
-            CreateScreen(new CombatScreen());
+            CreateScreen(new CombatScreen(), onSwitchScreen);
         }
 
-        public static void CreateCitadelScreen()
+        public static void CreateCitadelScreen(EventArg onSwitchScreen = null)
         {
             //Refill the all the player ship template's stats:
             ShipyardController.RefillShipStats();
 
             GameController.GameState = GameState.Citadel;
 
-            CreateScreen(new CitadelScreen());
+            CreateScreen(new CitadelScreen(), onSwitchScreen);
         }
 
-        public static void CreateGameOverScreen()
+        public static void CreateGameOverScreen(EventArg onSwitchScreen = null)
         {
             GameController.GameState = GameState.GameOver;
 
-            CreateScreen(new GameOverScreen());
+            CreateScreen(new GameOverScreen(), onSwitchScreen);
         }
 
         #endregion
@@ -114,12 +159,12 @@ namespace Galaxies.UIControllers
 
         public static int WidthPercent(float percent)
         {
-            return (int)Math.Round(Window.ClientBounds.Width * percent, 0);
+            return (int)Math.Round(windowSize.X * percent, 0);
         }
 
         public static int HeightPercent(float percent)
         {
-            return (int)Math.Round(Window.ClientBounds.Height * percent, 0);
+            return (int)Math.Round(windowSize.Y * percent, 0);
         }
 
         #endregion

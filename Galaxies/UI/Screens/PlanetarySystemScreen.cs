@@ -16,7 +16,7 @@ namespace Galaxies.UI.Screens
         public override void CreateUI()
         {
             AddUIElement(new UIBackgroundAnimation(
-                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
                 SpriteHelper.Space_Background_Animation_1,
                 this
                 ));
@@ -40,7 +40,7 @@ namespace Galaxies.UI.Screens
                 TextAlign.MiddleCenter,
                 5,
                 column,
-                new EventArg0(GameUIController.CreateGalaxyScreen),
+                new EventArg1<EventArg>(GameUIController.CreateGalaxyScreen, null),
                 this
                 ));
 

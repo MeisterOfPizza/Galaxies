@@ -18,7 +18,7 @@ namespace Galaxies.UI.Screens
         public override void CreateUI()
         {
             AddUIElement(new UIBackgroundAnimation(
-                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
                 SpriteHelper.Space_Background_Animation_2,
                 this
                 ));

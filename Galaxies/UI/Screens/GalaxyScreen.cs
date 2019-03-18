@@ -21,7 +21,7 @@ namespace Galaxies.UI.Screens
         {
             //Background:
             AddUIElement(new UIBackgroundAnimation(
-                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
                 SpriteHelper.Space_Background_Animation_1,
                 this
                 ));
@@ -48,7 +48,7 @@ namespace Galaxies.UI.Screens
                 TextAlign.MiddleCenter,
                 5,
                 columnSprite,
-                new EventArg0(GameUIController.CreateMenuScreen),
+                new EventArg1<EventArg>(GameUIController.CreateMenuScreen, null),
                 this
                 ));
 

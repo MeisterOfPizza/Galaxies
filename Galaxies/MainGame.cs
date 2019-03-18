@@ -24,9 +24,12 @@ namespace Galaxies
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth  = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-            graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            //graphics.PreferredBackBufferWidth  = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            //graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
             //graphics.ToggleFullScreen();
+
+            graphics.PreferredBackBufferWidth  = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
 
             //graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
 
@@ -51,7 +54,7 @@ namespace Galaxies
             ShipyardController.Initialize();
             GalaxyController.Initialize();
 
-            GameUIController.Window = Window;
+            GameUIController.Initialize();
             GameUIController.CreateMenuScreen();
         }
 

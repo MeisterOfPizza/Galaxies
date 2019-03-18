@@ -58,7 +58,7 @@ namespace Galaxies.UI.Screens
                 TextAlign.MiddleCenter,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg0(GameUIController.CreateGalaxyScreen),
+                new EventArg1<EventArg>(GameUIController.CreateGalaxyScreen, null),
                 this
                 ));
 
