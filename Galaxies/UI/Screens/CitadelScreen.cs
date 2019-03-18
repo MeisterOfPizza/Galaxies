@@ -4,7 +4,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -16,7 +15,7 @@ namespace Galaxies.UI.Screens
         UIShipyard  uiShipyard;
         UISaveFiles uiSaveFiles;
 
-        public async override void CreateUIAsync()
+        public override void CreateUI()
         {
             //Add background gif:
             AddUIElement(new UIBackgroundAnimation(
@@ -59,7 +58,7 @@ namespace Galaxies.UI.Screens
                 TextAlign.MiddleCenter,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg0(GameUIController.CreateGalaxyScreen),
+                new EventArg1<EventArg>(GameUIController.CreateGalaxyScreen, null),
                 this
                 ));
 

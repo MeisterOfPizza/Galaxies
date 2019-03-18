@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -102,10 +101,7 @@ namespace Galaxies.UI.Screens
             kb_selectCallbacks = new EventArg1<UIElement>();
         }
 
-        public virtual async void CreateUIAsync()
-        {
-
-        }
+        public abstract void CreateUI();
 
         #region Screen updates
 

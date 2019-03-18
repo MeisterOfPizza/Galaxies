@@ -4,8 +4,6 @@ using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Galaxies
 {
@@ -56,7 +54,7 @@ namespace Galaxies
             ShipyardController.Initialize();
             GalaxyController.Initialize();
 
-            GameUIController.Window = Window;
+            GameUIController.Initialize();
             GameUIController.CreateMenuScreen();
         }
 

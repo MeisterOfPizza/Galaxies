@@ -5,7 +5,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -21,7 +20,7 @@ namespace Galaxies.UI.Screens
         UIProgressBar enemyShieldBar;
         UIProgressBar enemyEnergyBar;
 
-        public async override void CreateUIAsync()
+        public override void CreateUI()
         {
             var actionBackground = SpriteHelper.GetSprite("Sprites/UI/Column");
 

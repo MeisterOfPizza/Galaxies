@@ -7,7 +7,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -18,11 +17,11 @@ namespace Galaxies.UI.Screens
         UIScrollableColumn visitablesColumn;
         UIInventory        uiInventory;
 
-        public async override void CreateUIAsync()
+        public override void CreateUI()
         {
             //Background:
             AddUIElement(new UIBackgroundAnimation(
-                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
                 SpriteHelper.Space_Background_Animation_1,
                 this
                 ));
@@ -49,7 +48,7 @@ namespace Galaxies.UI.Screens
                 TextAlign.MiddleCenter,
                 5,
                 columnSprite,
-                new EventArg0(GameUIController.CreateMenuScreen),
+                new EventArg1<EventArg>(GameUIController.CreateMenuScreen, null),
                 this
                 ));
 

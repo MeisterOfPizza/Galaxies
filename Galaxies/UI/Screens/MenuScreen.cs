@@ -4,7 +4,6 @@ using Galaxies.UI.Elements;
 using Galaxies.UI.Special;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
-using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -16,10 +15,10 @@ namespace Galaxies.UI.Screens
         UISaveFiles      uiSaveFiles;
         UICreateSaveFile uiCreateSaveFile;
 
-        public async override void CreateUIAsync()
+        public override void CreateUI()
         {
             AddUIElement(new UIBackgroundAnimation(
-                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
                 SpriteHelper.Space_Background_Animation_2,
                 this
                 ));
@@ -59,8 +58,6 @@ namespace Galaxies.UI.Screens
                 ));
 
             uiCreateSaveFile.Visable = false;
-
-            System.Console.WriteLine("Menu done");
         }
 
         private void ToggleUISaveFiles()

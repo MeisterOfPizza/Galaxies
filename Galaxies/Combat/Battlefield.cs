@@ -75,8 +75,7 @@ namespace Galaxies.Combat
             }
             else if (!Enemy.IsAlive)
             {
-                GameUIController.CreatePlanetarySystemScreen(); //Exit the combat screen.
-                PlanetEventController.TriggerNextEvent();
+                GameUIController.CreatePlanetarySystemScreen(new EventArg0(PlanetEventController.TriggerNextEvent)); //Exit the combat screen.
 
                 return;
             }

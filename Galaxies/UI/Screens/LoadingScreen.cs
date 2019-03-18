@@ -2,7 +2,6 @@
 using Galaxies.Extensions;
 using Galaxies.UI.Elements;
 using Galaxies.UIControllers;
-using System.Threading.Tasks;
 
 namespace Galaxies.UI.Screens
 {
@@ -10,10 +9,10 @@ namespace Galaxies.UI.Screens
     class LoadingScreen : Screen
     {
 
-        public override void CreateUIAsync()
+        public override void CreateUI()
         {
             AddUIElement(new UIText(
-                new Transform(Alignment.MiddleCenter, GameUIController.Window.ClientBounds.Size.ToVector2()),
+                new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
                 SpriteHelper.Arial_Font,
                 "Loading...",
                 TextAlign.MiddleCenter,
