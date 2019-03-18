@@ -11,7 +11,6 @@ namespace Galaxies.Datas.Space
         public string SpriteName { get; set; }
 
         [XmlArray("OnVisitEvents", IsNullable = true)]
-        //[XmlArrayItem("Artifact", typeof(ArtifactPlanetEventData), IsNullable = false)] //TODO: Remove obsolete
         [XmlArrayItem("ItemDrop", typeof(ItemDropPlanetEventData), IsNullable = false)]
         [XmlArrayItem("Combat", typeof(CombatPlanetEventData), IsNullable = false)]
         public PlanetEventData[] OnVisitEvents { get; set; }

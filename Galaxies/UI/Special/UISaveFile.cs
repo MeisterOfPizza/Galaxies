@@ -13,11 +13,11 @@ namespace Galaxies.UI.Special
     class UISaveFile : UIGroup
     {
 
-        public FileInfo FileInfo { get; private set; }
+        FileInfo fileInfo;
 
         public UISaveFile(Transform transform, Texture2D sprite, Screen screen, FileInfo fileInfo, bool canSave) : base(transform, sprite, screen)
         {
-            this.FileInfo = fileInfo;
+            this.fileInfo = fileInfo;
 
             //Name of save file:
             AddUIElement(new UIText(
@@ -48,7 +48,7 @@ namespace Galaxies.UI.Special
                     TextAlign.MiddleCenter,
                     5,
                     SpriteHelper.GetSprite("Sprites/UI/Column"),
-                    new EventArg1<FileInfo>(SaveFileController.SaveGame, FileInfo),
+                    new EventArg1<FileInfo>(SaveFileController.SaveGame, this.fileInfo),
                     screen
                 ));
             }
@@ -60,7 +60,7 @@ namespace Galaxies.UI.Special
                 TextAlign.MiddleCenter,
                 5,
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
-                new EventArg1<FileInfo>(SaveFileController.LoadGame, FileInfo),
+                new EventArg1<FileInfo>(SaveFileController.LoadGame, this.fileInfo),
                 screen
                 ));
         }

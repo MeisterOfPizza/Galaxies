@@ -2,7 +2,6 @@
 using Galaxies.Core;
 using Galaxies.Datas.Items;
 using Galaxies.Datas.Space;
-using Galaxies.Entities;
 using Galaxies.Items;
 using Galaxies.UI;
 using Galaxies.UI.Elements;
