@@ -16,6 +16,11 @@ namespace Galaxies.Items
         /// </summary>
         public abstract bool CanSell { get; }
 
+        /// <summary>
+        /// Can this item be used?
+        /// </summary>
+        public abstract bool CanUse { get; }
+
         #endregion
 
         public Item(ItemData data, Inventory inventory)

@@ -28,7 +28,8 @@ namespace Galaxies.UI.Special
                 screen,
                 PlayerController.Player.Inventory.Items,
                 "Player",
-                false
+                false,
+                null
                 ));
 
             //Merchant's inventory
@@ -37,7 +38,8 @@ namespace Galaxies.UI.Special
                 screen,
                 MerchantController.Merchant.Inventory.Items,
                 "Merchant",
-                false
+                false,
+                null
                 ));
 
             SetupItemButtons();
@@ -47,19 +49,22 @@ namespace Galaxies.UI.Special
         {
             foreach (UIItem item in uiPlayerInventory.Items)
             {
-                var uiPointer   = item; //Create a reference for the current UIItem in the iteration.
-                var itemPointer = item.Item; //Create a reference for the current Item in the iteration.
+                if (item.Item.CanSell)
+                {
+                    var uiPointer = item; //Create a reference for the current UIItem in the iteration.
+                    var itemPointer = item.Item; //Create a reference for the current Item in the iteration.
 
-                EventArg3<Item, Trader, Trader> onSellClicked 
-                    = new EventArg3<Item, Trader, Trader>(MerchantController.TradeItem, itemPointer, MerchantController.Merchant, PlayerController.Player);
+                    EventArg3<Item, Trader, Trader> onSellClicked
+                        = new EventArg3<Item, Trader, Trader>(MerchantController.TradeItem, itemPointer, MerchantController.Merchant, PlayerController.Player);
 
-                //Create the sell button, allowing the player to sell the item to the merchant.
-                //Also, swap the UIItem after it's sold/bought to the opposite UI Inventory (Player => Merchant and Merchant => Player).
-                item.CreateSellButton(
-                    new EventArgList(
-                        onSellClicked,
-                        new EventArg3<UIItem, bool, EventArg3<Item, Trader, Trader>>(SwapUIItems, uiPointer, true, onSellClicked)
-                        ));
+                    //Create the sell button, allowing the player to sell the item to the merchant.
+                    //Also, swap the UIItem after it's sold/bought to the opposite UI Inventory (Player => Merchant and Merchant => Player).
+                    item.CreateSellButton(
+                        new EventArgList(
+                            onSellClicked,
+                            new EventArg3<UIItem, bool, EventArg3<Item, Trader, Trader>>(SwapUIItems, uiPointer, true, onSellClicked)
+                            ));
+                }
             }
 
             foreach (UIItem item in uiMerchantInventory.Items)
@@ -110,8 +115,8 @@ namespace Galaxies.UI.Special
                     );
 
                 //Create the purchase/sell button whether or not it came from the player's inventory.
-                if (fromPlayer) uiItem.CreatePurchaseButton(onButtonClickEvents);
-                else            uiItem.CreateSellButton(onButtonClickEvents);
+                if (fromPlayer)               uiItem.CreatePurchaseButton(onButtonClickEvents);
+                else if (uiItem.Item.CanSell) uiItem.CreateSellButton(onButtonClickEvents);
 
                 //Add the new UIItem to the right grid:
                 if (fromPlayer) uiMerchantInventory.ItemGrid.AddUIElement(uiItem);

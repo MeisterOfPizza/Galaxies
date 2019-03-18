@@ -52,7 +52,7 @@ namespace Galaxies.UI.Screens
             uiSaveFiles.Visable = false;
 
             uiCreateSaveFile = AddUIElement(new UICreateSaveFile(
-                new Transform(Alignment.MiddleCenter, new Vector2(500, 200)),
+                new Transform(Alignment.MiddleCenter, new Vector2(500, 150)),
                 SpriteHelper.GetSprite("Sprites/UI/Column"),
                 this,
                 new EventArg0(ToggleUICreateSave)
@@ -63,13 +63,13 @@ namespace Galaxies.UI.Screens
             System.Console.WriteLine("Menu done");
         }
 
-        public void ToggleUISaveFiles()
+        private void ToggleUISaveFiles()
         {
             uiMenu.Visable = !uiMenu.Visable;
             uiSaveFiles.Visable = !uiSaveFiles.Visable;
         }
 
-        public void ToggleUICreateSave()
+        private void ToggleUICreateSave()
         {
             uiMenu.Visable = !uiMenu.Visable;
             uiCreateSaveFile.Visable = !uiCreateSaveFile.Visable;

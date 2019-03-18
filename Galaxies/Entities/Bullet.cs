@@ -9,8 +9,8 @@ namespace Galaxies.Entities
     class Bullet : MovingObject
     {
 
-        private GameObject target;
-        private EventArg   onHit;
+        GameObject target;
+        EventArg   onHit;
 
         public bool Destroyed { get; private set; }
 

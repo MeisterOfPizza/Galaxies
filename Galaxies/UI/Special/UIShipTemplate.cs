@@ -83,11 +83,6 @@ namespace Galaxies.UI.Special
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
-
     }
 
 }

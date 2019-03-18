@@ -16,7 +16,7 @@ namespace Galaxies.UI.Special
 
         public UIItem[] Items { get; private set; }
 
-        public UIInventory(Transform transform, Screen screen, IList<Item> items, string title, bool closeButton) : base(transform, null, screen)
+        public UIInventory(Transform transform, Screen screen, IList<Item> items, string title, bool closeButton, EventArg onClose) : base(transform, null, screen)
         {
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)),
@@ -59,15 +59,10 @@ namespace Galaxies.UI.Special
                     TextAlign.MiddleCenter,
                     5,
                     SpriteHelper.GetSprite("Sprites/UI/Column"),
-                    new EventArg0(Close),
+                    onClose,
                     screen
                 ));
             }
-        }
-
-        public void Close()
-        {
-            Screen.RemoveUIElement(this);
         }
 
     }

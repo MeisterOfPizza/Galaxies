@@ -159,7 +159,7 @@ namespace Galaxies.UI
         /// <summary>
         /// Removes the UI Element from the container and repositions all existing elements.
         /// </summary>
-        public bool RemoveUIElement(UIElement uiElement)
+        public void RemoveUIElement(UIElement uiElement)
         {
             int  index   = Container.IndexOf(uiElement);
             bool existed = Container.Remove(uiElement);
@@ -171,8 +171,6 @@ namespace Galaxies.UI
             {
                 UIElementRemoved(uiElement, index);
             }
-
-            return existed;
         }
 
         /// <summary>

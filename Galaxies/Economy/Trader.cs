@@ -20,12 +20,12 @@ namespace Galaxies.Economy
             this.Balance   = balance;
         }
 
-        public void InventoryChanged(Item changedItem)
+        public virtual void InventoryChanged(Item changedItem)
         {
             //Do nothing here.
         }
 
-        public void InventoryChanged(IList<Item> changedItems)
+        public virtual void InventoryChanged(IList<Item> changedItems)
         {
             //Do nothing here.
         }

@@ -41,6 +41,16 @@ namespace Galaxies.Controllers
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.PlayerShipTemplates, new DataFile(document));
+
+            file = File.Open("Data\\Merchant.xml", FileMode.Open);
+            document = new XmlDocument();
+            document.Load(file);
+            DataFiles.Add(DataFileType.Merchant, new DataFile(document));
+
+            file = File.Open("Data\\Visitables.xml", FileMode.Open);
+            document = new XmlDocument();
+            document.Load(file);
+            DataFiles.Add(DataFileType.Visitables, new DataFile(document));
         }
 
         /// <summary>
@@ -85,6 +95,7 @@ namespace Galaxies.Controllers
             }
             else
             {
+                //TODO: Add debug msg
                 return null;
             }
         }
@@ -98,37 +109,6 @@ namespace Galaxies.Controllers
             T data = (T)serializer.Deserialize(reader);
 
             return data;
-        }
-
-    }
-
-    enum DataFileType
-    {
-        PlanetarySystems,
-        Planets,
-        Items,
-        Enemies,
-        PlayerShipTemplates
-    }
-
-    class DataFile
-    {
-
-        public XmlDocument Document { get; private set; }
-
-        public DataFile(XmlDocument document)
-        {
-            this.Document = document;
-        }
-
-        public XmlNode GetNode(string id)
-        {
-            return Document.SelectSingleNode(string.Format("//*[@id='{0}']", id));
-        }
-
-        public XmlNodeList GetNodes(string nodeName)
-        {
-            return Document.SelectNodes("//" + nodeName);
         }
 
     }

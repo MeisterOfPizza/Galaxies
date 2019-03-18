@@ -1,4 +1,5 @@
-﻿using Galaxies.Progression;
+﻿using Galaxies.Debug;
+using Galaxies.Progression;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -89,8 +90,7 @@ namespace Galaxies.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed to serialize save file. Reason: " + e.Message);
-                throw e;
+                CrashHandler.ShowException("Failed to deserialize save file. Reason: " + e.Message);
             }
             finally
             {
@@ -102,19 +102,27 @@ namespace Galaxies.Controllers
         {
             SaveFile saveFile = null;
 
+            file.Refresh();
+
+            if (!file.Exists)
+            {
+                CrashHandler.ShowException(new FileNotFoundException("The file " + file.Name + " was not found.", file.Name));
+
+                return saveFile;
+            }
+
             //Open the save file.
             FileStream fs = new FileStream(file.FullName, FileMode.Open);
 
             try
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-
+                
                 saveFile = (SaveFile)formatter.Deserialize(fs);
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed to deserialize save file. Reason: " + e.Message);
-                throw e;
+                CrashHandler.ShowException("Failed to deserialize save file. Reason: " + e.Message);
             }
             finally
             {

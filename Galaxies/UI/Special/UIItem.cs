@@ -60,8 +60,6 @@ namespace Galaxies.UI.Special
                 onPurchase,
                 screen
                 ));
-
-            CalculatePositions();
         }
 
         public void CreateSellButton(EventArg onSell)
@@ -76,8 +74,20 @@ namespace Galaxies.UI.Special
                 onSell,
                 screen
                 ));
+        }
 
-            CalculatePositions();
+        public void CreateUseButton(EventArg onUse)
+        {
+            AddUIElement(new UIButton(
+                new Transform(new Vector2(transform.Width / 2f - 125, transform.Height / 2f - 25), new Vector2(250, 50)),
+                SpriteHelper.Arial_Font,
+                "Use",
+                TextAlign.MiddleCenter,
+                5,
+                SpriteHelper.GetSprite(Item.Data.SpriteName),
+                onUse,
+                screen
+                ));
         }
 
     }

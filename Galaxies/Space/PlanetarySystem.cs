@@ -1,6 +1,6 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Datas;
 using Galaxies.Datas.Space;
-using Galaxies.Extensions;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -49,18 +49,11 @@ namespace Galaxies.Space
 
         private void CreatePlanets()
         {
-            int nRndPlanets = Random.Next(Data.MinRandomPlanets, Data.MaxRandomPlanets + 1);
-
-            Planets = new Planet[Data.PlanetIds.Length + nRndPlanets];
+            Planets = new Planet[Data.PlanetIds.Length];
 
             for (int i = 0; i < Data.PlanetIds.Length; i++)
             {
                 Planets[i] = new Planet(DataController.LoadData<PlanetData>(Data.PlanetIds[i], DataFileType.Planets));
-            }
-
-            for (int i = Data.PlanetIds.Length; i < Planets.Length; i++)
-            {
-                //Planets[i] = new Planet();
             }
         }
 
@@ -70,7 +63,7 @@ namespace Galaxies.Space
         {
             CreatePlanets();
 
-            GalaxyController.Visitables.Remove(this); //Remove this from visitable things.
+            GalaxyController.RemoveVisistable(this); //Remove this from visitable things.
             PlanetarySystemController.SetPlanetarySystem(this); //Set the current planetary system.
             GameUIController.CreatePlanetarySystemScreen(); //Create the UI.
         }

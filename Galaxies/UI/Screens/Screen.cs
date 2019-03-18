@@ -17,7 +17,7 @@ namespace Galaxies.UI.Screens
         /// <summary>
         /// Delay between switches of interactables with the keyboard.
         /// </summary>
-        private const double KB_SELECT_COOLDOWN = 0.15f;
+        private const double KB_SELECT_COOLDOWN = 0.15;
 
         #endregion
 
