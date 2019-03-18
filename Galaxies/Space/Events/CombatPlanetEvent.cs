@@ -2,7 +2,6 @@
 using Galaxies.Core;
 using Galaxies.Datas;
 using Galaxies.Datas.Enemies;
-using Galaxies.Datas.Helpers;
 using Galaxies.Datas.Space;
 using Galaxies.Extensions;
 using Galaxies.UI;

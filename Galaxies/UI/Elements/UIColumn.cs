@@ -15,7 +15,7 @@ namespace Galaxies.UI.Elements
         /// <summary>
         /// This is the responsive height.
         /// </summary>
-        protected int ResponsiveMaxY;
+        protected int responsiveMaxY;
 
         public UIColumn(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, bool responsiveSize = true) : base(transform, sprite, screen, padding, spacing, responsiveSize)
         {
@@ -34,12 +34,12 @@ namespace Galaxies.UI.Elements
                 currentY += Container[i].Transform.RawHeight + (int)Spacing.Y;
             }
 
-            ResponsiveMaxY = currentY + (int)Padding.Z;
+            responsiveMaxY = currentY + (int)Padding.Z;
         }
 
         protected override void CalculateSize()
         {
-            transform.SetSizeY(ResponsiveMaxY);
+            transform.SetSizeY(responsiveMaxY);
         }
 
     }

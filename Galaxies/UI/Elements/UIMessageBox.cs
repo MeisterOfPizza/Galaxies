@@ -9,7 +9,7 @@ namespace Galaxies.UI.Elements
     class UIMessageBox : UIGroup
     {
 
-        public UIButton OkBtn { get; protected set; }
+        UIButton okBtn;
 
         public UIMessageBox(Transform transform, SpriteFont spriteFont, string text, TextAlign textAlign, int textPadding, Texture2D backgroundSprite, EventArg onClick, Screen screen) : base(transform, backgroundSprite, screen)
         {
@@ -22,7 +22,7 @@ namespace Galaxies.UI.Elements
                 screen
                 ));
 
-            OkBtn = AddUIElement(new UIButton(
+            okBtn = AddUIElement(new UIButton(
                 new Transform(new Vector2(0, transform.Height / 2 - 35), new Vector2(100, 50)),
                 spriteFont,
                 "Ok",
@@ -34,7 +34,7 @@ namespace Galaxies.UI.Elements
                 ));
             
             CalculatePositions();
-            Screen.ForceFocus(OkBtn);
+            Screen.ForceFocus(okBtn);
         }
 
     }

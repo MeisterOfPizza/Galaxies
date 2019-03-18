@@ -68,7 +68,7 @@ namespace Galaxies.UI.Elements
                 }
             }
 
-            ResponsiveMaxY = currentY + (int)Padding.Z; //Not used by this class, but may be used later down the road?
+            responsiveMaxY = currentY + (int)Padding.Z; //Not used by this class, but may be used later down the road?
         }
 
         protected override void CalculateSize()
