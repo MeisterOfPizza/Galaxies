@@ -74,7 +74,7 @@
     <Compile Include="Datas\Space\PlanetData.cs" />
     <Compile Include="Datas\Space\PlanetEventData.cs" />
     <Compile Include="Datas\Space\VisitablesData.cs" />
-    <Compile Include="Debug\CrashHandler.cs" />
+    <Compile Include="Debugging\CrashHandler.cs" />
     <Compile Include="Economy\Balance.cs" />
     <Compile Include="Economy\PlayerTrader.cs" />
     <Compile Include="Economy\Trader.cs" />
