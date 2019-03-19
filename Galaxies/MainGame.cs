@@ -19,6 +19,8 @@ namespace Galaxies
 
         public static MainGame Singleton { get; private set; }
 
+        private static Color backgroundColor = new Color(18, 18, 18);
+
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -99,7 +101,7 @@ namespace Galaxies
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(backgroundColor);
 
             spriteBatch.Begin();
             GameController.Draw(spriteBatch);
