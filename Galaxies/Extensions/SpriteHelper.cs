@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Galaxies.Extensions
