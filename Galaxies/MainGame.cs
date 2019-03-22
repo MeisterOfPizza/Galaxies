@@ -4,6 +4,7 @@ using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace Galaxies
 {
@@ -49,10 +50,12 @@ namespace Galaxies
         protected override void Initialize()
         {
             base.Initialize();
-
+            
             DataController.Initialize();
             SpriteHelper.Initialize();
             SaveFileController.Initialize();
+            GameTipsController.Initialize();
+
             ShipyardController.Initialize();
             GalaxyController.Initialize();
 
