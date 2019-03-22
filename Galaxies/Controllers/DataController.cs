@@ -21,36 +21,43 @@ namespace Galaxies.Controllers
             XmlDocument document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.PlanetarySystems, new DataFile(document));
+            file.Dispose();
 
             file = File.Open("Data\\Planets.xml", FileMode.Open);
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.Planets, new DataFile(document));
+            file.Dispose();
 
             file = File.Open("Data\\Items.xml", FileMode.Open);
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.Items, new DataFile(document));
+            file.Dispose();
 
             file = File.Open("Data\\Enemies.xml", FileMode.Open);
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.Enemies, new DataFile(document));
+            file.Dispose();
 
             file = File.Open("Data\\PlayerShipTemplates.xml", FileMode.Open);
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.PlayerShipTemplates, new DataFile(document));
+            file.Dispose();
 
             file = File.Open("Data\\Merchant.xml", FileMode.Open);
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.Merchant, new DataFile(document));
+            file.Dispose();
 
             file = File.Open("Data\\Visitables.xml", FileMode.Open);
             document = new XmlDocument();
             document.Load(file);
             DataFiles.Add(DataFileType.Visitables, new DataFile(document));
+            file.Dispose();
         }
 
         /// <summary>
