@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Media;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Galaxies.Controllers
 {
@@ -15,6 +16,14 @@ namespace Galaxies.Controllers
 
             MediaPlayer.Play(CurrentBackgroundSong);
             MediaPlayer.IsRepeating = true;
+        }
+
+        public static void PlaySoundEffect(string name, float volume = 1, float pitch = 0, float pan = 0)
+        {
+            ///TODO: Use <see cref="Extensions.SpriteHelper"/> instead.
+            SoundEffect soundEffect = MainGame.Singleton.Content.Load<SoundEffect>("Audio/Sound Effects/" + name);
+
+            soundEffect.Play(volume, pitch, pan);
         }
 
     }

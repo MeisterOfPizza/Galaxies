@@ -2630,3 +2630,21 @@
 /processorParam:Quality=Best
 /build:Audio/Background/a_fly-through_of_the_proxima_centauri_system.mp3
 
+#begin Audio/Sound Effects/laser.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Sound Effects/laser.mp3
+
+#begin Audio/Sound Effects/shield-down.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Sound Effects/shield-down.mp3
+
+#begin Audio/Sound Effects/shield-up.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Sound Effects/shield-up.mp3
+
