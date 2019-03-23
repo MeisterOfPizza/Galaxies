@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Combat\Battlefield.cs" />
+    <Compile Include="Controllers\AudioController.cs" />
     <Compile Include="Controllers\CombatController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
@@ -161,6 +162,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audio\Background\a_fly-through_of_the_proxima_centauri_system.mp3" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1-anim.gif" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_00_delay-0.13s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_01_delay-0.1s.png" />

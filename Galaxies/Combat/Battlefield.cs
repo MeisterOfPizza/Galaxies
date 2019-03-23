@@ -45,8 +45,8 @@ namespace Galaxies.Combat
 
             this.Bullets = new List<Bullet>();
 
-            playerShotEvent = new EventArgList(new EventArg1<ShipEntity>(Player.Attack, Enemy), new EventArg0(EndAwaitEventCallbacks, EndTurn));
-            enemyShotEvent  = new EventArgList(new EventArg1<ShipEntity>(Enemy.Attack, Player), new EventArg0(EndAwaitEventCallbacks, EndTurn));
+            playerShotEvent = new EventArgList(new EventArg1<ShipEntity>(Player.Attack, Enemy), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
+            enemyShotEvent  = new EventArgList(new EventArg1<ShipEntity>(Enemy.Attack, Player), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
 
             playerShieldEffect = new UIElement(new Transform(Player.Transform.Position, Player.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
             enemyShieldEffect  = new UIElement(new Transform(Enemy.Transform.Position, Enemy.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
@@ -89,14 +89,21 @@ namespace Galaxies.Combat
         {
             if (AwaitEventCallbacks) return; //Return if we're still waiting for an event callback.
 
-            Player.HasShieldUp = false;
-            playerShieldEffect.Visable = false;
+            if (Player.HasShieldUp)
+            {
+                AudioController.PlaySoundEffect("shield-down");
+                Player.HasShieldUp = false;
+                playerShieldEffect.Visable = false;
+            }
 
             if (Player.Energy >= PlayerShip.FIRE_ENERGY_COST)
             {
                 Player.TakeEnergy(); //Remove energy because the player shot.
 
                 Bullets.Add(CreateBullet(0, Player.Transform.Position, new Vector2(50f, 0), Enemy, playerShotEvent));
+
+                //Play sound effect:
+                AudioController.PlaySoundEffect("laser");
 
                 AwaitEventCallbacks = true;
             }
@@ -112,8 +119,12 @@ namespace Galaxies.Combat
                 Player.RegenEnergy();
             }
 
-            Player.HasShieldUp = true;
-            playerShieldEffect.Visable = true;
+            if (!Player.HasShieldUp)
+            {
+                AudioController.PlaySoundEffect("shield-up");
+                Player.HasShieldUp = true;
+                playerShieldEffect.Visable = true;
+            }
 
             EndTurn();
         }
@@ -126,26 +137,37 @@ namespace Galaxies.Combat
         {
             //HACK: Very poor combat Ai.
 
-            if (Enemy.Energy < EnemyShip.FIRE_ENERGY_COST)
+            if (Enemy.Energy < EnemyShip.FIRE_ENERGY_COST) //Do they need to recharge energy (they don't have enough energy to shoot)?
             {
                 if (Enemy.HasShieldUp)
                 {
                     Enemy.RegenEnergy();
                 }
 
-                Enemy.HasShieldUp = true;
-                enemyShieldEffect.Visable = true;
+                if (!Enemy.HasShieldUp)
+                {
+                    AudioController.PlaySoundEffect("shield-up");
+                    Enemy.HasShieldUp = true;
+                    enemyShieldEffect.Visable = true;
+                }
 
                 EndTurn();
             }
             else
             {
-                Enemy.HasShieldUp = false;
-                enemyShieldEffect.Visable = false;
+                if (Enemy.HasShieldUp)
+                {
+                    AudioController.PlaySoundEffect("shield-down");
+                    Enemy.HasShieldUp = false;
+                    enemyShieldEffect.Visable = false;
+                }
 
                 Enemy.TakeEnergy(); //Remove energy because the enemy shot.
 
                 Bullets.Add(CreateBullet(180, Enemy.Transform.Position, new Vector2(-50f, 0), Player, enemyShotEvent));
+
+                //Play sound effect:
+                AudioController.PlaySoundEffect("laser");
                 
                 AwaitEventCallbacks = true;
             }
@@ -154,15 +176,6 @@ namespace Galaxies.Combat
         #endregion
 
         #region Helpers
-
-        #region Event callback helpers
-
-        private void EndAwaitEventCallbacks()
-        {
-            AwaitEventCallbacks = false;
-        }
-
-        #endregion
 
         private Bullet CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg onHit)
         {
