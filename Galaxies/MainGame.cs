@@ -4,6 +4,7 @@ using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace Galaxies
 {
@@ -18,6 +19,8 @@ namespace Galaxies
         SpriteBatch spriteBatch;
 
         public static MainGame Singleton { get; private set; }
+
+        private static Color backgroundColor = new Color(18, 18, 18);
 
         public MainGame()
         {
@@ -47,10 +50,12 @@ namespace Galaxies
         protected override void Initialize()
         {
             base.Initialize();
-
+            
             DataController.Initialize();
             SpriteHelper.Initialize();
             SaveFileController.Initialize();
+            GameTipsController.Initialize();
+
             ShipyardController.Initialize();
             GalaxyController.Initialize();
 
@@ -101,7 +106,7 @@ namespace Galaxies
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(backgroundColor);
 
             spriteBatch.Begin();
             GameController.Draw(spriteBatch);

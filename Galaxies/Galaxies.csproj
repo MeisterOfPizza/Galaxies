@@ -44,6 +44,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\GalaxyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\GameTipsController.cs" />
     <Compile Include="Controllers\MerchantController.cs" />
     <Compile Include="Controllers\PlanetarySystemController.cs" />
     <Compile Include="Controllers\PlanetEventController.cs" />
@@ -375,8 +376,10 @@
     <Content Include="Content\Sprites\Backgrounds\Static\space-background-1.png" />
     <Content Include="Content\Sprites\Backgrounds\Static\space-background-2.png" />
     <Content Include="Content\Sprites\Backgrounds\Static\space-background-3.png" />
+    <Content Include="Content\Sprites\Backgrounds\Static\space-background-4.png" />
     <Content Include="Content\Sprites\Box 4x4.png" />
     <Content Include="Content\Sprites\Effects\Bullet.png" />
+    <Content Include="Content\Sprites\Effects\Dual Ring.png" />
     <Content Include="Content\Sprites\Effects\Shield.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 1.png" />
     <Content Include="Content\Sprites\Player Ships\Player Ship 2.png" />
@@ -384,26 +387,29 @@
     <Content Include="Content\Sprites\Transparent.png" />
     <Content Include="Content\Sprites\UI\Column.png" />
     <Content Include="Data\Enemies.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\GameTips.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Items.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\Merchant.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\PlanetarySystems.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Planets.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\PlayerShipTemplates.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Visitables.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
