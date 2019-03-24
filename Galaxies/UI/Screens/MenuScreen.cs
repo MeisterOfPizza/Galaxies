@@ -36,7 +36,7 @@ namespace Galaxies.UI.Screens
             uiMenu.AddUIElements(
                 new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(ToggleUICreateSave), this),
                 new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(ToggleUISaveFiles), this),
-                new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "Options", TextAlign.MiddleCenter, 5, textBackground, null, this),
+                new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "Settings", TextAlign.MiddleCenter, 5, textBackground, new EventArg1<EventArg>(GameUIController.CreateSettingsScreen, null), this),
                 new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "Exit", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(MainGame.Singleton.Exit), this)
                 );
 
