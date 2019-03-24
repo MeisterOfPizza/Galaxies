@@ -27,13 +27,16 @@ namespace Galaxies.Combat
         private bool AwaitEventCallbacks { get; set; }
         private bool PlayerTurn          { get; set; }
 
-        private List<Bullet> Bullets { get; set; }
-
         private UIElement playerShieldEffect;
         private UIElement enemyShieldEffect;
 
         private EventArgList playerShotEvent;
         private EventArgList enemyShotEvent;
+
+        /// <summary>
+        /// The bullet currently on screen.
+        /// </summary>
+        private Bullet bullet;
 
         public Battlefield(PlayerShip player, EnemyShip enemy)
         {
@@ -42,8 +45,6 @@ namespace Galaxies.Combat
 
             Player.Transform.Position = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
             Enemy.Transform.Position  = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
-
-            this.Bullets = new List<Bullet>();
 
             playerShotEvent = new EventArgList(new EventArg1<ShipEntity>(Player.Attack, Enemy), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
             enemyShotEvent  = new EventArgList(new EventArg1<ShipEntity>(Enemy.Attack, Player), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
@@ -100,7 +101,7 @@ namespace Galaxies.Combat
             {
                 Player.TakeEnergy(); //Remove energy because the player shot.
 
-                Bullets.Add(CreateBullet(0, Player.Transform.Position, new Vector2(50f, 0), Enemy, playerShotEvent));
+                CreateBullet(0, Player.Transform.Position, new Vector2(50f, 0), Enemy, playerShotEvent);
 
                 //Play sound effect:
                 AudioController.PlaySoundEffect("laser");
@@ -164,7 +165,7 @@ namespace Galaxies.Combat
 
                 Enemy.TakeEnergy(); //Remove energy because the enemy shot.
 
-                Bullets.Add(CreateBullet(180, Enemy.Transform.Position, new Vector2(-50f, 0), Player, enemyShotEvent));
+                CreateBullet(180, Enemy.Transform.Position, new Vector2(-50f, 0), Player, enemyShotEvent);
 
                 //Play sound effect:
                 AudioController.PlaySoundEffect("laser");
@@ -177,17 +178,20 @@ namespace Galaxies.Combat
 
         #region Helpers
 
-        private Bullet CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg onHit)
+        private void CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg onHit)
         {
-            return new Bullet(new Transform(position, new Vector2(100), rotation), SpriteHelper.Bullet_Sprite, speed, target, onHit);
+            if (bullet != null)
+            {
+                //TODO: Destroy bullet (GameObject.Destroy()).
+            }
+
+            bullet = new Bullet(new Transform(position, new Vector2(100), rotation), SpriteHelper.Bullet_Sprite, speed, target, onHit);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Bullet bullet in Bullets)
-            {
+            if (bullet != null)
                 bullet.Draw(spriteBatch);
-            }
 
             playerShieldEffect.Draw(spriteBatch);
             enemyShieldEffect.Draw(spriteBatch);
@@ -195,13 +199,14 @@ namespace Galaxies.Combat
 
         public void Update()
         {
-            foreach (Bullet bullet in Bullets.ToArray())
+            if (bullet != null)
             {
                 bullet.Move();
 
-                if (bullet.Destroyed)
+                if (bullet.HasHit)
                 {
-                    Bullets.Remove(bullet);
+                    //TODO:  Destroy bullet (GameObject.Destroy()).
+                    bullet = null;
                 }
             }
         }

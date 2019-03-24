@@ -12,7 +12,7 @@ namespace Galaxies.Entities
         GameObject target;
         EventArg   onHit;
 
-        public bool Destroyed { get; private set; }
+        public bool HasHit { get; private set; }
 
         public Bullet(Transform transform, Texture2D sprite, Vector2 speed, GameObject target, EventArg onHit) : base(transform, sprite, speed)
         {
@@ -29,12 +29,12 @@ namespace Galaxies.Entities
 
             if (Intersect(target))
             {
-                Destroyed = true;
+                HasHit = true;
                 onHit.Invoke();
             }
             else if (transform.Position.X < 0 || transform.Position.X > GameUIController.WindowWidth)
             {
-                Destroyed = true;
+                HasHit = true;
                 onHit.Invoke();
             }
         }
