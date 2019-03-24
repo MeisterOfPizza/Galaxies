@@ -115,13 +115,17 @@
     <Compile Include="Space\PlanetarySystem.cs" />
     <Compile Include="UIControllers\GameUIController.cs" />
     <Compile Include="UI\Elements\UIBackgroundAnimation.cs" />
+    <Compile Include="UI\Elements\UICheckbox.cs" />
     <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
+    <Compile Include="UI\Elements\UIDropdown.cs" />
+    <Compile Include="UI\Elements\UIFixedColumn.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
     <Compile Include="UI\Elements\UIInputField.cs" />
     <Compile Include="UI\Elements\UIProgressBar.cs" />
     <Compile Include="UI\Elements\UIScrollableColumn.cs" />
     <Compile Include="UI\Elements\UIScrollableGrid.cs" />
+    <Compile Include="UI\Elements\UISlider.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
     <Compile Include="UI\Extensions\TextHelper.cs" />
@@ -138,6 +142,7 @@
     <Compile Include="UI\Screens\PlanetarySystemScreen.cs" />
     <Compile Include="UI\Screens\Screen.cs" />
     <Compile Include="UI\Elements\UIContainer.cs" />
+    <Compile Include="UI\Screens\SettingsScreen.cs" />
     <Compile Include="UI\Special\UICreateSaveFile.cs" />
     <Compile Include="UI\Special\UIInventory.cs" />
     <Compile Include="UI\Special\UIItem.cs" />

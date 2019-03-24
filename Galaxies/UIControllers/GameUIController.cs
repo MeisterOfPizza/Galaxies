@@ -65,6 +65,16 @@ namespace Galaxies.UIControllers
             }
         }
 
+        public static void ChangeResolution(int width, int height)
+        {
+            windowSize = new Vector2(width, height);
+
+            MainGame.Singleton.Graphics.PreferredBackBufferWidth  = width;
+            MainGame.Singleton.Graphics.PreferredBackBufferHeight = height;
+
+            MainGame.Singleton.Graphics.ApplyChanges();
+        }
+
         #region Screens
 
         private static void CreateScreen(Screen newScreen, EventArg onSwitchScreen)
@@ -113,6 +123,13 @@ namespace Galaxies.UIControllers
             GameController.GameState = GameState.MainMenu;
 
             CreateScreen(new MenuScreen(), onSwitchScreen);
+        }
+
+        public static void CreateSettingsScreen(EventArg onSwitchScreen = null)
+        {
+            GameController.GameState = GameState.MainMenu;
+
+            CreateScreen(new SettingsScreen(), onSwitchScreen);
         }
 
         public static void CreateGalaxyScreen(EventArg onSwitchScreen = null)

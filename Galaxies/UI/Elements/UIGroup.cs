@@ -79,6 +79,15 @@ namespace Galaxies.UI.Elements
             GroupElements.RemoveAll(ge => ge.UIElement == uiElement); //Only remove the items that have the same UIElement reference as parameter uiElement.
         }
 
+        /// <summary>
+        /// Returns the <see cref="UIGroupElement"/> that has the <paramref name="uiElement"/>.
+        /// Returns null if none were found.
+        /// </summary>
+        public UIGroupElement GetGroupElement(UIElement uiElement)
+        {
+            return GroupElements.FirstOrDefault(ge => ge.UIElement == uiElement);
+        }
+
         #endregion
 
         public void CalculatePositions()
@@ -110,18 +119,18 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        protected class UIGroupElement
+    }
+
+    class UIGroupElement
+    {
+
+        public UIElement UIElement     { get; set; }
+        public Vector2   GroupPosition { get; set; }
+
+        public UIGroupElement(UIElement uiElement, Vector2 groupPosition)
         {
-
-            public UIElement UIElement     { get; set; }
-            public Vector2   GroupPosition { get; set; }
-
-            public UIGroupElement(UIElement uiElement, Vector2 groupPosition)
-            {
-                this.UIElement     = uiElement;
-                this.GroupPosition = groupPosition;
-            }
-
+            this.UIElement     = uiElement;
+            this.GroupPosition = groupPosition;
         }
 
     }

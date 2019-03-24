@@ -24,7 +24,7 @@ namespace Galaxies.UI.Special
 
             //Player's inventory
             uiPlayerInventory = AddUIElement(new UIInventory(
-                new Transform(new Vector2(450, 0), inventorySize),
+                new Transform(new Vector2(425, 0), inventorySize),
                 screen,
                 PlayerController.Player.Inventory.Items,
                 "Player",
@@ -34,7 +34,7 @@ namespace Galaxies.UI.Special
 
             //Merchant's inventory
             uiMerchantInventory = AddUIElement(new UIInventory(
-                new Transform(new Vector2(-450, 0), inventorySize),
+                new Transform(new Vector2(-425, 0), inventorySize),
                 screen,
                 MerchantController.Merchant.Inventory.Items,
                 "Merchant",

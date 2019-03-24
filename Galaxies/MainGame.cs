@@ -4,7 +4,6 @@ using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Diagnostics;
 
 namespace Galaxies
 {
@@ -15,26 +14,21 @@ namespace Galaxies
     public class MainGame : Game
     {
 
-        GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public static MainGame Singleton { get; private set; }
+
+        public GraphicsDeviceManager Graphics { get; private set; }
 
         private static Color backgroundColor = new Color(18, 18, 18);
 
         public MainGame()
         {
-            graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            //graphics.PreferredBackBufferWidth  = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-            //graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
-            //graphics.ToggleFullScreen();
-
-            graphics.PreferredBackBufferWidth  = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
-
-            //graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
+            Graphics.PreferredBackBufferWidth  = 1920;
+            Graphics.PreferredBackBufferHeight = 1080;
 
             IsMouseVisible = true;
 
@@ -55,6 +49,7 @@ namespace Galaxies
             ContentHelper.Initialize();
             SaveFileController.Initialize();
             GameTipsController.Initialize();
+            AudioController.Initialize();
 
             ShipyardController.Initialize();
             GalaxyController.Initialize();
