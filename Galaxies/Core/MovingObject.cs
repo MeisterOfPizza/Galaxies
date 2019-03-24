@@ -7,7 +7,7 @@ namespace Galaxies.Core
     /// <summary>
     /// Movable object.
     /// </summary>
-    abstract class MovingObject : GameObject
+    public abstract class MovingObject : GameObject
     {
 
         #region Fields

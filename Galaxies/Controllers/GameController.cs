@@ -13,7 +13,8 @@ namespace Galaxies.Controllers
         PlanetarySystem,
         Combat,
         Citadel,
-        GameOver
+        GameOver,
+        Victory
     }
 
     static class GameController

@@ -12,9 +12,17 @@
       </ItemDrop>
       <Combat>
         <EnemyPointers>
-          <EnemyPointer id="test2" />
+          <EnemyPointer id="test1" />
+          <EnemyPointer id="test5" />
         </EnemyPointers>
       </Combat>
+    </OnVisitEvents>
+  </Planet>
+  <Planet id="test3">
+    <Name>Mars</Name>
+    <Description>Desert planet</Description>
+    <SpriteName>Sprites/UI/column</SpriteName>
+    <OnVisitEvents>
       <ItemDrop>
         <ItemPointers>
           <ItemPointer id="0" type="su" />
@@ -22,24 +30,9 @@
       </ItemDrop>
       <Combat>
         <EnemyPointers>
-          <EnemyPointer id="test1" />
+          <EnemyPointer id="final_boss" />
         </EnemyPointers>
       </Combat>
-      <Combat>
-        <EnemyPointers>
-          <EnemyPointer id="test1" />
-          <EnemyPointer id="test2" />
-        </EnemyPointers>
-      </Combat>
-      <ItemDrop>
-        <ItemPointers>
-          <ItemPointer id="0" type="su" />
-        </ItemPointers>
-      </ItemDrop>
-      <ItemDrop>
-        <ItemPointers>
-        </ItemPointers>
-      </ItemDrop>
     </OnVisitEvents>
   </Planet>
 </Collection>

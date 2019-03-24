@@ -16,7 +16,7 @@
     </ShipUpgradeIds>
     <Color r="255" g="0" b="0"></Color>
   </EnemyShip>
-  <EnemyShip id="test2">
+  <EnemyShip id="test5">
     <Name>Bomber</Name>
     <Description>Basic bomber.</Description>
     <SpriteName>Sprites/Player Ships/player-ship-2</SpriteName>
@@ -28,5 +28,19 @@
       <EnergyRegen>15</EnergyRegen>
     </BaseShipStats>
     <Color r="255" g="0" b="0"></Color>
+  </EnemyShip>
+  <EnemyShip id="final_boss">
+    <Name>World Eater</Name>
+    <Description>Final boss.</Description>
+    <SpriteName>Sprites/Player Ships/player-ship-3</SpriteName>
+    <BaseShipStats>
+      <Health>25</Health>
+      <Shield>25</Shield>
+      <Damage>35</Damage>
+      <Energy>50</Energy>
+      <EnergyRegen>15</EnergyRegen>
+    </BaseShipStats>
+    <Color r="255" g="0" b="0"></Color>
+    <IsFinalBoss>true</IsFinalBoss>
   </EnemyShip>
 </Collection>

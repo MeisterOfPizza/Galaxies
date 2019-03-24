@@ -9,8 +9,8 @@ namespace Galaxies.Datas.Space
     public class CombatPlanetEventData : PlanetEventData
     {
 
-        [XmlArray("EnemyPointers", IsNullable = false)]
-        [XmlArrayItem("EnemyPointer", typeof(DataPointer), IsNullable = false)]
+        [XmlArray("EnemyPointers", IsNullable = true)]
+        [XmlArrayItem("EnemyPointer", typeof(DataPointer), IsNullable = true)]
         public DataPointer[] EnemyPointers { get; set; }
 
         public override PlanetEvent CreateEvent()

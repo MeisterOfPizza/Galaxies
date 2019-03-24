@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.Entities
 {
 
-    abstract class ShipEntity : MovingObject
+    public abstract class ShipEntity : MovingObject
     {
 
         #region Fields
@@ -165,7 +165,7 @@ namespace Galaxies.Entities
             Energy = MathHelper.Clamp(Energy + EnergyRegen, 0, MaxEnergy);
         }
 
-        public void Die()
+        public virtual void Die()
         {
             Health  = 0;
             isAlive = false;
