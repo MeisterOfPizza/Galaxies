@@ -26,7 +26,7 @@ namespace Galaxies.UI.Screens
 
             loadingSpinner = AddUIElement(new UIElement(
                 new Transform(Transform.CreatePosition(Alignment.BottomRight, new Vector2(-25), new Vector2(75)), new Vector2(75)),
-                ContentHelper.GetSprite("Sprites/Effects/Dual Ring"),
+                ContentHelper.GetSprite("Sprites/Effects/dual-ring"),
                 this
                 ));
 

@@ -22,7 +22,7 @@ namespace Galaxies.UI.Screens
 
         public override void CreateUI()
         {
-            var actionBackground = ContentHelper.GetSprite("Sprites/UI/Column");
+            var actionBackground = ContentHelper.GetSprite("Sprites/UI/column");
 
             AddUIElement(new UIButton(
                 new Transform(new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.9f)), new Vector2(250, 100)),

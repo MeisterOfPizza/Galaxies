@@ -3,7 +3,7 @@
   <PlanetarySystem id="test">
     <Name>Sol</Name>
     <Description>Home system of Humans</Description>
-    <SpriteName>Sprites/UI/Column</SpriteName>
+    <SpriteName>Sprites/UI/column</SpriteName>
     <PlanetIds>
       <PlanetId>test</PlanetId>
     </PlanetIds>
@@ -11,7 +11,7 @@
   <PlanetarySystem id="alpha_centauri">
     <Name>Alpha Centauri</Name>
     <Description>A triple star system.</Description>
-    <SpriteName>Sprites/UI/Column</SpriteName>
+    <SpriteName>Sprites/UI/column</SpriteName>
     <PlanetIds>
       <PlanetId>test</PlanetId>
     </PlanetIds>

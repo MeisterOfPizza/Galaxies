@@ -48,7 +48,7 @@ namespace Galaxies.UI.Special
                 20,
                 TextAlign.MiddleLeft,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 screen
                 ));
 
@@ -59,7 +59,7 @@ namespace Galaxies.UI.Special
                 20,
                 TextAlign.MiddleLeft,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 screen
                 ));
 
@@ -70,7 +70,7 @@ namespace Galaxies.UI.Special
                 "Create",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(CreateSaveFile),
                 screen
                 ));
@@ -82,7 +82,7 @@ namespace Galaxies.UI.Special
                 "Close",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 onClose,
                 screen
                 ));

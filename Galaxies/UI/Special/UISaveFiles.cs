@@ -53,7 +53,7 @@ namespace Galaxies.UI.Special
             //Actual column with save files:
             uiSaveFileColumn = AddUIElement(new UIScrollableColumn(
                 new Transform(transform.Size),
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 screen,
                 new Vector4(5),
                 new Vector2(5),
@@ -67,7 +67,7 @@ namespace Galaxies.UI.Special
                 "Close",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 onClose,
                 screen
                 ));
@@ -83,7 +83,7 @@ namespace Galaxies.UI.Special
 
                 uiSaveFileColumn.AddUIElement(new UISaveFile(
                     new Transform(new Vector2(250, 200)),
-                    ContentHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/column"),
                     screen,
                     tempFileInfo,
                     canSave

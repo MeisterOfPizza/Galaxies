@@ -31,8 +31,8 @@ namespace Galaxies.Extensions
 
         #region General
 
-        public static Texture2D Missing       { get; private set; }
-        public static Texture2D Box4x4_Sprite { get; private set; }
+        public static Texture2D Missing_Sprite { get; private set; }
+        public static Texture2D Box4x4_Sprite  { get; private set; }
 
         #endregion
 
@@ -61,18 +61,18 @@ namespace Galaxies.Extensions
 
         public static void Initialize()
         {
-            Arial_Font  = GetFont("Fonts/Arial");
+            Arial_Font  = GetFont("Fonts/arial");
 
-            Missing       = GetSprite("Sprites/missing");
-            Box4x4_Sprite = GetSprite("Sprites/Box 4x4");
+            Missing_Sprite = GetSprite("Sprites/missing");
+            Box4x4_Sprite  = GetSprite("Sprites/box-4x4");
 
-            Bullet_Sprite = GetSprite("Sprites/Effects/Bullet");
-            Shield_Sprite = GetSprite("Sprites/Effects/Shield");
+            Bullet_Sprite = GetSprite("Sprites/Effects/bullet");
+            Shield_Sprite = GetSprite("Sprites/Effects/shield");
         }
 
         public static Texture2D GetSprite(string path)
         {
-            Texture2D loaded = Missing;
+            Texture2D loaded = Missing_Sprite;
 
             try
             {

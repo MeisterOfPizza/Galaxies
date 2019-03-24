@@ -21,7 +21,7 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            var column = ContentHelper.GetSprite("Sprites/UI/Column");
+            var column = ContentHelper.GetSprite("Sprites/UI/column");
 
             var planetsColumn = AddUIElement(new UIScrollableColumn(new Transform(Alignment.TopLeft, new Vector2(300, 600)), column, this, new Vector4(5, 0, 5, 0), Vector2.Zero, 200));
 

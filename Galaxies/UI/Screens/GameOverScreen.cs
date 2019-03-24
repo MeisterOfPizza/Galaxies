@@ -33,7 +33,7 @@ namespace Galaxies.UI.Screens
                 "Load",
                 TextAlign.MiddleCenter,
                 0,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(ToggleUILoad),
                 this
                 )));
@@ -44,7 +44,7 @@ namespace Galaxies.UI.Screens
                 "Exit",
                 TextAlign.MiddleCenter,
                 0,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(MainGame.Singleton.Exit),
                 this
                 )));

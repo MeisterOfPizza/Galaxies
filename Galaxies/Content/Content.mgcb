@@ -13,11 +13,11 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Audio/Background/a_fly-through_of_the_proxima_centauri_system.mp3
+#begin Audio/Background/void.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Audio/Background/a_fly-through_of_the_proxima_centauri_system.mp3;Audio/Background/void.mp3
+/build:Audio/Background/void.mp3
 
 #begin Audio/Sound Effects/laser.mp3
 /importer:Mp3Importer
@@ -2564,7 +2564,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Backgrounds/Static/space-background-4.png
 
-#begin Sprites/Box 4x4.png
+#begin Sprites/box-4x4.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2574,7 +2574,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Box 4x4.png;Sprites/box-4x4.png
+/build:Sprites/box-4x4.png
 
 #begin Sprites/Effects/bullet.png
 /importer:TextureImporter
@@ -2588,7 +2588,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Effects/bullet.png
 
-#begin Sprites/Effects/Dual Ring.png
+#begin Sprites/Effects/dual-ring.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2598,9 +2598,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Effects/Dual Ring.png;Sprites/Effects/dual-ring.png
+/build:Sprites/Effects/dual-ring.png
 
-#begin Sprites/Effects/Shield.png
+#begin Sprites/Effects/shield.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2610,7 +2610,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Effects/Shield.png;Sprites/Effects/shield.png
+/build:Sprites/Effects/shield.png
 
 #begin Sprites/missing.png
 /importer:TextureImporter
@@ -2624,7 +2624,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/missing.png
 
-#begin Sprites/Player Ships/Player Ship 1.png
+#begin Sprites/Player Ships/player-ship-1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2634,9 +2634,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player Ships/Player Ship 1.png;Sprites/Player Ships/player-ship-1.png
+/build:Sprites/Player Ships/player-ship-1.png
 
-#begin Sprites/Player Ships/Player Ship 2.png
+#begin Sprites/Player Ships/player-ship-2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2646,9 +2646,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player Ships/Player Ship 2.png;Sprites/Player Ships/player-ship-2.png
+/build:Sprites/Player Ships/player-ship-2.png
 
-#begin Sprites/Player Ships/Player Ship 3.png
+#begin Sprites/Player Ships/player-ship-3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2658,9 +2658,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player Ships/Player Ship 3.png;Sprites/Player Ships/player-ship-3.png
+/build:Sprites/Player Ships/player-ship-3.png
 
-#begin Sprites/Transparent.png
+#begin Sprites/transparent.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2670,9 +2670,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Transparent.png;Sprites/transparent.png
+/build:Sprites/transparent.png
 
-#begin Sprites/UI/Column.png
+#begin Sprites/UI/column.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2682,5 +2682,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/UI/Column.png;Sprites/UI/column.png
+/build:Sprites/UI/column.png
 

@@ -3,7 +3,7 @@
   <EnemyShip id="test1">
     <Name>Fighter</Name>
     <Description>Basic fighter.</Description>
-    <SpriteName>Sprites/Player Ships/Player Ship 1</SpriteName>
+    <SpriteName>Sprites/Player Ships/player-ship-1</SpriteName>
     <BaseShipStats>
       <Health>50</Health>
       <Shield>25</Shield>
@@ -19,7 +19,7 @@
   <EnemyShip id="test2">
     <Name>Bomber</Name>
     <Description>Basic bomber.</Description>
-    <SpriteName>Sprites/Player Ships/Player Ship 2</SpriteName>
+    <SpriteName>Sprites/Player Ships/player-ship-2</SpriteName>
     <BaseShipStats>
       <Health>25</Health>
       <Shield>25</Shield>

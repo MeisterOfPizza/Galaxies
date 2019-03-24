@@ -26,7 +26,7 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            var columnSprite = ContentHelper.GetSprite("Sprites/UI/Column");
+            var columnSprite = ContentHelper.GetSprite("Sprites/UI/column");
 
             //Scrollable column with all the visitables that the player can click on:
             visitablesColumn = AddUIElement(new UIScrollableColumn(
@@ -100,7 +100,7 @@ namespace Galaxies.UI.Screens
 
         public void UpdateUIVisitables()
         {
-            var columnSprite = ContentHelper.GetSprite("Sprites/UI/Column");
+            var columnSprite = ContentHelper.GetSprite("Sprites/UI/column");
 
             visitablesColumn.Clear();
 

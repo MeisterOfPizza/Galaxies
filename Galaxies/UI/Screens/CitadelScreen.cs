@@ -57,7 +57,7 @@ namespace Galaxies.UI.Screens
                 "Exit the Citadel",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg1<EventArg>(GameUIController.CreateGalaxyScreen, null),
                 this
                 ));
@@ -69,7 +69,7 @@ namespace Galaxies.UI.Screens
                 "Shipyard",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(ToggleUIShipyard),
                 this
                 ));
@@ -81,7 +81,7 @@ namespace Galaxies.UI.Screens
                 "Shop",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(ToggleUIShop),
                 this
                 ));
@@ -93,7 +93,7 @@ namespace Galaxies.UI.Screens
                 "Save & Load",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(ToggleUISaveFiles),
                 this
                 ));

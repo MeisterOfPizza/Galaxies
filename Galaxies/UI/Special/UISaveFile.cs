@@ -47,7 +47,7 @@ namespace Galaxies.UI.Special
                     "Save",
                     TextAlign.MiddleCenter,
                     5,
-                    ContentHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/column"),
                     new EventArg1<FileInfo>(SaveFileController.SaveGame, this.fileInfo),
                     screen
                 ));
@@ -59,7 +59,7 @@ namespace Galaxies.UI.Special
                 "Load",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg1<FileInfo>(SaveFileController.LoadGame, this.fileInfo),
                 screen
                 ));

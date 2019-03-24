@@ -23,7 +23,7 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            var textBackground = ContentHelper.GetSprite("Sprites/UI/Column");
+            var textBackground = ContentHelper.GetSprite("Sprites/UI/column");
 
             uiMenu = AddUIElement(new UIColumn(
                 new Transform(Alignment.MiddleCenter, new Vector2(250, 400)),
@@ -52,7 +52,7 @@ namespace Galaxies.UI.Screens
 
             uiCreateSaveFile = AddUIElement(new UICreateSaveFile(
                 new Transform(Alignment.MiddleCenter, new Vector2(500, 150)),
-                ContentHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 this,
                 new EventArg0(ToggleUICreateSave)
                 ));

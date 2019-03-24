@@ -35,7 +35,7 @@ namespace Galaxies.UI.Special
                     "Buy [" + playerShipTemplate.Price + "]",
                     TextAlign.MiddleCenter,
                     5,
-                    ContentHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/column"),
                     new EventArg0(TryPurchasePlayerShipTemplate),
                     screen
                     ));
@@ -48,7 +48,7 @@ namespace Galaxies.UI.Special
                     "Use",
                     TextAlign.MiddleCenter,
                     5,
-                    ContentHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/column"),
                     new EventArg1<PlayerShipTemplate>(ShipyardController.AssignPlayerShip, playerShipTemplate),
                     screen
                     ));

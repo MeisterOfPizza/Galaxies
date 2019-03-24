@@ -3,7 +3,7 @@
   <Planet id="test">
     <Name>Earth</Name>
     <Description>Home planet of Humans</Description>
-    <SpriteName>Sprites/UI/Column</SpriteName>
+    <SpriteName>Sprites/UI/column</SpriteName>
     <OnVisitEvents>
       <ItemDrop>
         <ItemPointers>

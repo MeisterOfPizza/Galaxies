@@ -3,7 +3,7 @@
   <ShipUpgrade id="0">
     <Name>Strong hull</Name>
     <Description>A stronger hull reinforces the ship, allowing it to take more damage before it explodes.</Description>
-    <SpriteName>Sprites/UI/Column</SpriteName>
+    <SpriteName>Sprites/UI/column</SpriteName>
     <GalacticGoldValue>100</GalacticGoldValue>
     <ShipStats>
       <Health>10</Health>
@@ -16,7 +16,7 @@
   <StarChart id="alpha_centauri">
     <Name>Map of Alpha Centauri</Name>
     <Description>Star chart to guide you to Alpha Centauri</Description>
-    <SpriteName>Sprites/UI/Column</SpriteName>
+    <SpriteName>Sprites/UI/column</SpriteName>
     <GalacticGoldValue>250</GalacticGoldValue>
     <PlanetarySystemId>alpha_centauri</PlanetarySystemId>
   </StarChart>
