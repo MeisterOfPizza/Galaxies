@@ -1,5 +1,8 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Galaxies.Debug;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System.IO;
 using System.Windows.Forms;
 
@@ -9,7 +12,7 @@ namespace Galaxies.Extensions
     /// <summary>
     /// Contains preloaded sprites.
     /// </summary>
-    static class SpriteHelper
+    static class ContentHelper
     {
 
         #region Helpers
@@ -28,6 +31,7 @@ namespace Galaxies.Extensions
 
         #region General
 
+        public static Texture2D Missing       { get; private set; }
         public static Texture2D Box4x4_Sprite { get; private set; }
 
         #endregion
@@ -59,22 +63,75 @@ namespace Galaxies.Extensions
         {
             Arial_Font  = GetFont("Fonts/Arial");
 
+            Missing       = GetSprite("Sprites/missing");
             Box4x4_Sprite = GetSprite("Sprites/Box 4x4");
 
             Bullet_Sprite = GetSprite("Sprites/Effects/Bullet");
             Shield_Sprite = GetSprite("Sprites/Effects/Shield");
         }
 
-        public static Texture2D GetSprite(string spriteName)
+        public static Texture2D GetSprite(string path)
         {
-            //TODO: Implement try-catch? Return pink/purple error texture on fail?
-            return MainGame.Singleton.Content.Load<Texture2D>(spriteName);
+            Texture2D loaded = Missing;
+
+            try
+            {
+                loaded = MainGame.Singleton.Content.Load<Texture2D>(path);
+            }
+            catch (ContentLoadException e)
+            {
+                CrashHandler.ShowException(e);
+            }
+
+            return loaded;
         }
 
-        public static SpriteFont GetFont(string fontName)
+        public static SpriteFont GetFont(string path)
         {
-            //TODO: Implement try-catch? Return pink/purple error texture on fail?
-            return MainGame.Singleton.Content.Load<SpriteFont>(fontName);
+            SpriteFont loaded = null;
+
+            try
+            {
+                loaded = MainGame.Singleton.Content.Load<SpriteFont>(path);
+            }
+            catch (ContentLoadException e)
+            {
+                CrashHandler.ShowException(e);
+            }
+
+            return loaded;
+        }
+
+        public static Song GetSong(string path)
+        {
+            Song loaded = null;
+
+            try
+            {
+                loaded = MainGame.Singleton.Content.Load<Song>(path);
+            }
+            catch (ContentLoadException e)
+            {
+                CrashHandler.ShowException(e);
+            }
+
+            return loaded;
+        }
+
+        public static SoundEffect GetSoundEffect(string path)
+        {
+            SoundEffect loaded = null;
+
+            try
+            {
+                loaded = MainGame.Singleton.Content.Load<SoundEffect>(path);
+            }
+            catch (ContentLoadException e)
+            {
+                CrashHandler.ShowException(e);
+            }
+
+            return loaded;
         }
 
         public static Texture2D[] GetSprites(string path)

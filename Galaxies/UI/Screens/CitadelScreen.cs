@@ -20,7 +20,7 @@ namespace Galaxies.UI.Screens
             //Add background gif:
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, new Vector2(GameUIController.WindowWidth, GameUIController.WindowHeight)),
-                Random.Next(2) == 0 ? SpriteHelper.Citadel_Background_Animation_1 : SpriteHelper.Citadel_Background_Animation_2,
+                Random.Next(2) == 0 ? ContentHelper.Citadel_Background_Animation_1 : ContentHelper.Citadel_Background_Animation_2,
                 this
                 ));
 
@@ -53,11 +53,11 @@ namespace Galaxies.UI.Screens
             //Go back button:
             AddUIElement(new UIButton(
                 new Transform(Alignment.BottomLeft, new Vector2(300, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Exit the Citadel",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 new EventArg1<EventArg>(GameUIController.CreateGalaxyScreen, null),
                 this
                 ));
@@ -65,11 +65,11 @@ namespace Galaxies.UI.Screens
             //Open shipyard button:
             AddUIElement(new UIButton(
                 new Transform(Alignment.BottomRight, new Vector2(200, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Shipyard",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 new EventArg0(ToggleUIShipyard),
                 this
                 ));
@@ -77,11 +77,11 @@ namespace Galaxies.UI.Screens
             //Open shop button:
             AddUIElement(new UIButton(
                 new Transform(Transform.CreatePosition(Alignment.BottomRight, new Vector2(-212.5f, 0), new Vector2(200, 50)), new Vector2(200, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Shop",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 new EventArg0(ToggleUIShop),
                 this
                 ));
@@ -89,11 +89,11 @@ namespace Galaxies.UI.Screens
             //Open save files:
             AddUIElement(new UIButton(
                 new Transform(Transform.CreatePosition(Alignment.BottomRight, new Vector2(-425, 0), new Vector2(200, 50)), new Vector2(200, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Save & Load",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 new EventArg0(ToggleUISaveFiles),
                 this
                 ));

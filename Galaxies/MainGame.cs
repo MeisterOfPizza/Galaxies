@@ -52,7 +52,7 @@ namespace Galaxies
             base.Initialize();
             
             DataController.Initialize();
-            SpriteHelper.Initialize();
+            ContentHelper.Initialize();
             SaveFileController.Initialize();
             GameTipsController.Initialize();
 

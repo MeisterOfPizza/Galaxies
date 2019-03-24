@@ -31,11 +31,11 @@ namespace Galaxies.UI.Special
             {
                 button = AddUIElement(new UIButton(
                     new Transform(new Vector2(0, transform.Height / 2f + 50), new Vector2(transform.Width, 50)),
-                    SpriteHelper.Arial_Font,
+                    ContentHelper.Arial_Font,
                     "Buy [" + playerShipTemplate.Price + "]",
                     TextAlign.MiddleCenter,
                     5,
-                    SpriteHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/Column"),
                     new EventArg0(TryPurchasePlayerShipTemplate),
                     screen
                     ));
@@ -44,11 +44,11 @@ namespace Galaxies.UI.Special
             {
                 button = AddUIElement(new UIButton(
                     new Transform(new Vector2(0, transform.Height / 2f + 50), new Vector2(transform.Width, 50)),
-                    SpriteHelper.Arial_Font,
+                    ContentHelper.Arial_Font,
                     "Use",
                     TextAlign.MiddleCenter,
                     5,
-                    SpriteHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/Column"),
                     new EventArg1<PlayerShipTemplate>(ShipyardController.AssignPlayerShip, playerShipTemplate),
                     screen
                     ));
@@ -57,7 +57,7 @@ namespace Galaxies.UI.Special
             //Create the stats text, displaying such things as Health and Shield etc.:
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, transform.Height / 2f + 225), new Vector2(400, 250)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 string.Format("HP: {0}\nSHD: {1}\nDAM: {2}\nENR: {3}\nREG: {4}",
                                 playerShipTemplate.Ship.BaseStats.Health,
                                 playerShipTemplate.Ship.BaseStats.Shield,

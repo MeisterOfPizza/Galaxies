@@ -31,8 +31,8 @@ namespace Galaxies.UI.Special
             this.OnClick      = onClick;
             this.DefaultColor = Color.White;
 
-            AddUIElement(new UIText(new Transform(new Vector2(0, -75), new Vector2(300, 50)), SpriteHelper.Arial_Font, planet.Data.Name, TextAlign.MiddleLeft, 5, screen));
-            AddUIElement(new UIText(new Transform(new Vector2(0, 25), new Vector2(300, 150)), SpriteHelper.Arial_Font, planet.Data.Description, TextAlign.TopLeft, 5, screen));
+            AddUIElement(new UIText(new Transform(new Vector2(0, -75), new Vector2(300, 50)), ContentHelper.Arial_Font, planet.Data.Name, TextAlign.MiddleLeft, 5, screen));
+            AddUIElement(new UIText(new Transform(new Vector2(0, 25), new Vector2(300, 150)), ContentHelper.Arial_Font, planet.Data.Description, TextAlign.TopLeft, 5, screen));
         }
 
         #region Overriden methods

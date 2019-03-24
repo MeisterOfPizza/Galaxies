@@ -22,11 +22,11 @@ namespace Galaxies.UI.Screens
             //Background:
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
-                SpriteHelper.Space_Background_Animation_1,
+                ContentHelper.Space_Background_Animation_1,
                 this
                 ));
 
-            var columnSprite = SpriteHelper.GetSprite("Sprites/UI/Column");
+            var columnSprite = ContentHelper.GetSprite("Sprites/UI/Column");
 
             //Scrollable column with all the visitables that the player can click on:
             visitablesColumn = AddUIElement(new UIScrollableColumn(
@@ -43,7 +43,7 @@ namespace Galaxies.UI.Screens
             AddUIElement(new UIButton(
                 new Transform(Alignment.BottomLeft,
                 new Vector2(100, 100)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Menu",
                 TextAlign.MiddleCenter,
                 5,
@@ -56,7 +56,7 @@ namespace Galaxies.UI.Screens
 
             AddUIElement(new UIButton(
                 new Transform(Alignment.BottomRight, new Vector2(250, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Inventory",
                 TextAlign.MiddleCenter,
                 5,
@@ -100,7 +100,7 @@ namespace Galaxies.UI.Screens
 
         public void UpdateUIVisitables()
         {
-            var columnSprite = SpriteHelper.GetSprite("Sprites/UI/Column");
+            var columnSprite = ContentHelper.GetSprite("Sprites/UI/Column");
 
             visitablesColumn.Clear();
 

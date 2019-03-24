@@ -22,7 +22,7 @@ namespace Galaxies.UI.Special
             //Name of save file:
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, -transform.Height / 2f + 25), new Vector2(transform.Width, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 fileInfo.Name,
                 TextAlign.MiddleLeft,
                 5,
@@ -32,7 +32,7 @@ namespace Galaxies.UI.Special
             //Date of save file:
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, -transform.Height / 2f + 75), new Vector2(transform.Width, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 fileInfo.LastWriteTime.ToString(),
                 TextAlign.MiddleLeft,
                 5,
@@ -43,11 +43,11 @@ namespace Galaxies.UI.Special
             {
                 AddUIElement(new UIButton(
                     new Transform(new Vector2(-transform.Width / 2f + 50, transform.Height / 2f - 25), new Vector2(100, 50)),
-                    SpriteHelper.Arial_Font,
+                    ContentHelper.Arial_Font,
                     "Save",
                     TextAlign.MiddleCenter,
                     5,
-                    SpriteHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/Column"),
                     new EventArg1<FileInfo>(SaveFileController.SaveGame, this.fileInfo),
                     screen
                 ));
@@ -55,11 +55,11 @@ namespace Galaxies.UI.Special
 
             AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 50, transform.Height / 2f - 25), new Vector2(100, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Load",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 new EventArg1<FileInfo>(SaveFileController.LoadGame, this.fileInfo),
                 screen
                 ));

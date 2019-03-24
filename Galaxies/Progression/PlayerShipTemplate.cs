@@ -25,7 +25,7 @@ namespace Galaxies.Progression
 
             this.Ship = new PlayerShip(
                 new Transform(new Vector2(100)),
-                SpriteHelper.GetSprite(templateData.SpriteName),
+                ContentHelper.GetSprite(templateData.SpriteName),
                 Vector2.Zero,
                 templateData.BaseShipStats
                 );

@@ -23,14 +23,14 @@ namespace Galaxies.UI.Special
             //Item icon
             AddUIElement(new UIElement(
                 new Transform(-halfSize + new Vector2(25), new Vector2(50)),
-                SpriteHelper.GetSprite(item.Data.SpriteName),
+                ContentHelper.GetSprite(item.Data.SpriteName),
                 screen
                 ));
 
             //Item name
             AddUIElement(new UIText(
                 new Transform(new Vector2(25, -halfSize.Y + 25), new Vector2(transform.Width - 50, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 item.Data.Name,
                 TextAlign.MiddleLeft,
                 5,
@@ -40,7 +40,7 @@ namespace Galaxies.UI.Special
             //Item description
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, transform.Height / 2f - (transform.Height - 50) / 2f), new Vector2(transform.Width, transform.Height - 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 item.Data.Description,
                 TextAlign.TopLeft,
                 5,
@@ -52,11 +52,11 @@ namespace Galaxies.UI.Special
         {
             AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 125, transform.Height / 2f - 25), new Vector2(250, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Buy [" + Item.Data.GalacticGoldValue + " GG]",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite(Item.Data.SpriteName),
+                ContentHelper.GetSprite(Item.Data.SpriteName),
                 onPurchase,
                 screen
                 ));
@@ -66,11 +66,11 @@ namespace Galaxies.UI.Special
         {
             AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 125, transform.Height / 2f - 25), new Vector2(250, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Sell [" + Item.Data.GalacticGoldValue + " GG]",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite(Item.Data.SpriteName),
+                ContentHelper.GetSprite(Item.Data.SpriteName),
                 onSell,
                 screen
                 ));
@@ -80,11 +80,11 @@ namespace Galaxies.UI.Special
         {
             AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 125, transform.Height / 2f - 25), new Vector2(250, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Use",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite(Item.Data.SpriteName),
+                ContentHelper.GetSprite(Item.Data.SpriteName),
                 onUse,
                 screen
                 ));

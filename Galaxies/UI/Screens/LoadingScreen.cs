@@ -20,19 +20,19 @@ namespace Galaxies.UI.Screens
         {
             AddUIElement(new UIElement(
                 new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
-                SpriteHelper.GetSprite("Sprites/Backgrounds/Static/space-background-4"),
+                ContentHelper.GetSprite("Sprites/Backgrounds/Static/space-background-4"),
                 this
                 ));
 
             loadingSpinner = AddUIElement(new UIElement(
                 new Transform(Transform.CreatePosition(Alignment.BottomRight, new Vector2(-25), new Vector2(75)), new Vector2(75)),
-                SpriteHelper.GetSprite("Sprites/Effects/Dual Ring"),
+                ContentHelper.GetSprite("Sprites/Effects/Dual Ring"),
                 this
                 ));
 
             gameTipsText = AddUIElement(new UIText(
                 new Transform(Transform.CreatePosition(Alignment.BottomLeft, new Vector2(25, -25), new Vector2(GameUIController.WindowWidth / 2f, 100)), new Vector2(GameUIController.WindowWidth / 2f, 100)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 GameTipsController.RandomTip(),
                 TextAlign.BottomLeft,
                 0,

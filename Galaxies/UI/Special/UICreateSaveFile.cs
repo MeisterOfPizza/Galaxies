@@ -43,34 +43,34 @@ namespace Galaxies.UI.Special
 
             saveFileNameInputField = AddUIElement(new UIInputField(
                 new Transform(new Vector2(0, -transform.Height / 2f + 37.5f), new Vector2(transform.Width, 75)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Save file name",
                 20,
                 TextAlign.MiddleLeft,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 screen
                 ));
 
             playerNameInputField = AddUIElement(new UIInputField(
                 new Transform(new Vector2(0, -transform.Height / 2f + 112.5f), new Vector2(transform.Width, 75)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Player name",
                 20,
                 TextAlign.MiddleLeft,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 screen
                 ));
 
             //Create button:
             AddUIElement(new UIButton(
                 new Transform(new Vector2(-55, transform.Height / 2f + 35), new Vector2(100, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Create",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 new EventArg0(CreateSaveFile),
                 screen
                 ));
@@ -78,11 +78,11 @@ namespace Galaxies.UI.Special
             //Close button:
             AddUIElement(new UIButton(
                 new Transform(new Vector2(55, transform.Height / 2f + 35), new Vector2(100, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Close",
                 TextAlign.MiddleCenter,
                 5,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/Column"),
                 onClose,
                 screen
                 ));

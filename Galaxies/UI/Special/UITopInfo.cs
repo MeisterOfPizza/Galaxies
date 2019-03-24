@@ -15,11 +15,11 @@ namespace Galaxies.UI.Special
 
         UIText galacticGoldText;
 
-        public UITopInfo(Screen screen) : base(new Transform(Alignment.TopCenter, new Vector2(GameUIController.WindowWidth, 75)), SpriteHelper.Box4x4_Sprite, screen)
+        public UITopInfo(Screen screen) : base(new Transform(Alignment.TopCenter, new Vector2(GameUIController.WindowWidth, 75)), ContentHelper.Box4x4_Sprite, screen)
         {
             galacticGoldText = AddUIElement(new UIText(
                 new Transform(new Vector2(-transform.Width / 2f + 250, 0), new Vector2(250, 75)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 PlayerController.Player.Balance.GalacticGold + " GG",
                 TextAlign.MiddleLeft,
                 5,
@@ -31,9 +31,9 @@ namespace Galaxies.UI.Special
             //Player health bar:
             AddUIElement(new UIProgressBar(
                 new Transform(new Vector2(transform.Width / 2f - progressBarSize.X - 600, 0), progressBarSize),
-                SpriteHelper.Box4x4_Sprite,
+                ContentHelper.Box4x4_Sprite,
                 Color.Red,
-                SpriteHelper.Box4x4_Sprite,
+                ContentHelper.Box4x4_Sprite,
                 Color.LawnGreen,
                 Vector2.Zero,
                 PlayerController.Ship.Health / (float)PlayerController.Ship.MaxHealth,
@@ -43,9 +43,9 @@ namespace Galaxies.UI.Special
             //Player shield bar:
             AddUIElement(new UIProgressBar(
                 new Transform(new Vector2(transform.Width / 2f - progressBarSize.X - 300, 0), progressBarSize),
-                SpriteHelper.Box4x4_Sprite,
+                ContentHelper.Box4x4_Sprite,
                 Color.DarkBlue,
-                SpriteHelper.Box4x4_Sprite,
+                ContentHelper.Box4x4_Sprite,
                 Color.Cyan,
                 Vector2.Zero,
                 PlayerController.Ship.Shield / (float)PlayerController.Ship.MaxShield,
@@ -55,9 +55,9 @@ namespace Galaxies.UI.Special
             //Player energy bar:
             AddUIElement(new UIProgressBar(
                 new Transform(new Vector2(transform.Width / 2f - progressBarSize.X, 0), progressBarSize),
-                SpriteHelper.Box4x4_Sprite,
+                ContentHelper.Box4x4_Sprite,
                 Color.Black,
-                SpriteHelper.Box4x4_Sprite,
+                ContentHelper.Box4x4_Sprite,
                 Color.Yellow,
                 Vector2.Zero,
                 PlayerController.Ship.Energy / (float)PlayerController.Ship.MaxEnergy,
