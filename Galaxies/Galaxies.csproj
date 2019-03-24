@@ -87,7 +87,7 @@
     <Compile Include="Entities\ShipStats.cs" />
     <Compile Include="Extensions\GIF.cs" />
     <Compile Include="Extensions\Random.cs" />
-    <Compile Include="Extensions\SpriteHelper.cs" />
+    <Compile Include="Extensions\ContentHelper.cs" />
     <Compile Include="Controllers\TextInputController.cs" />
     <Compile Include="Items\Interfaces\IInventoryOwner.cs" />
     <Compile Include="Items\Inventory.cs" />
@@ -162,7 +162,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Audio\Background\a_fly-through_of_the_proxima_centauri_system.mp3" />
+    <Content Include="Content\Audio\Background\void.mp3" />
+    <Content Include="Content\Audio\Sound Effects\laser.mp3" />
+    <Content Include="Content\Audio\Sound Effects\shield-down.mp3" />
+    <Content Include="Content\Audio\Sound Effects\shield-up.mp3" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1-anim.gif" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_00_delay-0.13s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_01_delay-0.1s.png" />
@@ -377,15 +380,16 @@
     <Content Include="Content\Sprites\Backgrounds\Static\space-background-2.png" />
     <Content Include="Content\Sprites\Backgrounds\Static\space-background-3.png" />
     <Content Include="Content\Sprites\Backgrounds\Static\space-background-4.png" />
-    <Content Include="Content\Sprites\Box 4x4.png" />
-    <Content Include="Content\Sprites\Effects\Bullet.png" />
-    <Content Include="Content\Sprites\Effects\Dual Ring.png" />
-    <Content Include="Content\Sprites\Effects\Shield.png" />
-    <Content Include="Content\Sprites\Player Ships\Player Ship 1.png" />
-    <Content Include="Content\Sprites\Player Ships\Player Ship 2.png" />
-    <Content Include="Content\Sprites\Player Ships\Player Ship 3.png" />
-    <Content Include="Content\Sprites\Transparent.png" />
-    <Content Include="Content\Sprites\UI\Column.png" />
+    <Content Include="Content\Sprites\box-4x4.png" />
+    <Content Include="Content\Sprites\Effects\bullet.png" />
+    <Content Include="Content\Sprites\Effects\dual-ring.png" />
+    <Content Include="Content\Sprites\Effects\shield.png" />
+    <Content Include="Content\Sprites\missing.png" />
+    <Content Include="Content\Sprites\Player Ships\player-ship-1.png" />
+    <Content Include="Content\Sprites\Player Ships\player-ship-2.png" />
+    <Content Include="Content\Sprites\Player Ships\player-ship-3.png" />
+    <Content Include="Content\Sprites\transparent.png" />
+    <Content Include="Content\Sprites\UI\column.png" />
     <Content Include="Data\Enemies.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -418,7 +422,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Content\Fonts\Arial.spritefont" />
+    <None Include="Content\Fonts\arial.spritefont" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

@@ -20,7 +20,7 @@ namespace Galaxies.UI.Special
         {
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 title,
                 TextAlign.MiddleLeft,
                 5,
@@ -29,7 +29,7 @@ namespace Galaxies.UI.Special
 
             ItemGrid = AddUIElement(new UIScrollableGrid(
                 new Transform(transform.Size),
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 screen,
                 new Vector4(10),
                 new Vector2(5),
@@ -44,7 +44,7 @@ namespace Galaxies.UI.Special
 
                 Items[i] = ItemGrid.AddUIElement(new UIItem(
                     new Transform(new Vector2(400, 300)),
-                    SpriteHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/column"),
                     screen,
                     itemPointer
                     ));
@@ -54,11 +54,11 @@ namespace Galaxies.UI.Special
             {
                 AddUIElement(new UIButton(
                     new Transform(new Vector2(0, transform.Height / 2f + 50), new Vector2(100, 50)),
-                    SpriteHelper.Arial_Font,
+                    ContentHelper.Arial_Font,
                     "Close",
                     TextAlign.MiddleCenter,
                     5,
-                    SpriteHelper.GetSprite("Sprites/UI/Column"),
+                    ContentHelper.GetSprite("Sprites/UI/column"),
                     onClose,
                     screen
                 ));

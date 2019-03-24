@@ -49,8 +49,8 @@ namespace Galaxies.Combat
             playerShotEvent = new EventArgList(new EventArg1<ShipEntity>(Player.Attack, Enemy), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
             enemyShotEvent  = new EventArgList(new EventArg1<ShipEntity>(Enemy.Attack, Player), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
 
-            playerShieldEffect = new UIElement(new Transform(Player.Transform.Position, Player.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
-            enemyShieldEffect  = new UIElement(new Transform(Enemy.Transform.Position, Enemy.Transform.Size * 2), SpriteHelper.Shield_Sprite, GameUIController.CurrentScreen);
+            playerShieldEffect = new UIElement(new Transform(Player.Transform.Position, Player.Transform.Size * 2), ContentHelper.Shield_Sprite, GameUIController.CurrentScreen);
+            enemyShieldEffect  = new UIElement(new Transform(Enemy.Transform.Position, Enemy.Transform.Size * 2), ContentHelper.Shield_Sprite, GameUIController.CurrentScreen);
 
             playerShieldEffect.Visable = false;
             enemyShieldEffect.Visable  = false;
@@ -185,7 +185,7 @@ namespace Galaxies.Combat
                 //TODO: Destroy bullet (GameObject.Destroy()).
             }
 
-            bullet = new Bullet(new Transform(position, new Vector2(100), rotation), SpriteHelper.Bullet_Sprite, speed, target, onHit);
+            bullet = new Bullet(new Transform(position, new Vector2(100), rotation), ContentHelper.Bullet_Sprite, speed, target, onHit);
         }
 
         public void Draw(SpriteBatch spriteBatch)

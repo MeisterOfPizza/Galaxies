@@ -29,7 +29,7 @@ namespace Galaxies.Space
         {
             get
             {
-                return MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/Column");
+                return MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/column");
             }
         }
 

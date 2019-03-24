@@ -20,7 +20,7 @@ namespace Galaxies.UI.Screens
 
             mainElements.Add(AddUIElement(new UIText(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(0, -250), new Vector2(250, 50)), new Vector2(250, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Game Over",
                 TextAlign.MiddleCenter,
                 0,
@@ -29,22 +29,22 @@ namespace Galaxies.UI.Screens
 
             mainElements.Add(AddUIElement(new UIButton(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(-60, 0), new Vector2(100, 50)), new Vector2(100, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Load",
                 TextAlign.MiddleCenter,
                 0,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(ToggleUILoad),
                 this
                 )));
 
             mainElements.Add(AddUIElement(new UIButton(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(60, 0), new Vector2(100, 50)), new Vector2(100, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Exit",
                 TextAlign.MiddleCenter,
                 0,
-                SpriteHelper.GetSprite("Sprites/UI/Column"),
+                ContentHelper.GetSprite("Sprites/UI/column"),
                 new EventArg0(MainGame.Singleton.Exit),
                 this
                 )));

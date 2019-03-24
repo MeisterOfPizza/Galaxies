@@ -49,7 +49,7 @@ namespace Galaxies.Space.Events
                 "Detected a hostile ship! [" + EnemyShipData.Name + "]",
                 TextAlign.TopCenter,
                 5,
-                MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/Column"),
+                MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/column"),
                 new EventArg0(_Trigger),
                 GameUIController.CurrentScreen
                 ));

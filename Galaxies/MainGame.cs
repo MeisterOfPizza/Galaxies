@@ -52,7 +52,7 @@ namespace Galaxies
             base.Initialize();
             
             DataController.Initialize();
-            SpriteHelper.Initialize();
+            ContentHelper.Initialize();
             SaveFileController.Initialize();
             GameTipsController.Initialize();
 
@@ -62,7 +62,7 @@ namespace Galaxies
             GameUIController.Initialize();
             GameUIController.CreateMenuScreen();
 
-            AudioController.PlayBackgroundSong("a_fly-through_of_the_proxima_centauri_system");
+            AudioController.PlayBackgroundSong("void");
         }
 
         /// <summary>

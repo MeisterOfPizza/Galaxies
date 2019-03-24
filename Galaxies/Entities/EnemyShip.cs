@@ -29,7 +29,7 @@ namespace Galaxies.Entities
 
         #endregion
 
-        public EnemyShip(EnemyShipData data, Vector2 size) : base(new Transform(size), SpriteHelper.GetSprite(data.SpriteName), Vector2.Zero, data.BaseShipStats)
+        public EnemyShip(EnemyShipData data, Vector2 size) : base(new Transform(size), ContentHelper.GetSprite(data.SpriteName), Vector2.Zero, data.BaseShipStats)
         {
             this.SetColor(data.Color.GetColor());
 

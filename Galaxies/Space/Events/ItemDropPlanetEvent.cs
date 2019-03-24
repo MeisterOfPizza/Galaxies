@@ -62,7 +62,7 @@ namespace Galaxies.Space.Events
                 itemNames,
                 TextAlign.TopCenter,
                 5,
-                MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/Column"),
+                MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/column"),
                 new EventArg0(_Trigger),
                 GameUIController.CurrentScreen
                 ));

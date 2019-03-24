@@ -27,7 +27,7 @@ namespace Galaxies.Extensions
         /// <param name="gifSpeed">How fast the gif should play. The interval between each image update.</param>
         public GIF(string path, double gifSpeed)
         {
-            this.Images   = SpriteHelper.GetSprites(path);
+            this.Images   = ContentHelper.GetSprites(path);
             this.GIFSpeed = gifSpeed;
 
             if (Images.Length > 0)

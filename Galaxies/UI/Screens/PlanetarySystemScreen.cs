@@ -17,11 +17,11 @@ namespace Galaxies.UI.Screens
         {
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
-                SpriteHelper.Space_Background_Animation_1,
+                ContentHelper.Space_Background_Animation_1,
                 this
                 ));
 
-            var column = SpriteHelper.GetSprite("Sprites/UI/Column");
+            var column = ContentHelper.GetSprite("Sprites/UI/column");
 
             var planetsColumn = AddUIElement(new UIScrollableColumn(new Transform(Alignment.TopLeft, new Vector2(300, 600)), column, this, new Vector4(5, 0, 5, 0), Vector2.Zero, 200));
 
@@ -35,7 +35,7 @@ namespace Galaxies.UI.Screens
 
             AddUIElement(new UIButton(
                 new Transform(Alignment.BottomRight, new Vector2(300, 50)),
-                SpriteHelper.Arial_Font,
+                ContentHelper.Arial_Font,
                 "Exit solar system",
                 TextAlign.MiddleCenter,
                 5,
