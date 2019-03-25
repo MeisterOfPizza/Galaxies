@@ -1,9 +1,11 @@
 ﻿using Galaxies.Controllers;
+using Galaxies.Core;
 using Galaxies.Extensions;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading.Tasks;
 
 namespace Galaxies
 {
@@ -44,6 +46,7 @@ namespace Galaxies
         protected override void Initialize()
         {
             base.Initialize();
+            System.Console.WriteLine("init");
             
             DataController.Initialize();
             ContentHelper.Initialize();
@@ -54,10 +57,35 @@ namespace Galaxies
             ShipyardController.Initialize();
             GalaxyController.Initialize();
 
-            GameUIController.Initialize();
-            GameUIController.CreateMenuScreen();
-
             AudioController.PlayBackgroundSong("void");
+
+            GameUIController.Initialize();
+            //GameUIController.CreateMenuScreen();
+
+            GameUIController.CreateLoadingScreen();
+
+            Task.Run(() => Load());
+
+            /*
+            //TEST:
+            ContentHelper.GetSprites("Sprites/Backgrounds/Animated/space-background-1");
+            //ContentHelper.GetSprites("Sprites/Backgrounds/Animated/space-background-2");
+            ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
+            ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
+            */
+
+            //GameUIController.CreateMenuScreen();
+        }
+
+        private async void Load()
+        {   
+            await Task.WhenAll(
+                Task.Run(() => ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-1")),
+                Task.Run(() => ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-1")),
+                Task.Run(() => ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-2"))
+                );
+
+            GameUIController.CreateMenuScreen();
         }
 
         /// <summary>
@@ -66,6 +94,7 @@ namespace Galaxies
         /// </summary>
         protected override void LoadContent()
         {
+            System.Console.WriteLine("load");
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }

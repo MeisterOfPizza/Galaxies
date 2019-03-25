@@ -61,7 +61,7 @@ namespace Galaxies.Extensions
 
         public static void Initialize()
         {
-            Arial_Font  = GetFont("Fonts/arial");
+            Arial_Font = GetFont("Fonts/arial");
 
             Missing_Sprite = GetSprite("Sprites/missing");
             Box4x4_Sprite  = GetSprite("Sprites/box-4x4");

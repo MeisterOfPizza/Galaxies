@@ -32,7 +32,7 @@ namespace Galaxies.UI.Screens
 
             gameTipsText = AddUIElement(new UIText(
                 new Transform(Transform.CreatePosition(Alignment.BottomLeft, new Vector2(25, -25), new Vector2(GameUIController.WindowWidth / 2f, 100)), new Vector2(GameUIController.WindowWidth / 2f, 100)),
-                ContentHelper.Arial_Font,
+                ContentHelper.GetFont("Fonts/arial"),
                 GameTipsController.RandomTip(),
                 TextAlign.BottomLeft,
                 0,
