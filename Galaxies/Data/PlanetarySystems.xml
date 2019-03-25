@@ -6,6 +6,7 @@
     <SpriteName>Sprites/UI/column</SpriteName>
     <PlanetIds>
       <PlanetId>test</PlanetId>
+      <PlanetId>test3</PlanetId>
     </PlanetIds>
   </PlanetarySystem>
   <PlanetarySystem id="alpha_centauri">
@@ -14,6 +15,7 @@
     <SpriteName>Sprites/UI/column</SpriteName>
     <PlanetIds>
       <PlanetId>test</PlanetId>
+      <PlanetId>test3</PlanetId>
     </PlanetIds>
   </PlanetarySystem>
 </Collection>

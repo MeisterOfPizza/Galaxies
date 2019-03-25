@@ -12,7 +12,7 @@ using System.Linq;
 namespace Galaxies.Entities
 {
 
-    class EnemyShip : ShipEntity, IInventoryOwner
+    public class EnemyShip : ShipEntity, IInventoryOwner
     {
 
         #region Constants

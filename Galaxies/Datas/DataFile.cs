@@ -26,7 +26,7 @@ namespace Galaxies.Datas
 
         public XmlNode GetNode(string id)
         {
-            return Document.SelectSingleNode(string.Format("//*[@id='{0}']", id));
+            return Document.SelectSingleNode(string.Format("Collection/*[@id='{0}']", id));
         }
 
         public XmlNodeList GetNodes(string nodeName)

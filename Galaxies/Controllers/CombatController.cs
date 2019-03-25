@@ -1,5 +1,4 @@
 ﻿using Galaxies.Combat;
-using Galaxies.Entities;
 using Galaxies.Space.Events;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,7 +13,7 @@ namespace Galaxies.Controllers
 
         public static void StartBattle(CombatPlanetEvent @event)
         {
-            Battlefield = new Battlefield(PlayerController.Ship, new EnemyShip(@event.EnemyShipData, new Vector2(100)));
+            Battlefield = new Battlefield(PlayerController.Ship, @event.EnemyShipData.GetEnemyShip(new Vector2(100)));
             Battlefield.StartTurn();
         }
 

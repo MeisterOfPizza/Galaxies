@@ -161,7 +161,7 @@ namespace Galaxies.UI.Screens
             {
                 if (option.Title.Equals(currentRes))
                 {
-                    //We found the preselected option, appply it:
+                    //We found the preselected option, apply it:
                     dropdown.SelectOption(option);
                 }
             }

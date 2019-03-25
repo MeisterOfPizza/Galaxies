@@ -170,6 +170,13 @@ namespace Galaxies.UIControllers
             CreateScreen(new GameOverScreen(), onSwitchScreen);
         }
 
+        public static void CreateVictoryScreen(EventArg onSwitchScreen = null)
+        {
+            GameController.GameState = GameState.Victory;
+
+            CreateScreen(new VictoryScreen(), onSwitchScreen);
+        }
+
         #endregion
 
         #region Position helpers

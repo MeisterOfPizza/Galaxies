@@ -82,6 +82,7 @@
     <Compile Include="Economy\Trader.cs" />
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Entities\EnemyShip.cs" />
+    <Compile Include="Entities\FinalBossShip.cs" />
     <Compile Include="Entities\PlayerShip.cs" />
     <Compile Include="Entities\ShipEntity.cs" />
     <Compile Include="Entities\ShipStats.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="UI\Screens\Screen.cs" />
     <Compile Include="UI\Elements\UIContainer.cs" />
     <Compile Include="UI\Screens\SettingsScreen.cs" />
+    <Compile Include="UI\Screens\VictoryScreen.cs" />
     <Compile Include="UI\Special\UICreateSaveFile.cs" />
     <Compile Include="UI\Special\UIInventory.cs" />
     <Compile Include="UI\Special\UIItem.cs" />
@@ -396,29 +398,32 @@
     <Content Include="Content\Sprites\transparent.png" />
     <Content Include="Content\Sprites\UI\column.png" />
     <Content Include="Data\Enemies.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\GameTips.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Items.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\Merchant.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\PlanetarySystems.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\Planets.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\PlayerShipTemplates.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Visitables.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
