@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.UI.Special
 {
 
+    /// <summary>
+    /// The bar at the top of the screen, displaying amount of GG, health, shield and energy status.
+    /// </summary>
     class UITopInfo : UIGroup
     {
 
@@ -18,9 +21,9 @@ namespace Galaxies.UI.Special
         public UITopInfo(Screen screen) : base(new Transform(Alignment.TopCenter, new Vector2(GameUIController.WindowWidth, 75)), ContentHelper.Box4x4_Sprite, screen)
         {
             galacticGoldText = AddUIElement(new UIText(
-                new Transform(new Vector2(-transform.Width / 2f + 250, 0), new Vector2(250, 75)),
+                new Transform(new Vector2(-transform.Width / 2f + 400, 0), new Vector2(500, 75)),
                 ContentHelper.Arial_Font,
-                PlayerController.Player.Balance.GalacticGold + " GG",
+                PlayerController.Player.Balance.GalacticGold + " GG [" + SaveFileController.CurrentSaveFile.PlayerName + "]",
                 TextAlign.MiddleLeft,
                 5,
                 screen
@@ -69,7 +72,7 @@ namespace Galaxies.UI.Special
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            galacticGoldText.Text = PlayerController.Player.Balance.GalacticGold + " GG";
+            galacticGoldText.Text = PlayerController.Player.Balance.GalacticGold + " GG [" + SaveFileController.CurrentSaveFile.PlayerName + "]";
 
             base.Draw(spriteBatch);
         }

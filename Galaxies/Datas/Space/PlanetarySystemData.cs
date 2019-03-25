@@ -7,9 +7,6 @@ namespace Galaxies.Datas.Space
     public class PlanetarySystemData : Data
     {
 
-        [XmlElement("SpriteName", IsNullable = false)]
-        public string SpriteName { get; set; }
-
         [XmlArray("PlanetIds", IsNullable = false)]
         [XmlArrayItem("PlanetId", IsNullable = false)]
         public string[] PlanetIds { get; set; }

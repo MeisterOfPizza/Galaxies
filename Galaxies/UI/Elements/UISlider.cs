@@ -70,12 +70,14 @@ namespace Galaxies.UI.Elements
             this.DefaultColor = color;
             this.OnClick      = onValueChanged;
 
+            //The actual bar:
             AddUIElement(new UIElement(
                 new Transform(transform.Size),
                 barSprite,
                 screen
-                ));
+                )).SetColor(new Color(48, 48, 48));
 
+            //The handle:
             var handleElement = AddUIElement(new UIElement(
                 new Transform(new Vector2(50, 50)),
                 handleSprite,
@@ -105,6 +107,13 @@ namespace Galaxies.UI.Elements
             totalWidth = transform.Width;
 
             UpdateHandle();
+        }
+
+        public override void SetColor(Color color)
+        {
+            base.SetColor(color);
+
+            DefaultColor = color;
         }
 
         #region Helpers

@@ -41,6 +41,8 @@ namespace Galaxies.UI.Special
         {
             this.onClose = onClose;
 
+            SetColor(new Color(56, 56, 56));
+
             saveFileNameInputField = AddUIElement(new UIInputField(
                 new Transform(new Vector2(0, -transform.Height / 2f + 37.5f), new Vector2(transform.Width, 75)),
                 ContentHelper.Arial_Font,
@@ -48,9 +50,11 @@ namespace Galaxies.UI.Special
                 20,
                 TextAlign.MiddleLeft,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 screen
                 ));
+
+            saveFileNameInputField.SetColor(new Color(28, 28, 28));
 
             playerNameInputField = AddUIElement(new UIInputField(
                 new Transform(new Vector2(0, -transform.Height / 2f + 112.5f), new Vector2(transform.Width, 75)),
@@ -59,9 +63,11 @@ namespace Galaxies.UI.Special
                 20,
                 TextAlign.MiddleLeft,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 screen
                 ));
+
+            playerNameInputField.SetColor(new Color(28, 28, 28));
 
             //Create button:
             AddUIElement(new UIButton(
@@ -69,11 +75,11 @@ namespace Galaxies.UI.Special
                 ContentHelper.Arial_Font,
                 "Create",
                 TextAlign.MiddleCenter,
-                5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                0,
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(CreateSaveFile),
                 screen
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             //Close button:
             AddUIElement(new UIButton(
@@ -81,11 +87,11 @@ namespace Galaxies.UI.Special
                 ContentHelper.Arial_Font,
                 "Close",
                 TextAlign.MiddleCenter,
-                5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                0,
+                ContentHelper.Box4x4_Sprite,
                 onClose,
                 screen
-                ));
+                )).SetColor(new Color(28, 28, 28));
         }
 
         private void CreateSaveFile()

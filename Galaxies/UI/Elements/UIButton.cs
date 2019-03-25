@@ -116,7 +116,7 @@ namespace Galaxies.UI.Elements
 
                 if (spriteFont != null)
                 {
-                    spriteBatch.DrawString(spriteFont, FormattedText, transform.Position + textPosition, Color, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(spriteFont, FormattedText, transform.Position + textPosition, Color.White, 0, FormattedTextOrigin, 1, SpriteEffects.None, 0);
                 }
             }
         }
@@ -138,7 +138,7 @@ namespace Galaxies.UI.Elements
 
         public void Select()
         {
-            color = Color.Red;
+            color = new Color(DefaultColor * 0.9f, 1f);
 
             IsSelected = true;
         }

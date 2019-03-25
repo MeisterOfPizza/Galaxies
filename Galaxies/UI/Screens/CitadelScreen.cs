@@ -57,10 +57,10 @@ namespace Galaxies.UI.Screens
                 "Exit the Citadel",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg1<EventArg>(GameUIController.CreateGalaxyScreen, null),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             //Open shipyard button:
             AddUIElement(new UIButton(
@@ -69,10 +69,10 @@ namespace Galaxies.UI.Screens
                 "Shipyard",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(ToggleUIShipyard),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             //Open shop button:
             AddUIElement(new UIButton(
@@ -81,10 +81,10 @@ namespace Galaxies.UI.Screens
                 "Shop",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(ToggleUIShop),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             //Open save files:
             AddUIElement(new UIButton(
@@ -93,10 +93,10 @@ namespace Galaxies.UI.Screens
                 "Save & Load",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(ToggleUISaveFiles),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             //Add the Top Info bar:
             AddUIElement(new UITopInfo(this));

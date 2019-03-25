@@ -18,23 +18,27 @@ namespace Galaxies.UI.Special
 
         public UIInventory(Transform transform, Screen screen, IList<Item> items, string title, bool closeButton, EventArg onClose) : base(transform, null, screen)
         {
+            SetColor(new Color(56, 56, 56));
+
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, -transform.Height / 2f - 50), new Vector2(transform.Width, 50)),
                 ContentHelper.Arial_Font,
                 title,
                 TextAlign.MiddleLeft,
-                5,
+                0,
                 screen
                 ));
 
             ItemGrid = AddUIElement(new UIScrollableGrid(
                 new Transform(transform.Size),
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 screen,
                 new Vector4(10),
                 new Vector2(5),
                 new Vector2(400, 300)
                 ));
+
+            ItemGrid.SetColor(new Color(56, 56, 56));
 
             Items = new UIItem[items.Count];
 
@@ -44,7 +48,7 @@ namespace Galaxies.UI.Special
 
                 Items[i] = ItemGrid.AddUIElement(new UIItem(
                     new Transform(new Vector2(400, 300)),
-                    ContentHelper.GetSprite("Sprites/UI/column"),
+                    ContentHelper.Box4x4_Sprite,
                     screen,
                     itemPointer
                     ));
@@ -57,11 +61,11 @@ namespace Galaxies.UI.Special
                     ContentHelper.Arial_Font,
                     "Close",
                     TextAlign.MiddleCenter,
-                    5,
-                    ContentHelper.GetSprite("Sprites/UI/column"),
+                    0,
+                    ContentHelper.Box4x4_Sprite,
                     onClose,
                     screen
-                ));
+                )).SetColor(new Color(48, 48, 48));
             }
         }
 

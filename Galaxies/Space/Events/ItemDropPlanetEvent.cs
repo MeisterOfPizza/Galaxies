@@ -2,6 +2,7 @@
 using Galaxies.Core;
 using Galaxies.Datas.Items;
 using Galaxies.Datas.Space;
+using Galaxies.Extensions;
 using Galaxies.Items;
 using Galaxies.UI;
 using Galaxies.UI.Elements;
@@ -62,7 +63,7 @@ namespace Galaxies.Space.Events
                 itemNames,
                 TextAlign.TopCenter,
                 5,
-                MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(_Trigger),
                 GameUIController.CurrentScreen
                 ));

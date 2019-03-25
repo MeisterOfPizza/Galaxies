@@ -72,6 +72,23 @@ namespace Galaxies.UI.Elements
         }
 
         /// <summary>
+        /// Adds multiple new UI Elements to the <see cref="GroupElements"/> list with the specified local position set as the <see cref="Core.GameObject.Position"/>.
+        /// </summary>
+        public void AddUIElements(params UIElement[] uiElements)
+        {
+            for (int i = 0; i < uiElements.Length; i++)
+            {
+                GroupElements.Add(new UIGroupElement(uiElements[i], uiElements[i].Transform.Position));
+
+                //Add the UI Element to the screen's clickable items.
+                screen.AddInteractable(uiElements[i]); //Returns false if it wasn't an interactable.
+                screen.AddScrollable(uiElements[i]); //Returns false if it wasn't a scrollable.
+            }
+
+            CalculatePositions();
+        }
+
+        /// <summary>
         /// Remove UIElement from group.
         /// </summary>
         public void RemoveUIElement(UIElement uiElement)

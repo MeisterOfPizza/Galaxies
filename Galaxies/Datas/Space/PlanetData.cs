@@ -7,9 +7,6 @@ namespace Galaxies.Datas.Space
     public class PlanetData : Data
     {
 
-        [XmlElement("SpriteName", IsNullable = false)]
-        public string SpriteName { get; set; }
-
         [XmlArray("OnVisitEvents", IsNullable = true)]
         [XmlArrayItem("ItemDrop", typeof(ItemDropPlanetEventData), IsNullable = false)]
         [XmlArrayItem("Combat", typeof(CombatPlanetEventData), IsNullable = false)]

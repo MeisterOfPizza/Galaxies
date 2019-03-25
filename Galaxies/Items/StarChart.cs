@@ -2,7 +2,9 @@
 using Galaxies.Datas;
 using Galaxies.Datas.Items;
 using Galaxies.Datas.Space;
+using Galaxies.Extensions;
 using Galaxies.Space;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Items
 {
@@ -15,6 +17,8 @@ namespace Galaxies.Items
         public override bool CanSell { get { return false; } }
 
         public override bool CanUse { get { return true; } }
+
+        public override Texture2D ItemIcon { get { return ContentHelper.GetSprite("Sprites/UI/star-chart-icon"); } }
 
         public StarChart(StarChartItemData data, Inventory inventory) : base(data, inventory)
         {

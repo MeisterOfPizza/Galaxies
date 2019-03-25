@@ -110,9 +110,9 @@ namespace Galaxies
         {
             GraphicsDevice.Clear(Color.Purple);
 
-            spriteBatch.Begin();
-            GameController.Draw(spriteBatch);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             GameUIController.Draw(spriteBatch);
+            GameController.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -33,10 +33,10 @@ namespace Galaxies.UI.Screens
                 "Menu",
                 TextAlign.MiddleCenter,
                 0,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg1<EventArg>(GameUIController.CreateMenuScreen, null),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             AddUIElement(new UIButton(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(60, 0), new Vector2(100, 50)), new Vector2(100, 50)),
@@ -44,10 +44,10 @@ namespace Galaxies.UI.Screens
                 "Exit",
                 TextAlign.MiddleCenter,
                 0,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(MainGame.Singleton.Exit),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
         }
 
     }

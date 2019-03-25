@@ -11,7 +11,7 @@ namespace Galaxies.UI.Screens
     class MenuScreen : Screen
     {
 
-        UIColumn         uiMenu;
+        UIGroup          uiMenu;
         UISaveFiles      uiSaveFiles;
         UICreateSaveFile uiCreateSaveFile;
 
@@ -23,22 +23,63 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            var textBackground = ContentHelper.GetSprite("Sprites/UI/column");
+            var textBackground = ContentHelper.Box4x4_Sprite;
 
-            uiMenu = AddUIElement(new UIColumn(
-                new Transform(Alignment.MiddleCenter, new Vector2(250, 400)),
+            uiMenu = AddUIElement(new UIGroup(
+                new Transform(Transform.CreatePosition(Alignment.BottomCenter, new Vector2(0, -20), new Vector2(1000, 50)), new Vector2(1000, 50)),
                 null,
-                this,
-                new Vector4(5, 0, 5, 0),
-                new Vector2(0, 5)
+                this
                 ));
 
             uiMenu.AddUIElements(
-                new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "New Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(ToggleUICreateSave), this),
-                new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "Load Game", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(ToggleUISaveFiles), this),
-                new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "Settings", TextAlign.MiddleCenter, 5, textBackground, new EventArg1<EventArg>(GameUIController.CreateSettingsScreen, null), this),
-                new UIButton(new Transform(new Vector2(250, 100)), ContentHelper.Arial_Font, "Exit", TextAlign.MiddleCenter, 5, textBackground, new EventArg0(MainGame.Singleton.Exit), this)
+                //New game
+                new UIButton(
+                    new Transform(new Vector2(-390, 0), new Vector2(250, 50)),
+                    ContentHelper.Arial_Font,
+                    "New Game",
+                    TextAlign.MiddleCenter,
+                    0,
+                    textBackground,
+                    new EventArg0(ToggleUICreateSave),
+                    this
+                    ),
+                //Load game
+                new UIButton(
+                    new Transform(new Vector2(-130, 0), new Vector2(250, 50)),
+                    ContentHelper.Arial_Font,
+                    "Load Game",
+                    TextAlign.MiddleCenter,
+                    0,
+                    textBackground,
+                    new EventArg0(ToggleUISaveFiles),
+                    this
+                    ),
+                //Settings
+                new UIButton(
+                    new Transform(new Vector2(130, 0), new Vector2(250, 50)),
+                    ContentHelper.Arial_Font,
+                    "Settings",
+                    TextAlign.MiddleCenter,
+                    0,
+                    textBackground,
+                    new EventArg1<EventArg>(GameUIController.CreateSettingsScreen, null),
+                    this
+                    ),
+                //Exit
+                new UIButton(
+                    new Transform(new Vector2(390, 0), new Vector2(250, 50)),
+                    ContentHelper.Arial_Font,
+                    "Exit",
+                    TextAlign.MiddleCenter,
+                    0,
+                    textBackground,
+                    new EventArg0(MainGame.Singleton.Exit),
+                    this
+                    )
                 );
+
+            foreach (var child in uiMenu.Children)
+                child.SetColor(new Color(28, 28, 28));
 
             uiSaveFiles = AddUIElement(new UISaveFiles(
                 new Transform(Alignment.MiddleCenter, new Vector2(250, 600)),
@@ -52,7 +93,7 @@ namespace Galaxies.UI.Screens
 
             uiCreateSaveFile = AddUIElement(new UICreateSaveFile(
                 new Transform(Alignment.MiddleCenter, new Vector2(500, 150)),
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 this,
                 new EventArg0(ToggleUICreateSave)
                 ));

@@ -396,7 +396,14 @@
     <Content Include="Content\Sprites\Player Ships\player-ship-2.png" />
     <Content Include="Content\Sprites\Player Ships\player-ship-3.png" />
     <Content Include="Content\Sprites\transparent.png" />
+    <Content Include="Content\Sprites\UI\citadel-icon.png" />
     <Content Include="Content\Sprites\UI\column.png" />
+    <Content Include="Content\Sprites\UI\cross.png" />
+    <Content Include="Content\Sprites\UI\dropdown-arrow.png" />
+    <Content Include="Content\Sprites\UI\handle.png" />
+    <Content Include="Content\Sprites\UI\planet-icon.png" />
+    <Content Include="Content\Sprites\UI\ship-upgrade-icon.png" />
+    <Content Include="Content\Sprites\UI\star-chart-icon.png" />
     <Content Include="Data\Enemies.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

@@ -28,11 +28,30 @@ namespace Galaxies.UI.Special
         {
             transform.Size = new Vector2(300, 200);
 
-            this.OnClick      = onClick;
-            this.DefaultColor = Color.White;
+            SetColor(new Color(48, 48, 48));
 
-            AddUIElement(new UIText(new Transform(new Vector2(0, -75), new Vector2(300, 50)), ContentHelper.Arial_Font, planet.Data.Name, TextAlign.MiddleLeft, 5, screen));
-            AddUIElement(new UIText(new Transform(new Vector2(0, 25), new Vector2(300, 150)), ContentHelper.Arial_Font, planet.Data.Description, TextAlign.TopLeft, 5, screen));
+            this.OnClick      = onClick;
+            this.DefaultColor = color;
+
+            //Planet name:
+            AddUIElement(new UIText(
+                new Transform(new Vector2(0, -75), new Vector2(300, 50)),
+                ContentHelper.Arial_Font,
+                planet.Data.Name,
+                TextAlign.MiddleLeft,
+                5,
+                screen
+                ));
+
+            //Planet description:
+            AddUIElement(new UIText(
+                new Transform(new Vector2(0, 25), new Vector2(300, 150)),
+                ContentHelper.Arial_Font,
+                planet.Data.Description,
+                TextAlign.TopLeft,
+                5,
+                screen
+                ));
         }
 
         #region Overriden methods
@@ -63,7 +82,7 @@ namespace Galaxies.UI.Special
 
         public void Select()
         {
-            color = Color.Red;
+            color = new Color(DefaultColor * 0.9f, 1f);
 
             IsSelected = true;
         }

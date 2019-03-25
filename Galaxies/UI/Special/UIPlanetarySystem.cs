@@ -28,12 +28,37 @@ namespace Galaxies.UI.Special
         {
             transform.Size = new Vector2(300, 200);
 
-            AddUIElement(new UIElement(new Transform(new Vector2(-125, -75), new Vector2(50)), visitable.VisitableTypeIcon, screen));
-            AddUIElement(new UIText(new Transform(new Vector2(25, -75), new Vector2(250, 50)), ContentHelper.Arial_Font, visitable.Name, TextAlign.MiddleLeft, 5, screen));
-            AddUIElement(new UIText(new Transform(new Vector2(0, 25), new Vector2(300, 150)), ContentHelper.Arial_Font, visitable.Description, TextAlign.TopLeft, 5, screen));
+            SetColor(new Color(48, 48, 48));
 
+            this.DefaultColor = color;
             this.OnClick      = onClick;
-            this.DefaultColor = Color.White;
+
+            //Icon:
+            AddUIElement(new UIElement(
+                new Transform(new Vector2(-120, -70), new Vector2(50)),
+                visitable.VisitableTypeIcon,
+                screen
+                ));
+
+            //Title/name:
+            AddUIElement(new UIText(
+                new Transform(new Vector2(30, -70), new Vector2(250, 50)),
+                ContentHelper.Arial_Font,
+                visitable.Name,
+                TextAlign.MiddleLeft,
+                5,
+                screen
+                ));
+
+            //Description:
+            AddUIElement(new UIText(
+                new Transform(new Vector2(0, 30), new Vector2(300, 150)),
+                ContentHelper.Arial_Font,
+                visitable.Description,
+                TextAlign.TopLeft,
+                5,
+                screen
+                ));
         }
 
         #region IInteractable
@@ -53,7 +78,7 @@ namespace Galaxies.UI.Special
 
         public void Select()
         {
-            color = Color.Red;
+            color = new Color(DefaultColor * 0.9f, 1f);
 
             IsSelected = true;
         }
