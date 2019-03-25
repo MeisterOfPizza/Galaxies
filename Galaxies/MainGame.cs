@@ -4,6 +4,7 @@ using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading.Tasks;
 
 namespace Galaxies
 {
@@ -16,11 +17,9 @@ namespace Galaxies
 
         SpriteBatch spriteBatch;
 
-        public static MainGame Singleton { get; private set; }
-
         public GraphicsDeviceManager Graphics { get; private set; }
 
-        private static Color backgroundColor = new Color(18, 18, 18);
+        public static MainGame Singleton { get; private set; }
 
         public MainGame()
         {
@@ -46,7 +45,6 @@ namespace Galaxies
             base.Initialize();
             
             DataController.Initialize();
-            ContentHelper.Initialize();
             SaveFileController.Initialize();
             GameTipsController.Initialize();
             AudioController.Initialize();
@@ -54,10 +52,19 @@ namespace Galaxies
             ShipyardController.Initialize();
             GalaxyController.Initialize();
 
-            GameUIController.Initialize();
-            GameUIController.CreateMenuScreen();
-
             AudioController.PlayBackgroundSong("void");
+
+            GameUIController.Initialize();
+            GameUIController.CreateLoadingScreen();
+
+            LoadGame();
+        }
+
+        private async void LoadGame()
+        {
+            await Task.Run(() => ContentHelper.Initialize());
+
+            GameUIController.CreateMenuScreen();
         }
 
         /// <summary>
@@ -101,7 +108,7 @@ namespace Galaxies
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(backgroundColor);
+            GraphicsDevice.Clear(Color.Purple);
 
             spriteBatch.Begin();
             GameController.Draw(spriteBatch);

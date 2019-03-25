@@ -61,13 +61,19 @@ namespace Galaxies.Extensions
 
         public static void Initialize()
         {
-            Arial_Font  = GetFont("Fonts/arial");
+            Arial_Font = GetFont("Fonts/arial");
 
             Missing_Sprite = GetSprite("Sprites/missing");
             Box4x4_Sprite  = GetSprite("Sprites/box-4x4");
 
             Bullet_Sprite = GetSprite("Sprites/Effects/bullet");
             Shield_Sprite = GetSprite("Sprites/Effects/shield");
+
+            //Preloading all GIFs:
+            GetSprites("Sprites/Backgrounds/Animated/space-background-1");
+            GetSprites("Sprites/Backgrounds/Animated/space-background-2");
+            GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
+            GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
         }
 
         public static Texture2D GetSprite(string path)
