@@ -1,5 +1,4 @@
 ﻿using Galaxies.Controllers;
-using Galaxies.Core;
 using Galaxies.Extensions;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
@@ -18,11 +17,9 @@ namespace Galaxies
 
         SpriteBatch spriteBatch;
 
-        public static MainGame Singleton { get; private set; }
-
         public GraphicsDeviceManager Graphics { get; private set; }
 
-        private static Color backgroundColor = new Color(18, 18, 18);
+        public static MainGame Singleton { get; private set; }
 
         public MainGame()
         {
@@ -46,10 +43,8 @@ namespace Galaxies
         protected override void Initialize()
         {
             base.Initialize();
-            System.Console.WriteLine("init");
             
             DataController.Initialize();
-            ContentHelper.Initialize();
             SaveFileController.Initialize();
             GameTipsController.Initialize();
             AudioController.Initialize();
@@ -60,30 +55,14 @@ namespace Galaxies
             AudioController.PlayBackgroundSong("void");
 
             GameUIController.Initialize();
-            //GameUIController.CreateMenuScreen();
-
             GameUIController.CreateLoadingScreen();
 
-            Task.Run(() => Load());
-
-            /*
-            //TEST:
-            ContentHelper.GetSprites("Sprites/Backgrounds/Animated/space-background-1");
-            //ContentHelper.GetSprites("Sprites/Backgrounds/Animated/space-background-2");
-            ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
-            ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
-            */
-
-            //GameUIController.CreateMenuScreen();
+            LoadGame();
         }
 
-        private async void Load()
-        {   
-            await Task.WhenAll(
-                Task.Run(() => ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-1")),
-                Task.Run(() => ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-1")),
-                Task.Run(() => ContentHelper.GetSprites("Sprites/Backgrounds/Animated/citadel-background-2"))
-                );
+        private async void LoadGame()
+        {
+            await Task.Run(() => ContentHelper.Initialize());
 
             GameUIController.CreateMenuScreen();
         }
@@ -94,7 +73,6 @@ namespace Galaxies
         /// </summary>
         protected override void LoadContent()
         {
-            System.Console.WriteLine("load");
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
@@ -130,7 +108,7 @@ namespace Galaxies
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(backgroundColor);
+            GraphicsDevice.Clear(Color.Purple);
 
             spriteBatch.Begin();
             GameController.Draw(spriteBatch);

@@ -79,17 +79,8 @@ namespace Galaxies.UIControllers
 
         private static void CreateScreen(Screen newScreen, EventArg onSwitchScreen)
         {
-            if (CurrentScreen != null)
-            {
-                CurrentScreen.DestroyScreen();
-            }
-
-            //CreateLoadingScreen();
-
             //Create new screen asynchronously:
             Task.Run(() => CreateScreenAsync(newScreen, onSwitchScreen));
-
-            //Loading screen is then automatically removed when the new screen is done
         }
 
         private async static void CreateScreenAsync(Screen newScreen, EventArg onSwitchScreen)
@@ -98,7 +89,7 @@ namespace Galaxies.UIControllers
 
             if (CurrentScreen != null)
             {
-                //Properly destroy the loading screen
+                //Properly destroy the previous screen
                 CurrentScreen.DestroyScreen();
             }
 
@@ -112,14 +103,10 @@ namespace Galaxies.UIControllers
 
         public static void CreateLoadingScreen()
         {
-            CreateScreen(new LoadingScreen(), null);
-
-            /*
             LoadingScreen loadingScreen = new LoadingScreen();
             loadingScreen.CreateUI();
 
             CurrentScreen = loadingScreen;
-            */
         }
 
         public static void CreateMenuScreen(EventArg onSwitchScreen = null)
