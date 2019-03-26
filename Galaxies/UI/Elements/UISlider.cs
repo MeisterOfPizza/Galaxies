@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Galaxies.UI.Elements
 {
 
-    class UISlider : UIGroup, IInteractable
+    class UISlider : UIGroup/*, IInteractable*/
     {
 
         #region Variables
@@ -25,6 +25,14 @@ namespace Galaxies.UI.Elements
         #endregion
 
         #region Properties
+
+        public float TotalWidth
+        {
+            get
+            {
+                return totalWidth;
+            }
+        }
 
         public float Value
         {
@@ -78,9 +86,12 @@ namespace Galaxies.UI.Elements
                 )).SetColor(new Color(48, 48, 48));
 
             //The handle:
-            var handleElement = AddUIElement(new UIElement(
-                new Transform(new Vector2(50, 50)),
+            var handleElement = AddUIElement(new UIHandle(
+                new Transform(new Vector2(50)),
                 handleSprite,
+                //new EventArg0(CheckForKeyboard, CheckForMouse),
+                new EventArg0(UpdateHandle),
+                this,
                 screen
                 ));
 
@@ -95,8 +106,8 @@ namespace Galaxies.UI.Elements
 
             if (IsSelected)
             {
-                CheckForKeyboard();
-                CheckForMouse();
+                //CheckForKeyboard();
+                //CheckForMouse();
             }
         }
 
@@ -130,6 +141,7 @@ namespace Galaxies.UI.Elements
             CalculatePositions();
         }
 
+        /*
         /// <summary>
         /// Move the slider with the left and right arrows.
         /// </summary>
@@ -168,6 +180,7 @@ namespace Galaxies.UI.Elements
                 Value = 1f - mouseX / totalWidth;
             }
         }
+        */
 
         #endregion
 

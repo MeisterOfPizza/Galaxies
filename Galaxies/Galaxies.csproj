@@ -122,6 +122,7 @@
     <Compile Include="UI\Elements\UIDropdown.cs" />
     <Compile Include="UI\Elements\UIFixedColumn.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
+    <Compile Include="UI\Elements\UIHandle.cs" />
     <Compile Include="UI\Elements\UIInputField.cs" />
     <Compile Include="UI\Elements\UIProgressBar.cs" />
     <Compile Include="UI\Elements\UIScrollableColumn.cs" />
