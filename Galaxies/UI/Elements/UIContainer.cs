@@ -4,6 +4,7 @@ using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Galaxies.UI
 {
@@ -218,6 +219,16 @@ namespace Galaxies.UI
             foreach (UIElement element in Container)
             {
                 element.Draw(spriteBatch);
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            foreach (UIElement elem in Container.ToArray())
+            {
+                elem.Update(gameTime);
             }
         }
 

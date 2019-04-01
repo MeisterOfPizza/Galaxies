@@ -134,6 +134,17 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            foreach (var group in GroupElements.ToArray())
+            {
+                group.UIElement.Update(gameTime);
+            }
+
+        }
+
         #endregion
 
     }

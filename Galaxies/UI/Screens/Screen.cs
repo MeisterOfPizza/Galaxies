@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System;
 
 namespace Galaxies.UI.Screens
 {
@@ -118,7 +119,7 @@ namespace Galaxies.UI.Screens
 
         private void UpdateUIElements(GameTime gameTime)
         {
-            foreach (var element in UIElements)
+            foreach (var element in UIElements.ToArray())
             {
                 element.Update(gameTime);
             }
@@ -349,6 +350,24 @@ namespace Galaxies.UI.Screens
                     ms_selectedInteractable.Click();
                 }
             }
+        }
+
+        #endregion
+
+        #region Keyboard selection checking
+
+        public bool IsSelected_ByKeyboard(IInteractable interactable)
+        {
+            return ms_selectedInteractable == interactable;
+        }
+
+        #endregion
+
+        #region Mouse selection checking
+
+        public bool IsSelected_ByMouse(IInteractable interactable)
+        {
+            //TODO: Returns contains.
         }
 
         #endregion

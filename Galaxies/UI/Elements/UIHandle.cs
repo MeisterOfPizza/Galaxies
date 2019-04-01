@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Galaxies.Core;
-using Galaxies.UI.Screens;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Galaxies.Core;
 using Galaxies.UI.Interfaces;
+using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Galaxies.UI.Elements
@@ -17,7 +12,6 @@ namespace Galaxies.UI.Elements
     /// </summary>
     sealed class UIHandle : UIElement, IInteractable
     {
-
 
         UISlider slider;
 
@@ -42,6 +36,15 @@ namespace Galaxies.UI.Elements
             this.slider = slider;
         }
 
+        #region Overriden methods
+
+        public override void PositionChanged()
+        {
+            base.PositionChanged();
+
+            IsSelected = false;
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -52,6 +55,8 @@ namespace Galaxies.UI.Elements
                 CheckForMouse();
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Move the slider with the left and right arrows.
@@ -82,7 +87,7 @@ namespace Galaxies.UI.Elements
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
                 float mouseX = mouseState.Position.X; //Where is the mouse?
-                float halfWidth = slider.Transform.Width / 2f; //for faster calculations.
+                float halfWidth = slider.Transform.Width / 2f; //For faster calculations.
 
                 //Clamp it so we know where the mouse is (X) relative to the handle.
                 mouseX = MathHelper.Clamp(slider.Transform.X + halfWidth - mouseX, 0, slider.TotalWidth);
