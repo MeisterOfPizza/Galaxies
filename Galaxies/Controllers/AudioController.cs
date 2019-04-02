@@ -12,38 +12,45 @@ namespace Galaxies.Controllers
 
         public static float MasterVolume { get; private set; } = 1;
 
-        private static float musicVolume = 1;
-        public  static float MusicVolume { get { return MediaPlayer.Volume; } }
+        private static float musicVolume         = 1;
+        private static float modifiedMusicVolume = musicVolume * MasterVolume;
+        public  static float MusicVolume         { get { return musicVolume; } }
 
-        private static float effectsVolume = 1;
-        public  static float EffectsVolume { get { return SoundEffect.MasterVolume; } }
+        private static float effectsVolume         = 1;
+        private static float modifiedEffectsVolume = effectsVolume * MasterVolume;
+        public  static float EffectsVolume         { get { return effectsVolume; } }
 
         public static void Initialize()
         {
-            MediaPlayer.Volume       = musicVolume;
-            SoundEffect.MasterVolume = effectsVolume;
+            MediaPlayer.Volume       = modifiedMusicVolume;
+            SoundEffect.MasterVolume = modifiedEffectsVolume;
         }
 
         public static void SetMasterVolume(float volume)
         {
             MasterVolume = volume;
 
-            MediaPlayer.Volume       = musicVolume * MasterVolume;
-            SoundEffect.MasterVolume = effectsVolume * MasterVolume;
+            modifiedMusicVolume   = musicVolume * MasterVolume;
+            modifiedEffectsVolume = effectsVolume * MasterVolume;
+
+            MediaPlayer.Volume       = modifiedMusicVolume;
+            SoundEffect.MasterVolume = modifiedEffectsVolume;
         }
 
         public static void SetMusicVolume(float volume)
         {
             musicVolume = volume;
+            modifiedMusicVolume = musicVolume * MasterVolume;
 
-            MediaPlayer.Volume = musicVolume * MasterVolume;
+            MediaPlayer.Volume = modifiedMusicVolume;
         }
 
         public static void SetEffectsVolume(float volume)
         {
             effectsVolume = volume;
+            modifiedEffectsVolume = effectsVolume * MasterVolume;
 
-            SoundEffect.MasterVolume = effectsVolume * MasterVolume;
+            SoundEffect.MasterVolume = modifiedEffectsVolume;
         }
 
         public static void PlayBackgroundSong(string name)

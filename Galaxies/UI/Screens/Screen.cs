@@ -282,9 +282,7 @@ namespace Galaxies.UI.Screens
             {
                 if (Scrollables[i].IsScrollable)
                 {
-                    GameObject scrollable = (GameObject)Scrollables[i];
-
-                    if (scrollable.Visable && scrollable.Contains(mousePos))
+                    if (Scrollables[i].Visable && Scrollables[i].Contains(mousePos))
                     {
                         Scrollables[i].MouseScroll(value);
 
@@ -304,7 +302,7 @@ namespace Galaxies.UI.Screens
             //Deselect the current interactable beneath the mouse if the mouse is no longer inside the interactable.
             if (ms_selectedInteractable != null && ms_selectedInteractable.IsInteractable)
             {
-                if (!((GameObject)ms_selectedInteractable).Contains(mousePos) && ms_selectedInteractable != kb_selectedInteractable)
+                if (!ms_selectedInteractable.Contains(mousePos) && ms_selectedInteractable != kb_selectedInteractable)
                 {
                     ms_selectedInteractable.MouseExit();
 
@@ -318,9 +316,7 @@ namespace Galaxies.UI.Screens
             {
                 if (Interactables[i].IsInteractable)
                 {
-                    GameObject interactable = (GameObject)Interactables[i];
-
-                    if (interactable.Visable && interactable.Contains(mousePos))
+                    if (Interactables[i].Visable && Interactables[i].Contains(mousePos))
                     {
                         if (ms_selectedInteractable != Interactables[i])
                         {
@@ -356,18 +352,39 @@ namespace Galaxies.UI.Screens
 
         #region Keyboard selection checking
 
+        /// <summary>
+        /// Can / is the interactable selected by the keyboard?
+        /// </summary>
         public bool IsSelected_ByKeyboard(IInteractable interactable)
         {
-            return ms_selectedInteractable == interactable;
+            // The selected interactable cannot be switched, unless done so by the player.
+            // Therefore, we only need to check if the given interactable is the same as the stored one.
+            return kb_selectedInteractable == interactable;
         }
 
         #endregion
 
         #region Mouse selection checking
 
+        /// <summary>
+        /// Can / is the interactable selected by the mouse?
+        /// </summary>
         public bool IsSelected_ByMouse(IInteractable interactable)
         {
-            //TODO: Returns contains.
+            if (ms_selectedInteractable == interactable)
+            {
+                //It was selected from the start.
+
+                return true;
+            }
+            else
+            {
+                Vector2 mousePos = ms_lastPosition.ToVector2();
+
+                // Because elements can move, resolutions can change etc., we want to know if the
+                // given interactable is still "selected" (we don't know if it is or not).
+                return interactable.Visable && interactable.Contains(mousePos);
+            }
         }
 
         #endregion

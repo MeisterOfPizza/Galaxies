@@ -54,6 +54,15 @@ namespace Galaxies.UI.Elements
                 CheckForKeyboard();
                 CheckForMouse();
             }
+            //Check if the mouse is still over this element:
+            else if (screen.IsSelected_ByMouse(this) || screen.IsSelected_ByKeyboard(this))
+            {
+                Select();
+            }
+            else
+            {
+                Deselect();
+            }
         }
 
         #endregion
@@ -63,17 +72,20 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private void CheckForKeyboard()
         {
-            KeyboardState keyboardState = Keyboard.GetState();
+            if (screen.IsSelected_ByKeyboard(this))
+            {
+                KeyboardState keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                //Decrease value:
-                slider.Value -= 0.025f;
-            }
-            else if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                //Increase value:
-                slider.Value += 0.025f;
+                if (keyboardState.IsKeyDown(Keys.Left))
+                {
+                    //Decrease value:
+                    slider.Value -= 0.025f;
+                }
+                else if (keyboardState.IsKeyDown(Keys.Right))
+                {
+                    //Increase value:
+                    slider.Value += 0.025f;
+                }
             }
         }
 
@@ -82,18 +94,21 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private void CheckForMouse()
         {
-            MouseState mouseState = Mouse.GetState();
-
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            if (screen.IsSelected_ByMouse(this))
             {
-                float mouseX = mouseState.Position.X; //Where is the mouse?
-                float halfWidth = slider.Transform.Width / 2f; //For faster calculations.
+                MouseState mouseState = Mouse.GetState();
 
-                //Clamp it so we know where the mouse is (X) relative to the handle.
-                mouseX = MathHelper.Clamp(slider.Transform.X + halfWidth - mouseX, 0, slider.TotalWidth);
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    float mouseX = mouseState.Position.X; //Where is the mouse?
+                    float halfWidth = slider.Transform.Width / 2f; //For faster calculations.
 
-                //Apply the mouse movement.
-                slider.Value = 1f - mouseX / slider.TotalWidth;
+                    //Clamp it so we know where the mouse (X coordinate) is relative to the handle.
+                    mouseX = MathHelper.Clamp(slider.Transform.X + halfWidth - mouseX, 0, slider.TotalWidth);
+
+                    //Apply the mouse movement.
+                    slider.Value = 1f - mouseX / slider.TotalWidth;
+                }
             }
         }
 
