@@ -142,7 +142,6 @@ namespace Galaxies.UI.Elements
             {
                 group.UIElement.Update(gameTime);
             }
-
         }
 
         #endregion
