@@ -65,7 +65,7 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            masterVolumeSlider.SetOnClick(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMasterVolume, masterVolumeSlider));
+            masterVolumeSlider.SetOnValueChanged(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMasterVolume, masterVolumeSlider));
 
             //Music volume title:
             AddUIElement(new UIText(
@@ -87,7 +87,7 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            musicVolumeSlider.SetOnClick(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMusicVolume, musicVolumeSlider));
+            musicVolumeSlider.SetOnValueChanged(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMusicVolume, musicVolumeSlider));
 
             //Effects volume title:
             AddUIElement(new UIText(
@@ -109,7 +109,7 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            effectsVolumeSlider.SetOnClick(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetEffectsVolume, effectsVolumeSlider));
+            effectsVolumeSlider.SetOnValueChanged(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetEffectsVolume, effectsVolumeSlider));
 
             /* The resolution elements are placed near the bottom to allow them to overlap all other elements. */
 

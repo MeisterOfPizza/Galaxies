@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System;
 
 namespace Galaxies.UI.Screens
 {
@@ -133,15 +132,17 @@ namespace Galaxies.UI.Screens
             {
                 KeyboardState keyboardState = Keyboard.GetState();
 
-                if (keyboardState.GetPressedKeys().Length > 0)
+                if (keyboardState.GetPressedKeys().Length > 0) //A (any) (n = 1..*) key(s) was pressed.
                 {
                     KeyboardSelection(keyboardState);
 
+                    //Check if the player "clicked" with the keyboard:
                     if (keyboardState.IsKeyDown(Keys.Enter))
                     {
                         KeyboardClickEvent();
                     }
 
+                    //Reset the selection cooldown:
                     kb_selectionCooldown = 0;
                 }
             }

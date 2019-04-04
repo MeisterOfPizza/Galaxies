@@ -27,7 +27,7 @@ namespace Galaxies.Entities
                 base.Move();
             }
 
-            if (Intersect(target))
+            if (Intersects(target))
             {
                 HasHit = true;
                 onHit.Invoke();

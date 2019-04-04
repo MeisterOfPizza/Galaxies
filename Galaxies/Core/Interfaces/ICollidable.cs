@@ -10,7 +10,7 @@ namespace Galaxies.Core.Interfaces
     {
 
         bool Contains(Vector2 position);
-        bool Intersect(GameObject other);
+        bool Intersects(GameObject other);
 
     }
 

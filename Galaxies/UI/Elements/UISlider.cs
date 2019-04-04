@@ -96,6 +96,11 @@ namespace Galaxies.UI.Elements
 
         #region Helpers
 
+        public void SetOnValueChanged(EventArg @event)
+        {
+            onValueChanged = @event;
+        }
+
         private void UpdateHandle()
         {
             float valueOffset = totalWidth * value;
@@ -106,11 +111,6 @@ namespace Galaxies.UI.Elements
 
             //Position the handle:
             CalculatePositions();
-        }
-
-        public void SetOnClick(EventArg @event)
-        {
-            onValueChanged = @event;
         }
 
         #endregion

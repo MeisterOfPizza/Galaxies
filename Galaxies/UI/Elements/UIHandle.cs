@@ -22,21 +22,27 @@ namespace Galaxies.UI.Elements
         public Color DefaultColor   { get; set; }
 
         /// <summary>
-        /// This is used as the onSelected event.
+        /// NOTE: This is NOT called whenever the value of the slider that the handle is attached to is changed.
         /// </summary>
         public EventArg OnClick { get; set; }
 
         #endregion
 
-        public UIHandle(Transform transform, Texture2D sprite, EventArg onSelected, UISlider slider, Screen screen) : base(transform, sprite, screen)
+        public UIHandle(Transform transform, Texture2D sprite, EventArg onClick, UISlider slider, Screen screen) : base(transform, sprite, screen)
         {
             this.DefaultColor = color;
-            this.OnClick      = onSelected;
-
-            this.slider = slider;
+            this.OnClick      = onClick;
+            this.slider       = slider;
         }
 
         #region Overriden methods
+
+        public override void SetColor(Color color)
+        {
+            base.SetColor(color);
+
+            DefaultColor = color;
+        }
 
         public override void PositionChanged()
         {
@@ -66,6 +72,8 @@ namespace Galaxies.UI.Elements
         }
 
         #endregion
+
+        #region Checking for input
 
         /// <summary>
         /// Move the slider with the left and right arrows.
@@ -112,6 +120,10 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        #endregion
+
+        #region IInteractable
+
         public void Click()
         {
             if (OnClick != null)
@@ -148,6 +160,9 @@ namespace Galaxies.UI.Elements
         {
             Deselect();
         }
+
+        #endregion
+
     }
 
 }
