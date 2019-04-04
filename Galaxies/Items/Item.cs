@@ -1,4 +1,5 @@
 ﻿using Galaxies.Datas.Items;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Items
 {
@@ -20,6 +21,8 @@ namespace Galaxies.Items
         /// Can this item be used?
         /// </summary>
         public abstract bool CanUse { get; }
+
+        public abstract Texture2D ItemIcon { get; }
 
         #endregion
 

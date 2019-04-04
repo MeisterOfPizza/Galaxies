@@ -61,6 +61,13 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        public override void SetColor(Color color)
+        {
+            base.SetColor(color);
+
+            DefaultColor = color;
+        }
+
         #region Input Field
 
         private void InputChanged(TextInputEventArgs args)
@@ -107,14 +114,14 @@ namespace Galaxies.UI.Elements
 
         public void Select()
         {
-            SetColor(Color.LightGray);
+            color = new Color(DefaultColor * 0.9f, 1f);
 
             IsSelected = true;
         }
 
         public void Deselect()
         {
-            SetColor(DefaultColor);
+            color = DefaultColor;
 
             if (IsSelected)
             {

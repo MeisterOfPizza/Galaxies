@@ -10,7 +10,7 @@ namespace Galaxies.Extensions
 {
 
     /// <summary>
-    /// Contains preloaded sprites.
+    /// Contains preloaded fonts, sprites, songs and sound effects.
     /// </summary>
     static class ContentHelper
     {
@@ -69,7 +69,7 @@ namespace Galaxies.Extensions
             Bullet_Sprite = GetSprite("Sprites/Effects/bullet");
             Shield_Sprite = GetSprite("Sprites/Effects/shield");
 
-            //Preloading all GIFs:
+            //Preload GIFs:
             GetSprites("Sprites/Backgrounds/Animated/space-background-1");
             GetSprites("Sprites/Backgrounds/Animated/space-background-2");
             GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");

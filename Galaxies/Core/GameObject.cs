@@ -146,7 +146,7 @@ namespace Galaxies.Core
             return transform.Collider.Contains(position);
         }
 
-        public bool Intersect(GameObject other)
+        public bool Intersects(GameObject other)
         {
             return transform.Collider.Intersects(other.Transform.Collider);
         }

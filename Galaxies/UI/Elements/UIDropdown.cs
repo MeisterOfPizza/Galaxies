@@ -24,10 +24,12 @@ namespace Galaxies.UI.Elements
                 options.Length > defaultOptionIndex ? options[defaultOptionIndex].Title : "No options",
                 TextAlign.MiddleLeft,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(ToggleUIOptionsColumn),
                 screen
                 ));
+
+            optionButton.SetColor(new Color(28, 28, 28));
 
             //Options (in a fixed column):
             optionsColumn = AddUIElement(new UIFixedColumn(
@@ -42,8 +44,8 @@ namespace Galaxies.UI.Elements
 
             //Dropdown arrow:
             AddUIElement(new UIElement(
-                new Transform(new Vector2(transform.Width / 2f - transform.Height / 2f, 0), new Vector2(transform.Height, transform.Height)),
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                new Transform(new Vector2(transform.Width / 2f - transform.Height / 2f - 5, 0), new Vector2(transform.Height, transform.Height)),
+                ContentHelper.GetSprite("Sprites/UI/dropdown-arrow"),
                 screen
                 ));
 
@@ -82,10 +84,12 @@ namespace Galaxies.UI.Elements
                 option.Title,
                 TextAlign.MiddleLeft,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 option.OnChoose,
                 screen
                 ));
+
+            option.UIButton.SetColor(new Color(28, 28, 28));
         }
 
         private void OptionChosen(DropdownOption option)

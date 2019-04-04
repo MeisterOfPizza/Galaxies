@@ -53,12 +53,14 @@ namespace Galaxies.UI.Special
             //Actual column with save files:
             uiSaveFileColumn = AddUIElement(new UIScrollableColumn(
                 new Transform(transform.Size),
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 screen,
                 new Vector4(5),
                 new Vector2(5),
                 200
                 ));
+
+            uiSaveFileColumn.SetColor(new Color(56, 56, 56));
 
             //Close button:
             AddUIElement(new UIButton(
@@ -67,10 +69,10 @@ namespace Galaxies.UI.Special
                 "Close",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 onClose,
                 screen
-                ));
+                )).SetColor(new Color(28, 28, 28));
         }
 
         private void UpdateUISaveFiles()
@@ -83,7 +85,7 @@ namespace Galaxies.UI.Special
 
                 uiSaveFileColumn.AddUIElement(new UISaveFile(
                     new Transform(new Vector2(250, 200)),
-                    ContentHelper.GetSprite("Sprites/UI/column"),
+                    ContentHelper.Box4x4_Sprite,
                     screen,
                     tempFileInfo,
                     canSave

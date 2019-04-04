@@ -26,44 +26,43 @@ namespace Galaxies.UI.Screens
                 this
                 ));
 
-            var columnSprite = ContentHelper.GetSprite("Sprites/UI/column");
-
             //Scrollable column with all the visitables that the player can click on:
             visitablesColumn = AddUIElement(new UIScrollableColumn(
-                new Transform(Alignment.MiddleCenter,
-                new Vector2(300, 600)),
-                columnSprite,
+                new Transform(Alignment.MiddleCenter, new Vector2(300, 600)),
+                ContentHelper.Box4x4_Sprite,
                 this,
                 new Vector4(5, 0, 5, 0),
                 new Vector2(0, 5),
                 200
                 ));
 
+            visitablesColumn.SetColor(new Color(56, 56, 56));
+
             //Back to menu button:
             AddUIElement(new UIButton(
-                new Transform(Alignment.BottomLeft,
-                new Vector2(100, 100)),
+                new Transform(Alignment.BottomLeft, new Vector2(250, 50)),
                 ContentHelper.Arial_Font,
                 "Menu",
                 TextAlign.MiddleCenter,
                 5,
-                columnSprite,
+                ContentHelper.Box4x4_Sprite,
                 new EventArg1<EventArg>(GameUIController.CreateMenuScreen, null),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             UpdateUIVisitables();
 
+            //Open inventory button:
             AddUIElement(new UIButton(
                 new Transform(Alignment.BottomRight, new Vector2(250, 50)),
                 ContentHelper.Arial_Font,
                 "Inventory",
                 TextAlign.MiddleCenter,
                 5,
-                columnSprite,
+                ContentHelper.Box4x4_Sprite,
                 new EventArg0(ToggeUIInventory),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             uiInventory = AddUIElement(new UIInventory(
                 new Transform(Alignment.MiddleCenter, new Vector2(1200, 600)),
@@ -91,24 +90,28 @@ namespace Galaxies.UI.Screens
                     var uiItemPointer = uiItem;
                     var itemPointer   = (StarChart)uiItem.Item;
 
-                    var e = new EventArgList(new EventArg0(itemPointer.Use), new EventArg1<UIItem>(uiInventory.ItemGrid.RemoveUIElement, uiItemPointer));
+                    var @event = new EventArgList(new EventArg0(itemPointer.Use), new EventArg1<UIItem>(uiInventory.ItemGrid.RemoveUIElement, uiItemPointer));
 
-                    uiItem.CreateUseButton(e);
+                    uiItem.CreateUseButton(@event);
                 }
             }
         }
 
         public void UpdateUIVisitables()
         {
-            var columnSprite = ContentHelper.GetSprite("Sprites/UI/column");
-
             visitablesColumn.Clear();
 
             //Creating visitables
             foreach (IVisitable visitable in GalaxyController.Visitables)
             {
                 ///<see cref="PlanetarySystem.Visit"/> and <see cref="Citadel.Visit"/>.
-                visitablesColumn.AddUIElement(new UIPlanetarySystem(new Transform(Vector2.Zero), columnSprite, new EventArg0(visitable.Visit), this, visitable));
+                visitablesColumn.AddUIElement(new UIPlanetarySystem(
+                    new Transform(Vector2.Zero),
+                    ContentHelper.Box4x4_Sprite,
+                    new EventArg0(visitable.Visit),
+                    this,
+                    visitable
+                    ));
             }
         }
 

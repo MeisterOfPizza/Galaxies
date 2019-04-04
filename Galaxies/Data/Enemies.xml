@@ -5,10 +5,10 @@
     <Description>Basic fighter.</Description>
     <SpriteName>Sprites/Player Ships/player-ship-1</SpriteName>
     <BaseShipStats>
-      <Health>50</Health>
+      <Health>500</Health>
       <Shield>25</Shield>
-      <Damage>10</Damage>
-      <Energy>50</Energy>
+      <Damage>5</Damage>
+      <Energy>100</Energy>
       <EnergyRegen>5</EnergyRegen>
     </BaseShipStats>
     <ShipUpgradeIds>

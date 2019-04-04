@@ -1,4 +1,5 @@
-﻿using Galaxies.UIControllers;
+﻿using Galaxies.Extensions;
+using Galaxies.UIControllers;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Galaxies.Space
@@ -29,7 +30,7 @@ namespace Galaxies.Space
         {
             get
             {
-                return MainGame.Singleton.Content.Load<Texture2D>("Sprites/UI/column");
+                return ContentHelper.GetSprite("Sprites/UI/citadel-icon");
             }
         }
 

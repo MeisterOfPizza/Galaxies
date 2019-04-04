@@ -11,6 +11,8 @@ namespace Galaxies.UI.Elements
     {
         
         Texture2D checkSprite;
+        Vector2   checkOrigin;
+        Color     checkColor;
 
         public bool IsChecked { get; private set; }
 
@@ -23,9 +25,11 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
-        public UICheckbox(Transform transform, Texture2D boxSprite, Texture2D checkSprite, EventArg onCheck, bool isChecked, Screen screen) : base(transform, boxSprite, screen)
+        public UICheckbox(Transform transform, Texture2D boxSprite, Texture2D checkSprite, Color checkColor, EventArg onCheck, bool isChecked, Screen screen) : base(transform, boxSprite, screen)
         {
             this.checkSprite  = checkSprite;
+            this.checkOrigin  = new Vector2(checkSprite.Width / 2f, checkSprite.Height / 2f);
+            this.checkColor   = checkColor;
             this.OnClick      = onCheck;
             this.DefaultColor = this.color;
             this.IsChecked    = isChecked;
@@ -42,8 +46,15 @@ namespace Galaxies.UI.Elements
 
             if (Visable && checkSprite != null && IsChecked)
             {
-                spriteBatch.Draw(checkSprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, color, transform.Rotation, Origin, SpriteEffects.None, 0f);
+                spriteBatch.Draw(checkSprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, checkColor, transform.Rotation, checkOrigin, SpriteEffects.None, 0f);
             }
+        }
+
+        public override void SetColor(Color color)
+        {
+            base.SetColor(color);
+
+            DefaultColor = color;
         }
 
         #region IInteractable
@@ -65,14 +76,14 @@ namespace Galaxies.UI.Elements
 
         public void Select()
         {
-            SetColor(new Color(DefaultColor * 0.9f, 1f));
+            color = new Color(DefaultColor * 0.9f, 1f);
 
             IsSelected = true;
         }
 
         public void Deselect()
         {
-            SetColor(DefaultColor);
+            color = DefaultColor;
 
             IsSelected = false;
         }

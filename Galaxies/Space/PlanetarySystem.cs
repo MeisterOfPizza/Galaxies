@@ -1,6 +1,7 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Datas;
 using Galaxies.Datas.Space;
+using Galaxies.Extensions;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -36,7 +37,7 @@ namespace Galaxies.Space
         {
             get
             {
-                return null;
+                return ContentHelper.GetSprite("Sprites/UI/planet-icon");
             }
         }
 

@@ -37,6 +37,26 @@
   <PropertyGroup>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Combat\Battlefield.cs" />
     <Compile Include="Controllers\AudioController.cs" />
@@ -58,6 +78,7 @@
     <Compile Include="Core\EventArg3.cs" />
     <Compile Include="Core\EventArgList.cs" />
     <Compile Include="Core\GameObject.cs" />
+    <Compile Include="Core\Interfaces\ICollidable.cs" />
     <Compile Include="Core\MovingObject.cs" />
     <Compile Include="Core\Transform.cs" />
     <Compile Include="Datas\DataFile.cs" />
@@ -122,6 +143,7 @@
     <Compile Include="UI\Elements\UIDropdown.cs" />
     <Compile Include="UI\Elements\UIFixedColumn.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
+    <Compile Include="UI\Elements\UIHandle.cs" />
     <Compile Include="UI\Elements\UIInputField.cs" />
     <Compile Include="UI\Elements\UIProgressBar.cs" />
     <Compile Include="UI\Elements\UIScrollableColumn.cs" />
@@ -396,7 +418,14 @@
     <Content Include="Content\Sprites\Player Ships\player-ship-2.png" />
     <Content Include="Content\Sprites\Player Ships\player-ship-3.png" />
     <Content Include="Content\Sprites\transparent.png" />
+    <Content Include="Content\Sprites\UI\citadel-icon.png" />
     <Content Include="Content\Sprites\UI\column.png" />
+    <Content Include="Content\Sprites\UI\cross.png" />
+    <Content Include="Content\Sprites\UI\dropdown-arrow.png" />
+    <Content Include="Content\Sprites\UI\handle.png" />
+    <Content Include="Content\Sprites\UI\planet-icon.png" />
+    <Content Include="Content\Sprites\UI\ship-upgrade-icon.png" />
+    <Content Include="Content\Sprites\UI\star-chart-icon.png" />
     <Content Include="Data\Enemies.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

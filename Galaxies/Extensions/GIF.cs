@@ -50,12 +50,6 @@ namespace Galaxies.Extensions
             Current = Images[currentIndex];
         }
 
-        public void Reset()
-        {
-            if (Images.Length > 0) Current = Images[0];
-            currentIndex = 0;
-        }
-
     }
 
 }

@@ -19,6 +19,8 @@ namespace Galaxies.UI.Special
         {
             this.fileInfo = fileInfo;
 
+            SetColor(new Color(48, 48, 48));
+
             //Name of save file:
             AddUIElement(new UIText(
                 new Transform(new Vector2(0, -transform.Height / 2f + 25), new Vector2(transform.Width, 50)),
@@ -47,10 +49,10 @@ namespace Galaxies.UI.Special
                     "Save",
                     TextAlign.MiddleCenter,
                     5,
-                    ContentHelper.GetSprite("Sprites/UI/column"),
+                    ContentHelper.Box4x4_Sprite,
                     new EventArg1<FileInfo>(SaveFileController.SaveGame, this.fileInfo),
                     screen
-                ));
+                    )).SetColor(new Color(28, 28, 28));
             }
 
             AddUIElement(new UIButton(
@@ -59,10 +61,10 @@ namespace Galaxies.UI.Special
                 "Load",
                 TextAlign.MiddleCenter,
                 5,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg1<FileInfo>(SaveFileController.LoadGame, this.fileInfo),
                 screen
-                ));
+                )).SetColor(new Color(28, 28, 28));
         }
 
     }

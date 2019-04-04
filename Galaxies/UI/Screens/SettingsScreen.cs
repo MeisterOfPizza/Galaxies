@@ -38,11 +38,12 @@ namespace Galaxies.UI.Screens
             AddUIElement(new UICheckbox(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(350, -55), new Vector2(50, 50)), new Vector2(50, 50)),
                 ContentHelper.Box4x4_Sprite,
-                ContentHelper.Bullet_Sprite,
+                ContentHelper.GetSprite("Sprites/UI/cross"),
+                new Color(28, 255, 156),
                 new EventArg0(MainGame.Singleton.Graphics.ToggleFullScreen),
-                true,
+                MainGame.Singleton.Graphics.IsFullScreen,
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
 
             //Master volume title:
             AddUIElement(new UIText(
@@ -58,13 +59,13 @@ namespace Galaxies.UI.Screens
             masterVolumeSlider = AddUIElement(new UISlider(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(250, 0), new Vector2(250, 10)), new Vector2(250, 10)),
                 ContentHelper.Box4x4_Sprite,
-                ContentHelper.Bullet_Sprite,
+                ContentHelper.GetSprite("Sprites/UI/handle"),
                 null,
                 AudioController.MasterVolume,
                 this
                 ));
 
-            masterVolumeSlider.SetOnClick(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMasterVolume, masterVolumeSlider));
+            masterVolumeSlider.SetOnValueChanged(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMasterVolume, masterVolumeSlider));
 
             //Music volume title:
             AddUIElement(new UIText(
@@ -80,13 +81,13 @@ namespace Galaxies.UI.Screens
             musicVolumeSlider = AddUIElement(new UISlider(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(250, 55), new Vector2(250, 10)), new Vector2(250, 10)),
                 ContentHelper.Box4x4_Sprite,
-                ContentHelper.Bullet_Sprite,
+                ContentHelper.GetSprite("Sprites/UI/handle"),
                 null,
                 AudioController.MusicVolume,
                 this
                 ));
 
-            musicVolumeSlider.SetOnClick(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMusicVolume, musicVolumeSlider));
+            musicVolumeSlider.SetOnValueChanged(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetMusicVolume, musicVolumeSlider));
 
             //Effects volume title:
             AddUIElement(new UIText(
@@ -102,13 +103,13 @@ namespace Galaxies.UI.Screens
             effectsVolumeSlider = AddUIElement(new UISlider(
                 new Transform(Transform.CreatePosition(Alignment.MiddleCenter, new Vector2(250, 110), new Vector2(250, 10)), new Vector2(250, 10)),
                 ContentHelper.Box4x4_Sprite,
-                ContentHelper.Bullet_Sprite,
+                ContentHelper.GetSprite("Sprites/UI/handle"),
                 null,
                 AudioController.EffectsVolume,
                 this
                 ));
 
-            effectsVolumeSlider.SetOnClick(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetEffectsVolume, effectsVolumeSlider));
+            effectsVolumeSlider.SetOnValueChanged(new EventArg2<_EventArg1<float>, UISlider>(SetVolume, AudioController.SetEffectsVolume, effectsVolumeSlider));
 
             /* The resolution elements are placed near the bottom to allow them to overlap all other elements. */
 
@@ -136,15 +137,15 @@ namespace Galaxies.UI.Screens
 
             //Back to menu button:
             AddUIElement(new UIButton(
-                new Transform(Alignment.BottomCenter, new Vector2(250, 50)),
+                new Transform(Transform.CreatePosition(Alignment.BottomCenter, new Vector2(0, -20), new Vector2(250, 50)), new Vector2(250, 50)),
                 ContentHelper.Arial_Font,
                 "Menu",
                 TextAlign.MiddleCenter,
                 0,
-                ContentHelper.GetSprite("Sprites/UI/column"),
+                ContentHelper.Box4x4_Sprite,
                 new EventArg1<EventArg>(GameUIController.CreateMenuScreen, null),
                 this
-                ));
+                )).SetColor(new Color(28, 28, 28));
         }
 
         private void SetVolume(_EventArg1<float> method, UISlider volumeSlider)

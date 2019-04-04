@@ -44,7 +44,9 @@ namespace Galaxies.Combat
             this.Enemy  = enemy;
 
             Player.Transform.Position = new Vector2(GameUIController.WidthPercent(0.1f), GameUIController.HeightPercent(0.5f));
+            Player.Transform.Rotation = MathHelper.PiOver2; /* 90 degrees in radians */
             Enemy.Transform.Position  = new Vector2(GameUIController.WidthPercent(0.9f), GameUIController.HeightPercent(0.5f));
+            Enemy.Transform.Rotation  = MathHelper.ToRadians(270);
 
             playerShotEvent = new EventArgList(new EventArg1<ShipEntity>(Player.Attack, Enemy), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
             enemyShotEvent  = new EventArgList(new EventArg1<ShipEntity>(Enemy.Attack, Player), new EventArg0(() => AwaitEventCallbacks = false, EndTurn));
@@ -165,7 +167,7 @@ namespace Galaxies.Combat
 
                 Enemy.TakeEnergy(); //Remove energy because the enemy shot.
 
-                CreateBullet(180, Enemy.Transform.Position, new Vector2(-50f, 0), Player, enemyShotEvent);
+                CreateBullet(MathHelper.Pi /* 180 degrees in radians */, Enemy.Transform.Position, new Vector2(-50f, 0), Player, enemyShotEvent);
 
                 //Play sound effect:
                 AudioController.PlaySoundEffect("laser");
@@ -180,11 +182,6 @@ namespace Galaxies.Combat
 
         private void CreateBullet(float rotation, Vector2 position, Vector2 speed, ShipEntity target, EventArg onHit)
         {
-            if (bullet != null)
-            {
-                //TODO: Destroy bullet (GameObject.Destroy()).
-            }
-
             bullet = new Bullet(new Transform(position, new Vector2(100), rotation), ContentHelper.Bullet_Sprite, speed, target, onHit);
         }
 
@@ -205,7 +202,6 @@ namespace Galaxies.Combat
 
                 if (bullet.HasHit)
                 {
-                    //TODO:  Destroy bullet (GameObject.Destroy()).
                     bullet = null;
                 }
             }

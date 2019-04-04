@@ -15,9 +15,6 @@ namespace Galaxies.Datas.Items
     public abstract class ItemData : Data
     {
 
-        [XmlElement("SpriteName", IsNullable = false)]
-        public string SpriteName { get; set; }
-
         [XmlElement("Color", typeof(ColorData), IsNullable = true)]
         public ColorData Color { get; set; } = new ColorData();
 
