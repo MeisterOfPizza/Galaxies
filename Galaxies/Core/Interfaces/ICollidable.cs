@@ -9,6 +9,8 @@ namespace Galaxies.Core.Interfaces
     interface ICollidable
     {
 
+        Transform Transform { get; }
+
         bool Contains(Vector2 position);
         bool Intersects(GameObject other);
 

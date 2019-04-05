@@ -15,6 +15,18 @@ namespace Galaxies.UI.Interfaces
 
         void MouseScroll(int value);
 
+        /// <summary>
+        /// The percentage of the view (all items in total) that can be viewed at once.
+        /// </summary>
+        float DeltaViewSize();
+
+        /// <summary>
+        /// Set where the view of the scrollable should be.
+        /// Because this is a the middle value, the <paramref name="scrollValue"/> will only be the middle of the view,
+        /// therefore you need to determine the same index and then substract and add the index amount to get the full view.
+        /// </summary>
+        void SetViewMiddleIndex(float scrollValue);
+
     }
 
 }

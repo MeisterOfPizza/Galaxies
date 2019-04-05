@@ -192,6 +192,26 @@ namespace Galaxies.UI.Elements
             }
         }
 
+        public float DeltaViewSize()
+        {
+            return (maxFitPerViewX * maxFitPerViewY) / (float)Container.Count;
+        }
+
+        public void SetViewMiddleIndex(float scrollValue)
+        {
+            //TODO: SetViewMiddleIndex(float scrollValue) in UIScrollableGrid.cs.
+
+            /*
+            int index = (int)(Container.Count * scrollValue);
+            int halfMaxFirPewView = maxFitPerView / 2;
+
+            minIndex = MathHelper.Clamp(index - halfMaxFirPewView, 0, Container.Count - 1);
+            maxIndex = MathHelper.Clamp(index + halfMaxFirPewView, 0, Container.Count - 1);
+
+            CalculatePositions();
+            */
+        }
+
         #endregion
 
         #region Helpers

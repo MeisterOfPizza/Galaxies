@@ -1,4 +1,5 @@
 ﻿using Galaxies.Core;
+using Galaxies.Extensions;
 using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
@@ -30,6 +31,8 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private int maxIndex;
 
+        private UIScrollbar scrollbar;
+
         #region IScrollable
 
         public bool IsScrollable { get; set; } = true;
@@ -42,6 +45,15 @@ namespace Galaxies.UI.Elements
             this.itemHeight = itemHeight;
 
             screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
+
+            scrollbar = screen.AddUIElement(new UIScrollbar(
+                new Transform(new Vector2(transform.X + transform.Width / 2f, transform.Y), new Vector2(25, transform.Height)),
+                ContentHelper.Box4x4_Sprite,
+                ContentHelper.GetSprite("Sprites/UI/handle"),
+                new EventArg1<string>(System.Console.WriteLine, "Test"),
+                this,
+                screen
+                ));
         }
 
         #region Overriden methods
@@ -80,6 +92,8 @@ namespace Galaxies.UI.Elements
                 RawSize.X + Padding.W + Padding.Y,
                 RawSize.Y + Padding.X + Padding.Z + maxFitPerView * Spacing.Y
                 );
+
+            scrollbar.IScrollableChanged();
         }
         
         protected override void UIElementAdded(UIElement addedElement)
@@ -88,6 +102,8 @@ namespace Galaxies.UI.Elements
 
             FixIndexRange();
             CalculatePositions();
+
+            scrollbar.IScrollableChanged();
         }
 
         protected override void UIElementRemoved(UIElement removedElement, int removedIndex)
@@ -101,6 +117,8 @@ namespace Galaxies.UI.Elements
                 CalculateSize();
                 CalculatePositions();
             }
+
+            scrollbar.IScrollableChanged();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -145,6 +163,22 @@ namespace Galaxies.UI.Elements
 
                 CalculatePositions();
             }
+        }
+
+        public float DeltaViewSize()
+        {
+            return maxFitPerView / (float)Container.Count;
+        }
+
+        public void SetViewMiddleIndex(float scrollValue)
+        {
+            int index = (int)(Container.Count * scrollValue);
+            int halfMaxFirPewView = maxFitPerView / 2;
+
+            minIndex = MathHelper.Clamp(index - halfMaxFirPewView, 0, Container.Count - 1);
+            maxIndex = MathHelper.Clamp(index + halfMaxFirPewView, 0, Container.Count - 1);
+
+            CalculatePositions();
         }
 
         #endregion

@@ -144,10 +144,13 @@
     <Compile Include="UI\Elements\UIFixedColumn.cs" />
     <Compile Include="UI\Elements\UIGroup.cs" />
     <Compile Include="UI\Elements\UIHandle.cs" />
+    <Compile Include="UI\Elements\UISliderHandle.cs" />
     <Compile Include="UI\Elements\UIInputField.cs" />
     <Compile Include="UI\Elements\UIProgressBar.cs" />
     <Compile Include="UI\Elements\UIScrollableColumn.cs" />
     <Compile Include="UI\Elements\UIScrollableGrid.cs" />
+    <Compile Include="UI\Elements\UIScrollbar.cs" />
+    <Compile Include="UI\Elements\UIScrollbarHandle.cs" />
     <Compile Include="UI\Elements\UISlider.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />

@@ -72,7 +72,7 @@ namespace Galaxies.UI.Elements
                 )).SetColor(new Color(48, 48, 48));
 
             //The handle:
-            var handleElement = AddUIElement(new UIHandle(
+            var handleElement = AddUIElement(new UISliderHandle(
                 new Transform(new Vector2(50)),
                 handleSprite,
                 new EventArg0(UpdateHandle),
