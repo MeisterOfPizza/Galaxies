@@ -50,7 +50,7 @@ namespace Galaxies.UI.Elements
                 new Transform(new Vector2(transform.X + transform.Width / 2f, transform.Y), new Vector2(25, transform.Height)),
                 ContentHelper.Box4x4_Sprite,
                 ContentHelper.GetSprite("Sprites/UI/handle"),
-                new EventArg1<string>(System.Console.WriteLine, "Test"),
+                null,
                 this,
                 screen
                 ));

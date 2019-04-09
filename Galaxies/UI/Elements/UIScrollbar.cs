@@ -64,7 +64,11 @@ namespace Galaxies.UI.Elements
                 if (!lastValue.Equals(value))
                 {
                     CalculateScrollbarHandlePosition();
-                    onValueChanged.Invoke();
+
+                    if (onValueChanged != null)
+                    {
+                        onValueChanged.Invoke();
+                    }
                 }
             }
         }
@@ -98,8 +102,8 @@ namespace Galaxies.UI.Elements
 
         private void CalculateContainingBounds()
         {
-            float upperY = transform.Y - transform.Height;
-            float lowerY = transform.Y + transform.Height;
+            float upperY = transform.Y - transform.Height / 2f;
+            float lowerY = transform.Y + transform.Height / 2f;
 
             containingBounds = new Vector2(upperY, lowerY);
         }
@@ -110,7 +114,7 @@ namespace Galaxies.UI.Elements
         /// </summary>
         private void CalculateScrollbarHandleSize()
         {
-            deltaViewSize = scrollable.DeltaViewSize();
+            deltaViewSize = MathHelper.Clamp(scrollable.DeltaViewSize(), 0f, 1f);
 
             handle.UIElement.Transform.SetSizeY(deltaViewSize * transform.Height);
 
