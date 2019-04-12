@@ -140,6 +140,7 @@ namespace Galaxies.Extensions
             return loaded;
         }
 
+        /*
         public static Texture2D[] GetSprites(string path)
         {
             ContentManager content = MainGame.Singleton.Content; //Create a new reference for quicker access.
@@ -160,6 +161,32 @@ namespace Galaxies.Extensions
                 string name = Path.GetFileNameWithoutExtension(files[i].Name); //Get the file name alone.
 
                 result[i] = content.Load<Texture2D>(path + "/" + name);
+            }
+
+            return result;
+        }
+        */
+
+        public static Texture2D[] GetSprites(string path)
+        {
+            ContentManager content = MainGame.Singleton.Content; //Create a new reference for quicker access.
+
+            DirectoryInfo dir = new DirectoryInfo(ContentDirectoryPath + "/" + path);
+
+            if (!dir.Exists) //The directory did not exist, return an empty array.
+            {
+                return new Texture2D[0];
+            }
+
+            FileInfo[] files = dir.GetFiles("*.png"); //Search for all files with the file extension .xnb (monogame files).
+
+            Texture2D[] result = new Texture2D[files.Length];
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                string name = Path.GetFileNameWithoutExtension(files[i].Name); //Get the file name alone.
+
+                result[i] = StreamContentLoader.LoadTextureStream(path + "/" + name);
             }
 
             return result;
