@@ -111,6 +111,7 @@
     <Compile Include="Extensions\Random.cs" />
     <Compile Include="Extensions\ContentHelper.cs" />
     <Compile Include="Controllers\TextInputController.cs" />
+    <Compile Include="Extensions\StreamContentLoader.cs" />
     <Compile Include="Items\Interfaces\IInventoryOwner.cs" />
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="Items\StarChart.cs" />

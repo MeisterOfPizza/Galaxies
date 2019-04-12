@@ -3,7 +3,6 @@ using Galaxies.Extensions;
 using Galaxies.UIControllers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
 
 namespace Galaxies
@@ -107,7 +106,7 @@ namespace Galaxies
         {
             GraphicsDevice.Clear(Color.Purple);
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
             GameUIController.Draw(spriteBatch);
             GameController.Draw(spriteBatch);
             spriteBatch.End();
