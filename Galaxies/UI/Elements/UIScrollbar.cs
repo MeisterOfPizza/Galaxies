@@ -56,19 +56,27 @@ namespace Galaxies.UI.Elements
 
             set
             {
-                float lastValue = this.scrollbarValue;
-
-                this.scrollbarValue = MathHelper.Clamp(value, 0f, 1f);
-
-                //Just to avoid overloading with updates.
-                if (!lastValue.Equals(value))
+                //Check so that we can't see everything.
+                if (deltaViewSize < 1)
                 {
-                    CalculateScrollbarHandlePosition();
+                    float lastValue = this.scrollbarValue;
 
-                    if (onValueChanged != null)
+                    this.scrollbarValue = MathHelper.Clamp(value, 0f, 1f);
+
+                    //Just to avoid overloading with updates.
+                    if (!lastValue.Equals(value))
                     {
-                        onValueChanged.Invoke();
+                        CalculateScrollbarHandlePosition();
+
+                        if (onValueChanged != null)
+                        {
+                            onValueChanged.Invoke();
+                        }
                     }
+                }
+                else
+                {
+                    this.scrollbarValue = 0;
                 }
             }
         }
@@ -102,8 +110,8 @@ namespace Galaxies.UI.Elements
 
         private void CalculateContainingBounds()
         {
-            float upperY = transform.Y - transform.Height / 2f;
-            float lowerY = transform.Y + transform.Height / 2f;
+            float upperY = /*transform.Y - */-transform.Height / 2f;
+            float lowerY = /*transform.Y + */transform.Height / 2f;
 
             containingBounds = new Vector2(upperY, lowerY);
         }
@@ -124,7 +132,7 @@ namespace Galaxies.UI.Elements
         private void CalculateScrollbarHandlePosition()
         {
             float yCoord = (containingBounds.Y - containingBounds.X) * scrollbarValue;
-            Vector2 offset = new Vector2(0, containingBounds.X + yCoord);
+            Vector2 offset = new Vector2(0, containingBounds.X + yCoord + handle.UIElement.Transform.Height / 2f);
 
             //Set the position of the handle:
             handle.GroupPosition = offset;
