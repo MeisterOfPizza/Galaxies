@@ -173,10 +173,13 @@ namespace Galaxies.UI.Elements
         public void SetViewMiddleIndex(float scrollValue)
         {
             int index = (int)(Container.Count * scrollValue);
-            int halfMaxFirPewView = maxFitPerView / 2;
+            int halfMaxFitPerView = maxFitPerView / 2;
 
-            minIndex = MathHelper.Clamp(index - halfMaxFirPewView, 0, Container.Count - 1);
-            maxIndex = MathHelper.Clamp(index + halfMaxFirPewView, 0, Container.Count - 1);
+            minIndex = MathHelper.Clamp(index - halfMaxFitPerView, 0, Container.Count - 1);
+
+            int extraIndex = index - halfMaxFitPerView < 0 ? maxFitPerView : 0;
+
+            maxIndex = MathHelper.Clamp(index + halfMaxFitPerView + extraIndex, 0, Container.Count - 1);
 
             CalculatePositions();
         }

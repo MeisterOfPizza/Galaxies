@@ -72,6 +72,8 @@ namespace Galaxies.UI.Elements
                         {
                             onValueChanged.Invoke();
                         }
+
+                        scrollable.SetViewMiddleIndex(scrollbarValue);
                     }
                 }
                 else

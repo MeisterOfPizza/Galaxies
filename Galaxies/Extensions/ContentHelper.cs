@@ -59,6 +59,12 @@ namespace Galaxies.Extensions
 
         #endregion
 
+        #region Shaders
+
+        public static SpriteEffect AlphaMask_Shader { get; private set; }
+
+        #endregion
+
         public static void Initialize()
         {
             Arial_Font = GetFont("Fonts/arial");
@@ -74,6 +80,9 @@ namespace Galaxies.Extensions
             GetSprites("Sprites/Backgrounds/Animated/space-background-2");
             GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
             GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
+
+            //Load Shaders:
+            AlphaMask_Shader = MainGame.Singleton.Content.Load<SpriteEffect>("Shaders/AlphaMask");
         }
 
         public static Texture2D GetSprite(string path)

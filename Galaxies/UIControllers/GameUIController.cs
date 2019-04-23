@@ -89,7 +89,7 @@ namespace Galaxies.UIControllers
 
             if (CurrentScreen != null)
             {
-                //Properly destroy the previous screen
+                //Properly destroy the previous screen.
                 CurrentScreen.DestroyScreen();
             }
 
@@ -146,7 +146,7 @@ namespace Galaxies.UIControllers
 
         public static void CreateCitadelScreen(EventArg onSwitchScreen = null)
         {
-            //Refill the all the player ship template's stats:
+            //Refill all the player ship templates' stats:
             ShipyardController.RefillShipStats();
 
             GameController.GameState = GameState.Citadel;

@@ -2768,3 +2768,10 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/UI/star-chart-icon.png
 
+#begin Shaders/AlphaMask.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/processorParam:Defines=
+/build:Shaders/AlphaMask.fx
+

@@ -198,6 +198,7 @@
     <Content Include="Content\Audio\Sound Effects\laser.mp3" />
     <Content Include="Content\Audio\Sound Effects\shield-down.mp3" />
     <Content Include="Content\Audio\Sound Effects\shield-up.mp3" />
+    <Content Include="Content\Shaders\AlphaMask.fx" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1-anim.gif" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_00_delay-0.13s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_01_delay-0.1s.png" />
