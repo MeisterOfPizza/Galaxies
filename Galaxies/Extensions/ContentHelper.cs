@@ -61,7 +61,7 @@ namespace Galaxies.Extensions
 
         #region Shaders
 
-        public static SpriteEffect AlphaMask_Shader { get; private set; }
+        public static Effect AlphaMask_Shader { get; private set; }
 
         #endregion
 
@@ -75,14 +75,14 @@ namespace Galaxies.Extensions
             Bullet_Sprite = GetSprite("Sprites/Effects/bullet");
             Shield_Sprite = GetSprite("Sprites/Effects/shield");
 
+            //Load Shaders:
+            AlphaMask_Shader = MainGame.Singleton.Content.Load<Effect>("Shaders/AlphaMask");
+
             //Preload GIFs:
             GetSprites("Sprites/Backgrounds/Animated/space-background-1");
             GetSprites("Sprites/Backgrounds/Animated/space-background-2");
-            GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
-            GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
-
-            //Load Shaders:
-            AlphaMask_Shader = MainGame.Singleton.Content.Load<SpriteEffect>("Shaders/AlphaMask");
+            //GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
+            //GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
         }
 
         public static Texture2D GetSprite(string path)

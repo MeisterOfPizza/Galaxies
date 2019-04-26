@@ -37,6 +37,11 @@ namespace Galaxies.UI.Screens
         /// </summary>
         public List<IScrollable> Scrollables { get; protected set; } = new List<IScrollable>();
 
+        /// <summary>
+        /// All UI Elements that are maskable.
+        /// </summary>
+        public List<IMaskable> Maskables { get; set; }
+
         #endregion
 
         #region Focus
@@ -412,6 +417,11 @@ namespace Galaxies.UI.Screens
                 Scrollables.Add(scrollable);
             }
 
+            if (uiElement is IMaskable maskable)
+            {
+                Maskables.Add(maskable);
+            }
+
             return uiElement;
         }
 
@@ -483,6 +493,11 @@ namespace Galaxies.UI.Screens
             if (uiElement is IScrollable scrollable)
             {
                 Scrollables.Remove(scrollable);
+            }
+
+            if (uiElement is IMaskable maskable)
+            {
+                Maskables.Remove(maskable);
             }
 
             if (uiElement is IContainer container)

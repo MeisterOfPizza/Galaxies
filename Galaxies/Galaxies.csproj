@@ -157,6 +157,7 @@
     <Compile Include="UI\Extensions\TextHelper.cs" />
     <Compile Include="UI\Interfaces\IContainer.cs" />
     <Compile Include="UI\Interfaces\IInteractable.cs" />
+    <Compile Include="UI\Interfaces\IMaskable.cs" />
     <Compile Include="UI\Interfaces\IScrollable.cs" />
     <Compile Include="UI\Interfaces\ITextElement.cs" />
     <Compile Include="UI\Screens\CitadelScreen.cs" />

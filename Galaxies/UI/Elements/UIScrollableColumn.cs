@@ -65,6 +65,7 @@ namespace Galaxies.UI.Elements
             int currentY = (int)Padding.X;
             float startY = transform.Height / 2f - itemHeight / 2f;
 
+            /*
             for (int i = minIndex; i <= maxIndex; i++)
             {
                 if (i < Container.Count)
@@ -78,6 +79,14 @@ namespace Galaxies.UI.Elements
                 {
                     break;
                 }
+            }
+            */
+            for (int i = 0; i < Container.Count; i++)
+            {
+                Container[i].Visable = true;
+                Container[i].Transform.Position = transform.Position - new Vector2(0, startY - currentY);
+
+                currentY += itemHeight + (int)Spacing.Y;
             }
 
             responsiveMaxY = currentY + (int)Padding.Z; //Not used by this class, but may be used later down the road?
@@ -123,6 +132,23 @@ namespace Galaxies.UI.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //Effect maskEffect = ContentHelper.AlphaMask_Shader;
+            //
+            //maskEffect.Parameters["MaskLocation"].SetValue(transform.Position);
+            //maskEffect.Parameters["MaskSize"].SetValue(transform.Size);
+            //maskEffect.Parameters["MaskTexture"].SetValue(base.Sprite);
+
+            //Viewport defaultViewport = spriteBatch.GraphicsDevice.Viewport;
+            spriteBatch.End();
+
+            //RasterizerState rs = new RasterizerState() { ScissorTestEnable = true };
+
+            //spriteBatch.GraphicsDevice.Viewport = new Viewport(new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()));
+            //spriteBatch.GraphicsDevice.RasterizerState = rs;
+            spriteBatch.GraphicsDevice.ScissorRectangle = new Rectangle((transform.Position - transform.Size / 2f).ToPoint(), transform.Size.ToPoint());
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, rasterizerState: new RasterizerState() { ScissorTestEnable = true });
+            //spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
             if (Visable)
             {
                 if (Sprite != null)
@@ -132,6 +158,7 @@ namespace Galaxies.UI.Elements
 
                 if (Container.Count > 0)
                 {
+                    /*
                     for (int i = minIndex; i <= maxIndex; i++)
                     {
                         if (i < Container.Count)
@@ -139,8 +166,28 @@ namespace Galaxies.UI.Elements
                             Container[i].Draw(spriteBatch);
                         }
                     }
+                    */
+                    foreach (var item in Container)
+                    {
+                        if (item is IMaskable maskable)
+                        {
+                            maskable.CheckMask(spriteBatch.GraphicsDevice.ScissorRectangle);
+                        }
+
+                        //maskEffect.Parameters["BaseTextureLocation"].SetValue(item.Transform.Position);
+                        //maskEffect.Parameters["BaseTextureSize"].SetValue(item.Transform.Size);
+                        //maskEffect.Parameters["BaseTexture"].SetValue(item.Sprite);
+                        //
+                        //ContentHelper.AlphaMask_Shader.CurrentTechnique.Passes[0].Apply();
+
+                        item.Draw(spriteBatch);
+                    }
                 }
             }
+
+            spriteBatch.End();
+            //spriteBatch.GraphicsDevice.Viewport = defaultViewport;
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
         }
 
         #endregion
