@@ -27,8 +27,7 @@ namespace Galaxies.UI.Screens
                 ContentHelper.Box4x4_Sprite,
                 this,
                 new Vector4(5, 0, 5, 0),
-                Vector2.Zero,
-                200
+                Vector2.Zero
                 ));
 
             planetsColumn.SetColor(new Color(56, 56, 56));

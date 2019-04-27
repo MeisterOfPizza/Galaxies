@@ -1,150 +1,153 @@
 ﻿using Galaxies.Core;
+using Galaxies.Extensions;
 using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Galaxies.UI.Elements
 {
 
-    class UIScrollableGrid : UIContainer, IScrollable
+    sealed class UIScrollableGrid : UIContainer, IScrollable
     {
 
         /// <summary>
-        /// UIElement = Grid item
-        /// |
-        /// int = Y index of grid item
+        /// By how much should the each "scroll" event change the <see cref="currentScrollValue"/>.
         /// </summary>
-        private Dictionary<UIElement, int> Grid = new Dictionary<UIElement, int>();
+        private const float SCROLL_DELTA_VALUE = 0.1f;
         
-        private Vector2 itemSize;
-        private int     maxFitPerViewX;
-        private int     maxFitPerViewY;
-
         /// <summary>
-        /// The "top" row (position wise) of the visable container.
+        /// 2D grid where the Y coordinate comes BEFORE the X coordinate.
+        /// Therefore, access the grid with [y][x].
         /// </summary>
-        private int minRowIndex;
+        private List<List<UIElement>> Grid = new List<List<UIElement>>();
 
-        /// <summary>
-        /// The "bottom" row (position wise) of the visable container.
-        /// </summary>
-        private int maxRowIndex;
+        private float currentScrollValue;
 
-        /// <summary>
-        /// How many rows are there in total?
-        /// </summary>
-        private int maxRows;
+        private UIScrollbar scrollbar;
+
+        public override bool Visable
+        {
+            get
+            {
+                return base.Visable;
+            }
+
+            set
+            {
+                base.Visable = value;
+
+                scrollbar.Visable = value;
+            }
+        }
 
         #region IScrollable
 
         public bool IsScrollable { get; set; } = true;
 
+        public float ScrollValue
+        {
+            get
+            {
+                return currentScrollValue;
+            }
+
+            set
+            {
+                currentScrollValue = value;
+
+                CalculatePositions();
+            }
+        }
+
         #endregion
 
-        public UIScrollableGrid(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, Vector2 itemSize)
+        public UIScrollableGrid(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing)
             : base(transform, sprite, screen, padding, spacing, true)
         {
-            this.itemSize = itemSize;
-
             Screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
 
-            CalculateSize();
-            CalculatePositions();
+            scrollbar = screen.AddUIElement(new UIScrollbar(
+                new Transform(new Vector2(transform.X + transform.Width / 2f + 7.5f, transform.Y), new Vector2(15, transform.Height)),
+                ContentHelper.Box4x4_Sprite,
+                ContentHelper.GetSprite("Sprites/UI/handle"),
+                null,
+                this,
+                screen
+                ));
         }
 
         #region Overriden methods
 
         protected override void CalculatePositions()
         {
-            HideAll();
-
-            int goFrom = MathHelper.Clamp(minRowIndex * maxFitPerViewX, 0, Container.Count);
-            int goTo   = MathHelper.Clamp(maxRowIndex * maxFitPerViewX + maxFitPerViewX, 0, Container.Count);
-            
-            int currentX = (int)Padding.W; //Apply left padding.
-            int currentY = (int)Padding.X; //Apply top padding.
-
-            float startX = transform.Width / 2f - itemSize.X / 2f; //Position of the first element from the left.
-            float startY = transform.Height / 2f - itemSize.Y / 2f; //Position of the first element from the top.
-
-            for (int y = 0; y < maxFitPerViewY; y++)
+            if (Container.Count > 0)
             {
-                for (int x = 0; x < maxFitPerViewX; x++)
+                float scrollOffsetY = (TotalGridItemsHeight() - (RawSize.Y - Spacing.Y * (Grid.Count - 1))) * currentScrollValue;
+                scrollOffsetY = MathHelper.Clamp(scrollOffsetY, 0, scrollOffsetY);
+                
+                float currentY = Grid[0][0].Transform.Height / 2f; //Position of the first element from the top.
+
+                float startX = transform.X - transform.Width / 2f + Padding.W; //Apply left padding.
+                float startY = transform.Y - transform.Height / 2f + Padding.X; //Apply top padding.
+
+                for (int y = 0; y < Grid.Count; y++)
                 {
-                    if (goFrom < goTo)
-                    {
-                        Container[goFrom].Visable = true;
-                        Container[goFrom++].Transform.Position = transform.Position - new Vector2(startX - currentX, startY - currentY);
+                    float tallestItem = float.MaxValue;
 
-                        currentX += (int)(itemSize.X + Spacing.X);
-                    }
-                    else
+                    float currentX = Grid[y][0].Transform.Width / 2f; //Position of the first element from the left.
+
+                    for (int x = 0; x < Grid[y].Count; x++)
                     {
-                        return;
+                        Grid[y][x].Transform.Position = new Vector2(startX + currentX, startY + currentY - scrollOffsetY);
+
+                        currentX += Grid[y][x].Transform.Width / 2f + Spacing.X;
+
+                        //Add the width of the previous item:
+                        if (x < Grid[y].Count - 1)
+                        {
+                            currentX += Grid[y][x + 1].Transform.Width / 2f;
+                        }
+
+                        //Check if the current item is the tallest item:
+                        if (Grid[y][x].Transform.Height < tallestItem)
+                        {
+                            tallestItem = Grid[y][x].Transform.Height;
+                        }
                     }
+                    
+                    currentY += tallestItem + Spacing.Y;
                 }
-
-                currentX = (int)Padding.W; //Reset X.
-                currentY += (int)(itemSize.Y + Spacing.Y);
             }
-        }
-
-        protected override void CalculateSize()
-        {
-            maxFitPerViewX = MathHelper.Clamp(transform.RawWidth / (int)itemSize.X, 1, int.MaxValue);
-            maxFitPerViewY = MathHelper.Clamp(transform.RawHeight / (int)itemSize.Y, 1, int.MaxValue);
-
-            maxRows = (int)Math.Ceiling((double)Container.Count / maxFitPerViewX); //Recount max rows.
-
-            //Set size with the addition of padding and spacing.
-            transform.Size = new Vector2(
-                RawSize.X + Padding.W + Padding.Y + (maxFitPerViewX - 1) * Spacing.X,
-                RawSize.Y + Padding.X + Padding.Z + (maxFitPerViewY - 1) * Spacing.Y
-                );
         }
 
         protected override void UIElementAdded(UIElement addedElement)
         {
             base.UIElementAdded(addedElement);
 
-            //We need to coordinates of all grid items, and to get that we need to do some quick maths:
+            ArrangeItems();
 
-            int itemIndex = Container.IndexOf(addedElement) + 1; //The "index" of the newly added item.
-            int rowIndex = RowIndexOfItem(itemIndex); //Get the row index by calling the helper method.
-
-            //Now we can add in the UI Element and the y coordinate of the grid item:
-            Grid.Add(addedElement, rowIndex);
-
-            maxRows = rowIndex;
-
-            FixIndexRange();
+            scrollbar.IScrollableChanged();
         }
 
         protected override void UIElementRemoved(UIElement removedElement, int removedIndex)
         {
             base.UIElementRemoved(removedElement, removedIndex);
 
-            //Get all elements AFTER the removed element:
-            Grid.Remove(removedElement);
+            ArrangeItems();
 
-            for (int i = removedIndex; i < Container.Count; i++)
+            scrollbar.IScrollableChanged();
+        }
+
+        public override void PositionChanged()
+        {
+            base.PositionChanged();
+
+            if (scrollbar != null)
             {
-                UIElement key = Grid.ElementAt(i).Key;
-
-                //Recalculate the row index of each grid item AFTER the removed element:
-                Grid[key] = RowIndexOfItem(i + 1);
-            }
-
-            if (Container.Count > 0)
-            {
-                CalculateIndexRange(Container[MathHelper.Clamp(removedIndex, 0, Container.Count - 1)]);
-
-                CalculateSize();
-                CalculatePositions();
+                scrollbar.Transform.Position = new Vector2(transform.Position.X + transform.Width / 2f + scrollbar.Transform.Width / 2f, transform.Y);
             }
         }
 
@@ -152,6 +155,10 @@ namespace Galaxies.UI.Elements
         {
             if (Visable)
             {
+                spriteBatch.End();
+                spriteBatch.GraphicsDevice.ScissorRectangle = new Rectangle((transform.Position - transform.Size / 2f).ToPoint(), transform.Size.ToPoint());
+                spriteBatch.Begin(samplerState: SamplerState.PointClamp, rasterizerState: new RasterizerState() { ScissorTestEnable = true });
+
                 if (Sprite != null)
                 {
                     spriteBatch.Draw(Sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, Color, transform.Rotation, Origin, SpriteEffects.None, 0f);
@@ -159,14 +166,19 @@ namespace Galaxies.UI.Elements
 
                 if (Container.Count > 0)
                 {
-                    int drawFrom = MathHelper.Clamp(minRowIndex * maxFitPerViewX, 0, Container.Count);
-                    int drawTo   = MathHelper.Clamp(maxRowIndex * maxFitPerViewX + maxFitPerViewX, 0, Container.Count);
-
-                    for (int i = drawFrom; i < drawTo; i++)
+                    foreach (var item in Container)
                     {
-                        Container[i].Draw(spriteBatch);
+                        if (item is IMaskable maskable)
+                        {
+                            maskable.CheckMask(spriteBatch.GraphicsDevice.ScissorRectangle);
+                        }
+
+                        item.Draw(spriteBatch);
                     }
                 }
+
+                spriteBatch.End();
+                spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
             }
         }
 
@@ -176,20 +188,17 @@ namespace Galaxies.UI.Elements
 
         public void MouseScroll(int value)
         {
-            if (value < 0) //Scroll down
-            {
-                minRowIndex = MathHelper.Clamp(minRowIndex + 1, 0, maxRows - maxFitPerViewY + 1);
-                maxRowIndex = MathHelper.Clamp(maxRowIndex + 1, maxFitPerViewY - 1, maxRows);
+            float scrollSpeedMultiplier = transform.Height / TotalGridItemsHeight();
+            currentScrollValue = MathHelper.Clamp(currentScrollValue + -value * SCROLL_DELTA_VALUE * scrollSpeedMultiplier, 0f, 1f);
 
-                CalculatePositions();
-            }
-            else if (value > 0) //Scroll up
-            {
-                minRowIndex = MathHelper.Clamp(minRowIndex - 1, 0, maxRows - maxFitPerViewY);
-                maxRowIndex = MathHelper.Clamp(maxRowIndex - 1, maxFitPerViewY - 1, maxRows - 1);
+            scrollbar.ScrollbarValue = currentScrollValue;
 
-                CalculatePositions();
-            }
+            CalculatePositions();
+        }
+
+        public float DeltaViewSize()
+        {
+            return RawSize.Y / TotalGridItemsHeight();
         }
 
         #endregion
@@ -197,70 +206,84 @@ namespace Galaxies.UI.Elements
         #region Helpers
 
         /// <summary>
+        /// Arranges the items in the grid, limiting the total width of each row to the width of the grid.
+        /// </summary>
+        private void ArrangeItems()
+        {
+            Queue<UIElement>      unarrangedItems = new Queue<UIElement>(Container);
+            List<List<UIElement>> arrangedItems = new List<List<UIElement>>();
+
+            arrangedItems.Add(new List<UIElement>(3));
+
+            int   currentRow   = 0; //Current row.
+            float currentWidth = Padding.X; //Add the left padding.
+            float maxWidth     = transform.Width - Padding.Y; //Remove the right padding.
+
+            while (unarrangedItems.Count > 0)
+            {
+                UIElement item = unarrangedItems.Dequeue();
+
+                if (currentWidth + item.Transform.Width > maxWidth)
+                {
+                    currentRow++;
+                    currentWidth = Padding.X;
+                    arrangedItems.Add(new List<UIElement>(3));
+                }
+
+                currentWidth += item.Transform.Width + (currentWidth > Padding.X ? Spacing.X : 0); //Spacing from the last item on the same row.
+
+                arrangedItems[currentRow].Add(item);
+            }
+
+            Grid = arrangedItems;
+
+            CalculatePositions();
+        }
+
+        /// <summary>
+        /// Returns the total grid items height, with each row adding the tallest item to the total height.
+        /// </summary>
+        private float TotalGridItemsHeight()
+        {
+            float totalHeight = 0;
+
+            for (int y = 0; y < Grid.Count; y++)
+            {
+                if (Grid[y].Count > 0)
+                {
+                    //Get the largest height (tallest item).
+                    totalHeight += Grid[y].Max(g => g.Transform.Height);
+                }
+            }
+
+            return totalHeight;
+        }
+
+        /// <summary>
         /// Callback method whenever the player selects a new UI Element from the current screen.
         /// </summary>
         /// <param name="newSelected">Newly selected element.</param>
-        protected void SelectedChanged(UIElement newSelected)
+        private void SelectedChanged(UIElement newSelected)
         {
             int index = Container.IndexOf(newSelected);
 
             if (index != -1)
             {
-                CalculateIndexRange(newSelected);
+                //Find the item in the grid:
+                for (int y = 0; y < Grid.Count; y++)
+                {
+                    //Get the index of the index in the current row (y):
+                    index = Grid[y].IndexOf(newSelected);
 
-                CalculatePositions();
+                    if (index != 0)
+                    {
+                        //Divide the row with the total amount of rows.
+                        ScrollValue = y / (float)Grid.Count;
+
+                        CalculatePositions();
+                    }
+                }
             }
-        }
-
-        private void CalculateIndexRange(UIElement element)
-        {
-            int rowIndex = Grid[element];
-
-            //Account for the fact that we already need one reserved row for the selected element:
-            int fitY = maxFitPerViewY - 1;
-
-            //Trying to scroll down
-            if (rowIndex <= minRowIndex)
-            {
-                minRowIndex = MathHelper.Clamp(rowIndex, 0, maxRows);
-
-                maxRowIndex = MathHelper.Clamp(minRowIndex + fitY, 0, maxRows);
-            }
-            //Trying to scroll up
-            else if (rowIndex >= maxRowIndex)
-            {
-                maxRowIndex = MathHelper.Clamp(rowIndex, 0, maxRows);
-
-                minRowIndex = MathHelper.Clamp(maxRowIndex - fitY, 0, maxRows);
-            }
-        }
-
-        /// <summary>
-        /// Fixes the row index range (<see cref="minRowIndex"/> and <see cref="maxRowIndex"/>) if they're acting weird.
-        /// </summary>
-        private void FixIndexRange()
-        {
-            if ((maxRowIndex - minRowIndex) * maxFitPerViewX <= maxRowIndex * maxFitPerViewX)
-                //Are the amounts of displayed grid items between minRowIndex and maxRowIndex
-                //lower or equal to the maximum amount of grid items that should be displayed?
-            {
-                minRowIndex = MathHelper.Clamp(minRowIndex, 0, maxRows);
-
-                maxRowIndex = MathHelper.Clamp(minRowIndex + maxFitPerViewY - 1, 0, maxRows);
-            }
-        }
-
-        /// <summary>
-        /// Returns the row index of the item (with itemIndex as index).
-        /// </summary>
-        private int RowIndexOfItem(int itemIndex)
-        {
-            //Find the x and y grid coordinates:
-            int itemX = itemIndex % maxFitPerViewX; //This is not the "real" x-index value (it starts counting from 1).
-            if (itemX == 0) itemX = maxFitPerViewX; //It is the last item in the row.
-            int itemY = (itemIndex - itemX) / maxFitPerViewX; //This is the "real" y-index value (it starts counting from 0).
-
-            return itemY; //The row index.
         }
 
         #endregion

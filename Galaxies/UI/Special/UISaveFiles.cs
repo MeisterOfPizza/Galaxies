@@ -56,8 +56,7 @@ namespace Galaxies.UI.Special
                 ContentHelper.Box4x4_Sprite,
                 screen,
                 new Vector4(5),
-                new Vector2(5),
-                200
+                new Vector2(5)
                 ));
 
             uiSaveFileColumn.SetColor(new Color(56, 56, 56));

@@ -2,6 +2,7 @@
 using Galaxies.Core;
 using Galaxies.Extensions;
 using Galaxies.UI.Elements;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,10 +11,26 @@ using System.IO;
 namespace Galaxies.UI.Special
 {
 
-    class UISaveFile : UIGroup
+    class UISaveFile : UIGroup, IMaskable
     {
 
         FileInfo fileInfo;
+        UIButton loadButton;
+        UIButton saveButton;
+
+        #region IMaskable
+
+        public bool IsInteractableAfterMask
+        {
+            get
+            {
+                return isInteractableAfterMask;
+            }
+        }
+
+        private bool isInteractableAfterMask;
+
+        #endregion
 
         public UISaveFile(Transform transform, Texture2D sprite, Screen screen, FileInfo fileInfo, bool canSave) : base(transform, sprite, screen)
         {
@@ -43,7 +60,7 @@ namespace Galaxies.UI.Special
 
             if (canSave)
             {
-                AddUIElement(new UIButton(
+                saveButton = AddUIElement(new UIButton(
                     new Transform(new Vector2(-transform.Width / 2f + 50, transform.Height / 2f - 25), new Vector2(100, 50)),
                     ContentHelper.Arial_Font,
                     "Save",
@@ -52,10 +69,12 @@ namespace Galaxies.UI.Special
                     ContentHelper.Box4x4_Sprite,
                     new EventArg1<FileInfo>(SaveFileController.SaveGame, this.fileInfo),
                     screen
-                    )).SetColor(new Color(28, 28, 28));
+                    ));
+
+                saveButton.SetColor(new Color(28, 28, 28));
             }
 
-            AddUIElement(new UIButton(
+            loadButton = AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 50, transform.Height / 2f - 25), new Vector2(100, 50)),
                 ContentHelper.Arial_Font,
                 "Load",
@@ -64,8 +83,21 @@ namespace Galaxies.UI.Special
                 ContentHelper.Box4x4_Sprite,
                 new EventArg1<FileInfo>(SaveFileController.LoadGame, this.fileInfo),
                 screen
-                )).SetColor(new Color(28, 28, 28));
+                ));
+
+            loadButton.SetColor(new Color(28, 28, 28));
         }
+
+        #region IMaskable
+
+        public void CheckMask(Rectangle mask)
+        {
+            isInteractableAfterMask = mask.Intersects(loadButton.Transform.Collider) && (saveButton == null || mask.Intersects(saveButton.Transform.Collider));
+            loadButton.IsInteractable = isInteractableAfterMask;
+            if (saveButton != null) saveButton.IsInteractable = isInteractableAfterMask;
+        }
+
+        #endregion
 
     }
 

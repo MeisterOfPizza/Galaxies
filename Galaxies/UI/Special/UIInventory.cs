@@ -34,8 +34,7 @@ namespace Galaxies.UI.Special
                 ContentHelper.Box4x4_Sprite,
                 screen,
                 new Vector4(10),
-                new Vector2(5),
-                new Vector2(400, 300)
+                new Vector2(5)
                 ));
 
             ItemGrid.SetColor(new Color(56, 56, 56));

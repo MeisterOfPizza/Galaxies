@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.UI.Special
 {
 
-    class UIPlanetarySystem : UIGroup, IInteractable
+    class UIPlanetarySystem : UIGroup, IInteractable, IMaskable
     {
 
         #region IInteractable
@@ -21,6 +21,20 @@ namespace Galaxies.UI.Special
         public EventArg OnClick { get; set; }
 
         public Color DefaultColor { get; set; }
+
+        #endregion
+
+        #region IMaskable
+
+        public bool IsInteractableAfterMask
+        {
+            get
+            {
+                return isInteractableAfterMask;
+            }
+        }
+
+        private bool isInteractableAfterMask;
 
         #endregion
 
@@ -98,6 +112,16 @@ namespace Galaxies.UI.Special
         public void MouseExit()
         {
             Deselect();
+        }
+
+        #endregion
+
+        #region IMaskable
+
+        public void CheckMask(Rectangle mask)
+        {
+            isInteractableAfterMask = mask.Intersects(transform.Collider);
+            IsInteractable = isInteractableAfterMask;
         }
 
         #endregion
