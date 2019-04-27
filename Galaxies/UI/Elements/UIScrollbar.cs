@@ -55,7 +55,7 @@ namespace Galaxies.UI.Elements
 
             set
             {
-                //Check so that we can't see everything.
+                //Check if we can scroll.
                 if (deltaViewSize < 1)
                 {
                     float lastValue = this.scrollbarValue;
@@ -98,18 +98,18 @@ namespace Galaxies.UI.Elements
                 screen
                 ));
 
-            handleElement.SetColor(Color.Red);
+            handleElement.SetColor(new Color(66, 134, 244));
 
             //Get the handle group element:
             handle = GetGroupElement(handleElement);
 
-            CalculateScrollbarHandleSize();
+            CalculateScrollbarHandlePosition();
         }
         
         public void IScrollableChanged()
         {
             CalculateContainingBounds();
-            CalculateScrollbarHandleSize();
+            CalculateScrollbarHandlePosition();
         }
 
         private void CalculateContainingBounds()
@@ -118,19 +118,8 @@ namespace Galaxies.UI.Elements
             float lowerY = transform.Height / 2f;
 
             containingBounds = new Vector2(upperY + handle.UIElement.Transform.Height / 2f, lowerY - handle.UIElement.Transform.Height / 2f);
-        }
 
-        /// <summary>
-        /// Calculates the size of the scrollbar handle size using <see cref="deltaViewSize"/> and <see cref="IScrollable.DeltaViewSize"/>.
-        /// Also calls <see cref="CalculateScrollbarHandlePosition"/>.
-        /// </summary>
-        private void CalculateScrollbarHandleSize()
-        {
             deltaViewSize = MathHelper.Clamp(scrollable.DeltaViewSize(), 0f, 1f);
-
-            //handle.UIElement.Transform.SetSizeY(deltaViewSize * transform.Height);
-
-            CalculateScrollbarHandlePosition();
         }
 
         private void CalculateScrollbarHandlePosition()

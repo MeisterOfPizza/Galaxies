@@ -64,7 +64,7 @@ namespace Galaxies.UI.Screens
                 )).SetColor(new Color(28, 28, 28));
 
             uiInventory = AddUIElement(new UIInventory(
-                new Transform(Alignment.MiddleCenter, new Vector2(1200, 600)),
+                new Transform(Alignment.MiddleCenter, new Vector2(1210, 600)),
                 this,
                 PlayerController.Player.Inventory.Items,
                 "Inventory",

@@ -91,10 +91,14 @@ namespace Galaxies.UI.Screens
 
         #endregion
 
+        #region Callbacks
+
         /// <summary>
         /// Events called wheneever a new selection with the keyboard was made.
         /// </summary>
         public EventArg1<UIElement> kb_selectCallbacks { get; private set; }
+
+        #endregion
 
         public Screen()
         {

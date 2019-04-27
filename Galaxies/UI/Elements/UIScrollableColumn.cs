@@ -82,14 +82,15 @@ namespace Galaxies.UI.Elements
                 scrollOffsetY = MathHelper.Clamp(scrollOffsetY, 0, scrollOffsetY);
 
                 float currentY = Container[0].Transform.Height / 2f;
-                float topY = transform.Y - transform.Height / 2f + Padding.X;
+                float startY   = transform.Y - transform.Height / 2f + Padding.X;
 
                 for (int i = 0; i < Container.Count; i++)
                 {
-                    Container[i].Transform.Position = new Vector2(transform.X, topY + currentY - scrollOffsetY);
+                    Container[i].Transform.Position = new Vector2(transform.X, startY + currentY - scrollOffsetY);
 
                     currentY += Container[i].Transform.Height / 2f + Spacing.Y;
 
+                    //Add the height of the previous item:
                     if (i < Container.Count - 1)
                     {
                         currentY += Container[i + 1].Transform.Height / 2f;
@@ -98,16 +99,10 @@ namespace Galaxies.UI.Elements
             }
         }
         
-        protected override void CalculateSize()
-        {
-            //TODO: Remove empty method.
-        }
-        
         protected override void UIElementAdded(UIElement addedElement)
         {
             base.UIElementAdded(addedElement);
-
-            //FixIndexRange();
+            
             CalculatePositions();
 
             scrollbar.IScrollableChanged();
@@ -138,25 +133,12 @@ namespace Galaxies.UI.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //Effect maskEffect = ContentHelper.AlphaMask_Shader;
-            //
-            //maskEffect.Parameters["MaskLocation"].SetValue(transform.Position);
-            //maskEffect.Parameters["MaskSize"].SetValue(transform.Size);
-            //maskEffect.Parameters["MaskTexture"].SetValue(base.Sprite);
-
-            //Viewport defaultViewport = spriteBatch.GraphicsDevice.Viewport;
-            spriteBatch.End();
-
-            //RasterizerState rs = new RasterizerState() { ScissorTestEnable = true };
-
-            //spriteBatch.GraphicsDevice.Viewport = new Viewport(new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()));
-            //spriteBatch.GraphicsDevice.RasterizerState = rs;
-            spriteBatch.GraphicsDevice.ScissorRectangle = new Rectangle((transform.Position - transform.Size / 2f).ToPoint(), transform.Size.ToPoint());
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, rasterizerState: new RasterizerState() { ScissorTestEnable = true });
-            //spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
             if (Visable)
             {
+                spriteBatch.End();
+                spriteBatch.GraphicsDevice.ScissorRectangle = new Rectangle((transform.Position - transform.Size / 2f).ToPoint(), transform.Size.ToPoint());
+                spriteBatch.Begin(samplerState: SamplerState.PointClamp, rasterizerState: new RasterizerState() { ScissorTestEnable = true });
+
                 if (Sprite != null)
                 {
                     spriteBatch.Draw(Sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, Color, transform.Rotation, Origin, SpriteEffects.None, 0f);
@@ -164,15 +146,6 @@ namespace Galaxies.UI.Elements
 
                 if (Container.Count > 0)
                 {
-                    /*
-                    for (int i = minIndex; i <= maxIndex; i++)
-                    {
-                        if (i < Container.Count)
-                        {
-                            Container[i].Draw(spriteBatch);
-                        }
-                    }
-                    */
                     foreach (var item in Container)
                     {
                         if (item is IMaskable maskable)
@@ -180,20 +153,13 @@ namespace Galaxies.UI.Elements
                             maskable.CheckMask(spriteBatch.GraphicsDevice.ScissorRectangle);
                         }
 
-                        //maskEffect.Parameters["BaseTextureLocation"].SetValue(item.Transform.Position);
-                        //maskEffect.Parameters["BaseTextureSize"].SetValue(item.Transform.Size);
-                        //maskEffect.Parameters["BaseTexture"].SetValue(item.Sprite);
-                        //
-                        //ContentHelper.AlphaMask_Shader.CurrentTechnique.Passes[0].Apply();
-
                         item.Draw(spriteBatch);
                     }
                 }
-            }
 
-            spriteBatch.End();
-            //spriteBatch.GraphicsDevice.Viewport = defaultViewport;
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
+                spriteBatch.End();
+                spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
+            }
         }
 
         #endregion
@@ -202,8 +168,8 @@ namespace Galaxies.UI.Elements
 
         public void MouseScroll(int value)
         {
-            float mul = transform.Height / TotalItemsHeight();
-            currentScrollValue = MathHelper.Clamp(currentScrollValue + -value * SCROLL_DELTA_VALUE * mul, 0f, 1f);
+            float scrollSpeedMultiplier = transform.Height / TotalItemsHeight();
+            currentScrollValue = MathHelper.Clamp(currentScrollValue + -value * SCROLL_DELTA_VALUE * scrollSpeedMultiplier, 0f, 1f);
 
             scrollbar.ScrollbarValue = currentScrollValue;
 
