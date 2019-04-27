@@ -138,7 +138,6 @@
     <Compile Include="UIControllers\GameUIController.cs" />
     <Compile Include="UI\Elements\UIBackgroundAnimation.cs" />
     <Compile Include="UI\Elements\UICheckbox.cs" />
-    <Compile Include="UI\Elements\UIColumn.cs" />
     <Compile Include="UI\Elements\UIButton.cs" />
     <Compile Include="UI\Elements\UIDropdown.cs" />
     <Compile Include="UI\Elements\UIFixedColumn.cs" />

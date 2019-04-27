@@ -32,8 +32,7 @@ namespace Galaxies.UI.Screens
                 ContentHelper.Box4x4_Sprite,
                 this,
                 new Vector4(5, 0, 5, 0),
-                new Vector2(0, 5),
-                200
+                new Vector2(0, 5)
                 ));
 
             visitablesColumn.SetColor(new Color(56, 56, 56));
@@ -117,7 +116,8 @@ namespace Galaxies.UI.Screens
 
         private void ToggeUIInventory()
         {
-            uiInventory.Visable = !uiInventory.Visable;
+            visitablesColumn.Visable = uiInventory.Visable;
+            uiInventory.Visable      = !uiInventory.Visable;
         }
 
     }

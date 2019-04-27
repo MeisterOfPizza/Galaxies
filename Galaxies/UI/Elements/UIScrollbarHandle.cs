@@ -1,5 +1,6 @@
 ﻿using Galaxies.Core;
 using Galaxies.UI.Screens;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -39,7 +40,14 @@ namespace Galaxies.UI.Elements
 
         protected override void CheckForMouse()
         {
-            //throw new NotImplementedException();
+            MouseState mouseState = Mouse.GetState();
+
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Vector2 mousePosition = mouseState.Position.ToVector2();
+
+                scrollbar.SetHandlePosition(mousePosition);
+            }
         }
 
         #endregion

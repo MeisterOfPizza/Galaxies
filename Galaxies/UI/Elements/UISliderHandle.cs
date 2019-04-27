@@ -48,21 +48,18 @@ namespace Galaxies.UI.Elements
         /// </summary>
         protected override void CheckForMouse()
         {
-            if (screen.IsSelected_ByMouse(this))
+            MouseState mouseState = Mouse.GetState();
+
+            if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                MouseState mouseState = Mouse.GetState();
+                float mouseX    = mouseState.Position.X; //Where is the mouse?
+                float halfWidth = slider.Transform.Width / 2f; //For faster calculations.
 
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                {
-                    float mouseX = mouseState.Position.X; //Where is the mouse?
-                    float halfWidth = slider.Transform.Width / 2f; //For faster calculations.
+                //Clamp it so we know where the mouse (X coordinate) is relative to the handle.
+                mouseX = MathHelper.Clamp(slider.Transform.X + halfWidth - mouseX, 0, slider.TotalWidth);
 
-                    //Clamp it so we know where the mouse (X coordinate) is relative to the handle.
-                    mouseX = MathHelper.Clamp(slider.Transform.X + halfWidth - mouseX, 0, slider.TotalWidth);
-
-                    //Apply the mouse movement.
-                    slider.Value = 1f - mouseX / slider.TotalWidth;
-                }
+                //Apply the mouse movement.
+                slider.Value = 1f - mouseX / slider.TotalWidth;
             }
         }
 

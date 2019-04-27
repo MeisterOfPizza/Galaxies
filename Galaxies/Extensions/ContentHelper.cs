@@ -59,12 +59,6 @@ namespace Galaxies.Extensions
 
         #endregion
 
-        #region Shaders
-
-        public static Effect AlphaMask_Shader { get; private set; }
-
-        #endregion
-
         public static void Initialize()
         {
             Arial_Font = GetFont("Fonts/arial");
@@ -74,9 +68,6 @@ namespace Galaxies.Extensions
 
             Bullet_Sprite = GetSprite("Sprites/Effects/bullet");
             Shield_Sprite = GetSprite("Sprites/Effects/shield");
-
-            //Load Shaders:
-            AlphaMask_Shader = MainGame.Singleton.Content.Load<Effect>("Shaders/AlphaMask");
 
             //Preload GIFs:
             GetSprites("Sprites/Backgrounds/Animated/space-background-1");

@@ -43,6 +43,19 @@ namespace Galaxies.UI.Elements
 
         public bool IsScrollable { get; set; } = true;
 
+        public float ScrollValue
+        {
+            get
+            {
+                return 0;
+            }
+
+            set
+            {
+
+            }
+        }
+
         #endregion
 
         public UIScrollableGrid(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, Vector2 itemSize)

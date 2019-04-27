@@ -3,12 +3,18 @@ using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Galaxies.UI.Elements
 {
 
     abstract class UIHandle : UIElement, IInteractable
     {
+
+        /// <summary>
+        /// Has the player let go of the handle with the left mouse button yet?
+        /// </summary>
+        private bool mouseHasLetGo = true;
 
         #region IInteractable
 
@@ -42,8 +48,6 @@ namespace Galaxies.UI.Elements
         public override void PositionChanged()
         {
             base.PositionChanged();
-
-            IsSelected = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -53,16 +57,20 @@ namespace Galaxies.UI.Elements
             if (IsSelected)
             {
                 CheckForKeyboard();
-                CheckForMouse();
             }
-            //Check if the mouse is still over this element:
-            else if (screen.IsSelected_ByMouse(this) || screen.IsSelected_ByKeyboard(this))
+
+            if (!mouseHasLetGo)
             {
-                Select();
-            }
-            else
-            {
-                Deselect();
+                MouseState mouseState = Mouse.GetState();
+
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    CheckForMouse();
+                }
+                else
+                {
+                    mouseHasLetGo = true;
+                }
             }
         }
 
@@ -90,6 +98,8 @@ namespace Galaxies.UI.Elements
             {
                 OnClick.Invoke();
             }
+
+            mouseHasLetGo = false;
         }
 
         public void SetOnClick(EventArg @event)
