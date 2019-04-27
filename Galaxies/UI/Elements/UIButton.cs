@@ -123,6 +123,8 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
+        #region IInteractable
+
         public void SetOnClick(EventArg @event)
         {
             this.OnClick = @event;
@@ -159,6 +161,9 @@ namespace Galaxies.UI.Elements
         {
             Deselect();
         }
+
+        #endregion
+
     }
 
 }

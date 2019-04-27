@@ -9,7 +9,7 @@ using System.Linq;
 namespace Galaxies.UI.Elements
 {
 
-    class UIScrollableColumn : UIContainer, IScrollable
+    sealed class UIScrollableColumn : UIContainer, IScrollable
     {
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Galaxies.UI.Elements
         /// Callback method whenever the player selects a new Interactable from the current screen.
         /// </summary>
         /// <param name="newSelected">Newly selected element.</param>
-        protected void SelectedChanged(UIElement newSelected)
+        private void SelectedChanged(UIElement newSelected)
         {
             int index = Container.IndexOf(newSelected);
 

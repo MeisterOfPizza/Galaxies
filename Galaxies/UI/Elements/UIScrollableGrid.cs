@@ -10,7 +10,7 @@ using System.Linq;
 namespace Galaxies.UI.Elements
 {
 
-    class UIScrollableGrid : UIContainer, IScrollable
+    sealed class UIScrollableGrid : UIContainer, IScrollable
     {
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Galaxies.UI.Elements
         /// Callback method whenever the player selects a new UI Element from the current screen.
         /// </summary>
         /// <param name="newSelected">Newly selected element.</param>
-        protected void SelectedChanged(UIElement newSelected)
+        private void SelectedChanged(UIElement newSelected)
         {
             int index = Container.IndexOf(newSelected);
 

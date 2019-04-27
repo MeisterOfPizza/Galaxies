@@ -2,6 +2,7 @@
 using Galaxies.Extensions;
 using Galaxies.Items;
 using Galaxies.UI.Elements;
+using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,10 +10,26 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.UI.Special
 {
 
-    class UIItem : UIGroup
+    class UIItem : UIGroup, IMaskable
     {
 
         public Item Item { get; private set; }
+
+        private UIButton eventButton;
+
+        #region IMaskable
+
+        public bool IsInteractableAfterMask
+        {
+            get
+            {
+                return isInteractableAfterMask;
+            }
+        }
+
+        private bool isInteractableAfterMask;
+
+        #endregion
 
         public UIItem(Transform transform, Texture2D sprite, Screen screen, Item item) : base(transform, sprite, screen)
         {
@@ -52,7 +69,7 @@ namespace Galaxies.UI.Special
 
         public void CreatePurchaseButton(EventArg onPurchase)
         {
-            AddUIElement(new UIButton(
+            eventButton = AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 130, transform.Height / 2f - 30), new Vector2(250, 50)),
                 ContentHelper.Arial_Font,
                 "Buy [" + Item.Data.GalacticGoldValue + " GG]",
@@ -61,12 +78,14 @@ namespace Galaxies.UI.Special
                 ContentHelper.Box4x4_Sprite,
                 onPurchase,
                 screen
-                )).SetColor(new Color(28, 28, 28));
+                ));
+
+            eventButton.SetColor(new Color(28, 28, 28));
         }
 
         public void CreateSellButton(EventArg onSell)
         {
-            AddUIElement(new UIButton(
+            eventButton = AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 130, transform.Height / 2f - 30), new Vector2(250, 50)),
                 ContentHelper.Arial_Font,
                 "Sell [" + Item.Data.GalacticGoldValue + " GG]",
@@ -75,12 +94,14 @@ namespace Galaxies.UI.Special
                 ContentHelper.Box4x4_Sprite,
                 onSell,
                 screen
-                )).SetColor(new Color(28, 28, 28));
+                ));
+
+            eventButton.SetColor(new Color(28, 28, 28));
         }
 
         public void CreateUseButton(EventArg onUse)
         {
-            AddUIElement(new UIButton(
+            eventButton = AddUIElement(new UIButton(
                 new Transform(new Vector2(transform.Width / 2f - 130, transform.Height / 2f - 30), new Vector2(250, 50)),
                 ContentHelper.Arial_Font,
                 "Use",
@@ -89,8 +110,20 @@ namespace Galaxies.UI.Special
                 ContentHelper.Box4x4_Sprite,
                 onUse,
                 screen
-                )).SetColor(new Color(28, 28, 28));
+                ));
+
+            eventButton.SetColor(new Color(28, 28, 28));
         }
+
+        #region IMaskable
+
+        public void CheckMask(Rectangle mask)
+        {
+            isInteractableAfterMask = mask.Intersects(eventButton.Transform.Collider);
+            eventButton.IsInteractable = isInteractableAfterMask;
+        }
+
+        #endregion
 
     }
 

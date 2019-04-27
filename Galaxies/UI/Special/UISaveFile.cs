@@ -92,25 +92,9 @@ namespace Galaxies.UI.Special
 
         public void CheckMask(Rectangle mask)
         {
-            Rectangle loadRect = new Rectangle(loadButton.Transform.Position.ToPoint(), loadButton.Transform.Size.ToPoint());
-
-            if (mask.Contains(loadRect))
-            {
-                if (saveButton != null)
-                {
-                    Rectangle saveRect = new Rectangle(saveButton.Transform.Position.ToPoint(), saveButton.Transform.Size.ToPoint());
-
-                    isInteractableAfterMask = mask.Contains(saveRect);
-                }
-                else
-                {
-                    isInteractableAfterMask = true;
-                }
-            }
-            else
-            {
-                isInteractableAfterMask = false;
-            }
+            isInteractableAfterMask = mask.Intersects(loadButton.Transform.Collider) && (saveButton == null || mask.Intersects(saveButton.Transform.Collider));
+            loadButton.IsInteractable = isInteractableAfterMask;
+            if (saveButton != null) saveButton.IsInteractable = isInteractableAfterMask;
         }
 
         #endregion

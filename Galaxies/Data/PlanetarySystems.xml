@@ -14,6 +14,9 @@
     <PlanetIds>
       <PlanetId>test</PlanetId>
       <PlanetId>test3</PlanetId>
+      <PlanetId>test3</PlanetId>
+      <PlanetId>test3</PlanetId>
+      <PlanetId>test3</PlanetId>
     </PlanetIds>
   </PlanetarySystem>
 </Collection>

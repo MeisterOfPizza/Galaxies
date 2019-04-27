@@ -234,21 +234,6 @@ namespace Galaxies.UI
 
         #endregion
 
-        #region Helpers
-
-        /// <summary>
-        /// Hides all the elements inside the container.
-        /// </summary>
-        protected void HideAll()
-        {
-            for (int i = 0; i < Container.Count; i++)
-            {
-                Container[i].Visable = false;
-            }
-        }
-
-        #endregion
-
     }
 
 }

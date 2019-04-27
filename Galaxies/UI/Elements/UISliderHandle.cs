@@ -6,13 +6,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Galaxies.UI.Elements
 {
+
     /// <summary>
     /// Used with the <see cref="UISlider"/> class.
     /// </summary>
     sealed class UISliderHandle : UIHandle
     {
 
-        UISlider slider;
+        private UISlider slider;
 
         public UISliderHandle(Transform transform, Texture2D sprite, EventArg onClick, UISlider slider, Screen screen) : base(transform, sprite, onClick, screen)
         {

@@ -15,28 +15,28 @@ namespace Galaxies.UI.Elements
 
         #region Variables
 
-        IScrollable    scrollable;
-        UIGroupElement handle;
+        private IScrollable    scrollable;
+        private UIGroupElement handle;
 
         /// <summary>
         /// How much (in %) can the user see of the scrollable at once?
         /// 1 = entire view, 0 = nothing.
         /// This determines the size of the scrollbar handle.
         /// </summary>
-        float deltaViewSize;
+        private float deltaViewSize;
 
         /// <summary>
         /// X = the Y coordinate of the upper bounds of the scrollbar.
         /// Y = the Y coordinate of the lower bounds of the scrollbar.
         /// </summary>
-        Vector2 containingBounds;
+        private Vector2 containingBounds;
 
         /// <summary>
         /// Same as <see cref="ScrollbarValue"/>.
         /// </summary>
-        float scrollbarValue;
+        private float scrollbarValue;
 
-        EventArg onValueChanged;
+        private EventArg onValueChanged;
 
         #endregion
 
@@ -134,9 +134,9 @@ namespace Galaxies.UI.Elements
             CalculatePositions();
         }
 
-        public void SetHandlePosition(Vector2 globalPosition)
+        public void SetHandlePosition(Vector2 mousePosition)
         {
-            float value = (MathHelper.Clamp(globalPosition.Y, transform.Y - transform.Height / 2f, transform.Y + transform.Height / 2f) - (transform.Y - transform.Height / 2f)) / transform.Height;
+            float value = (MathHelper.Clamp(mousePosition.Y, transform.Y - transform.Height / 2f, transform.Y + transform.Height / 2f) - (transform.Y - transform.Height / 2f)) / transform.Height;
 
             ScrollbarValue = value;
         }

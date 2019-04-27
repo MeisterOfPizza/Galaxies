@@ -344,11 +344,31 @@ namespace Galaxies.UI.Screens
             {
                 if (!ForceFocusOn)
                 {
-                    ms_selectedInteractable.Click();
+                    if (ms_selectedInteractable is IMaskable maskable)
+                    {
+                        if (maskable.IsInteractableAfterMask)
+                        {
+                            ms_selectedInteractable.Click();
+                        }
+                    }
+                    else
+                    {
+                        ms_selectedInteractable.Click();
+                    }
                 }
                 else if (ForceFocusOn && ForceFocusedInteractable == ms_selectedInteractable)
                 {
-                    ms_selectedInteractable.Click();
+                    if (ms_selectedInteractable is IMaskable maskable)
+                    {
+                        if (maskable.IsInteractableAfterMask)
+                        {
+                            ms_selectedInteractable.Click();
+                        }
+                    }
+                    else
+                    {
+                        ms_selectedInteractable.Click();
+                    }
                 }
             }
         }

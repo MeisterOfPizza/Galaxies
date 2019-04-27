@@ -72,8 +72,8 @@ namespace Galaxies.Extensions
             //Preload GIFs:
             GetSprites("Sprites/Backgrounds/Animated/space-background-1");
             GetSprites("Sprites/Backgrounds/Animated/space-background-2");
-            //GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
-            //GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
+            GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
+            GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
         }
 
         public static Texture2D GetSprite(string path)
