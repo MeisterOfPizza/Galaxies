@@ -28,6 +28,16 @@ namespace Galaxies.UI.Elements
             originalSize = transform.Size;
         }
 
+        protected override void UIElementAdded(UIElement addedElement)
+        {
+            CalculatePositions();
+        }
+
+        protected override void UIElementRemoved(UIElement removedElement, int removedIndex)
+        {
+            CalculatePositions();
+        }
+
         protected override void CalculatePositions()
         {
             int currentY = (int)Padding.X;

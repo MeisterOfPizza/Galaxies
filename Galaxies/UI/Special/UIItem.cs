@@ -119,8 +119,11 @@ namespace Galaxies.UI.Special
 
         public void CheckMask(Rectangle mask)
         {
-            isInteractableAfterMask = mask.Intersects(eventButton.Transform.Collider);
-            eventButton.IsInteractable = isInteractableAfterMask;
+            if (eventButton != null)
+            {
+                isInteractableAfterMask = mask.Intersects(eventButton.Transform.Collider);
+                eventButton.IsInteractable = isInteractableAfterMask;
+            }
         }
 
         #endregion
