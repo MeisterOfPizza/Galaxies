@@ -1,93 +1,111 @@
 ﻿using Galaxies.Core;
+using Galaxies.Extensions;
 using Galaxies.UI.Interfaces;
 using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
 
 namespace Galaxies.UI.Elements
 {
 
-    class UIScrollableColumn : UIColumn, IScrollable
+    sealed class UIScrollableColumn : UIContainer, IScrollable
     {
-        
-        /// <summary>
-        /// How many items can fit per view?
-        /// </summary>
-        private int maxFitPerView;
 
         /// <summary>
-        /// How high is each item?
+        /// By how much should the each "scroll" event change the <see cref="currentScrollValue"/>.
         /// </summary>
-        private int itemHeight;
+        private const float SCROLL_DELTA_VALUE = 0.1f;
 
-        /// <summary>
-        /// What index is the one at the top?
-        /// </summary>
-        private int minIndex;
+        private float currentScrollValue;
 
-        /// <summary>
-        /// What index is the one at the bottom?
-        /// </summary>
-        private int maxIndex;
+        private UIScrollbar scrollbar;
+
+        public override bool Visable
+        {
+            get
+            {
+                return base.Visable;
+            }
+
+            set
+            {
+                base.Visable = value;
+
+                scrollbar.Visable = value;
+            }
+        }
 
         #region IScrollable
 
         public bool IsScrollable { get; set; } = true;
 
+        public float ScrollValue
+        {
+            get
+            {
+                return currentScrollValue;
+            }
+
+            set
+            {
+                currentScrollValue = MathHelper.Clamp(value, 0f, 1f);
+
+                CalculatePositions();
+            }
+        }
+
         #endregion
 
-        public UIScrollableColumn(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing, int itemHeight)
+        public UIScrollableColumn(Transform transform, Texture2D sprite, Screen screen, Vector4 padding, Vector2 spacing)
             : base(transform, sprite, screen, padding, spacing, true)
         {
-            this.itemHeight = itemHeight;
-
             screen.kb_selectCallbacks.AddEvent(new _EventArg1<UIElement>(SelectedChanged));
+
+            scrollbar = screen.AddUIElement(new UIScrollbar(
+                new Transform(new Vector2(transform.X + transform.Width / 2f + 7.5f, transform.Y), new Vector2(15, transform.Height)),
+                ContentHelper.Box4x4_Sprite,
+                ContentHelper.GetSprite("Sprites/UI/handle"),
+                null,
+                this,
+                screen
+                ));
         }
 
         #region Overriden methods
 
         protected override void CalculatePositions()
         {
-            HideAll();
-
-            int currentY = (int)Padding.X;
-            float startY = transform.Height / 2f - itemHeight / 2f;
-
-            for (int i = minIndex; i <= maxIndex; i++)
+            if (Container.Count > 0)
             {
-                if (i < Container.Count)
-                {
-                    Container[i].Visable = true;
-                    Container[i].Transform.Position = transform.Position - new Vector2(0, startY - currentY);
+                float scrollOffsetY = (TotalItemsHeight() - (RawSize.Y - Spacing.Y * (Container.Count - 1))) * currentScrollValue;
+                scrollOffsetY = MathHelper.Clamp(scrollOffsetY, 0, scrollOffsetY);
 
-                    currentY += itemHeight + (int)Spacing.Y;
-                }
-                else
+                float currentY = Container[0].Transform.Height / 2f;
+                float startY   = transform.Y - transform.Height / 2f + Padding.X;
+
+                for (int i = 0; i < Container.Count; i++)
                 {
-                    break;
+                    Container[i].Transform.Position = new Vector2(transform.X, startY + currentY - scrollOffsetY);
+
+                    currentY += Container[i].Transform.Height / 2f + Spacing.Y;
+
+                    //Add the height of the previous item:
+                    if (i < Container.Count - 1)
+                    {
+                        currentY += Container[i + 1].Transform.Height / 2f;
+                    }
                 }
             }
-
-            responsiveMaxY = currentY + (int)Padding.Z; //Not used by this class, but may be used later down the road?
-        }
-
-        protected override void CalculateSize()
-        {
-            CalculateFitPerView();
-
-            //Set size with the addition of padding and spacing.
-            transform.Size = new Vector2(
-                RawSize.X + Padding.W + Padding.Y,
-                RawSize.Y + Padding.X + Padding.Z + maxFitPerView * Spacing.Y
-                );
         }
         
         protected override void UIElementAdded(UIElement addedElement)
         {
             base.UIElementAdded(addedElement);
-
-            FixIndexRange();
+            
             CalculatePositions();
+
+            scrollbar.IScrollableChanged();
         }
 
         protected override void UIElementRemoved(UIElement removedElement, int removedIndex)
@@ -96,10 +114,20 @@ namespace Galaxies.UI.Elements
 
             if (Container.Count > 0)
             {
-                CalculateIndexRange(MathHelper.Clamp(removedIndex, 0, Container.Count - 1));
-
                 CalculateSize();
                 CalculatePositions();
+            }
+
+            scrollbar.IScrollableChanged();
+        }
+
+        public override void PositionChanged()
+        {
+            base.PositionChanged();
+
+            if (scrollbar != null)
+            {
+                scrollbar.Transform.Position = new Vector2(transform.Position.X + transform.Width / 2f + scrollbar.Transform.Width / 2f, transform.Y);
             }
         }
 
@@ -107,6 +135,10 @@ namespace Galaxies.UI.Elements
         {
             if (Visable)
             {
+                spriteBatch.End();
+                spriteBatch.GraphicsDevice.ScissorRectangle = new Rectangle((transform.Position - transform.Size / 2f).ToPoint(), transform.Size.ToPoint());
+                spriteBatch.Begin(samplerState: SamplerState.PointClamp, rasterizerState: new RasterizerState() { ScissorTestEnable = true });
+
                 if (Sprite != null)
                 {
                     spriteBatch.Draw(Sprite, new Rectangle(transform.RawX, transform.RawY, transform.RawWidth, transform.RawHeight), null, Color, transform.Rotation, Origin, SpriteEffects.None, 0f);
@@ -114,14 +146,19 @@ namespace Galaxies.UI.Elements
 
                 if (Container.Count > 0)
                 {
-                    for (int i = minIndex; i <= maxIndex; i++)
+                    foreach (var item in Container)
                     {
-                        if (i < Container.Count)
+                        if (item is IMaskable maskable)
                         {
-                            Container[i].Draw(spriteBatch);
+                            maskable.CheckMask(spriteBatch.GraphicsDevice.ScissorRectangle);
                         }
+
+                        item.Draw(spriteBatch);
                     }
                 }
+
+                spriteBatch.End();
+                spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
             }
         }
 
@@ -131,20 +168,17 @@ namespace Galaxies.UI.Elements
 
         public void MouseScroll(int value)
         {
-            if (value < 0) //Scroll down
-            {
-                minIndex = MathHelper.Clamp(minIndex + 1, 0, Container.Count - 1 - maxFitPerView);
-                maxIndex = MathHelper.Clamp(maxIndex + 1, maxFitPerView, Container.Count - 1);
+            float scrollSpeedMultiplier = transform.Height / TotalItemsHeight();
+            currentScrollValue = MathHelper.Clamp(currentScrollValue + -value * SCROLL_DELTA_VALUE * scrollSpeedMultiplier, 0f, 1f);
 
-                CalculatePositions();
-            }
-            else if (value > 0) //Scroll up
-            {
-                minIndex = MathHelper.Clamp(minIndex - 1, 0, Container.Count - 1 - maxFitPerView);
-                maxIndex = MathHelper.Clamp(maxIndex - 1, maxFitPerView, Container.Count - 1);
+            scrollbar.ScrollbarValue = currentScrollValue;
 
-                CalculatePositions();
-            }
+            CalculatePositions();
+        }
+
+        public float DeltaViewSize()
+        {
+            return RawSize.Y / TotalItemsHeight();
         }
 
         #endregion
@@ -152,63 +186,24 @@ namespace Galaxies.UI.Elements
         #region Helpers
 
         /// <summary>
-        /// How many elements can fit per view?
+        /// Returns the total height of all items.
         /// </summary>
-        private void CalculateFitPerView()
+        private float TotalItemsHeight()
         {
-            maxFitPerView = (int)(RawSize.Y / itemHeight);
-            maxFitPerView--; //Account for index value.
-        }
-
-        /// <summary>
-        /// Calculates the min and max index allowed.
-        /// </summary>
-        private void CalculateIndexRange(int selectedIndex)
-        {
-            //Scroll down
-            if (selectedIndex <= minIndex)
-            {
-                minIndex = MathHelper.Clamp(selectedIndex, 0, Container.Count - 1);
-
-                maxIndex = MathHelper.Clamp(minIndex + maxFitPerView, 0, Container.Count - 1);
-            }
-            //Scroll up
-            else if (selectedIndex >= maxIndex)
-            {
-                maxIndex = MathHelper.Clamp(selectedIndex, 0, Container.Count - 1);
-
-                minIndex = MathHelper.Clamp(maxIndex - maxFitPerView, 0, Container.Count - 1);
-            }
-        }
-
-        /// <summary>
-        /// Fixes the row index range (<see cref="minIndex"/> and <see cref="maxIndex"/>) if they're acting weird.
-        /// </summary>
-        private void FixIndexRange()
-        {
-            if ((maxIndex - maxIndex) * maxFitPerView <= maxIndex * maxFitPerView)
-                //Are the amounts of displayed items between minIndex and maxIndex
-                //lower or equal to the maximum amount of items that should be displayed?
-            {
-                minIndex = MathHelper.Clamp(minIndex, 0, Container.Count - 1);
-
-                maxIndex = MathHelper.Clamp(minIndex + maxFitPerView, 0, Container.Count - 1);
-            }
+            return Container.Sum(c => c.Transform.Height);
         }
 
         /// <summary>
         /// Callback method whenever the player selects a new Interactable from the current screen.
         /// </summary>
         /// <param name="newSelected">Newly selected element.</param>
-        protected void SelectedChanged(UIElement newSelected)
+        private void SelectedChanged(UIElement newSelected)
         {
             int index = Container.IndexOf(newSelected);
 
             if (index != -1)
             {
-                CalculateIndexRange(index);
-
-                CalculatePositions();
+                ScrollValue = (index + 1) / (float)Container.Count;
             }
         }
 

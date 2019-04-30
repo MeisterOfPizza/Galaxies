@@ -43,17 +43,14 @@ Leaving the current solar system can be done at any time, however, once left, th
 
 Docking at the Citadel will grant you the ability to repair your ship, purchase new ships or upgrades for your ship or to sell owned ship upgrades.
 
-### Quests
-Quests are very simple objectives that often rewards the player for killing X amount of Y enemies. Or by finding a planet of type X.
-
 ### Ending
-Star charts can be purchased for a large sum of Galactic Gold from one of the NPCs inside the Citadel. These star charts shows us the path to the center of the galaxy. Following this path will result in the player encountering the final boss. Once the player has entered the final battle, they cannot back out, and will either win or lose.
+Star charts can be purchased for a large sum of Galactic Gold from one of the NPCs inside the Citadel. These star charts shows us the path to the center of the galaxy. Following this path will result in the player encountering the final boss. Once the player has entered the final battle, they cannot back out, and will either win or lose the game.
 
 ---
 
 ## Gamedata
 
-Ships, ship upgrades, enemies, sol systems (including planets), quests and trades (buy and sell price etc.) will all be stored in six different .xml files. Data structures for each .xml file will not be presented here.
+Ships, ship upgrades, enemies, planetary systems (including planets) and trades (buy and sell price etc.) will all be stored in different .xml files. Data structures for each .xml file will not be presented here.
 
 ---
 

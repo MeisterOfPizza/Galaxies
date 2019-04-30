@@ -32,8 +32,7 @@ namespace Galaxies.UI.Screens
                 ContentHelper.Box4x4_Sprite,
                 this,
                 new Vector4(5, 0, 5, 0),
-                new Vector2(0, 5),
-                200
+                new Vector2(0, 5)
                 ));
 
             visitablesColumn.SetColor(new Color(56, 56, 56));
@@ -65,7 +64,7 @@ namespace Galaxies.UI.Screens
                 )).SetColor(new Color(28, 28, 28));
 
             uiInventory = AddUIElement(new UIInventory(
-                new Transform(Alignment.MiddleCenter, new Vector2(1200, 600)),
+                new Transform(Alignment.MiddleCenter, new Vector2(1210, 600)),
                 this,
                 PlayerController.Player.Inventory.Items,
                 "Inventory",
@@ -117,7 +116,8 @@ namespace Galaxies.UI.Screens
 
         private void ToggeUIInventory()
         {
-            uiInventory.Visable = !uiInventory.Visable;
+            visitablesColumn.Visable = uiInventory.Visable;
+            uiInventory.Visable      = !uiInventory.Visable;
         }
 
     }

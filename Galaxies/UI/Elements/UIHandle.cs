@@ -7,13 +7,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Galaxies.UI.Elements
 {
-    /// <summary>
-    /// Used with the <see cref="UISlider"/> class.
-    /// </summary>
-    sealed class UIHandle : UIElement, IInteractable
+
+    abstract class UIHandle : UIElement, IInteractable
     {
 
-        UISlider slider;
+        /// <summary>
+        /// Has the player let go of the handle with the left mouse button yet?
+        /// </summary>
+        private bool mouseHasLetGo = true;
 
         #region IInteractable
 
@@ -22,17 +23,17 @@ namespace Galaxies.UI.Elements
         public Color DefaultColor   { get; set; }
 
         /// <summary>
-        /// NOTE: This is NOT called whenever the value of the slider that the handle is attached to is changed.
+        /// NOTE: This should ONLY be called whenever the handle is grabbed, NOT whenever its value is changed.
+        /// That will be handled differently for each inheritance of <see cref="UIHandle"/>.
         /// </summary>
         public EventArg OnClick { get; set; }
 
         #endregion
 
-        public UIHandle(Transform transform, Texture2D sprite, EventArg onClick, UISlider slider, Screen screen) : base(transform, sprite, screen)
+        public UIHandle(Transform transform, Texture2D sprite, EventArg onClick, Screen screen) : base(transform, sprite, screen)
         {
             this.DefaultColor = color;
             this.OnClick      = onClick;
-            this.slider       = slider;
         }
 
         #region Overriden methods
@@ -47,8 +48,6 @@ namespace Galaxies.UI.Elements
         public override void PositionChanged()
         {
             base.PositionChanged();
-
-            IsSelected = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -58,16 +57,20 @@ namespace Galaxies.UI.Elements
             if (IsSelected)
             {
                 CheckForKeyboard();
-                CheckForMouse();
             }
-            //Check if the mouse is still over this element:
-            else if (screen.IsSelected_ByMouse(this) || screen.IsSelected_ByKeyboard(this))
+
+            if (!mouseHasLetGo)
             {
-                Select();
-            }
-            else
-            {
-                Deselect();
+                MouseState mouseState = Mouse.GetState();
+
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    CheckForMouse();
+                }
+                else
+                {
+                    mouseHasLetGo = true;
+                }
             }
         }
 
@@ -78,47 +81,12 @@ namespace Galaxies.UI.Elements
         /// <summary>
         /// Move the slider with the left and right arrows.
         /// </summary>
-        private void CheckForKeyboard()
-        {
-            if (screen.IsSelected_ByKeyboard(this))
-            {
-                KeyboardState keyboardState = Keyboard.GetState();
-
-                if (keyboardState.IsKeyDown(Keys.Left))
-                {
-                    //Decrease value:
-                    slider.Value -= 0.025f;
-                }
-                else if (keyboardState.IsKeyDown(Keys.Right))
-                {
-                    //Increase value:
-                    slider.Value += 0.025f;
-                }
-            }
-        }
+        protected abstract void CheckForKeyboard();
 
         /// <summary>
         /// Move the slider with the mouse.
         /// </summary>
-        private void CheckForMouse()
-        {
-            if (screen.IsSelected_ByMouse(this))
-            {
-                MouseState mouseState = Mouse.GetState();
-
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                {
-                    float mouseX = mouseState.Position.X; //Where is the mouse?
-                    float halfWidth = slider.Transform.Width / 2f; //For faster calculations.
-
-                    //Clamp it so we know where the mouse (X coordinate) is relative to the handle.
-                    mouseX = MathHelper.Clamp(slider.Transform.X + halfWidth - mouseX, 0, slider.TotalWidth);
-
-                    //Apply the mouse movement.
-                    slider.Value = 1f - mouseX / slider.TotalWidth;
-                }
-            }
-        }
+        protected abstract void CheckForMouse();
 
         #endregion
 
@@ -130,6 +98,8 @@ namespace Galaxies.UI.Elements
             {
                 OnClick.Invoke();
             }
+
+            mouseHasLetGo = false;
         }
 
         public void SetOnClick(EventArg @event)

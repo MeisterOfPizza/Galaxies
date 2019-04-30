@@ -4,7 +4,6 @@ using Galaxies.UI.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Galaxies.UI
 {
@@ -83,7 +82,12 @@ namespace Galaxies.UI
         }
 
         protected abstract void CalculatePositions();
-        protected abstract void CalculateSize();
+
+        protected virtual void CalculateSize()
+        {
+            //Do nothing here.
+            //This method will not be utilized by every child, therefore, keep it overridable.
+        }
 
         #region Adding UI Elements
 
@@ -107,14 +111,12 @@ namespace Galaxies.UI
             screen.AddInteractable(uiElement); //Returns false if it wasn't an interactable.
             screen.AddScrollable(uiElement); //Returns false if it wasn't a scrollable.
 
-            CalculatePositions();
+            UIElementAdded(uiElement);
 
             if (ResponsiveSize)
             {
                 CalculateSize();
             }
-
-            UIElementAdded(uiElement);
 
             return uiElement;
         }
@@ -134,8 +136,6 @@ namespace Galaxies.UI
 
                 UIElementAdded(uiElements[i]);
             }
-
-            CalculatePositions();
 
             if (ResponsiveSize)
             {
@@ -229,21 +229,6 @@ namespace Galaxies.UI
             foreach (UIElement elem in Container.ToArray())
             {
                 elem.Update(gameTime);
-            }
-        }
-
-        #endregion
-
-        #region Helpers
-
-        /// <summary>
-        /// Hides all the elements inside the container.
-        /// </summary>
-        protected void HideAll()
-        {
-            for (int i = 0; i < Container.Count; i++)
-            {
-                Container[i].Visable = false;
             }
         }
 

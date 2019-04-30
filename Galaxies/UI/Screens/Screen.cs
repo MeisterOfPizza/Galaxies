@@ -91,10 +91,14 @@ namespace Galaxies.UI.Screens
 
         #endregion
 
+        #region Callbacks
+
         /// <summary>
         /// Events called wheneever a new selection with the keyboard was made.
         /// </summary>
         public EventArg1<UIElement> kb_selectCallbacks { get; private set; }
+
+        #endregion
 
         public Screen()
         {
@@ -340,11 +344,31 @@ namespace Galaxies.UI.Screens
             {
                 if (!ForceFocusOn)
                 {
-                    ms_selectedInteractable.Click();
+                    if (ms_selectedInteractable is IMaskable maskable)
+                    {
+                        if (maskable.IsInteractableAfterMask)
+                        {
+                            ms_selectedInteractable.Click();
+                        }
+                    }
+                    else
+                    {
+                        ms_selectedInteractable.Click();
+                    }
                 }
                 else if (ForceFocusOn && ForceFocusedInteractable == ms_selectedInteractable)
                 {
-                    ms_selectedInteractable.Click();
+                    if (ms_selectedInteractable is IMaskable maskable)
+                    {
+                        if (maskable.IsInteractableAfterMask)
+                        {
+                            ms_selectedInteractable.Click();
+                        }
+                    }
+                    else
+                    {
+                        ms_selectedInteractable.Click();
+                    }
                 }
             }
         }
