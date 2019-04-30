@@ -153,6 +153,7 @@
     <Compile Include="UI\Elements\UIScrollbarHandle.cs" />
     <Compile Include="UI\Elements\UISlider.cs" />
     <Compile Include="UI\Elements\UIText.cs" />
+    <Compile Include="UI\Elements\UIVideo.cs" />
     <Compile Include="UI\Enums\TextAlign.cs" />
     <Compile Include="UI\Extensions\TextHelper.cs" />
     <Compile Include="UI\Interfaces\IContainer.cs" />
@@ -200,6 +201,7 @@
     <Content Include="Content\Audio\Sound Effects\shield-down.mp3" />
     <Content Include="Content\Audio\Sound Effects\shield-up.mp3" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1-anim.gif" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1-video.mp4" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_00_delay-0.13s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_01_delay-0.1s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_02_delay-0.03s.png" />
@@ -246,6 +248,7 @@
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_43_delay-0.07s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-1\frame_44_delay-0.07s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-2-anim.gif" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-2-video.mp4" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-2\frame_00_delay-0.1s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-2\frame_01_delay-0.1s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-2\frame_02_delay-0.1s.png" />
@@ -271,6 +274,7 @@
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-2\frame_22_delay-0.1s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\citadel-background-2\frame_23_delay-0.1s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1-anim.gif" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1-video.mp4" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_00_delay-0.08s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_01_delay-0.08s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_02_delay-0.08s.png" />
@@ -296,6 +300,7 @@
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_22_delay-0.08s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-1\frame_23_delay-0.08s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-2-anim.gif" />
+    <Content Include="Content\Sprites\Backgrounds\Animated\space-background-2-video.mp4" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-2\frame_000_delay-0.07s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-2\frame_001_delay-0.07s.png" />
     <Content Include="Content\Sprites\Backgrounds\Animated\space-background-2\frame_002_delay-0.07s.png" />

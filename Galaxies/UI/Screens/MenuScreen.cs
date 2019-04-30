@@ -17,9 +17,18 @@ namespace Galaxies.UI.Screens
 
         public override void CreateUI()
         {
+            //TODO: Remove old code.
+            /*
             AddUIElement(new UIBackgroundAnimation(
                 new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
                 ContentHelper.Space_Background_Animation_2,
+                this
+                ));
+                */
+
+            AddUIElement(new UIVideo(
+                new Transform(Alignment.MiddleCenter, GameUIController.WindowSize),
+                ContentHelper.GetVideo("Sprites/Backgrounds/Animated/space-background-2-video"),
                 this
                 ));
 

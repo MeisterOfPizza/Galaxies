@@ -2768,3 +2768,23 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/UI/star-chart-icon.png
 
+#begin Sprites/Backgrounds/Animated/citadel-background-1-video.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:Sprites/Backgrounds/Animated/citadel-background-1-video.mp4
+
+#begin Sprites/Backgrounds/Animated/citadel-background-2-video.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:Sprites/Backgrounds/Animated/citadel-background-2-video.mp4
+
+#begin Sprites/Backgrounds/Animated/space-background-1-video.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:Sprites/Backgrounds/Animated/space-background-1-video.mp4
+
+#begin Sprites/Backgrounds/Animated/space-background-2-video.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:Sprites/Backgrounds/Animated/space-background-2-video.mp4
+

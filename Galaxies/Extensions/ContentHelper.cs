@@ -70,10 +70,16 @@ namespace Galaxies.Extensions
             Shield_Sprite = GetSprite("Sprites/Effects/shield");
 
             //Preload GIFs:
-            GetSprites("Sprites/Backgrounds/Animated/space-background-1");
-            GetSprites("Sprites/Backgrounds/Animated/space-background-2");
-            GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
-            GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
+            //GetSprites("Sprites/Backgrounds/Animated/space-background-1");
+            //GetSprites("Sprites/Backgrounds/Animated/space-background-2");
+            //GetSprites("Sprites/Backgrounds/Animated/citadel-background-1");
+            //GetSprites("Sprites/Backgrounds/Animated/citadel-background-2");
+
+            //Preload videos:
+            GetVideo("Sprites/Backgrounds/Animated/space-background-1-video");
+            GetVideo("Sprites/Backgrounds/Animated/space-background-2-video");
+            GetVideo("Sprites/Backgrounds/Animated/citadel-background-1-video");
+            GetVideo("Sprites/Backgrounds/Animated/citadel-background-2-video");
         }
 
         public static Texture2D GetSprite(string path)
@@ -83,6 +89,22 @@ namespace Galaxies.Extensions
             try
             {
                 loaded = MainGame.Singleton.Content.Load<Texture2D>(path);
+            }
+            catch (ContentLoadException e)
+            {
+                CrashHandler.ShowException(e);
+            }
+
+            return loaded;
+        }
+
+        public static Video GetVideo(string path)
+        {
+            Video loaded = null;
+
+            try
+            {
+                loaded = MainGame.Singleton.Content.Load<Video>(path);
             }
             catch (ContentLoadException e)
             {
@@ -139,8 +161,7 @@ namespace Galaxies.Extensions
 
             return loaded;
         }
-
-        /*
+        
         public static Texture2D[] GetSprites(string path)
         {
             ContentManager content = MainGame.Singleton.Content; //Create a new reference for quicker access.
@@ -165,8 +186,8 @@ namespace Galaxies.Extensions
 
             return result;
         }
-        */
 
+        /*
         public static Texture2D[] GetSprites(string path)
         {
             ContentManager content = MainGame.Singleton.Content; //Create a new reference for quicker access.
@@ -191,6 +212,7 @@ namespace Galaxies.Extensions
 
             return result;
         }
+        */
 
     }
 
