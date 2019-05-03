@@ -37,7 +37,7 @@ namespace Galaxies.Entities
 
         #endregion
 
-        public PlayerShip(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats) : base(transform, sprite, speed, baseStats)
+        public PlayerShip(Transform transform, Texture2D sprite, ShipStats baseStats) : base(transform, sprite, baseStats)
         {
 
         }

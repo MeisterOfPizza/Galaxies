@@ -1,4 +1,5 @@
 ﻿using Galaxies.Datas;
+using Galaxies.Debug;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -75,13 +76,15 @@ namespace Galaxies.Controllers
                 }
                 else
                 {
-                    //TODO: Add debug msg
+                    CrashHandler.ShowException(string.Format("Data of type {0} with ID {1} does not exist.", id, type));
+
                     return null;
                 }
             }
             else
             {
-                //TODO: Add debug msg
+                CrashHandler.ShowException(string.Format("Data of type {0} with ID {1} does not exist.", id, type));
+
                 return null;
             }
         }
@@ -102,7 +105,8 @@ namespace Galaxies.Controllers
             }
             else
             {
-                //TODO: Add debug msg
+                CrashHandler.ShowException(string.Format("Data of type {0} in node {1} does not exist.", type, nodeName));
+
                 return null;
             }
         }

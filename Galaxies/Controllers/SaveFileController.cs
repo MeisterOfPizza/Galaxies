@@ -2,6 +2,7 @@
 using Galaxies.Progression;
 using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Galaxies.Controllers
@@ -46,6 +47,9 @@ namespace Galaxies.Controllers
             }
         }
 
+        /// <summary>
+        /// Create a new save file.
+        /// </summary>
         public static void SaveGame(SaveFile saveFile)
         {
             if (!SaveFileDirectory.Exists) SaveFileDirectory.Create();
@@ -56,6 +60,9 @@ namespace Galaxies.Controllers
             SerializeSaveFile(CurrentSaveFile);
         }
 
+        /// <summary>
+        /// Override a save file.
+        /// </summary>
         public static void SaveGame(FileInfo fileInfo)
         {
             if (!SaveFileDirectory.Exists) SaveFileDirectory.Create();
@@ -130,6 +137,13 @@ namespace Galaxies.Controllers
             }
 
             return saveFile;
+        }
+
+        public static bool IsValidFileName(string name)
+        {
+            // Check that each invalid file name char does not exist in the string name.
+            // Also check if the string has any chars at all.
+            return name.Length > 0 && Path.GetInvalidFileNameChars().All(c => !name.Any(n => n.Equals(c)));
         }
 
     }

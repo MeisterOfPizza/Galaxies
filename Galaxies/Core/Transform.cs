@@ -78,11 +78,6 @@ namespace Galaxies.Core
         /// </summary>
         public int RawY { get; private set; }
 
-        /// <summary>
-        /// Used to "reset" the position after a window resizing event has occurred.
-        /// </summary>
-        private Vector2 percentage;
-
         #endregion
 
         #region Size
@@ -218,8 +213,6 @@ namespace Galaxies.Core
 
             RawX = (int)position.X;
             RawY = (int)position.Y;
-
-            percentage = new Vector2(RawX / (float)GameUIController.WindowWidth, RawY / (float)GameUIController.WindowHeight);
 
             CreateCollider();
 

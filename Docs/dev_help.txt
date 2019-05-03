@@ -1,1 +1,0 @@
-Basic UML Class Diagram Notation and Basic UML Sequence Diagram Notation: http://umich.edu/~eecs381/handouts/UMLNotationSummary.pdf

@@ -138,8 +138,6 @@ namespace Galaxies.Combat
 
         private void Ai()
         {
-            //HACK: Very poor combat Ai.
-
             if (Enemy.Energy < EnemyShip.FIRE_ENERGY_COST) //Do they need to recharge energy (they don't have enough energy to shoot)?
             {
                 if (Enemy.HasShieldUp)
