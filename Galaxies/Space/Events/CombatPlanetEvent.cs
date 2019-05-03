@@ -60,7 +60,7 @@ namespace Galaxies.Space.Events
         /// </summary>
         private void _Trigger()
         {
-            messageBox.Screen.RemoveUIElement(messageBox); //HACK: Really needed? If we're discarding the current screen, do we really need to remove the UI Element first?
+            messageBox.Screen.RemoveUIElement(messageBox);
             CombatController.StartBattle(this);
             GameUIController.CreateCombatScreen();
         }

@@ -1,5 +1,6 @@
 ﻿using Galaxies.Controllers;
 using Galaxies.Core;
+using Galaxies.Debug;
 using Galaxies.Extensions;
 using Galaxies.Progression;
 using Galaxies.UI.Elements;
@@ -96,10 +97,18 @@ namespace Galaxies.UI.Special
 
         private void CreateSaveFile()
         {
-            SaveFile saveFile = new SaveFile(saveFileNameInputField.Text, playerNameInputField.Text);
+            //Check if the file name is valid BEFORE trying to create a new save file:
+            if (SaveFileController.IsValidFileName(saveFileNameInputField.Text))
+            {
+                SaveFile saveFile = new SaveFile(saveFileNameInputField.Text, playerNameInputField.Text);
 
-            GameController.NewGame();
-            SaveFileController.SaveGame(saveFile);
+                GameController.NewGame();
+                SaveFileController.SaveGame(saveFile);
+            }
+            else
+            {
+                CrashHandler.ShowException("Save file name \"" + saveFileNameInputField.Text + "\" is not a valid name.");
+            }
         }
 
     }

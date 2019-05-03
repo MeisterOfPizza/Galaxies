@@ -36,11 +36,6 @@ namespace Galaxies.Space
 
         #endregion
 
-        public Citadel()
-        {
-            //TODO: Refresh store:
-        }
-
         #region IVisitable
 
         public void Visit()

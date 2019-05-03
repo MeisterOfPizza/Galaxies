@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Galaxies.Entities
 {
 
-    public abstract class ShipEntity : MovingObject
+    public abstract class ShipEntity : GameObject
     {
 
         #region Fields
@@ -116,7 +116,7 @@ namespace Galaxies.Entities
 
         #endregion
 
-        public ShipEntity(Transform transform, Texture2D sprite, Vector2 speed, ShipStats baseStats) : base(transform, sprite, speed)
+        public ShipEntity(Transform transform, Texture2D sprite, ShipStats baseStats) : base(transform, sprite)
         {
             this.baseStats     = baseStats;
             this.modifiedStats = new ShipStats();

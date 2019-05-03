@@ -57,6 +57,21 @@ namespace Galaxies.UI.Elements
         public int     TextPadding         { get; set; }
         public Vector2 FormattedTextOrigin { get; set; }
 
+        public override bool Visable
+        {
+            get
+            {
+                return base.Visable;
+            }
+
+            set
+            {
+                base.Visable = value;
+
+                IsInteractable = value;
+            }
+        }
+
         #endregion
 
         #region IInteractable

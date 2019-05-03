@@ -30,6 +30,21 @@ namespace Galaxies.UI.Elements
 
         #endregion
 
+        public override bool Visable
+        {
+            get
+            {
+                return base.Visable;
+            }
+
+            set
+            {
+                base.Visable = value;
+
+                IsInteractable = value;
+            }
+        }
+
         public UIHandle(Transform transform, Texture2D sprite, EventArg onClick, Screen screen) : base(transform, sprite, screen)
         {
             this.DefaultColor = color;
